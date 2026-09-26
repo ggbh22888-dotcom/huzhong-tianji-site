@@ -302,7 +302,7 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
       <p class="kicker" data-i18n="fm_k">已经选好服务 · FOR OUR CLIENTS</p>
       <h2 class="title" style="font-size:26px" data-i18n="fm_t">接下来，让我们认真读你。</h2>
       <form id="intakeForm" class="form-grid">
-        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" <!-- ⚠️ 必须替换：到 web3forms.com 免费注册，复制 access key 贴这里 -->>
+        <input type="hidden" name="access_key" value="5d57f6ac-9774-486d-b350-c9730decd894" <!-- ⚠️ 必须替换：到 web3forms.com 免费注册，复制 access key 贴这里 -->>
         <input type="hidden" name="subject" value="壶中天机 · 新订单资料">
         <input type="checkbox" name="botcheck" style="display:none">
         <div><label data-i18n="f_name">姓名</label><input name="name" required></div>
@@ -603,7 +603,7 @@ document.getElementById('intakeForm').addEventListener('submit',function(e){
   e.preventDefault();
   var form=e.target, btn=form.querySelector('button[type=submit]');
   if(form.access_key.value.indexOf('YOUR_')===0){
-    alert(LANG==='zh'?'表单尚未设定：请把代码中的 YOUR_WEB3FORMS_ACCESS_KEY 换成你的 Web3Forms 密钥':'Form not configured yet: replace YOUR_WEB3FORMS_ACCESS_KEY with your Web3Forms key.');
+    alert(LANG==='zh'?'表单尚未设定：请把代码中的 5d57f6ac-9774-486d-b350-c9730decd894换成你的 Web3Forms 密钥':'Form not configured yet: replace 5d57f6ac-9774-486d-b350-c9730decd894 with your Web3Forms key.');
     return;
   }
   btn.disabled=true;
