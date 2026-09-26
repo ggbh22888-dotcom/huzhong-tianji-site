@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#12161B">
+<title>壶中天机 · 玄夜观星，指一方吉凶 | Huzhong Tianji</title>
+<meta name="description" content="壶中天机：八字、紫微、数字解读与个人风水方位建议。个人命书、一对一咨询、免费人格签与每日历法。Chinese & English readings, personal guides, consultations and feng shui direction reports.">
+<link rel="icon" href="assets/seal.png">
+<meta property="og:title" content="壶中天机 · 玄夜观星，指一方吉凶">
+<meta property="og:description" content="八字、紫微、数字解读与个人风水方位建议。中文与英文服务。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://huzhongtianji.netlify.app/">
+<meta property="og:image" content="https://huzhongtianji.netlify.app/assets/seal.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"壶中天机 Huzhong Tianji","url":"https://huzhongtianji.netlify.app/","description":"八字、紫微、数字解读与个人风水方位建议 / Four Pillars, Zi Wei Dou Shu, numerology and personal feng shui direction readings.","areaServed":"SG","priceRange":"SGD 38 - 168","email":"dfe22888@gmail.com"}
+</script>
+<style>
+/* ============ 设计变量 · 玄夜航 ============
+   想换风格只需改这里：
+   A 墨·素纸: --bg:#F5F2E9; --bg2:#EDE8DA; --text:#2B2B2B; --muted:#6E6A5E; --accent:#A03123; --line:rgba(43,43,43,.14); --card:#FBF9F3;
+   C 青·山水: --bg:#EEF3F0; --bg2:#E2EBE5; --text:#22312B; --muted:#5F7268; --accent:#2F5D50; --line:rgba(34,49,43,.14); --card:#F6FAF7;
+*/
+:root{
+  --bg:#12161B; --bg2:#171D24; --card:#1B222B; --text:#E8E3D5; --muted:#9AA3AD;
+  --accent:#D8B56B; --accent-dim:rgba(216,181,107,.14); --line:rgba(232,227,213,.13);
+  --serif:"Noto Serif SC",serif; --sans:"Noto Sans SC",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent);color:var(--bg)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.serif{font-family:var(--serif)}
+.kicker{font-size:13px;letter-spacing:.22em;color:var(--accent);margin-bottom:12px}
+h2.title{font-family:var(--serif);font-size:clamp(26px,4vw,36px);font-weight:600;line-height:1.3}
+.sub{color:var(--muted);margin-top:10px;max-width:560px}
+section{padding:88px 0;border-top:1px solid var(--line)}
+/* ---------- 头部 ---------- */
+header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hd{max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:40px;height:40px;border-radius:8px}
+.brand strong{font-family:var(--serif);font-size:19px;letter-spacing:.06em;display:block;line-height:1.2}
+.brand small{font-size:10px;letter-spacing:.3em;color:var(--muted)}
+nav{display:flex;gap:26px}
+nav a{font-size:14px;color:var(--muted);transition:color .2s}
+nav a:hover{color:var(--text)}
+.hd-act{display:flex;align-items:center;gap:14px}
+.lang button{background:none;border:1px solid var(--line);color:var(--muted);font-size:12px;padding:5px 11px;cursor:pointer}
+.lang button:first-child{border-radius:8px 0 0 8px}
+.lang button:last-child{border-radius:0 8px 8px 0;border-left:none}
+.lang button.on{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:500}
+.menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer}
+@media(max-width:900px){
+  nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg2);flex-direction:column;padding:18px 24px;gap:16px;border-bottom:1px solid var(--line)}
+  nav.open{display:flex}
+  .menu-btn{display:block}
+}
+/* ---------- 主视觉 ---------- */
+.hero{position:relative;padding:110px 0 96px;overflow:hidden;border-top:none}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.hero .kicker{margin-bottom:18px}
+.hero h1{font-family:var(--serif);font-size:clamp(36px,6vw,58px);font-weight:700;line-height:1.22}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--muted);margin:22px 0 34px;max-width:480px}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:999px;font-size:15px;font-weight:500;cursor:pointer;transition:transform .2s,box-shadow .2s;border:none}
+.btn-gold{background:var(--accent);color:#12161B}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(216,181,107,.28)}
+.btn-line{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn-line:hover{border-color:var(--accent);color:var(--accent)}
+.compass-box{position:relative;aspect-ratio:1;max-width:420px;margin:0 auto}
+.compass-box svg{width:100%;height:100%}
+.spin-slow{animation:spin 90s linear infinite;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* ---------- 理念 ---------- */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+@media(max-width:820px){.pillars{grid-template-columns:1fr}}
+.pillar{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;transition:border-color .2s,transform .2s}
+.pillar:hover{border-color:var(--accent);transform:translateY(-4px)}
+.pillar .num{font-family:var(--serif);font-size:15px;color:var(--accent);letter-spacing:.15em}
+.pillar h3{font-family:var(--serif);font-size:21px;margin:12px 0 8px}
+.pillar p{font-size:14px;color:var(--muted)}
+/* ---------- 服务 ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+@media(max-width:980px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.svc-grid{grid-template-columns:1fr}}
+.svc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;display:flex;flex-direction:column;transition:border-color .2s,transform .2s}
+.svc:hover{border-color:var(--accent);transform:translateY(-4px)}
+.svc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.svc-badge{font-size:11px;letter-spacing:.12em;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--muted)}
+.svc-badge.hot{border-color:var(--accent);color:var(--accent)}
+.svc-price{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--accent)}
+.svc-price small{font-size:13px;color:var(--muted);font-weight:400}
+.svc h3{font-family:var(--serif);font-size:20px}
+.svc .en{font-size:12px;letter-spacing:.14em;color:var(--muted);margin:2px 0 14px}
+.svc ul{list-style:none;flex:1}
+.svc li{font-size:13.5px;color:var(--muted);padding:7px 0 7px 20px;position:relative;border-top:1px dashed var(--line)}
+.svc li::before{content:"";position:absolute;left:2px;top:16px;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.7}
+.svc .btn{margin-top:20px;justify-content:center;padding:11px 20px;font-size:14px}
+/* ---------- 一签 / 日签 ---------- */
+.tool-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:36px;max-width:640px;margin:44px auto 0}
+@media(max-width:640px){.tool-card{padding:26px 20px}}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+@media(max-width:640px){.f-row{grid-template-columns:1fr}}
+label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+input,select,textarea{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:12px 14px;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+.note{font-size:12.5px;color:var(--muted);margin-top:14px}
+.result{display:none;margin-top:28px;border-top:1px solid var(--line);padding-top:28px;text-align:center}
+.result.show{display:block;animation:fadeUp .5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
+.stamp{display:inline-block;border:2px solid var(--accent);color:var(--accent);border-radius:10px;padding:8px 18px;font-family:var(--serif);letter-spacing:.2em;font-size:14px;margin-bottom:16px}
+.result .gz{font-family:var(--serif);font-size:44px;font-weight:700;line-height:1.2}
+.result .nick{font-family:var(--serif);font-size:20px;color:var(--accent);margin:8px 0 14px}
+.result .read{font-size:14.5px;color:var(--muted);max-width:440px;margin:0 auto}
+.result .share{font-size:12px;color:var(--muted);margin-top:16px;opacity:.8}
+.result .btn{margin-top:22px}
+.daily-nav{display:flex;justify-content:center;gap:12px;margin-top:26px}
+.daily-nav button{background:var(--bg2);border:1px solid var(--line);color:var(--text);border-radius:999px;padding:9px 20px;font-size:13.5px;cursor:pointer;transition:border-color .2s}
+.daily-nav button:hover{border-color:var(--accent)}
+.chips{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:20px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:7px 18px;font-size:13px;color:var(--muted)}
+.chip b{color:var(--text);font-weight:500}
+/* ---------- 步骤 ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+@media(max-width:820px){.steps{grid-template-columns:1fr}}
+.step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px}
+.step .n{font-family:var(--serif);font-size:30px;color:var(--accent);font-weight:600}
+.step h3{font-family:var(--serif);font-size:18px;margin:10px 0 6px}
+.step p{font-size:13.5px;color:var(--muted)}
+/* ---------- 表单 ---------- */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+@media(max-width:720px){.form-grid{grid-template-columns:1fr}}
+.form-grid .full{grid-column:1/-1}
+.form-ok{display:none;margin-top:16px;padding:14px 18px;border:1px solid var(--accent);border-radius:12px;color:var(--accent);font-size:14px}
+/* ---------- FAQ ---------- */
+details{border:1px solid var(--line);border-radius:12px;margin-top:12px;background:var(--card)}
+summary{cursor:pointer;padding:18px 22px;font-family:var(--serif);font-size:16px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:"+";color:var(--accent);font-size:20px;font-family:var(--sans)}
+details[open] summary::after{content:"–"}
+details p{padding:0 22px 18px;font-size:14px;color:var(--muted)}
+/* ---------- 页脚 ---------- */
+footer{border-top:1px solid var(--line);padding:56px 0 40px;text-align:center}
+footer .mail{font-family:var(--serif);font-size:22px;color:var(--accent);display:inline-block;margin:14px 0 22px;border-bottom:1px dashed var(--accent);padding-bottom:4px}
+footer .fine{font-size:12px;color:var(--muted);max-width:560px;margin:26px auto 0;line-height:1.8}
+footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd">
+    <a class="brand" href="#top">
+      <img src="assets/seal.png" alt="壶中天机印">
+      <span><strong>壶中天机</strong><small>HUZHONG TIANJI</small></span>
+    </a>
+    <nav id="nav">
+      <a href="#approach" data-i18n="nav1">理念</a>
+      <a href="#services" data-i18n="nav2">服务</a>
+      <a href="#draw" data-i18n="nav3">一签</a>
+      <a href="#daily" data-i18n="nav4">日签</a>
+      <a href="#book" data-i18n="nav5">预约</a>
+    </nav>
+    <div class="hd-act">
+      <div class="lang">
+        <button id="btn-zh" class="on" onclick="setLang('zh')">中</button><button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+      <button class="menu-btn" onclick="document.getElementById('nav').classList.toggle('open')" data-i18n="menu">菜单</button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= 主视觉 ================= -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker" data-i18n="hero_kicker">八字 · 紫微 · 数字 · 风水方位</p>
+      <h1><span data-i18n="h1a">玄夜观星，</span><br><em data-i18n="h1b">指一方吉凶。</em></h1>
+      <p data-i18n="hero_desc">把脚步放慢一点。从传统智慧出发，读懂性情、际遇与身边的方位，找到属于自己的方向。</p>
+      <div class="cta">
+        <a class="btn btn-gold" href="#services" data-i18n="hero_c1">探索我的命书</a>
+        <a class="btn btn-line" href="#draw" data-i18n="hero_c2">先抽一签 →</a>
+      </div>
+    </div>
+    <div class="compass-box" aria-hidden="true">
+      <svg viewBox="0 0 400 400" fill="none">
+        <circle cx="200" cy="200" r="190" stroke="#E8E3D5" stroke-opacity=".1"/>
+        <circle cx="200" cy="200" r="150" stroke="#E8E3D5" stroke-opacity=".12"/>
+        <circle cx="200" cy="200" r="110" stroke="#D8B56B" stroke-opacity=".3"/>
+        <g class="spin-slow">
+          <g stroke="#D8B56B" stroke-opacity=".55">
+            <path d="M200 30 L208 90 L200 82 L192 90 Z" fill="#D8B56B" fill-opacity=".8"/>
+            <path d="M200 370 L208 310 L200 318 L192 310 Z" fill="#D8B56B" fill-opacity=".25"/>
+            <path d="M30 200 L90 208 L82 200 L90 192 Z" fill="#D8B56B" fill-opacity=".25"/>
+            <path d="M370 200 L310 208 L318 200 L310 192 Z" fill="#D8B56B" fill-opacity=".25"/>
+            <path d="M80 80 L120 120" /><path d="M320 80 L280 120"/><path d="M80 320 L120 280"/><path d="M320 320 L280 280"/>
+          </g>
+          <g fill="#E8E3D5" fill-opacity=".5" font-size="17" font-family="Noto Serif SC" text-anchor="middle">
+            <text x="200" y="16">北</text><text x="200" y="396">南</text><text x="14" y="206">西</text><text x="386" y="206">东</text>
+          </g>
+        </g>
+        <text x="200" y="192" text-anchor="middle" fill="#D8B56B" font-size="34" font-family="Noto Serif SC" font-weight="600">壶中</text>
+        <text x="200" y="232" text-anchor="middle" fill="#D8B56B" font-size="34" font-family="Noto Serif SC" font-weight="600">天机</text>
+        <text x="200" y="262" text-anchor="middle" fill="#9AA3AD" font-size="10" letter-spacing="4" font-family="Noto Sans SC">SECRETS OF THE VESSEL</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 理念 ================= -->
+<section id="approach">
+  <div class="wrap">
+    <p class="kicker" data-i18n="ap_k">壶中之道 · OUR APPROACH</p>
+    <h2 class="title" data-i18n="ap_t">不只问未来，也问问自己。</h2>
+    <p class="sub" data-i18n="ap_d">有些答案，来自更深地认识自己。壶中天机将八字、紫微、数字与风水方位放在一起，结合您的生活情境，梳理天性、关系、选择与空间。我们提供一份参考，也为您的自主选择留白。</p>
+    <div class="pillars">
+      <div class="pillar"><span class="num">01</span><h3 data-i18n="p1t">八字 · 读天性</h3><p data-i18n="p1d">从出生四柱出发，认识性情、格局与不同人生阶段的主题。</p></div>
+      <div class="pillar"><span class="num">02</span><h3 data-i18n="p2t">紫微 · 观人生</h3><p data-i18n="p2d">从十二宫与四化，观察事业、关系及生活面向之间的联系。</p></div>
+      <div class="pillar"><span class="num">03</span><h3 data-i18n="p3t">壶中数 · 看日常</h3><p data-i18n="p3d">从生日与身边的数字、方位，寻找日常生活中的另一种解读。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 服务 ================= -->
+<section id="services">
+  <div class="wrap">
+    <p class="kicker" data-i18n="sv_k">命书与咨询 · READINGS &amp; CONSULTATIONS</p>
+    <h2 class="title" data-i18n="sv_t">属于你的，一份解读。</h2>
+    <p class="sub" data-i18n="sv_d">从一份随身参考，到一场深入对话。按自己的需要，选择适合的开始。</p>
+    <div class="svc-grid" id="svcGrid"></div>
+    <p style="margin-top:28px;font-size:14px;color:var(--muted)"><span data-i18n="sv_q">还不确定从哪里开始？</span> <a href="mailto:dfe22888@gmail.com" style="color:var(--accent);border-bottom:1px dashed var(--accent)" data-i18n="sv_ql">先聊一聊 →</a></p>
+  </div>
+</section>
+
+<!-- ================= 一签 ================= -->
+<section id="draw">
+  <div class="wrap" style="text-align:center">
+    <p class="kicker" data-i18n="dr_k">壶中一签 · A MOMENT FOR YOU</p>
+    <h2 class="title" data-i18n="dr_t">先从一签，认识自己的天性。</h2>
+    <p class="sub" style="margin-left:auto;margin-right:auto" data-i18n="dr_d">输入出生日期，开启一支日主人格签。用片刻清静，看看传统命理如何描述您的性情。</p>
+    <div class="tool-card" style="text-align:left">
+      <div class="f-row">
+        <div><label data-i18n="dr_birth">出生日期（阳历）</label><input type="date" id="drawDate"></div>
+        <div><label data-i18n="dr_time">出生时辰（可选，不确定可留空）</label>
+          <select id="drawTime">
+            <option value="" data-i18n="dr_unsure">不确定</option>
+            <option>子时 23:00–01:00</option><option>丑时 01:00–03:00</option><option>寅时 03:00–05:00</option>
+            <option>卯时 05:00–07:00</option><option>辰时 07:00–09:00</option><option>巳时 09:00–11:00</option>
+            <option>午时 11:00–13:00</option><option>未时 13:00–15:00</option><option>申时 15:00–17:00</option>
+            <option>酉时 17:00–19:00</option><option>戌时 19:00–21:00</option><option>亥时 21:00–23:00</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-gold" style="width:100%;justify-content:center" onclick="draw()" data-i18n="dr_go">开启我的一签</button>
+      <p class="note" data-i18n="dr_note">生辰仅在您的装置上运算，不会上传或储存。</p>
+      <div class="result" id="drawResult"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 日签 ================= -->
+<section id="daily">
+  <div class="wrap" style="text-align:center">
+    <p class="kicker" data-i18n="da_k">壶中日签 · THE DAILY PAGE</p>
+    <h2 class="title" data-i18n="da_t">翻一页历法，留一点从容。</h2>
+    <div class="tool-card" style="text-align:center">
+      <div style="font-size:13px;color:var(--muted);letter-spacing:.15em" id="dailyDate"></div>
+      <div class="gz serif" style="font-size:46px;font-weight:700;margin:10px 0 4px" id="dailyGz">—</div>
+      <div style="font-family:var(--serif);color:var(--accent);font-size:17px" id="dailyNick"></div>
+      <div class="chips" id="dailyChips"></div>
+      <div class="daily-nav">
+        <button onclick="shiftDay(-1)" data-i18n="da_prev">← 前一日</button>
+        <button onclick="shiftDay(0)" data-i18n="da_today">回到今日</button>
+        <button onclick="shiftDay(1)" data-i18n="da_next">后一日 →</button>
+      </div>
+    </div>
+    <p class="note" style="text-align:center" data-i18n="da_note">依您装置的当地日期计算。传统历法参考，不替您决定每一步。</p>
+  </div>
+</section>
+
+<!-- ================= 步骤 + 表单 ================= -->
+<section id="book">
+  <div class="wrap">
+    <p class="kicker" data-i18n="bk_k">如何开始 · YOUR NEXT STEPS</p>
+    <h2 class="title" data-i18n="bk_t">从相识，到读懂。</h2>
+    <div class="steps">
+      <div class="step"><span class="n">01</span><h3 data-i18n="s1t">选择服务</h3><p data-i18n="s1d">先选适合的命书或咨询，通过 Stripe 页面付款。</p></div>
+      <div class="step"><span class="n">02</span><h3 data-i18n="s2t">提交资料</h3><p data-i18n="s2d">付款后填写生辰、出生地与收据单号，注明中文或英文版。</p></div>
+      <div class="step"><span class="n">03</span><h3 data-i18n="s3t">交付与对话</h3><p data-i18n="s3d">报告以 PDF 电邮交付；选择真人咨询的客户，可预约解读时间。</p></div>
+    </div>
+
+    <div style="max-width:720px;margin:72px auto 0">
+      <p class="kicker" data-i18n="fm_k">已经选好服务 · FOR OUR CLIENTS</p>
+      <h2 class="title" style="font-size:26px" data-i18n="fm_t">接下来，让我们认真读你。</h2>
+      <form id="intakeForm" class="form-grid">
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" <!-- ⚠️ 必须替换：到 web3forms.com 免费注册，复制 access key 贴这里 -->>
+        <input type="hidden" name="subject" value="壶中天机 · 新订单资料">
+        <input type="checkbox" name="botcheck" style="display:none">
+        <div><label data-i18n="f_name">姓名</label><input name="name" required></div>
+        <div><label data-i18n="f_email">电邮</label><input type="email" name="email" required></div>
+        <div><label data-i18n="f_gender">性别</label><select name="gender"><option data-i18n="g_f">女</option><option data-i18n="g_m">男</option></select></div>
+        <div><label data-i18n="f_item">订购项目</label>
+          <select name="service" id="fService"></select>
+        </div>
+        <div><label data-i18n="f_lang">版本</label><select name="lang"><option data-i18n="v_zh">中文</option><option>English</option></select></div>
+        <div><label data-i18n="f_date">出生日期</label><input type="date" name="birthdate"></div>
+        <div><label data-i18n="f_time">出生时间</label><input name="birthtime" placeholder="如 14:30 / 不确定"></div>
+        <div><label data-i18n="f_place">出生地</label><input name="birthplace"></div>
+        <div><label data-i18n="f_receipt">付款单号（选填）</label><input name="receipt"></div>
+        <div class="full"><label data-i18n="f_home">现居环境简述（指南针客户填写）</label><textarea name="home" rows="2" placeholder="如：自宅三房式，主卧在西北；或租屋单间，床头朝东"></textarea></div>
+        <div class="full"><label data-i18n="f_note">备注（选填）</label><textarea name="note" rows="2"></textarea></div>
+        <div class="full"><button type="submit" class="btn btn-gold" style="width:100%;justify-content:center" data-i18n="f_submit">提交资料</button></div>
+      </form>
+      <div class="form-ok" id="formOk" data-i18n="f_ok">已收到您的资料，我们会尽快以电邮回复。付款证明请另行电邮补交。</div>
+      <p class="note" data-i18n="f_priv">资料经加密表单送达我们的信箱，仅用于您的订购服务。付款证明请另行电邮，不会随此表单上传。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="wrap" style="max-width:760px">
+    <p class="kicker" data-i18n="fq_k">常见问题 · GOOD TO KNOW</p>
+    <h2 class="title" data-i18n="fq_t">来问之前。</h2>
+    <div id="faqList" style="margin-top:24px"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="kicker" data-i18n="ft_k">待君来问 · AN OPEN INVITATION</p>
+    <h2 class="title" data-i18n="ft_t">心里有问，不妨坐下聊聊。</h2>
+    <a class="mail" href="mailto:dfe22888@gmail.com">dfe22888@gmail.com</a>
+    <div>
+      <a class="btn btn-line" href="https://calendly.com/dfe22888" target="_blank" rel="noopener" data-i18n="ft_b1">预约 30 分钟解读</a>
+      &nbsp;&nbsp;
+      <a class="btn btn-line" href="mailto:dfe22888@gmail.com?subject=Numero%20Unlock%20session" data-i18n="ft_b2">安排 45 分钟数钥</a>
+    </div>
+    <p class="fine" data-i18n="ft_fine">本系列依传统命理学理推演，供人生参考，不构成医疗、投资或法律建议。命由天定，运由己造——最终的每一步，仍由您亲手落子。</p>
+    <p class="c">© 2026 壶中天机 HUZHONG TIANJI · <a href="https://gghb.studio/" target="_blank" rel="noopener" style="color:var(--muted);border-bottom:1px dashed var(--line)">果甘壶半工作室</a></p>
+  </div>
+</footer>
+
+<script>
+/* ================= 国际化 ================= */
+var LANG = localStorage.getItem('hz-lang') || 'zh';
+var T = {
+zh:{
+ nav1:"理念",nav2:"服务",nav3:"一签",nav4:"日签",nav5:"预约",menu:"菜单",
+ hero_kicker:"八字 · 紫微 · 数字 · 风水方位",
+ h1a:"玄夜观星，",h1b:"指一方吉凶。",
+ hero_desc:"把脚步放慢一点。从传统智慧出发，读懂性情、际遇与身边的方位，找到属于自己的方向。",
+ hero_c1:"探索我的命书",hero_c2:"先抽一签 →",
+ ap_k:"壶中之道 · OUR APPROACH",ap_t:"不只问未来，也问问自己。",
+ ap_d:"有些答案，来自更深地认识自己。壶中天机将八字、紫微、数字与风水方位放在一起，结合您的生活情境，梳理天性、关系、选择与空间。我们提供一份参考，也为您的自主选择留白。",
+ p1t:"八字 · 读天性",p1d:"从出生四柱出发，认识性情、格局与不同人生阶段的主题。",
+ p2t:"紫微 · 观人生",p2d:"从十二宫与四化，观察事业、关系及生活面向之间的联系。",
+ p3t:"壶中数 · 看日常",p3d:"从生日与身边的数字、方位，寻找日常生活中的另一种解读。",
+ sv_k:"命书与咨询 · READINGS & CONSULTATIONS",sv_t:"属于你的，一份解读。",
+ sv_d:"从一份随身参考，到一场深入对话。按自己的需要，选择适合的开始。",
+ sv_q:"还不确定从哪里开始？",sv_ql:"先聊一聊 →",
+ dr_k:"壶中一签 · A MOMENT FOR YOU",dr_t:"先从一签，认识自己的天性。",
+ dr_d:"输入出生日期，开启一支日主人格签。用片刻清静，看看传统命理如何描述您的性情。",
+ dr_birth:"出生日期（阳历）",dr_time:"出生时辰（可选，不确定可留空）",dr_unsure:"不确定",dr_go:"开启我的一签",
+ dr_note:"生辰仅在您的装置上运算，不会上传或储存。",
+ dr_cta:"探索完整解读",dr_share:"六十甲子 · 此日生人约占 1.7%",
+ da_k:"壶中日签 · THE DAILY PAGE",da_t:"翻一页历法，留一点从容。",
+ da_prev:"← 前一日",da_today:"回到今日",da_next:"后一日 →",
+ da_note:"依您装置的当地日期计算。传统历法参考，不替您决定每一步。",
+ bk_k:"如何开始 · YOUR NEXT STEPS",bk_t:"从相识，到读懂。",
+ s1t:"选择服务",s1d:"先选适合的命书或咨询，通过 Stripe 页面付款。",
+ s2t:"提交资料",s2d:"付款后填写生辰、出生地与收据单号，注明中文或英文版。",
+ s3t:"交付与对话",s3d:"报告以 PDF 电邮交付；选择真人咨询的客户，可预约解读时间。",
+ fm_k:"已经选好服务 · FOR OUR CLIENTS",fm_t:"接下来，让我们认真读你。",
+ f_name:"姓名",f_email:"电邮",f_gender:"性别",g_f:"女",g_m:"男",f_item:"订购项目",f_lang:"版本",v_zh:"中文",
+ f_date:"出生日期",f_time:"出生时间",f_place:"出生地",f_receipt:"付款单号（选填）",
+ f_home:"现居环境简述（指南针客户填写）",f_note:"备注（选填）",f_submit:"提交资料",
+ f_ok:"已收到您的资料，我们会尽快以电邮回复。付款证明请另行电邮补交。",
+ f_priv:"资料经加密表单送达我们的信箱，仅用于您的订购服务。付款证明请另行电邮，不会随此表单上传。",
+ fq_k:"常见问题 · GOOD TO KNOW",fq_t:"来问之前。",
+ ft_k:"待君来问 · AN OPEN INVITATION",ft_t:"心里有问，不妨坐下聊聊。",
+ ft_b1:"预约 30 分钟解读",ft_b2:"安排 45 分钟数钥",
+ ft_fine:"本系列依传统命理学理推演，供人生参考，不构成医疗、投资或法律建议。命由天定，运由己造——最终的每一步，仍由您亲手落子。"
+},
+en:{
+ nav1:"Approach",nav2:"Services",nav3:"A Draw",nav4:"Daily",nav5:"Book",menu:"Menu",
+ hero_kicker:"FOUR PILLARS · ZI WEI · NUMEROLOGY · DIRECTIONS",
+ h1a:"Under quiet stars,",h1b:"find your true direction.",
+ hero_desc:"Slow down a little. From classical wisdom, read your temperament, your seasons, and the directions around you — and find your own way.",
+ hero_c1:"Explore my reading",hero_c2:"Try a free draw →",
+ ap_k:"OUR APPROACH",ap_t:"Ask not only about the future — ask about yourself.",
+ ap_d:"Some answers come from knowing yourself more deeply. We place Four Pillars, Zi Wei, numerology and feng shui directions side by side, and map temperament, relationships, choices and space against your real life. We offer a reference — and leave the choosing to you.",
+ p1t:"Four Pillars · Temperament",p1d:"From your birth pillars, understand character, structure and the themes of each life stage.",
+ p2t:"Zi Wei · The Map of Life",p2d:"Through twelve palaces and transformations, see how career, relationships and life areas connect.",
+ p3t:"Numerology · Everyday Cues",p3d:"From birthdays, numbers and directions, find another way to read ordinary days.",
+ sv_k:"READINGS & CONSULTATIONS",sv_t:"A reading that belongs to you.",
+ sv_d:"From a pocket reference to a deep conversation. Start where it suits you.",
+ sv_q:"Not sure where to begin?",sv_ql:"Talk to us first →",
+ dr_k:"A MOMENT FOR YOU",dr_t:"Start with one draw, and meet your nature.",
+ dr_d:"Enter your birth date for a free day-master draw — a quiet moment to see how classical metaphysics describes you.",
+ dr_birth:"Birth date (Gregorian)",dr_time:"Birth hour (optional)",dr_unsure:"Not sure",dr_go:"Reveal my draw",
+ dr_note:"Your birth data is computed on your device only. Nothing is uploaded or stored.",
+ dr_cta:"Explore the full reading",dr_share:"60 Jiazi · about 1.7% of people share this day",
+ da_k:"THE DAILY PAGE",da_t:"Turn one page of the calendar, keep some ease.",
+ da_prev:"← Prev",da_today:"Today",da_next:"Next →",
+ da_note:"Computed from your device's local date. A traditional reference — it does not decide your steps.",
+ bk_k:"YOUR NEXT STEPS",bk_t:"From meeting, to understanding.",
+ s1t:"Choose a service",s1d:"Pick a reading or consultation, and pay via our Stripe page.",
+ s2t:"Submit your details",s2d:"After payment, fill in birth details and receipt number, and note Chinese or English version.",
+ s3t:"Delivery & dialogue",s3d:"Reports arrive by email as PDF; consultation clients may book a time.",
+ fm_k:"FOR OUR CLIENTS",fm_t:"Next, let us read you carefully.",
+ f_name:"Name",f_email:"Email",f_gender:"Gender",g_f:"Female",g_m:"Male",f_item:"Service",f_lang:"Version",v_zh:"中文",
+ f_date:"Birth date",f_time:"Birth time",f_place:"Birth place",f_receipt:"Receipt no. (optional)",
+ f_home:"Brief description of your home (Compass clients)",f_note:"Notes (optional)",f_submit:"Submit details",
+ f_ok:"Received. We will reply by email shortly. Please email your payment receipt separately.",
+ f_priv:"Your details reach our inbox via an encrypted form and are used only to deliver your service. Payment receipts are emailed separately.",
+ fq_k:"GOOD TO KNOW",fq_t:"Before you ask.",
+ ft_k:"AN OPEN INVITATION",ft_t:"Questions? Sit down, let us talk.",
+ ft_b1:"Book a 30-min session",ft_b2:"Arrange a 45-min unlock",
+ ft_fine:"All readings follow classical principles and are offered as life references — not medical, investment or legal advice. Fate is given; fortune is made — every step remains yours."
+}};
+
+/* ================= 数据 ================= */
+/* ⚠️ Stripe 链接：请逐一核对每个按钮指向正确的服务 */
+var SERVICES = [
+ {b:"PDF", hot:false, price:38, link:"https://buy.stripe.com/fZueVc72Q5VV2DU9KT38409",
+  zh:{n:"壶中钥匙",en:"THE VESSEL KEY",d:"专属数字与字母，让传统数理成为日常参考。",
+      f:["专属数字与英文字母组合，供电话、车牌、账户等日常场景参考","每个数字皆用河图、洛书双系统交叉验证，标明双证或单证","也是壶中命书数字的解密说明，让你知道数字从何而来","可单独使用，不需要先持有壶中命书"]},
+  en:{n:"The Vessel Key",en:"PDF REPORT",d:"Your personal numbers and letters, as a daily reference.",
+      f:["A personal set of numbers & letters for phone, car plate, accounts","Every number cross-checked in two classical systems","Explains how the numbers in your Life Book were derived","Works standalone — no Life Book required"]}},
+ {b:"PDF", hot:true, price:68, link:"https://buy.stripe.com/bJe9ASaf2bgf7Ye5uD38405",
+  zh:{n:"壶中命书",en:"THE LIFE BOOK",d:"读性情、看格局，理解事业与关系中的自己。",
+      f:["四柱八字完整排盘：日主、格局、身强身弱、喜用忌凶","紫微斗数十二宫与四化合参","十神结构、性情、事业、财运、感情、健康","大运逐十年＋未来三年流年推演，完整报告"]},
+  en:{n:"The Life Book",en:"PDF REPORT",d:"Read your nature and structure — career, wealth, bonds, health.",
+      f:["Full Four Pillars chart: day master, structure, favourable elements","Zi Wei Dou Shu: twelve palaces with transformations","Ten Gods, temperament, career, wealth, relationships, health","10-year luck cycles + 3 annual forecasts, full report"]}},
+ {b:"PDF", hot:false, price:98, link:"https://buy.stripe.com/REPLACE_WITH_COMPASS_LINK <!-- ⚠️ 必须替换：到 Stripe 后台创建 SGD 98 的 Payment Link，贴 URL 到这里 -->",
+  zh:{n:"壶中指南针",en:"THE PERSONAL COMPASS",d:"个人风水方位建议报告：你的吉方凶方，一册掌握。",
+      f:["依八字喜用五行与八宅命卦，排出你的专属吉方与凶方","睡床朝向、书桌与办公位坐向、大门与炉灶方位建议","附流年方位调整提醒，每年重点方位一目了然","可与壶中命书合并阅读，作居家与办公布局参考"]},
+  en:{n:"The Personal Compass",en:"PDF REPORT",d:"Your personal feng shui directions: auspicious sectors, one guide.",
+      f:["Auspicious & challenging directions from your chart and life卦","Bed facing, desk orientation, door and stove suggestions","Annual direction reminders — key sectors at a glance","Pairs with the Life Book for home & office planning"]}},
+ {b:"PDF", hot:false, price:108, link:"https://buy.stripe.com/9B6cN4dre6ZZemC1en3840b",
+  zh:{n:"壶中说明书",en:"THE PERSONAL GUIDE",d:"把命盘化作个人手册，梳理每一阶段的行动方向。",
+      f:["依你的命盘格局，整理成一份「个人操作手册」","逐年重点提醒：哪几年宜冲刺、哪几年宜守成、哪几年须谨慎","附个人化宜忌对照表，依你命盘量身定制","可与命书合并阅读，也可单独作随身参考"]},
+  en:{n:"The Personal Guide",en:"PDF REPORT",d:"Your chart distilled into a manual for each stage of life.",
+      f:["Your chart structure as a practical personal manual","Year-by-year cues: when to push, hold, or tread carefully","A personalised do & avoid table, tailored to your chart","Reads with the Life Book or stands alone"]}},
+ {b:"30 MIN", hot:false, price:68, link:"https://buy.stripe.com/8x2fZgevi5VV3HYbT138408",
+  zh:{n:"线上真人解读",en:"A PERSONAL CONVERSATION",d:"留出半小时，把心里最想问的事，好好谈一谈。",
+      f:["30 分钟一对一 Zoom 视讯解读，由命运规划师亲自讲解你的命盘","解读后提供重点整理报告（PDF），方便日后回顾","解读前可先提出你最想厘清的三个问题","含录影档，事后可回看"]},
+  en:{n:"A Personal Conversation",en:"30 MIN ZOOM",d:"Thirty minutes for the questions that matter most.",
+      f:["One-on-one Zoom reading of your chart by our planner","A summary PDF after the session","Share your three key questions in advance","Recording included for review"]}},
+ {b:"30 MIN", hot:false, price:68, link:"https://buy.stripe.com/3cI28qbj6don5Q6f5d3840a",
+  zh:{n:"壶中数解",en:"NUMERO DECODING",d:"重新认识生日与日常数字背后的传统解读。",
+      f:["分析您身边常用的数字：生日、电话号码、门牌、车牌等","以西方生命数字学，拆解每组数字背后的能量与意涵","从数字学角度解读组合与事业、人际及生活主题的关联","30 分钟一对一真人讲解，当面问清楚每个数字的影响"]},
+  en:{n:"Numero Decoding",en:"30 MIN",d:"Rediscover the meaning behind your birthday and daily numbers.",
+      f:["Analyse your numbers: birthday, phone, address, plate","Western numerology: the energy of each combination","How your numbers connect to career, people, life themes","30-min one-on-one walkthrough, ask anything"]}},
+ {b:"45 MIN", hot:false, price:168, link:"https://buy.stripe.com/14A7sK86U3NNceubT138407",
+  zh:{n:"壶中数钥",en:"NUMERO UNLOCK",d:"从数字分析出发，整理更适合自己的组合建议。",
+      f:["承接《壶中数解》的分析，为您量身订制全新专属数字","依据个人数字分析，整理组合选择与使用的参考方向","涵盖电话、车牌、门牌等各类数字的订制建议","45 分钟一对一真人讲解，说明如何逐步替换与启用新数字"]},
+  en:{n:"Numero Unlock",en:"45 MIN",d:"From analysis to action: numbers tailored to you.",
+      f:["Builds on your Numero Decoding session","A custom set of numbers and how to use them","Covers phone, plate, door numbers and more","45-min one-on-one: how to switch and activate"]}}
+];
+
+var FAQS = [
+ {zh:{q:"不确定出生时辰怎么办？",a:"可先提供大概时段（如「下午」），我们会以定盘法协助核对；若完全未知，将以日柱与年月盘为主撰写，并于书中注明。"},
+  en:{q:"What if I don't know my birth hour?",a:"Give an approximate window (e.g. “afternoon”) and we will verify with chart rectification. If totally unknown, we write mainly from the day pillar and note it clearly."}},
+ {zh:{q:"可以选择中文或英文吗？",a:"可以。七项服务均可选择中文版或英文版，请在提交资料时注明。"},
+  en:{q:"Chinese or English?",a:"All seven services are available in both. Just note your preference when submitting details."}},
+ {zh:{q:"可以为家人朋友订制吗？",a:"可以，请于下单时提供其生辰并确认对方知情同意；命书内容私密，仅交付予订购人。"},
+  en:{q:"Can I order for family or friends?",a:"Yes — provide their birth details and confirm their consent. Reports are private and delivered only to the buyer."}},
+ {zh:{q:"一签和完整命书有什么不同？",a:"免费一签以日主性情为切入点，是一份简短体验。完整命书会结合四柱、紫微等体系，梳理更完整的人生主题。"},
+  en:{q:"How is the free draw different from the Life Book?",a:"The free draw is a brief taste centred on your day master. The Life Book weaves Four Pillars and Zi Wei into a full map of life themes."}},
+ {zh:{q:"壶中指南针需要我提供什么？",a:"生辰资料与命书相同；另请简单描述现居环境（自宅或租屋、房间格局、睡床朝向），不确定处标注即可，报告中会说明依据。"},
+  en:{q:"What does the Personal Compass need from me?",a:"The same birth details as the Life Book, plus a brief description of your home (owned or rented, room layout, bed facing). Note what you are unsure of — the report explains the basis."}}
+];
+
+/* ================= 六十甲子 ================= */
+var STEMS=["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"];
+var BRANCHES=["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
+var NICKS=["海中潜龙","岸金待凿","炉焰初腾","桂魄分辉","大林挺秀","蛰龙奋起","路旁砥金","土藏珠玉","剑锋新发","金光淬水","山头夕照","林隙生烟","涧水含光","星火伏渊","城头立柱","堤土护花","白蜡凝辉","金火相炼","杨柳拂波","木秀于林","泉声入石","金鸣秋涧","屋上炊烟","土暖生灯","霹雳破晓","火土含章","松柏凌霜","木金成器","长流汇海","水龙行雨","沙金烁野","金隐厚土","山下传灯","火凤归巢","平地载屋","木根入河","壁上悬镜","土中金声","金箔耀日","金木逢春","覆灯照夜","火吟风前","天河水阔","星火燎原","大驿通衢","土厚藏金","钗钏委匣","金水流芳","桑柘荫浓","木扎根深","大溪出山","水月交辉","沙中埋金","火土同宫","天上流火","火土燎原","石榴抱籽","木金相成","大海藏舟","水归其宗"];
+var NAYIN=["海中金","炉中火","大林木","路旁土","剑锋金","山头火","涧下水","城头土","白蜡金","杨柳木","泉中水","屋上土","霹雳火","松柏木","长流水","沙中金","山下火","平地木","壁上土","金箔金","覆灯火","天河水","大驿土","钗钏金","桑柘木","大溪水","沙中土","天上火","石榴木","大海水"];
+var READS={
+ "甲":{zh:"甲木参天，性直而仁。您像一棵树——向上、要阳光、重原则。缺点是固执，认定的事九头牛拉不回。学会弯腰，反而长得更高。",en:"Jia Wood — the tall tree. Direct, principled, growth-hungry. Your edge is stubbornness; learn to bend and you grow taller."},
+ "乙":{zh:"乙木藤萝，柔韧善附。您懂得顺势与借力，感受力细腻，人缘好。要留神的是别太迁就，绕久了，会忘记自己本来要去的方向。",en:"Yi Wood — the vine. Flexible, perceptive, well-liked. Mind the drift: bending around others too long, you may forget your own direction."},
+ "丙":{zh:"丙火太阳，热烈坦荡。您天生发光，乐于助人，藏不住心事。注意别烧太旺——热情给错了人，就成了消耗；学会留一点光给自己。",en:"Bing Fire — the sun. Warm, open, generous to a fault. Shine, but don't burn out; keep some light for yourself."},
+ "丁":{zh:"丁火灯烛，外柔内明。您洞察人心，做事细致持久，是暗夜里的光。容易想太多、操太多心；记住：灯芯剪一剪，火才更亮。",en:"Ding Fire — the lamp. Gentle outside, luminous inside. You read people well but overthink; trim the wick, and the flame steadies."},
+ "戊":{zh:"戊土高山，厚重信实。您可靠、包容，是能扛事的人。固执是山的天性，但山也会挡路——偶尔挪一挪，听听别人的走法。",en:"Wu Earth — the mountain. Steady, trustworthy, load-bearing. Your stubbornness is the mountain's nature; shift a little, hear other paths."},
+ "己":{zh:"己土田园，滋养万物。您务实、细心，善把资源养好。缺点是容易自我怀疑、付出太多；田园也需要休耕，先把自己养好。",en:"Ji Earth — the field. Practical, nurturing, good with resources. You give a lot and doubt yourself; fields need fallow years too."},
+ "庚":{zh:"庚金顽铁，刚直果断。您讲义气、有担当，执行力强。过刚易折——铁要成器，须经火炼与水淬；多点柔软，路更宽。",en:"Geng Metal — raw iron. Decisive, loyal, built to execute. Untempered iron snaps; through fire and water it becomes a blade. Soften a little."},
+ "辛":{zh:"辛金珠玉，外柔内韧。您重质感、有审美，追求完美。容易敏感多虑、对自己挑剔；玉 already 很美，不必人人来鉴定。",en:"Xin Metal — the jewel. Refined, aesthetic, perfection-seeking. Sensitive and self-critical; the jade is already beautiful — not everyone must appraise it."},
+ "壬":{zh:"壬水江河，智涌奔流。您聪明、好动、格局大，想法如江水滔滔不绝。需要堤坝与方向——不定河道，水势再大也只是泛滥。",en:"Ren Water — the river. Intelligent, restless, big-pictured. Ideas flow like current; without banks and direction, even great water only floods."},
+ "癸":{zh:"癸水雨露，润物无声。您直觉敏锐、善解人意，柔而有力。容易沉浸情绪、替人操雨；记得雨露也要有晴天，您值得被灌溉。",en:"Gui Water — the mist and rain. Intuitive, gentle, quietly powerful. You absorb others' weather; even rain deserves sunny days."}
+};
+var ELE={甲:"木",乙:"木",丙:"火",丁:"火",戊:"土",己:"土",庚:"金",辛:"金",壬:"水",癸:"水"};
+var ELE_META={
+ "木":{zh:{c:"青绿",d:"东方"},en:{c:"Green",d:"East"}},
+ "火":{zh:{c:"朱红",d:"南方"},en:{c:"Vermilion",d:"South"}},
+ "土":{zh:{c:"明黄",d:"中宫"},en:{c:"Gold yellow",d:"Centre"}},
+ "金":{zh:{c:"素白",d:"西方"},en:{c:"White",d:"West"}},
+ "水":{zh:{c:"玄黑",d:"北方"},en:{c:"Deep black",d:"North"}}
+};
+
+/* ================= 历法算法 ================= */
+function jdn(y,m,d){
+  var a=Math.floor((m-14)/12);
+  return Math.floor(1461*(y+4800+a)/4)+Math.floor(367*(m-2-12*a)/12)-Math.floor(3*Math.floor((y+4900+a)/100)/4)+d-32075;
+}
+function pillarIdx(y,m,d){ return (jdn(y,m,d)+49)%60; }
+
+/* ================= 渲染 ================= */
+function t(k){ return T[LANG][k]||T.zh[k]||k; }
+function setLang(l){
+  LANG=l; localStorage.setItem('hz-lang',l);
+  document.getElementById('btn-zh').classList.toggle('on',l==='zh');
+  document.getElementById('btn-en').classList.toggle('on',l==='en');
+  document.documentElement.lang = l==='zh'?'zh-Hans':'en';
+  document.querySelectorAll('[data-i18n]').forEach(function(el){ el.innerHTML=t(el.getAttribute('data-i18n')); });
+  renderServices(); renderFaq(); renderDaily();
+  var fs=document.getElementById('fService'); fs.innerHTML='';
+  SERVICES.forEach(function(s,i){ var o=document.createElement('option'); o.textContent=(LANG==='zh'?s.zh.n:s.en.n); fs.appendChild(o); });
+}
+
+function renderServices(){
+  var g=document.getElementById('svcGrid'); g.innerHTML='';
+  SERVICES.forEach(function(s){
+    var L=LANG==='zh'?s.zh:s.en;
+    var card=document.createElement('div'); card.className='svc';
+    card.innerHTML=
+      '<div class="svc-top"><span class="svc-badge'+(s.hot?' hot':'')+'">'+s.b+'</span>'+
+      '<span class="svc-price"><small>SGD </small>'+s.price+'</span></div>'+
+      '<h3>'+L.n+'</h3><div class="en">'+L.en+'</div>'+
+      '<p style="font-size:14px;color:var(--muted);margin-bottom:12px">'+L.d+'</p>'+
+      '<ul>'+L.f.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>'+
+      '<a class="btn '+(s.hot?'btn-gold':'btn-line')+'" href="'+s.link+'" target="_blank" rel="noopener">'+(LANG==='zh'?'选择此项':'Choose')+' ↗</a>';
+    g.appendChild(card);
+  });
+}
+
+function renderFaq(){
+  var g=document.getElementById('faqList'); g.innerHTML='';
+  FAQS.forEach(function(f){
+    var L=LANG==='zh'?f.zh:f.en;
+    var d=document.createElement('details');
+    d.innerHTML='<summary>'+L.q+'</summary><p>'+L.a+'</p>';
+    g.appendChild(d);
+  });
+}
+
+/* ================= 一签 ================= */
+function draw(){
+  var v=document.getElementById('drawDate').value;
+  if(!v){ alert(LANG==='zh'?'请先选择出生日期':'Please pick a birth date first'); return; }
+  var p=v.split('-'), idx=pillarIdx(+p[0],+p[1],+p[2]);
+  var stem=STEMS[idx%10], branch=BRANCHES[idx%12];
+  var r=READS[stem], nick=NICKS[idx], read=LANG==='zh'?r.zh:r.en;
+  var box=document.getElementById('drawResult');
+  box.innerHTML=
+    '<div class="stamp">壶中天机 · 一签</div>'+
+    '<div class="gz">'+stem+branch+'</div>'+
+    '<div class="nick">'+stem+'日 · '+nick+'</div>'+
+    '<p class="read">'+read+'</p>'+
+    '<p class="share">'+t('dr_share')+'</p>'+
+    '<a class="btn btn-gold" href="#services">'+t('dr_cta')+' →</a>';
+  box.classList.add('show');
+  box.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+/* ================= 日签 ================= */
+var dayOffset=0;
+function shiftDay(n){
+  if(n===0){ dayOffset=0; } else { dayOffset+=n; }
+  renderDaily();
+}
+function renderDaily(){
+  var dt=new Date(); dt.setDate(dt.getDate()+dayOffset);
+  var y=dt.getFullYear(), m=dt.getMonth()+1, d=dt.getDate();
+  var idx=pillarIdx(y,m,d);
+  var stem=STEMS[idx%10], branch=BRANCHES[idx%12];
+  var meta=ELE_META[ELE[stem]][LANG];
+  var dateStr = LANG==='zh'
+    ? y+'年'+m+'月'+d+'日'
+    : dt.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('dailyDate').textContent=dateStr;
+  document.getElementById('dailyGz').textContent=stem+branch;
+  document.getElementById('dailyNick').textContent=NICKS[idx];
+  var c1=LANG==='zh'?['纳音','参考色','参考方位']:['Na Yin','Colour','Direction'];
+  var v=[NAYIN[Math.floor(idx/2)], meta.c, meta.d];
+  document.getElementById('dailyChips').innerHTML=v.map(function(x,i){
+    return '<span class="chip">'+c1[i]+' · <b>'+x+'</b></span>';
+  }).join('');
+}
+
+/* ================= 表单（Web3Forms） ================= */
+document.getElementById('intakeForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var form=e.target, btn=form.querySelector('button[type=submit]');
+  if(form.access_key.value.indexOf('YOUR_')===0){
+    alert(LANG==='zh'?'表单尚未设定：请把代码中的 YOUR_WEB3FORMS_ACCESS_KEY 换成你的 Web3Forms 密钥':'Form not configured yet: replace YOUR_WEB3FORMS_ACCESS_KEY with your Web3Forms key.');
+    return;
+  }
+  btn.disabled=true;
+  fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(form)})
+    .then(function(r){return r.json()})
+    .then(function(d){
+      if(d.success){ form.style.display='none'; document.getElementById('formOk').style.display='block'; }
+      else{ alert('Error: '+d.message); btn.disabled=false; }
+    })
+    .catch(function(){ alert(LANG==='zh'?'网络错误，请稍后再试或改以电邮发送':'Network error — please retry or email us.'); btn.disabled=false; });
+});
+
+/* ================= 启动 ================= */
+setLang(LANG);
+document.getElementById('drawDate').valueAsDate=new Date(1990,0,1);
+</script>
+</body>
+</html>
