@@ -51,3 +51,5 @@ CURRENT SHARING FLOW: Public phone labels removed. Phone registration replaced w
 Popup V2：保留黑金主站，每次打开或刷新页面均显示，可关闭。纪念日依用户提供农历表，常规月份按原月日；不自动重复闰月，不将三十移至二十九。五月十六佛诞为参考表日期，明确标注，不代表所有传统。
 
 最新订阅方式：已改用用户提供的 WhatsApp Business 原始二维码，可扫码打开工作室聊天申请日签分享；手机按钮也可直接申请。此二维码不是群邀请，不会自动入群。
+
+壶中度月 / The Twelve-Month Journey：SGD 68，一次交付完整 PDF；从购买月份下个月起连续 12 个公历月份。新服务咨询与订单资料接现有 WhatsApp，尚无独立付款链接。个人分析需客户生辰资料，不使用通用预测冒充个人报告。

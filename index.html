@@ -295,7 +295,7 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
     <p class="kicker" data-i18n="bk_k">如何开始 · YOUR NEXT STEPS</p>
     <h2 class="title" data-i18n="bk_t">从相识，到读懂。</h2>
     <div class="steps">
-      <div class="step"><span class="n">01</span><h3 data-i18n="s1t">选择服务</h3><p data-i18n="s1d">先选适合的命书或咨询，通过付款页面订购；壶中指南针请先咨询。</p></div>
+      <div class="step"><span class="n">01</span><h3 data-i18n="s1t">选择服务</h3><p data-i18n="s1d">先选适合的命书或咨询，通过付款页面订购；壶中指南针与壶中度月请先咨询。</p></div>
       <div class="step"><span class="n">02</span><h3 data-i18n="s2t">提交资料</h3><p data-i18n="s2d">付款后填写生辰、出生地与收据单号，注明中文或英文版。</p></div>
       <div class="step"><span class="n">03</span><h3 data-i18n="s3t">交付与对话</h3><p data-i18n="s3d">报告以 PDF 电邮交付；选择真人咨询的客户，可预约解读时间。</p></div>
     </div>
@@ -381,7 +381,7 @@ zh:{
  da_prev:"← 前一日",da_today:"回到今日",da_next:"后一日 →",
  da_note:"依您装置的当地日期计算。传统历法参考，不替您决定每一步。",
  bk_k:"如何开始 · YOUR NEXT STEPS",bk_t:"从相识，到读懂。",
- s1t:"选择服务",s1d:"先选适合的命书或咨询，通过付款页面订购；壶中指南针请先咨询。",
+ s1t:"选择服务",s1d:"先选适合的命书或咨询，通过付款页面订购；壶中指南针与壶中度月请先咨询。",
  s2t:"提交资料",s2d:"付款后填写生辰、出生地与收据单号，注明中文或英文版。",
  s3t:"交付与对话",s3d:"报告以 PDF 电邮交付；选择真人咨询的客户，可预约解读时间。",
  fm_k:"已经选好服务 · FOR OUR CLIENTS",fm_t:"接下来，让我们认真读你。",
@@ -470,14 +470,22 @@ var SERVICES = [
   zh:{n:"壶中数钥",en:"NUMERO UNLOCK",d:"从数字分析出发，整理更适合自己的组合建议。",
       f:["承接《壶中数解》的分析，为您量身订制全新专属数字","依据个人数字分析，整理组合选择与使用的参考方向","涵盖电话、车牌、门牌等各类数字的订制建议","45 分钟一对一真人讲解，说明如何逐步替换与启用新数字"]},
   en:{n:"Numero Unlock",en:"45 MIN",d:"From analysis to action: numbers tailored to you.",
-      f:["Builds on your Numero Decoding session","A custom set of numbers and how to use them","Covers phone, plate, door numbers and more","45-min one-on-one: how to switch and activate"]}}
+      f:["Builds on your Numero Decoding session","A custom set of numbers and how to use them","Covers phone, plate, door numbers and more","45-min one-on-one: how to switch and activate"]}},
+ {id:"duyue",b:"12 MONTHS · PDF", hot:false, price:68, link:waUrl("你好，我想订购壶中度月，SGD 68 一份，涵盖购买月份的下个月起连续 12 个月。请告知所需资料与付款方式。 / Hello, I would like to order The Twelve-Month Journey, SGD 68, covering 12 consecutive months starting next month."),
+  zh:{n:"壶中度月",en:"THE TWELVE-MONTH JOURNEY",d:"把接下来的十二个月，过得更有方向。结合个人生辰与流年、流月，梳理每月值得留意的主题。",
+      f:["SGD 68 一份，一次交付完整 12 个月 PDF 报告","从购买月份的下个月起算，连续涵盖 12 个公历月份；跨年也完整覆盖","逐月梳理事业与学习、财务规划、人际与感情、生活节奏，以及行动建议与谨慎提醒","例如 2026 年 9 月购买：报告期间为 2026 年 10 月至 2027 年 9 月","请提供出生日期、时间、地点及关注问题；传统文化参考，不保证事件或结果"]},
+  en:{n:"The Twelve-Month Journey",en:"HU ZHONG DU YUE",d:"Meet the next twelve months with greater direction. A personal reading of annual and monthly themes based on your birth details.",
+      f:["SGD 68 for one complete 12-month PDF, delivered together","Starts the calendar month after purchase and covers 12 consecutive Gregorian months, including across years","Monthly themes for work, learning, money planning, relationships and everyday rhythm, with actions and cautions","Example: purchase in September 2026 covers October 2026 through September 2027","Provide birth date, time, place and key questions. Cultural reference; no guaranteed events or outcomes"]}}
 ];
 
 var FAQS = [
+ {zh:{q:"壶中度月从什么时候开始？会每月收费吗？",a:"SGD 68 为一份完整 12 个月 PDF 报告，一次交付，不按月收费。购买月份的下个月为第一个月，连续涵盖 12 个公历月份。例如 2026 年 9 月购买，覆盖 2026 年 10 月至 2027 年 9 月。月份用于阅读编排，传统流月交界及采用的口径会在个人报告中注明。"},
+  en:{q:"When does the Twelve-Month Journey start? Is it a subscription?",a:"SGD 68 buys one complete PDF covering 12 consecutive calendar months, delivered together, with no monthly subscription. It begins the month after purchase. A September 2026 purchase covers October 2026 to September 2027. The report explains the traditional month boundaries used in the analysis."}},
+
  {zh:{q:"不确定出生时辰怎么办？",a:"可先提供大概时段（如「下午」），我们会以定盘法协助核对；若完全未知，将以日柱与年月盘为主撰写，并于书中注明。"},
   en:{q:"What if I don't know my birth hour?",a:"Give an approximate window (e.g. “afternoon”) and we will verify with chart rectification. If totally unknown, we write mainly from the day pillar and note it clearly."}},
- {zh:{q:"可以选择中文或英文吗？",a:"可以。七项服务均可选择中文版或英文版，请在提交资料时注明。"},
-  en:{q:"Chinese or English?",a:"All seven services are available in both. Just note your preference when submitting details."}},
+ {zh:{q:"可以选择中文或英文吗？",a:"可以。八项服务均可选择中文版或英文版，请在提交资料时注明。"},
+  en:{q:"Chinese or English?",a:"All eight services are available in both. Just note your preference when submitting details."}},
  {zh:{q:"可以为家人朋友订制吗？",a:"可以，请于下单时提供其生辰并确认对方知情同意；命书内容私密，仅交付予订购人。"},
   en:{q:"Can I order for family or friends?",a:"Yes — provide their birth details and confirm their consent. Reports are private and delivered only to the buyer."}},
  {zh:{q:"一签和完整命书有什么不同？",a:"免费一签以日主性情为切入点，是一份简短体验。完整命书会结合四柱、紫微等体系，梳理更完整的人生主题。"},
@@ -536,14 +544,14 @@ function renderServices(){
   var g=document.getElementById('svcGrid'); g.innerHTML='';
   SERVICES.forEach(function(s,i){
     var L=LANG==='zh'?s.zh:s.en;
-    var card=document.createElement('div'); card.className='svc'; if(i===2){card.id='compass';}
+    var card=document.createElement('div'); card.className='svc'; if(i===2){card.id='compass';} if(s.id){card.id=s.id;}
     card.innerHTML=
       '<div class="svc-top"><span class="svc-badge'+(s.hot?' hot':'')+'">'+s.b+'</span>'+
       '<span class="svc-price"><small>SGD </small>'+s.price+'</span></div>'+
       '<h3>'+L.n+'</h3><div class="en">'+L.en+'</div>'+
       '<p style="font-size:14px;color:var(--muted);margin-bottom:12px">'+L.d+'</p>'+
       '<ul>'+L.f.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>'+
-      '<a class="btn '+(s.hot?'btn-gold':'btn-line')+'" href="'+s.link+'" target="_blank" rel="noopener">'+(i===2?(LANG==='zh'?'咨询壶中罗盘':'Ask about Compass'):(LANG==='zh'?'选择此项':'Choose'))+' ↗</a>';
+      '<a class="btn '+(s.hot?'btn-gold':'btn-line')+'" href="'+s.link+'" target="_blank" rel="noopener">'+(s.id==='duyue'?(LANG==='zh'?'咨询壶中度月':'Ask about this report'):i===2?(LANG==='zh'?'咨询壶中罗盘':'Ask about Compass'):(LANG==='zh'?'选择此项':'Choose'))+' ↗</a>';
     g.appendChild(card);
   });
 }
