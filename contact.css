@@ -11,3 +11,13 @@
 :focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 @media(max-width:600px){body{padding-bottom:84px}.wa-launch{bottom:calc(12px + env(safe-area-inset-bottom));left:16px;right:16px;justify-content:center}.wa-panel{right:16px;bottom:calc(84px + env(safe-area-inset-bottom));max-height:calc(100dvh - 110px)}.hd{gap:10px;padding:12px 16px}.brand img{width:120px;height:40px}.hd-act{gap:8px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.spin-slow{animation:none}}
+
+/* Warm white navigation blends with the original brand artwork. */
+header{background:#f8f5ee;color:#17232d;border-bottom:1px solid #ded8cb;backdrop-filter:none}
+header .brand img{border-radius:0;mix-blend-mode:multiply}
+header nav a{color:#46515b}
+header nav a:hover,header nav a:focus-visible{color:#806020}
+header .lang button,header .menu-btn{color:#34414c;border-color:#c9c2b4}
+header .lang button.on{background:#d8b56b;color:#12161b;border-color:#d8b56b}
+header :focus-visible{outline-color:#806020}
+@media(max-width:900px){header nav{background:#f8f5ee;border-bottom-color:#ded8cb}}
