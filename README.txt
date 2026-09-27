@@ -54,4 +54,4 @@ Popup V2：保留黑金主站，每次打开或刷新页面均显示，可关闭
 
 壶中度月 / The Twelve-Month Journey：SGD 38，购买月份下个月起连续 12 个月，一次交付 PDF。
 
-最新付款配置（2026-09-27）：度月 SGD38；指南针 SGD38；命书 SGD68；数解 SGD68；钥匙 SGD38；说明书 SGD108。以用户提供的六项 Stripe 链接为准。真人解读与数钥的旧链接已分配给其他商品，改为 WhatsApp 咨询，避免错付。
+最新付款配置（2026-09-27）：度月 SGD38；指南针 SGD38；命书 SGD68；数解 SGD68；钥匙 SGD38；说明书 SGD108。以用户提供的六项 Stripe 链接为准。壶中数钥暂用 WhatsApp 咨询订购。线上真人解读报告 SGD 68 已接入 https://buy.stripe.com/bJe9ASaf2bgf7Ye5uD38405；壶中钥匙 SGD 38 使用 https://buy.stripe.com/8x2fZgevi5VV3HYbT138408。
