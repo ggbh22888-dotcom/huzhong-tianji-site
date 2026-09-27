@@ -1,30 +1,39 @@
-壶中天机 · 新版网站部署包
-=================================
+壶中天机 · 黑金版 WhatsApp 更新包
+更新日期：2026-09-27
 
-部署步骤（2 分钟）：
-1. 打开 https://app.netlify.com/projects/huzhongtianji/overview
-2. 左侧菜单选 "Deploys"
-3. 把本文件夹里的所有文件（index.html、robots.txt、sitemap.xml）拖进页面
-4. 等待几秒，网站自动更新
+联系号码：+65 8014 8899
+WhatsApp：https://wa.me/6580148899
 
-⚠️ 部署前必须替换 2 处（在 index.html 里搜索即可找到）：
+本包基于你提供的 huzhong-tianji-v2/index.html。
+保留黑金配色、首页罗盘、页面布局、七项服务与中英文切换。
+正式 Logo 使用你提供的原始品牌图片，未重绘。
 
-① Web3Forms Access Key
-   到 https://web3forms.com/ 免费注册 → 复制你的 access_key
-   在 index.html 搜索 YOUR_WEB3FORMS_ACCESS_KEY → 替换
-   否则客户提交表单会失败。
+本次新增／修复：
+- 桌面浮动 WhatsApp 咨询窗口及手机版底部联系按钮。
+- 五个快捷咨询主题、自定义留言、各服务的购买前咨询、页尾号码。
+- 表单将填写资料带入 WhatsApp，由客户自行确认发送；不会调用原来未配置的 Web3Forms。
+- 导航新增「壶中罗盘 / Compass」，指向现有壶中指南针服务。
+- 壶中指南针没有有效 Stripe 付款链接，因此该服务按钮改为 WhatsApp 咨询。
+- 其余六个原有 Stripe 链接和七项服务价格均保留。
+- 补齐缺失的品牌图像引用、favicon 和社交分享图。
 
-② 壶中指南针 Stripe 付款链接
-   到 https://dashboard.stripe.com/payment-links 创建一笔 SGD 98 的链接
-   在 index.html 搜索 REPLACE_WITH_COMPASS_LINK → 替换为真实链接
-   否则客户点"选择此项"会跳到 404。
+说明：保留的是现有首页罗盘图形和个人方位报告服务，未新增个人化罗盘运算。
+此更新不审核原有日签／命理算法，也未验证外部付款页面或 Calendly 账户。
 
-建议用 VS Code 或记事本打开 index.html，Ctrl+F 搜索即可。
+部署：
+1. 解压 ZIP。
+2. 将完整 site 文件夹（里面直接包含 index.html 及其余文件）部署到现有 Netlify 项目。
+3. 发布后检查 WhatsApp、付款与预约链接。
+本版本通过现有 GitHub main 分支交由 Netlify 自动部署。
 
-文件清单：
-- index.html   主网页（完整新版，含一签/日签/七项服务/中英双语）
-- robots.txt   告诉搜索引擎可以收录
-- sitemap.xml  搜索引擎地图
+文件：
+index.html                 主页面及服务数据
+contact.js          咨询窗口、联系入口与表单转交
+contact.css         沿用黑金配色的联系组件样式
+brand-logo.png       原始正式 Logo
+robots.txt / sitemap.xml   原文件保持不变
 
-域名：当前使用 https://huzhongtianji.netlify.app/
-以后买域名时，把 index.html 里所有 netlify.app 批量替换为新域名即可。
+联系号码设置：
+index.html 的 WHATSAPP_NUMBER = '6580148899' 控制所有 WhatsApp 目标。
+显示号码位于 contact.js 和本说明，更新号码时请同步修改。
+网站仅保存语言偏好；本次新增功能不保存出生资料或咨询留言。

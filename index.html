@@ -6,12 +6,12 @@
 <meta name="theme-color" content="#12161B">
 <title>壶中天机 · 玄夜观星，指一方吉凶 | Huzhong Tianji</title>
 <meta name="description" content="壶中天机：八字、紫微、数字解读与个人风水方位建议。个人命书、一对一咨询、免费人格签与每日历法。Chinese & English readings, personal guides, consultations and feng shui direction reports.">
-<link rel="icon" href="assets/seal.png">
+<link rel="icon" href="brand-logo.png">
 <meta property="og:title" content="壶中天机 · 玄夜观星，指一方吉凶">
 <meta property="og:description" content="八字、紫微、数字解读与个人风水方位建议。中文与英文服务。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://huzhongtianji.netlify.app/">
-<meta property="og:image" content="https://huzhongtianji.netlify.app/assets/seal.png">
+<meta property="og:image" content="https://huzhongtianji.netlify.app/brand-logo.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -154,16 +154,18 @@ footer .mail{font-family:var(--serif);font-size:22px;color:var(--accent);display
 footer .fine{font-size:12px;color:var(--muted);max-width:560px;margin:26px auto 0;line-height:1.8}
 footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
 </style>
+<link rel="stylesheet" href="contact.css">
 </head>
 <body>
 
 <header>
   <div class="hd">
     <a class="brand" href="#top">
-      <img src="assets/seal.png" alt="壶中天机印">
-      <span><strong>壶中天机</strong><small>HUZHONG TIANJI</small></span>
+      <img src="brand-logo.png" alt="壶中天机 Huzhong Tianji">
+      
     </a>
     <nav id="nav">
+      <a href="#compass" data-i18n="nav_compass">壶中罗盘</a>
       <a href="#approach" data-i18n="nav1">理念</a>
       <a href="#services" data-i18n="nav2">服务</a>
       <a href="#draw" data-i18n="nav3">一签</a>
@@ -293,7 +295,7 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
     <p class="kicker" data-i18n="bk_k">如何开始 · YOUR NEXT STEPS</p>
     <h2 class="title" data-i18n="bk_t">从相识，到读懂。</h2>
     <div class="steps">
-      <div class="step"><span class="n">01</span><h3 data-i18n="s1t">选择服务</h3><p data-i18n="s1d">先选适合的命书或咨询，通过 Stripe 页面付款。</p></div>
+      <div class="step"><span class="n">01</span><h3 data-i18n="s1t">选择服务</h3><p data-i18n="s1d">先选适合的命书或咨询，通过付款页面订购；壶中指南针请先咨询。</p></div>
       <div class="step"><span class="n">02</span><h3 data-i18n="s2t">提交资料</h3><p data-i18n="s2d">付款后填写生辰、出生地与收据单号，注明中文或英文版。</p></div>
       <div class="step"><span class="n">03</span><h3 data-i18n="s3t">交付与对话</h3><p data-i18n="s3d">报告以 PDF 电邮交付；选择真人咨询的客户，可预约解读时间。</p></div>
     </div>
@@ -302,7 +304,6 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
       <p class="kicker" data-i18n="fm_k">已经选好服务 · FOR OUR CLIENTS</p>
       <h2 class="title" style="font-size:26px" data-i18n="fm_t">接下来，让我们认真读你。</h2>
       <form id="intakeForm" class="form-grid">
-        <input type="hidden" name="access_key" value="5d57f6ac-9774-486d-b350-c9730decd894" <!-- ⚠️ 必须替换：到 web3forms.com 免费注册，复制 access key 贴这里 -->>
         <input type="hidden" name="subject" value="壶中天机 · 新订单资料">
         <input type="checkbox" name="botcheck" style="display:none">
         <div><label data-i18n="f_name">姓名</label><input name="name" required></div>
@@ -318,10 +319,10 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
         <div><label data-i18n="f_receipt">付款单号（选填）</label><input name="receipt"></div>
         <div class="full"><label data-i18n="f_home">现居环境简述（指南针客户填写）</label><textarea name="home" rows="2" placeholder="如：自宅三房式，主卧在西北；或租屋单间，床头朝东"></textarea></div>
         <div class="full"><label data-i18n="f_note">备注（选填）</label><textarea name="note" rows="2"></textarea></div>
-        <div class="full"><button type="submit" class="btn btn-gold" style="width:100%;justify-content:center" data-i18n="f_submit">提交资料</button></div>
+        <div class="full"><button type="submit" class="btn btn-gold" style="width:100%;justify-content:center" data-i18n="f_submit">通过 WhatsApp 发送资料</button></div>
       </form>
       <div class="form-ok" id="formOk" data-i18n="f_ok">已收到您的资料，我们会尽快以电邮回复。付款证明请另行电邮补交。</div>
-      <p class="note" data-i18n="f_priv">资料经加密表单送达我们的信箱，仅用于您的订购服务。付款证明请另行电邮，不会随此表单上传。</p>
+      <p class="note" data-i18n="f_priv">资料只在此页面整理，点击后由您在 WhatsApp 确认发送。网站不储存表单资料。</p>
     </div>
   </div>
 </section>
@@ -352,10 +353,13 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
 
 <script>
 /* ================= 国际化 ================= */
+// WhatsApp destination: international digits, no plus sign or spaces.
+var WHATSAPP_NUMBER = '6580148899';
+function waUrl(message){return 'https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(message);}
 var LANG = localStorage.getItem('hz-lang') || 'zh';
 var T = {
 zh:{
- nav1:"理念",nav2:"服务",nav3:"一签",nav4:"日签",nav5:"预约",menu:"菜单",
+ nav_compass:"壶中罗盘",nav1:"理念",nav2:"服务",nav3:"一签",nav4:"日签",nav5:"预约",menu:"菜单",
  hero_kicker:"八字 · 紫微 · 数字 · 风水方位",
  h1a:"玄夜观星，",h1b:"指一方吉凶。",
  hero_desc:"把脚步放慢一点。从传统智慧出发，读懂性情、际遇与身边的方位，找到属于自己的方向。",
@@ -377,22 +381,22 @@ zh:{
  da_prev:"← 前一日",da_today:"回到今日",da_next:"后一日 →",
  da_note:"依您装置的当地日期计算。传统历法参考，不替您决定每一步。",
  bk_k:"如何开始 · YOUR NEXT STEPS",bk_t:"从相识，到读懂。",
- s1t:"选择服务",s1d:"先选适合的命书或咨询，通过 Stripe 页面付款。",
+ s1t:"选择服务",s1d:"先选适合的命书或咨询，通过付款页面订购；壶中指南针请先咨询。",
  s2t:"提交资料",s2d:"付款后填写生辰、出生地与收据单号，注明中文或英文版。",
  s3t:"交付与对话",s3d:"报告以 PDF 电邮交付；选择真人咨询的客户，可预约解读时间。",
  fm_k:"已经选好服务 · FOR OUR CLIENTS",fm_t:"接下来，让我们认真读你。",
  f_name:"姓名",f_email:"电邮",f_gender:"性别",g_f:"女",g_m:"男",f_item:"订购项目",f_lang:"版本",v_zh:"中文",
  f_date:"出生日期",f_time:"出生时间",f_place:"出生地",f_receipt:"付款单号（选填）",
- f_home:"现居环境简述（指南针客户填写）",f_note:"备注（选填）",f_submit:"提交资料",
+ f_home:"现居环境简述（指南针客户填写）",f_note:"备注（选填）",f_submit:"通过 WhatsApp 发送资料",
  f_ok:"已收到您的资料，我们会尽快以电邮回复。付款证明请另行电邮补交。",
- f_priv:"资料经加密表单送达我们的信箱，仅用于您的订购服务。付款证明请另行电邮，不会随此表单上传。",
+ f_priv:"资料只在此页面整理，点击后由您在 WhatsApp 确认发送。网站不储存表单资料。",
  fq_k:"常见问题 · GOOD TO KNOW",fq_t:"来问之前。",
  ft_k:"待君来问 · AN OPEN INVITATION",ft_t:"心里有问，不妨坐下聊聊。",
  ft_b1:"预约 30 分钟解读",ft_b2:"安排 45 分钟数钥",
  ft_fine:"本系列依传统命理学理推演，供人生参考，不构成医疗、投资或法律建议。命由天定，运由己造——最终的每一步，仍由您亲手落子。"
 },
 en:{
- nav1:"Approach",nav2:"Services",nav3:"A Draw",nav4:"Daily",nav5:"Book",menu:"Menu",
+ nav_compass:"Compass",nav1:"Approach",nav2:"Services",nav3:"A Draw",nav4:"Daily",nav5:"Book",menu:"Menu",
  hero_kicker:"FOUR PILLARS · ZI WEI · NUMEROLOGY · DIRECTIONS",
  h1a:"Under quiet stars,",h1b:"find your true direction.",
  hero_desc:"Slow down a little. From classical wisdom, read your temperament, your seasons, and the directions around you — and find your own way.",
@@ -420,9 +424,9 @@ en:{
  fm_k:"FOR OUR CLIENTS",fm_t:"Next, let us read you carefully.",
  f_name:"Name",f_email:"Email",f_gender:"Gender",g_f:"Female",g_m:"Male",f_item:"Service",f_lang:"Version",v_zh:"中文",
  f_date:"Birth date",f_time:"Birth time",f_place:"Birth place",f_receipt:"Receipt no. (optional)",
- f_home:"Brief description of your home (Compass clients)",f_note:"Notes (optional)",f_submit:"Submit details",
+ f_home:"Brief description of your home (Compass clients)",f_note:"Notes (optional)",f_submit:"Send details via WhatsApp",
  f_ok:"Received. We will reply by email shortly. Please email your payment receipt separately.",
- f_priv:"Your details reach our inbox via an encrypted form and are used only to deliver your service. Payment receipts are emailed separately.",
+ f_priv:"Details are prepared in this page. Review and send them in WhatsApp; this website does not store the form details.",
  fq_k:"GOOD TO KNOW",fq_t:"Before you ask.",
  ft_k:"AN OPEN INVITATION",ft_t:"Questions? Sit down, let us talk.",
  ft_b1:"Book a 30-min session",ft_b2:"Arrange a 45-min unlock",
@@ -442,7 +446,7 @@ var SERVICES = [
       f:["四柱八字完整排盘：日主、格局、身强身弱、喜用忌凶","紫微斗数十二宫与四化合参","十神结构、性情、事业、财运、感情、健康","大运逐十年＋未来三年流年推演，完整报告"]},
   en:{n:"The Life Book",en:"PDF REPORT",d:"Read your nature and structure — career, wealth, bonds, health.",
       f:["Full Four Pillars chart: day master, structure, favourable elements","Zi Wei Dou Shu: twelve palaces with transformations","Ten Gods, temperament, career, wealth, relationships, health","10-year luck cycles + 3 annual forecasts, full report"]}},
- {b:"PDF", hot:false, price:98, link:"https://buy.stripe.com/REPLACE_WITH_COMPASS_LINK <!-- ⚠️ 必须替换：到 Stripe 后台创建 SGD 68 的 Payment Link，贴 URL 到这里 -->",
+ {b:"PDF", hot:false, price:98, link:waUrl("你好，我想咨询壶中指南针 / Hello, I would like to ask about the Personal Compass."),
   zh:{n:"壶中指南针",en:"THE PERSONAL COMPASS",d:"个人风水方位建议报告：你的吉方凶方，一册掌握。",
       f:["依八字喜用五行与八宅命卦，排出你的专属吉方与凶方","睡床朝向、书桌与办公位坐向、大门与炉灶方位建议","附流年方位调整提醒，每年重点方位一目了然","可与壶中命书合并阅读，作居家与办公布局参考"]},
   en:{n:"The Personal Compass",en:"PDF REPORT",d:"Your personal feng shui directions: auspicious sectors, one guide.",
@@ -530,16 +534,16 @@ function setLang(l){
 
 function renderServices(){
   var g=document.getElementById('svcGrid'); g.innerHTML='';
-  SERVICES.forEach(function(s){
+  SERVICES.forEach(function(s,i){
     var L=LANG==='zh'?s.zh:s.en;
-    var card=document.createElement('div'); card.className='svc';
+    var card=document.createElement('div'); card.className='svc'; if(i===2){card.id='compass';}
     card.innerHTML=
       '<div class="svc-top"><span class="svc-badge'+(s.hot?' hot':'')+'">'+s.b+'</span>'+
       '<span class="svc-price"><small>SGD </small>'+s.price+'</span></div>'+
       '<h3>'+L.n+'</h3><div class="en">'+L.en+'</div>'+
       '<p style="font-size:14px;color:var(--muted);margin-bottom:12px">'+L.d+'</p>'+
       '<ul>'+L.f.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>'+
-      '<a class="btn '+(s.hot?'btn-gold':'btn-line')+'" href="'+s.link+'" target="_blank" rel="noopener">'+(LANG==='zh'?'选择此项':'Choose')+' ↗</a>';
+      '<a class="btn '+(s.hot?'btn-gold':'btn-line')+'" href="'+s.link+'" target="_blank" rel="noopener">'+(i===2?(LANG==='zh'?'咨询壶中罗盘':'Ask about Compass'):(LANG==='zh'?'选择此项':'Choose'))+' ↗</a>';
     g.appendChild(card);
   });
 }
@@ -598,27 +602,10 @@ function renderDaily(){
   }).join('');
 }
 
-/* ================= 表单（Web3Forms） ================= */
-document.getElementById('intakeForm').addEventListener('submit',function(e){
-  e.preventDefault();
-  var form=e.target, btn=form.querySelector('button[type=submit]');
-  if(form.access_key.value.indexOf('YOUR_')===0){
-    alert(LANG==='zh'?'表单尚未设定：请把代码中的 5d57f6ac-9774-486d-b350-c9730decd894换成你的 Web3Forms 密钥':'Form not configured yet: replace 5d57f6ac-9774-486d-b350-c9730decd894 with your Web3Forms key.');
-    return;
-  }
-  btn.disabled=true;
-  fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(form)})
-    .then(function(r){return r.json()})
-    .then(function(d){
-      if(d.success){ form.style.display='none'; document.getElementById('formOk').style.display='block'; }
-      else{ alert('Error: '+d.message); btn.disabled=false; }
-    })
-    .catch(function(){ alert(LANG==='zh'?'网络错误，请稍后再试或改以电邮发送':'Network error — please retry or email us.'); btn.disabled=false; });
-});
-
 /* ================= 启动 ================= */
 setLang(LANG);
 document.getElementById('drawDate').valueAsDate=new Date(1990,0,1);
 </script>
+<script src="contact.js"></script>
 </body>
 </html>
