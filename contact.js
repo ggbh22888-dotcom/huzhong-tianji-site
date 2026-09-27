@@ -8703,3 +8703,73 @@ window.renderDaily=function(){
 };
 renderDaily();
 })();
+
+/* Original Huzhong project artwork: decorative crops, never almanac data. */
+(function(){
+const art=[{"name":"竹报平安","en":"Bamboo · peace","box":[118,556,242,171]},{"name":"松鹤延年","en":"Crane · longevity","box":[416,222,224,170]},{"name":"松柏长青","en":"Pine · resilience","box":[415,1165,220,180]},{"name":"吉祥如意","en":"Ruyi · good wishes","box":[718,1180,207,155]},{"name":"喜上眉梢","en":"Magpie · joy","box":[132,881,235,151]},{"name":"年年有余","en":"Carp · abundance","box":[420,866,218,173]}];
+const fig=document.createElement('figure');fig.className='daily-art';
+fig.innerHTML='<div class="daily-art-window"><img src="daily-ink-original.png" alt="" decoding="async"></div><figcaption></figcaption>';
+document.querySelector('#daily .daily-quote').before(fig);
+const previous=window.renderDaily;
+window.renderDaily=function(){previous();document.querySelector('#daily .daily-quote').before(fig);const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Singapore',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const n=t=>Number(p.find(i=>i.type===t).value);const day=Math.floor(Date.UTC(n('year'),n('month')-1,n('day')+dayOffset)/86400000);const a=art[((day-20723)%art.length+art.length)%art.length],box=a.box;
+const win=fig.querySelector('.daily-art-window'),im=fig.querySelector('img');win.style.aspectRatio=box[2]+'/'+box[3];im.style.width=(1055/box[2]*100)+'%';im.style.left=(-box[0]/box[2]*100)+'%';im.style.top=(-box[1]/box[3]*100)+'%';im.alt=LANG==='zh'?a.name+'水墨插画':a.en+' ink illustration';fig.querySelector('figcaption').textContent=LANG==='zh'?a.name+' · 水墨寄意':a.en+' · Decorative artwork';};renderDaily();
+})();
+
+/* Free daily sharing group; invitation URL is supplied by the owner. */
+(function(){
+const groupUrl='';
+const icon='<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true" focusable="false"><path d="M16 3a12 12 0 0 0-10.4 18L4 28l7-1.8A12 12 0 1 0 16 3Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 9c-2 0-2 4 1 7s7 5 9 3l1-2-4-2-1 2c-2-1-3-2-4-4l2-1-2-3Z" fill="currentColor"/></svg>';
+function update(){const zh=LANG==='zh',section=document.querySelector('.daily-subscription');
+ section.innerHTML='<summary>'+icon+'<span>'+(zh?'加入日签分享群':'Join our daily sharing group')+'</span></summary><div class="daily-group"><p>'+(zh?'每天分享壶中日签与通胜参考 PDF，欢迎有兴趣的朋友加入。':'Join us for daily inspiration and a traditional almanac PDF.')+'</p>'+(groupUrl?'<a class="btn btn-gold" href="'+groupUrl+'" target="_blank" rel="noopener">'+icon+(zh?'加入 WhatsApp 群':'Join WhatsApp group')+'</a>':'<button class="btn btn-line" type="button" disabled>'+icon+(zh?'群组邀请链接准备中':'Group invitation coming soon')+'</button>')+'<p class="note">'+(zh?'壶中日签为免费分享，由个人利用闲暇时间整理与发送。若有延迟、遗漏或内容疏误，敬请谅解，也欢迎提醒指正。':'This is a free service, prepared and shared personally as time allows. Please forgive any delays, omissions or errors; corrections are welcome.')+'</p></div>';
+ const intro=document.getElementById('wa-intro');if(intro)intro.textContent=zh?'选择问题，前往 WhatsApp 与我们联系。':'Choose a topic to contact us on WhatsApp.';
+ const footer=document.querySelector('.wa-footer a');if(footer){footer.innerHTML=icon+'<span>'+(zh?'WhatsApp 联系我们':'Contact us on WhatsApp')+'</span>';}
+}
+const prev=window.setLang;window.setLang=function(lang){prev(lang);update();};update();
+})();
+
+/* Optional Daily Page invitation from the owner’s Popup V2. */
+(function(){
+const copy={
+    zh:{
+      kicker:"HU ZHONG TIAN JI",
+      title1:"想不想洞彻",
+      title2:"今日天机",
+      q:"？",
+      sub:"看看今天，有什么值得你留意。",
+      yes:"想｜揭开今日天机",
+      no:"暂时不要",
+      note:"每日一签 · 传统文化内容，仅供个人参考"
+    },
+    en:{
+      kicker:"HU ZHONG TIAN JI",
+      title1:"Curious what ",
+      title2:"today may reveal",
+      q:"?",
+      sub:"Draw your Hu Zhong Daily Sign and see what may be worth noticing today.",
+      yes:"YES · Reveal Today’s Sign",
+      no:"NOT NOW",
+      note:"Daily reflection · Traditional culture content for personal reference"
+    }
+  };
+const host=document.createElement("div");host.innerHTML="<div id=\"hzp-dialog\" class=\"hzp-overlay\" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"hzp-title\">\n  <section class=\"hzp-popup\"><button type=\"button\" class=\"hzp-close\" aria-label=\"关闭 / Close\">×</button>\n    <div class=\"hzp-orbit\"><i></i></div>\n    <div class=\"hzp-mist\"></div>\n\n    <div class=\"hzp-lang\">\n      <button data-lang=\"zh\" class=\"hzp-active\">中文</button>\n      <button data-lang=\"en\">EN</button>\n    </div>\n\n    <img class=\"hzp-logo\" src=\"brand-logo.png\" alt=\"壶中天机\">\n    <div class=\"hzp-seal\">天<br>机</div>\n    <div class=\"hzp-kicker\" data-i18n=\"kicker\">HU ZHONG TIAN JI</div>\n\n    <h2 class=\"hzp-title\" id=\"hzp-title\">\n      <span data-i18n=\"title1\">想不想洞彻</span><span class=\"hzp-accent\" data-i18n=\"title2\">今日天机</span><span data-i18n=\"q\">？</span>\n    </h2>\n\n    <p class=\"hzp-sub\" data-i18n=\"sub\">看看今天，有什么值得你留意。</p>\n\n    <div class=\"hzp-divider\"><span>◇</span></div>\n\n    <div class=\"hzp-actions\">\n      <button id=\"hzp-yes\" class=\"hzp-btn hzp-yes\" data-i18n=\"yes\">想｜揭开今日天机</button>\n      <button id=\"hzp-no\" class=\"hzp-btn hzp-no\" data-i18n=\"no\">暂时不要</button>\n    </div>\n\n    <div class=\"hzp-note\" data-i18n=\"note\">每日一签 · 传统文化内容，仅供个人参考</div>\n  </section>\n</div>\n\n";const overlay=host.firstElementChild;document.body.append(overlay);
+
+const yes=overlay.querySelector('#hzp-yes'),no=overlay.querySelector('#hzp-no');
+function translate(){const lang=LANG==='en'?'en':'zh';overlay.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=copy[lang][el.dataset.i18n]);overlay.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('hzp-active',b.dataset.lang===lang));}
+const previous=window.setLang;window.setLang=function(lang){previous(lang);translate();};translate();
+overlay.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>window.setLang(b.dataset.lang)));
+let focusBefore,overflowBefore;const isolated=[];
+function open(){focusBefore=document.activeElement;overflowBefore=document.body.style.overflow;document.body.style.overflow='hidden';for(const el of document.body.children){if(el!==overlay && el.tagName!=='SCRIPT' && !el.inert){el.inert=true;isolated.push(el);}}overlay.classList.add('hzp-open');yes.focus();}
+function close(){overlay.classList.remove('hzp-open');document.body.style.overflow=overflowBefore;isolated.splice(0).forEach(el=>el.inert=false);try{sessionStorage.setItem('hz-daily-popup-seen','1')}catch{}focusBefore?.focus();}
+no.addEventListener('click',close);overlay.querySelector('.hzp-close').addEventListener('click',close);overlay.addEventListener('click',e=>{if(e.target===overlay)close();});
+overlay.addEventListener('keydown',e=>{if(e.key==='Escape'){close();return;}if(e.key==='Tab'){const controls=[...overlay.querySelectorAll('button')],first=controls[0],last=controls[controls.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+yes.addEventListener('click',()=>{close();location.hash='daily';document.getElementById('daily').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});});
+let seen=false;try{seen=sessionStorage.getItem('hz-daily-popup-seen')==='1'}catch{}if(!seen)setTimeout(open,550);
+})();
+
+/* Lunar observances transcribed from the owner’s supplied reference table. */
+(function(){
+const dates={"1-1": ["弥勒菩萨圣诞"], "1-9": ["玉皇大帝圣诞"], "2-2": ["福德正神千秋"], "2-3": ["文昌帝君圣诞"], "2-8": ["释迦牟尼佛出家日"], "2-10": ["莲生活佛出家日"], "2-15": ["释迦牟尼佛涅槃日", "九天玄女圣诞"], "2-19": ["观世音菩萨圣诞"], "2-21": ["普贤菩萨圣诞"], "3-3": ["玄天上帝圣诞"], "3-16": ["准提佛母圣诞"], "3-23": ["天上圣母圣诞"], "4-4": ["文殊菩萨圣诞"], "4-14": ["吕纯阳祖师圣诞"], "4-28": ["药王菩萨圣诞"], "5-16": ["释迦牟尼佛圣诞（依参考表）"], "5-18": ["莲生活佛圣诞"], "6-3": ["韦陀菩萨圣诞"], "6-19": ["观世音菩萨成道日"], "6-24": ["伽蓝尊者圣诞"], "7-10": ["莲华生大士圣诞"], "7-13": ["大势至菩萨圣诞"], "7-18": ["瑶池金母圣诞"], "7-19": ["值年太岁星君千秋"], "7-24": ["龙树菩萨圣诞"], "7-30": ["地藏王菩萨圣诞"], "8-4": ["多闻天王圣诞"], "8-22": ["燃灯古佛圣诞"], "9-9": ["摩利支天菩萨圣诞", "中坛元帅千秋"], "9-19": ["观世音菩萨出家日"], "9-30": ["药师佛圣诞"], "11-17": ["阿弥陀佛圣诞"], "12-8": ["释迦牟尼佛成道日"], "12-29": ["华严菩萨圣诞"]};
+
+const card=document.createElement('aside');card.className='daily-observance';document.querySelector('#daily .daily-quote').before(card);
+const previous=window.renderDaily;window.renderDaily=function(){previous();document.querySelector('#daily .daily-quote').before(card);const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Singapore',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const n=t=>Number(p.find(i=>i.type===t).value);const d=new Date(Date.UTC(n('year'),n('month')-1,n('day')+dayOffset));const lunar=Solar.fromYmd(d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate()).getLunar();const names=lunar.getMonth()>0?(dates[lunar.getMonth()+'-'+lunar.getDay()]||[]):[];card.hidden=!names.length;card.replaceChildren();if(!names.length)return;const h=document.createElement('h3');h.textContent=LANG==='zh'?'今日 · 诸神佛菩萨纪念日':'Today · Traditional observances';const p1=document.createElement('p');p1.textContent=names.join(' · ');const p2=document.createElement('p');p2.className='note';p2.textContent=LANG==='zh'?'依所提供《诸神佛菩萨圣诞千秋表（农历）》整理。不同传承日期可能有异；闰月不重复，农历三十仅在该月有三十日时显示。':'Based on the supplied lunar observance table. Traditions may differ; leap months do not repeat these dates. Day 30 applies only when present.';card.append(h,p1,p2);};renderDaily();
+})();

@@ -37,3 +37,15 @@ robots.txt / sitemap.xml   原文件保持不变
 index.html 的 WHATSAPP_NUMBER = '6580148899' 控制所有 WhatsApp 目标。
 显示号码位于 contact.js 和本说明，更新号码时请同步修改。
 网站仅保存语言偏好；本次新增功能不保存出生资料或咨询留言。
+
+DAILY PAGE / MANUAL WHATSAPP SUBSCRIPTION
+The daily page uses Singapore dates and 372 Chinese editorial reflections on rotation.
+Subscription form requires an international phone number and explicit consent. It opens a prefilled WhatsApp draft to +65 8014 8899; the customer must send it and the owner must confirm registration. No subscriber database or automatic customer messages are implemented. Reply STOP / 停止 to unsubscribe; the owner must remove that subscriber manually.
+A Codex heartbeat is scheduled for 06:00 Asia/Singapore to prepare a PDF in this conversation. It depends on the local app/runtime being available. Website date rotation runs in the browser independently.
+Daily PDF source and generator: sibling daily/content.json and daily/make_pdf.py (kept outside the public deploy package).
+
+ALMANAC: lunar-javascript 1.7.7 bundled in contact.js (MIT); PDF uses lunar_python 1.4.8. Fu direction uses sect 2. Zodiac harmonies follow day branch. Colours use day-stem element; Hetu numbers Wood 3/8, Fire 2/7, Earth 5/10, Metal 4/9, Water 1/6. These are explicitly labelled cultural references.
+
+CURRENT SHARING FLOW: Public phone labels removed. Phone registration replaced with WhatsApp group icon and free, personal best-effort service statement. The owner has not yet supplied a group invite URL; button remains explicitly disabled until provided. Contact wa.me destinations remain configured internally. Artwork is from the project-only authorized library at ../huzhongtianji-image-library; original sheet is retained intact and decorative viewports rotate daily.
+
+Popup V2：保留黑金主站，每次浏览器会话首次显示，可关闭。纪念日依用户提供农历表，常规月份按原月日；不自动重复闰月，不将三十移至二十九。五月十六佛诞为参考表日期，明确标注，不代表所有传统。
