@@ -48,4 +48,6 @@ ALMANAC: lunar-javascript 1.7.7 bundled in contact.js (MIT); PDF uses lunar_pyth
 
 CURRENT SHARING FLOW: Public phone labels removed. Phone registration replaced with WhatsApp group icon and free, personal best-effort service statement. The owner has not yet supplied a group invite URL; button remains explicitly disabled until provided. Contact wa.me destinations remain configured internally. Artwork is from the project-only authorized library at ../huzhongtianji-image-library; original sheet is retained intact and decorative viewports rotate daily.
 
-Popup V2：保留黑金主站，每次浏览器会话首次显示，可关闭。纪念日依用户提供农历表，常规月份按原月日；不自动重复闰月，不将三十移至二十九。五月十六佛诞为参考表日期，明确标注，不代表所有传统。
+Popup V2：保留黑金主站，每次打开或刷新页面均显示，可关闭。纪念日依用户提供农历表，常规月份按原月日；不自动重复闰月，不将三十移至二十九。五月十六佛诞为参考表日期，明确标注，不代表所有传统。
+
+最新订阅方式：已改用用户提供的 WhatsApp Business 原始二维码，可扫码打开工作室聊天申请日签分享；手机按钮也可直接申请。此二维码不是群邀请，不会自动入群。

@@ -8762,11 +8762,11 @@ const previous=window.setLang;window.setLang=function(lang){previous(lang);trans
 overlay.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>window.setLang(b.dataset.lang)));
 let focusBefore,overflowBefore;const isolated=[];
 function open(){focusBefore=document.activeElement;overflowBefore=document.body.style.overflow;document.body.style.overflow='hidden';for(const el of document.body.children){if(el!==overlay && el.tagName!=='SCRIPT' && !el.inert){el.inert=true;isolated.push(el);}}overlay.classList.add('hzp-open');yes.focus();}
-function close(){overlay.classList.remove('hzp-open');document.body.style.overflow=overflowBefore;isolated.splice(0).forEach(el=>el.inert=false);try{sessionStorage.setItem('hz-daily-popup-seen','1')}catch{}focusBefore?.focus();}
+function close(){overlay.classList.remove('hzp-open');document.body.style.overflow=overflowBefore;isolated.splice(0).forEach(el=>el.inert=false);focusBefore?.focus();}
 no.addEventListener('click',close);overlay.querySelector('.hzp-close').addEventListener('click',close);overlay.addEventListener('click',e=>{if(e.target===overlay)close();});
 overlay.addEventListener('keydown',e=>{if(e.key==='Escape'){close();return;}if(e.key==='Tab'){const controls=[...overlay.querySelectorAll('button')],first=controls[0],last=controls[controls.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
 yes.addEventListener('click',()=>{close();location.hash='daily';document.getElementById('daily').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});});
-let seen=false;try{seen=sessionStorage.getItem('hz-daily-popup-seen')==='1'}catch{}if(!seen)setTimeout(open,550);
+setTimeout(open,550);
 })();
 
 /* Lunar observances transcribed from the owner’s supplied reference table. */
