@@ -273,3 +273,9 @@ font-family:"Songti SC","STSong",serif;color:var(--ink)}
 .hzp-popup{max-height:90dvh;overflow-y:auto}.hzp-close{position:absolute;left:25px;top:20px;border:0;background:transparent;color:#54362c;font-size:26px;cursor:pointer;z-index:6}.hzp-popup button:focus-visible{outline:3px solid #8a3d32;outline-offset:4px}
 
 .daily-observance{clear:both;padding:16px 20px;margin:18px 0;border:1px solid #8c7445;border-left:3px solid #d8b56b;border-radius:10px;background:#221e18}.daily-observance[hidden]{display:none}.daily-observance h3{color:#d8b56b;margin:0 0 8px}.daily-observance p{margin:6px 0;line-height:1.7}
+
+/* Zodiac colours requested by the owner: six harmony red, three harmony green, clash black. */
+.almanac-cell:nth-child(4) span,.almanac-cell:nth-child(4) strong{color:#ff8580}
+.almanac-cell:nth-child(5) span,.almanac-cell:nth-child(5) strong{color:#8bd5a4}
+.almanac-cell:nth-child(6){background:#f8f5ee;border-color:#d8b56b}
+.almanac-cell:nth-child(6) span,.almanac-cell:nth-child(6) strong{color:#000}
