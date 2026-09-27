@@ -40,7 +40,7 @@
       var existing = card.querySelector('.wa-service'); if (existing) existing.remove();
       var a = document.createElement('a'); a.className = 'wa-service'; a.textContent = zh ? '购买前先问 →' : 'Ask before ordering →';
       a.href = waUrl((zh ? '你好，我想咨询：' : 'Hello, I would like to ask about: ') + SERVICES[i][LANG].n); a.target = '_blank'; a.rel = 'noopener'; card.appendChild(a);
-      if (i === 2) card.querySelector('.btn').href = waUrl(topics[4]);
+
     });
     updateLink();
   }

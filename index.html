@@ -295,7 +295,7 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
     <p class="kicker" data-i18n="bk_k">如何开始 · YOUR NEXT STEPS</p>
     <h2 class="title" data-i18n="bk_t">从相识，到读懂。</h2>
     <div class="steps">
-      <div class="step"><span class="n">01</span><h3 data-i18n="s1t">选择服务</h3><p data-i18n="s1d">先选适合的命书或咨询，通过付款页面订购；壶中指南针与壶中度月请先咨询。</p></div>
+      <div class="step"><span class="n">01</span><h3 data-i18n="s1t">选择服务</h3><p data-i18n="s1d">先选适合的命书或咨询，通过付款页面订购；线上真人解读与壶中数钥请先咨询。</p></div>
       <div class="step"><span class="n">02</span><h3 data-i18n="s2t">提交资料</h3><p data-i18n="s2d">付款后填写生辰、出生地与收据单号，注明中文或英文版。</p></div>
       <div class="step"><span class="n">03</span><h3 data-i18n="s3t">交付与对话</h3><p data-i18n="s3d">报告以 PDF 电邮交付；选择真人咨询的客户，可预约解读时间。</p></div>
     </div>
@@ -381,7 +381,7 @@ zh:{
  da_prev:"← 前一日",da_today:"回到今日",da_next:"后一日 →",
  da_note:"依您装置的当地日期计算。传统历法参考，不替您决定每一步。",
  bk_k:"如何开始 · YOUR NEXT STEPS",bk_t:"从相识，到读懂。",
- s1t:"选择服务",s1d:"先选适合的命书或咨询，通过付款页面订购；壶中指南针与壶中度月请先咨询。",
+ s1t:"选择服务",s1d:"先选适合的命书或咨询，通过付款页面订购；线上真人解读与壶中数钥请先咨询。",
  s2t:"提交资料",s2d:"付款后填写生辰、出生地与收据单号，注明中文或英文版。",
  s3t:"交付与对话",s3d:"报告以 PDF 电邮交付；选择真人咨询的客户，可预约解读时间。",
  fm_k:"已经选好服务 · FOR OUR CLIENTS",fm_t:"接下来，让我们认真读你。",
@@ -436,27 +436,27 @@ en:{
 /* ================= 数据 ================= */
 /* ⚠️ Stripe 链接：请逐一核对每个按钮指向正确的服务 */
 var SERVICES = [
- {b:"PDF", hot:false, price:38, link:"https://buy.stripe.com/fZueVc72Q5VV2DU9KT38409",
+ {b:"PDF", hot:false, price:38, link:"https://buy.stripe.com/8x2fZgevi5VV3HYbT138408",
   zh:{n:"壶中钥匙",en:"THE VESSEL KEY",d:"专属数字与字母，让传统数理成为日常参考。",
       f:["专属数字与英文字母组合，供电话、车牌、账户等日常场景参考","每个数字皆用河图、洛书双系统交叉验证，标明双证或单证","也是壶中命书数字的解密说明，让你知道数字从何而来","可单独使用，不需要先持有壶中命书"]},
   en:{n:"The Vessel Key",en:"PDF REPORT",d:"Your personal numbers and letters, as a daily reference.",
       f:["A personal set of numbers & letters for phone, car plate, accounts","Every number cross-checked in two classical systems","Explains how the numbers in your Life Book were derived","Works standalone — no Life Book required"]}},
- {b:"PDF", hot:true, price:68, link:"https://buy.stripe.com/bJe9ASaf2bgf7Ye5uD38405",
+ {b:"PDF", hot:true, price:68, link:"https://buy.stripe.com/fZueVc72Q5VV2DU9KT38409",
   zh:{n:"壶中命书",en:"THE LIFE BOOK",d:"读性情、看格局，理解事业与关系中的自己。",
       f:["四柱八字完整排盘：日主、格局、身强身弱、喜用忌凶","紫微斗数十二宫与四化合参","十神结构、性情、事业、财运、感情、健康","大运逐十年＋未来三年流年推演，完整报告"]},
   en:{n:"The Life Book",en:"PDF REPORT",d:"Read your nature and structure — career, wealth, bonds, health.",
       f:["Full Four Pillars chart: day master, structure, favourable elements","Zi Wei Dou Shu: twelve palaces with transformations","Ten Gods, temperament, career, wealth, relationships, health","10-year luck cycles + 3 annual forecasts, full report"]}},
- {b:"PDF", hot:false, price:68, link:waUrl("你好，我想咨询壶中指南针 / Hello, I would like to ask about the Personal Compass."),
+ {b:"PDF", hot:false, price:38, link:"https://buy.stripe.com/9B6cN4af24RR1zQ2ir3840c",
   zh:{n:"壶中指南针",en:"THE PERSONAL COMPASS",d:"个人风水方位建议报告：你的吉方凶方，一册掌握。",
       f:["依八字喜用五行与八宅命卦，排出你的专属吉方与凶方","睡床朝向、书桌与办公位坐向、大门与炉灶方位建议","附流年方位调整提醒，每年重点方位一目了然","可与壶中命书合并阅读，作居家与办公布局参考"]},
   en:{n:"The Personal Compass",en:"PDF REPORT",d:"Your personal feng shui directions: auspicious sectors, one guide.",
       f:["Auspicious & challenging directions from your chart and life卦","Bed facing, desk orientation, door and stove suggestions","Annual direction reminders — key sectors at a glance","Pairs with the Life Book for home & office planning"]}},
- {b:"PDF", hot:false, price:108, link:"https://buy.stripe.com/9B6cN4dre6ZZemC1en3840b",
+ {b:"PDF", hot:false, price:108, link:"https://buy.stripe.com/14A7sK86U3NNceubT138407",
   zh:{n:"壶中说明书",en:"THE PERSONAL GUIDE",d:"把命盘化作个人手册，梳理每一阶段的行动方向。",
       f:["依你的命盘格局，整理成一份「个人操作手册」","逐年重点提醒：哪几年宜冲刺、哪几年宜守成、哪几年须谨慎","附个人化宜忌对照表，依你命盘量身定制","可与命书合并阅读，也可单独作随身参考"]},
   en:{n:"The Personal Guide",en:"PDF REPORT",d:"Your chart distilled into a manual for each stage of life.",
       f:["Your chart structure as a practical personal manual","Year-by-year cues: when to push, hold, or tread carefully","A personalised do & avoid table, tailored to your chart","Reads with the Life Book or stands alone"]}},
- {b:"30 MIN", hot:false, price:68, link:"https://buy.stripe.com/8x2fZgevi5VV3HYbT138408",
+ {b:"30 MIN", hot:false, price:68, link:waUrl("你好，我想咨询线上真人解读的订购与付款方式。"), consult:true,
   zh:{n:"线上真人解读",en:"A PERSONAL CONVERSATION",d:"留出半小时，把心里最想问的事，好好谈一谈。",
       f:["30 分钟一对一 Zoom 视讯解读，由命运规划师亲自讲解你的命盘","解读后提供重点整理报告（PDF），方便日后回顾","解读前可先提出你最想厘清的三个问题","含录影档，事后可回看"]},
   en:{n:"A Personal Conversation",en:"30 MIN ZOOM",d:"Thirty minutes for the questions that matter most.",
@@ -466,21 +466,21 @@ var SERVICES = [
       f:["分析您身边常用的数字：生日、电话号码、门牌、车牌等","以西方生命数字学，拆解每组数字背后的能量与意涵","从数字学角度解读组合与事业、人际及生活主题的关联","30 分钟一对一真人讲解，当面问清楚每个数字的影响"]},
   en:{n:"Numero Decoding",en:"30 MIN",d:"Rediscover the meaning behind your birthday and daily numbers.",
       f:["Analyse your numbers: birthday, phone, address, plate","Western numerology: the energy of each combination","How your numbers connect to career, people, life themes","30-min one-on-one walkthrough, ask anything"]}},
- {b:"45 MIN", hot:false, price:168, link:"https://buy.stripe.com/14A7sK86U3NNceubT138407",
+ {b:"45 MIN", hot:false, price:168, link:waUrl("你好，我想咨询壶中数钥的订购与付款方式。"), consult:true,
   zh:{n:"壶中数钥",en:"NUMERO UNLOCK",d:"从数字分析出发，整理更适合自己的组合建议。",
       f:["承接《壶中数解》的分析，为您量身订制全新专属数字","依据个人数字分析，整理组合选择与使用的参考方向","涵盖电话、车牌、门牌等各类数字的订制建议","45 分钟一对一真人讲解，说明如何逐步替换与启用新数字"]},
   en:{n:"Numero Unlock",en:"45 MIN",d:"From analysis to action: numbers tailored to you.",
       f:["Builds on your Numero Decoding session","A custom set of numbers and how to use them","Covers phone, plate, door numbers and more","45-min one-on-one: how to switch and activate"]}},
- {id:"duyue",b:"12 MONTHS · PDF", hot:false, price:68, link:waUrl("你好，我想订购壶中度月，SGD 68 一份，涵盖购买月份的下个月起连续 12 个月。请告知所需资料与付款方式。 / Hello, I would like to order The Twelve-Month Journey, SGD 68, covering 12 consecutive months starting next month."),
+ {id:"duyue",b:"12 MONTHS · PDF", hot:false, price:38, link:"https://buy.stripe.com/bJe00igDq3NN3HYe193840d",
   zh:{n:"壶中度月",en:"THE TWELVE-MONTH JOURNEY",d:"把接下来的十二个月，过得更有方向。结合个人生辰与流年、流月，梳理每月值得留意的主题。",
-      f:["SGD 68 一份，一次交付完整 12 个月 PDF 报告","从购买月份的下个月起算，连续涵盖 12 个公历月份；跨年也完整覆盖","逐月梳理事业与学习、财务规划、人际与感情、生活节奏，以及行动建议与谨慎提醒","例如 2026 年 9 月购买：报告期间为 2026 年 10 月至 2027 年 9 月","请提供出生日期、时间、地点及关注问题；传统文化参考，不保证事件或结果"]},
+      f:["SGD 38 一份，一次交付完整 12 个月 PDF 报告","从购买月份的下个月起算，连续涵盖 12 个公历月份；跨年也完整覆盖","逐月梳理事业与学习、财务规划、人际与感情、生活节奏，以及行动建议与谨慎提醒","例如 2026 年 9 月购买：报告期间为 2026 年 10 月至 2027 年 9 月","请提供出生日期、时间、地点及关注问题；传统文化参考，不保证事件或结果"]},
   en:{n:"The Twelve-Month Journey",en:"HU ZHONG DU YUE",d:"Meet the next twelve months with greater direction. A personal reading of annual and monthly themes based on your birth details.",
-      f:["SGD 68 for one complete 12-month PDF, delivered together","Starts the calendar month after purchase and covers 12 consecutive Gregorian months, including across years","Monthly themes for work, learning, money planning, relationships and everyday rhythm, with actions and cautions","Example: purchase in September 2026 covers October 2026 through September 2027","Provide birth date, time, place and key questions. Cultural reference; no guaranteed events or outcomes"]}}
+      f:["SGD 38 for one complete 12-month PDF, delivered together","Starts the calendar month after purchase and covers 12 consecutive Gregorian months, including across years","Monthly themes for work, learning, money planning, relationships and everyday rhythm, with actions and cautions","Example: purchase in September 2026 covers October 2026 through September 2027","Provide birth date, time, place and key questions. Cultural reference; no guaranteed events or outcomes"]}}
 ];
 
 var FAQS = [
- {zh:{q:"壶中度月从什么时候开始？会每月收费吗？",a:"SGD 68 为一份完整 12 个月 PDF 报告，一次交付，不按月收费。购买月份的下个月为第一个月，连续涵盖 12 个公历月份。例如 2026 年 9 月购买，覆盖 2026 年 10 月至 2027 年 9 月。月份用于阅读编排，传统流月交界及采用的口径会在个人报告中注明。"},
-  en:{q:"When does the Twelve-Month Journey start? Is it a subscription?",a:"SGD 68 buys one complete PDF covering 12 consecutive calendar months, delivered together, with no monthly subscription. It begins the month after purchase. A September 2026 purchase covers October 2026 to September 2027. The report explains the traditional month boundaries used in the analysis."}},
+ {zh:{q:"壶中度月从什么时候开始？会每月收费吗？",a:"SGD 38 为一份完整 12 个月 PDF 报告，一次交付，不按月收费。购买月份的下个月为第一个月，连续涵盖 12 个公历月份。例如 2026 年 9 月购买，覆盖 2026 年 10 月至 2027 年 9 月。月份用于阅读编排，传统流月交界及采用的口径会在个人报告中注明。"},
+  en:{q:"When does the Twelve-Month Journey start? Is it a subscription?",a:"SGD 38 buys one complete PDF covering 12 consecutive calendar months, delivered together, with no monthly subscription. It begins the month after purchase. A September 2026 purchase covers October 2026 to September 2027. The report explains the traditional month boundaries used in the analysis."}},
 
  {zh:{q:"不确定出生时辰怎么办？",a:"可先提供大概时段（如「下午」），我们会以定盘法协助核对；若完全未知，将以日柱与年月盘为主撰写，并于书中注明。"},
   en:{q:"What if I don't know my birth hour?",a:"Give an approximate window (e.g. “afternoon”) and we will verify with chart rectification. If totally unknown, we write mainly from the day pillar and note it clearly."}},
@@ -551,7 +551,7 @@ function renderServices(){
       '<h3>'+L.n+'</h3><div class="en">'+L.en+'</div>'+
       '<p style="font-size:14px;color:var(--muted);margin-bottom:12px">'+L.d+'</p>'+
       '<ul>'+L.f.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>'+
-      '<a class="btn '+(s.hot?'btn-gold':'btn-line')+'" href="'+s.link+'" target="_blank" rel="noopener">'+(s.id==='duyue'?(LANG==='zh'?'咨询壶中度月':'Ask about this report'):i===2?(LANG==='zh'?'咨询壶中罗盘':'Ask about Compass'):(LANG==='zh'?'选择此项':'Choose'))+' ↗</a>';
+      '<a class="btn '+(s.hot?'btn-gold':'btn-line')+'" href="'+s.link+'" target="_blank" rel="noopener">'+(s.consult?(LANG==='zh'?'咨询订购':'Ask about ordering'):(LANG==='zh'?'立即订购':'Order now'))+' ↗</a>';
     g.appendChild(card);
   });
 }
