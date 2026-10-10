@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import PersonForm, { emptyPerson, personPayload } from "@/app/components/PersonForm";
-import { ChartSet, Tarot, Gua, Reading, Transits } from "@/app/components/Charts";
+import { ChartSet, Tarot, Gua, Reading, Transits, Hexagram } from "@/app/components/Charts";
+import CoinCast from "@/app/components/CoinCast";
 
 const MODES = [
-  ["single", "单排"], ["multi", "合盘"], ["predict", "预测"], ["tarot", "塔罗"],
+  ["single", "单排"], ["multi", "合盘"], ["predict", "预测"], ["yijing", "一卦"], ["tarot", "塔罗"],
   ["horoscope", "星座运势"], ["naming", "起名"], ["fengshui", "风水"], ["pet", "宠物"], ["dream", "解梦"],
 ];
 const SYSTEMS = ["八字", "紫微", "七政四余", "西洋星盘", "吠陀", "玛雅", "人类图", "灵数"];
@@ -29,6 +30,7 @@ export default function Home() {
   const [period, setPeriod] = useState("week");
   const [sunSign, setSunSign] = useState("白羊");
   const [knowBirth, setKnowBirth] = useState(true);
+  const [castValues, setCastValues] = useState(null);
 
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null); // { charts, reading }
@@ -48,6 +50,7 @@ export default function Home() {
       case "multi":    return { mode, persons: [p1, p2, p3].filter(Boolean).map(personPayload), systems, relationType };
       case "predict":  return { mode, person: personPayload(p1), systems, targetYear, focus: question };
       case "tarot":    return { mode, question, spread };
+      case "yijing":   return { mode, question, values: castValues };
       case "naming":   return { mode, person: personPayload(p1), surname, expectation: text };
       case "fengshui": return { mode, person: personPayload(p1), home: text };
       case "pet":      return { mode, pet: personPayload(p1), species, owner: withOwner ? personPayload(p2) : null };
@@ -92,7 +95,7 @@ export default function Home() {
         <a href="/" className="back">← 回到壺中天機首页</a>
       </header>
 
-      <nav className="modes">{MODES.map(([k, l]) => <button key={k} type="button" className={mode === k ? "on" : ""} onClick={() => { setMode(k); setResult(null); }}>{l}</button>)}</nav>
+      <nav className="modes">{MODES.map(([k, l]) => <button key={k} type="button" className={mode === k ? "on" : ""} onClick={() => { setMode(k); setResult(null); setCastValues(null); }}>{l}</button>)}</nav>
 
       <form onSubmit={submit} className="card">
         {showSystems && (
@@ -124,6 +127,11 @@ export default function Home() {
             <label>预测年份 <select value={targetYear} onChange={(e) => setTargetYear(+e.target.value)}>{[0, 1, 2, 3].map((d) => { const y = new Date().getFullYear() + d; return <option key={y}>{y}</option>; })}</select></label>
             <label>关注重点 <input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="事业 / 感情 / 搬迁 / 创业…" /></label>
           </div>
+        </>}
+
+        {mode === "yijing" && <>
+          <label className="full">你的问题（可留空，心中默念即可）<textarea value={question} onChange={(e) => setQuestion(e.target.value)} rows={2} placeholder="一事一问，越具体越好。例：这个月该不该接下那个项目？" /></label>
+          <CoinCast onDone={setCastValues} disabled={loading} />
         </>}
 
         {mode === "tarot" && <>
@@ -168,7 +176,7 @@ export default function Home() {
           {withOwner && <PersonForm value={p1} onChange={setP1} compact />}
         </>}
 
-        <button disabled={loading}>{loading ? "壶中正在倒出……" : "✦ 开壶 ✦"}</button>
+        <button disabled={loading || (mode === "yijing" && !castValues)}>{loading ? "壶中正在倒出……" : mode === "yijing" ? "✦ 解卦 ✦" : "✦ 开壶 ✦"}</button>
         {error && <p className="error">{error}</p>}
       </form>
 
@@ -195,6 +203,7 @@ function Result({ data, loading }) {
       {c.petCharts && <ChartSet charts={c.petCharts} title={`${c.petName || "宠物"}（${c.species}）`} />}
       {c.ownerCharts && <ChartSet charts={c.ownerCharts} title="主人" />}
       {c.draw && <Tarot draw={c.draw} />}
+      {c.cast && <Hexagram cast={c.cast} date={c.castDate} question={c.question} />}
       {c.gua && <Gua gua={c.gua} />}
       {c.transitsNow && <Transits t={c.transitsNow} events={c.events} sunSign={c.sunSign} />}
       {c.liuNian && <p className="muted">流年 {c.liuNian.year} {c.liuNian.ganZhi}（{c.liuNian.shengXiao}）</p>}

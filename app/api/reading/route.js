@@ -4,6 +4,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { computeCharts, toUTC } from "@/lib/charts";
 import { computeTransits, sunSignOnly, periodEvents } from "@/lib/astro";
 import { drawTarot, mingGua, liuNian } from "@/lib/extras";
+import { castFromValues, castRandom } from "@/lib/yijing";
 import { buildSystemPrompt } from "@/lib/prompts";
 import { Solar } from "lunar-javascript";
 
@@ -70,6 +71,11 @@ function prepare(body) {
       const l = Solar.fromDate(now).getLunar();
       out.todayGanZhi = { year: l.getYearInGanZhiExact(), month: l.getMonthInGanZhiExact(), day: l.getDayInGanZhi() };
       return out;
+    }
+    case "yijing": {
+      const cast = Array.isArray(body.values) && body.values.length === 6 ? castFromValues(body.values) : castRandom();
+      const l = Solar.fromDate(new Date()).getLunar();
+      return { mode, question: body.question || "（默念，未写出）", cast, castDate: { solar: new Date().toISOString().slice(0, 10), ganZhi: `${l.getYearInGanZhiExact()}年 ${l.getMonthInGanZhiExact()}月 ${l.getDayInGanZhi()}日` } };
     }
     case "dream": {
       const out = { mode, dream: body.dream || "" };

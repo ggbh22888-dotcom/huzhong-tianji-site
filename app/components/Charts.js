@@ -188,6 +188,33 @@ export function Transits({ t, events = [], sunSign }) {
   );
 }
 
+export function Hexagram({ cast, date, question }) {
+  if (!cast) return null;
+  const draw = (h) => (
+    <div className="hexfig">
+      {[5,4,3,2,1,0].map((i) => <div key={i} className={`yao ${cast.changing.includes(i + 1) && h === cast.ben ? "chg" : ""}`}>{h.bits[i] ? <span className="yang" /> : <><span className="yin" /><span className="yin" /></>}</div>)}
+      <b>{h.name}</b><small>第{h.number}卦 · 上{h.upper.name}{h.upper.nature} 下{h.lower.name}{h.lower.nature}</small>
+    </div>
+  );
+  return (
+    <div className="sys">
+      <h4>壺中一卦 <small>{date?.ganZhi} · 问：{question}</small></h4>
+      <div className="hexrow">
+        {draw(cast.ben)}
+        {cast.zhi && <><span className="arrow">→</span>{draw(cast.zhi)}</>}
+        <div className="hexmeta">
+          <p><b>卦辞</b> {cast.ben.text}</p>
+          {cast.zhi && <p><b>之卦</b> {cast.zhi.name}：{cast.zhi.text}</p>}
+          <p><b>互卦</b> {cast.hu.name}</p>
+          <p><b>变爻</b> {cast.changing.length ? cast.changing.map((n) => cast.lines[n - 1].label).join("、") : "无"}</p>
+          <p className="muted small">{cast.rule}</p>
+        </div>
+      </div>
+      <table className="qz"><tbody>{[...cast.lines].reverse().map((l) => <tr key={l.position} className={l.changing ? "" : "yu"}><td>{l.label}</td><td>{l.coins}</td><td>{l.value}</td><td>{l.changing ? "变" : ""}</td></tr>)}</tbody></table>
+    </div>
+  );
+}
+
 export function Reading({ text }) {
   return <div className="reading"><ReactMarkdown>{text}</ReactMarkdown></div>;
 }

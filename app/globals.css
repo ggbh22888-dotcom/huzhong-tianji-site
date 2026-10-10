@@ -128,3 +128,26 @@ button.ghost { width: auto; background: transparent; color: var(--gold); border:
 .kv { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; } .kv span { color: var(--muted); } .kv b { font-weight: 500; }
 .gold-t { color: var(--gold); } .red-t { color: var(--火); }
 .yy { padding-left: 1.2em; } .yy li { margin-bottom: 10px; } .yy b { display: block; font-weight: 500; color: var(--gold); } .yy span { color: var(--ink); font-size: .9rem; }
+
+/* coins & hexagram */
+.coincast { margin: 10px 0 18px; }
+.coins { display: flex; justify-content: center; gap: 18px; margin: 12px 0 18px; perspective: 600px; }
+.coin { width: 64px; height: 64px; position: relative; transform-style: preserve-3d; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+.coin .face { position: absolute; inset: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; backface-visibility: hidden; border: 2px solid var(--gold); background: radial-gradient(circle at 35% 35%, #e8d7a8, #9c7a3a 70%); color: #2a2110; box-shadow: 0 4px 14px rgba(0,0,0,.5); }
+.coin .face::after { content: ""; position: absolute; width: 16px; height: 16px; background: var(--card); border: 1px solid #6b5327; }
+.coin .face.back { transform: rotateY(180deg); }
+.coin.spin { animation: flip .9s ease-in-out; }
+.coin.bei { transform: rotateY(180deg); } .coin.zi { transform: rotateY(0deg); }
+@keyframes flip { 0% { transform: translateY(0) rotateY(0); } 50% { transform: translateY(-40px) rotateY(540deg); } 100% { transform: translateY(0) rotateY(1080deg); } }
+.hexbuild, .hexfig { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 0 auto 14px; }
+.yao { display: flex; gap: 8px; align-items: center; height: 16px; width: 150px; justify-content: center; position: relative; }
+.yao .yang { display: block; width: 120px; height: 10px; background: var(--gold); border-radius: 2px; }
+.yao .yin { display: block; width: 52px; height: 10px; background: var(--gold); border-radius: 2px; }
+.yao.chg .yang, .yao.chg .yin { background: var(--火); }
+.yao small { position: absolute; left: 100%; margin-left: 8px; color: var(--muted); font-size: .65rem; white-space: nowrap; }
+.yao.empty .ph { color: var(--line); font-size: .8rem; letter-spacing: .2em; }
+button.throw { width: auto; padding: 12px 28px; margin: 0; }
+.hexrow { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+.hexfig b { color: var(--gold); font-weight: 500; margin-top: 6px; } .hexfig small { color: var(--muted); font-size: .72rem; }
+.arrow { align-self: center; color: var(--muted); font-size: 1.4rem; }
+.hexmeta { flex: 1; min-width: 220px; font-size: .9rem; } .hexmeta p { margin: 0 0 6px; } .hexmeta b { color: var(--gold); font-weight: 500; margin-right: 6px; }
