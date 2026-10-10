@@ -9,9 +9,9 @@ export default function NumberTool({ id, label, placeholder, hint }) {
     <ToolShell id={id} result={data && (
       <section className="card">
         <h3>{data.digits}</h3>
-        <div className="chips">{Object.entries(data.tally).map(([k, n]) => <span key={k} className={`chip ${["生气","天医","延年"].includes(k) ? "gold" : ["伏位"].includes(k) ? "" : "retro"}`}>{k} ×{n}</span>)}</div>
+        <div className="chips">{Object.entries(data.tally).map(([k, n]) => <span key={k} className={`chip ${["生气","天医","延年"].includes(k) ? "jade" : ["伏位"].includes(k) ? "" : "retro"}`}>{k} ×{n}</span>)}</div>
         <table className="qz" style={{ marginTop: 12 }}><thead><tr><th>数对</th><th>磁场</th><th>含义</th></tr></thead>
-          <tbody>{data.pairs.map((p, i) => <tr key={i}><td>{p.pair}</td><td className={p.level === "吉" ? "gold-t" : p.level === "凶" ? "red-t" : ""}>{p.star}</td><td>{p.desc}</td></tr>)}</tbody></table>
+          <tbody>{data.pairs.map((p, i) => <tr key={i}><td>{p.pair}</td><td className={p.level === "吉" ? "gold-t ji" : p.level === "凶" ? "red-t" : ""}>{p.star}</td><td>{p.desc}</td></tr>)}</tbody></table>
         <p className="muted small" style={{ marginTop: 10 }}>尾四位数理 <b>{data.tail.n}</b>（{data.tail.level}）：{data.tail.meaning}{data.zeros ? ` · 含 ${data.zeros} 个 0（放大前后磁场）` : ""}{data.fives ? ` · 含 ${data.fives} 个 5（过渡/加强）` : ""}</p>
         <p className="muted small">数字能量与 81 数理皆为民间参考体系，用来觉察、不用来恐慌。号码用得顺手、记得住，本身就是好号码。</p>
       </section>)}>

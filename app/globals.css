@@ -162,3 +162,25 @@ button.throw { width: auto; padding: 12px 28px; margin: 0; }
 .hexfig b { color: var(--gold); font-weight: 500; margin-top: 6px; } .hexfig small { color: var(--muted); font-size: .72rem; }
 .arrow { align-self: center; color: var(--muted); font-size: 1.4rem; }
 .hexmeta { flex: 1; min-width: 220px; font-size: .9rem; } .hexmeta p { margin: 0 0 6px; } .hexmeta b { color: var(--gold); font-weight: 500; margin-right: 6px; }
+
+/* ---- 金 · 朱 · 青 accents ---- */
+:root { --jade: #2f7d5a; --gold-bright: #c9a24d; }
+header { position: relative; padding-bottom: 14px; }
+header::after { content: ""; display: block; width: 120px; height: 3px; margin: 14px auto 0; background: linear-gradient(90deg, var(--gold-bright) 0 34%, var(--seal) 34% 67%, var(--jade) 67% 100%); border-radius: 2px; }
+h1 { color: var(--gold); }
+.tagline { color: var(--ink); }
+.modes button.on { background: var(--gold); color: #fff; border-color: var(--gold); }
+.card { border-top: 2px solid var(--gold-soft); }
+.sys h4, .tool-h, .chartset h3, h3 { color: var(--gold); }
+button { background: var(--ink); } .btn-gold { background: var(--gold); }
+.chip.gold { border-color: var(--gold); color: var(--gold); background: rgba(201,162,77,.06); }
+.chip.jade, .gold-t.ji { color: var(--jade); border-color: var(--jade); }
+.dayun div.cur, .zw-cell.body { border-color: var(--jade); box-shadow: 0 0 0 1px var(--jade) inset; }
+.ln tr.cur th { color: var(--jade); }
+.sys-pick.on { color: var(--seal); border-color: var(--seal); }
+.yao.chg .yang, .yao.chg .yin, .daymaster, .error { color: var(--seal); }
+.bar { border-color: var(--gold-soft); }
+.hexfig b, .yy b { color: var(--seal); }
+.tool-card b { color: var(--gold); } .tool-card:hover { border-color: var(--jade); }
+.wx-木 { color: var(--jade); } .bar .seg.wx-木 { background: var(--jade); }
+footer { color: var(--muted); } footer::before { content: "✦"; color: var(--gold); display: block; margin-bottom: 6px; }
