@@ -162,7 +162,14 @@ export function Tarot({ draw }) {
   return (
     <div className="sys">
       <h4>牌阵</h4>
-      <div className="tarot">{draw.cards.map((c, i) => <div key={i} className={`card-t ${c.reversed ? "rev" : ""}`}><small>{c.position}</small><b>{c.card}</b><span>{c.reversed ? "逆位" : "正位"}</span></div>)}</div>
+      <div className="tarot">{draw.cards.map((c, i) => (
+        <div key={i} className={`card-t ${c.reversed ? "rev" : ""}`}>
+          <small>{c.position}</small>
+          <div className="card-img">{c.image ? <img src={c.image} alt={c.card} /> : <div className="card-ph">{c.card}</div>}</div>
+          <b>{c.card}</b><span>{c.reversed ? "逆位" : "正位"}</span>
+        </div>
+      ))}</div>
+      <p className="muted small">牌面：東方塔羅牌 · GGHB STUDIO</p>
     </div>
   );
 }
