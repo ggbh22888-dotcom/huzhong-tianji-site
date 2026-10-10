@@ -1,0 +1,99 @@
+:root {
+  --bg: #0f0e0c; --card: #1a1814; --ink: #ece6d8; --muted: #9a917f;
+  --gold: #c9a961; --line: #2e2a22;
+  --木: #5fa36b; --火: #d2694f; --土: #c9a961; --金: #d8d3c4; --水: #5b8fc9;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font-family: "Noto Serif SC", "Songti SC", Georgia, serif; line-height: 1.6; }
+main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
+header { text-align: center; margin-bottom: 28px; }
+h1 { font-size: 2.2rem; letter-spacing: .3em; margin: 0; color: var(--gold); font-weight: 500; }
+.tagline { color: var(--muted); margin: 6px 0 0; letter-spacing: .15em; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+.row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+label { display: flex; flex-direction: column; gap: 4px; font-size: .85rem; color: var(--muted); flex: 1; min-width: 110px; }
+label.check { flex-direction: row; align-items: center; justify-content: flex-start; margin-top: 22px; color: var(--ink); }
+input, select { background: #0f0e0c; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; font-size: 1rem; font-family: inherit; }
+button { width: 100%; margin-top: 8px; padding: 14px; background: var(--gold); color: #1a1814; border: 0; border-radius: 8px; font-size: 1.05rem; letter-spacing: .2em; cursor: pointer; font-family: inherit; }
+button:disabled { opacity: .5; cursor: wait; }
+.error { color: var(--火); }
+.muted { color: var(--muted); font-size: .9rem; }
+h2 { margin: 0 0 4px; font-weight: 500; }
+h3 { color: var(--gold); font-weight: 500; margin: 28px 0 10px; font-size: 1.05rem; }
+.pillars { width: 100%; border-collapse: collapse; text-align: center; margin-top: 16px; }
+.pillars th { color: var(--muted); font-weight: normal; font-size: .85rem; padding-bottom: 6px; }
+.pillars td { padding: 4px; }
+.pillars .shishen td, .pillars .nayin td { font-size: .8rem; color: var(--muted); }
+.pillars .gan td, .pillars .zhi td { font-size: 2.2rem; line-height: 1.2; }
+.pillars .hide td { font-size: .9rem; color: var(--muted); }
+.daymaster { color: var(--gold); }
+.wuxing { display: flex; gap: 10px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
+.wx { padding: 4px 12px; border-radius: 999px; border: 1px solid currentColor; font-size: .9rem; }
+.wx-木 { color: var(--木); } .wx-火 { color: var(--火); } .wx-土 { color: var(--土); } .wx-金 { color: var(--金); } .wx-水 { color: var(--水); }
+.dayun { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 8px; }
+.dayun div { background: #0f0e0c; border: 1px solid var(--line); border-radius: 8px; padding: 8px 4px; text-align: center; display: flex; flex-direction: column; }
+.dayun b { font-size: 1.2rem; font-weight: 500; } .dayun small { color: var(--muted); font-size: .7rem; }
+.reading h2 { font-size: 1rem; color: var(--gold); font-weight: 500; margin: 22px 0 6px; }
+.reading p { margin: 0 0 10px; }
+.reading ol, .reading ul { padding-left: 1.4em; }
+details { margin-top: 20px; } summary { cursor: pointer; color: var(--muted); font-size: .85rem; }
+pre { font-size: .75rem; overflow: auto; background: #0f0e0c; padding: 12px; border-radius: 8px; }
+footer { text-align: center; color: var(--muted); font-size: .8rem; }
+
+/* ---- modes & systems ---- */
+.modes { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-bottom: 18px; }
+.modes button { width: auto; margin: 0; padding: 8px 16px; background: transparent; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; font-size: .95rem; letter-spacing: .1em; }
+.modes button.on { background: var(--gold); color: #1a1814; border-color: var(--gold); }
+.systems { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.sys-pick { flex: none; flex-direction: row; gap: 6px; align-items: center; padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); cursor: pointer; font-size: .85rem; }
+.sys-pick.on { color: var(--gold); border-color: var(--gold); }
+.sys-pick input { display: none; }
+fieldset.person { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px 2px; margin: 0 0 14px; }
+fieldset.person legend { color: var(--gold); padding: 0 6px; font-size: .9rem; }
+label.full { width: 100%; margin-bottom: 14px; }
+textarea { background: #0f0e0c; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; font-size: 1rem; font-family: inherit; resize: vertical; }
+button.ghost { width: auto; background: transparent; color: var(--gold); border: 1px dashed var(--gold); padding: 8px 14px; font-size: .9rem; margin: 0 0 14px; letter-spacing: 0; }
+.cursor { animation: blink 1s infinite; margin-left: 4px; } @keyframes blink { 50% { opacity: 0; } }
+
+/* ---- chart renderers ---- */
+.chartset h3 { margin-top: 18px; }
+.sys { margin: 18px 0 26px; }
+.sys h4 { margin: 0 0 10px; font-weight: 500; color: var(--gold); font-size: 1rem; }
+.sys h4 small { display: block; color: var(--muted); font-weight: normal; font-size: .8rem; margin-top: 2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: .8rem; padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px; color: var(--ink); }
+.chip.gold { border-color: var(--gold); color: var(--gold); }
+.small { font-size: .8rem; }
+.dayun { margin-top: 14px; }
+/* 紫微 4x4 ring */
+.zw { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+.zw-cell { background: #0f0e0c; border: 1px solid var(--line); border-radius: 6px; padding: 6px; min-height: 92px; display: flex; flex-direction: column; font-size: .72rem; }
+.zw-cell.body { border-color: var(--gold); }
+.zw-major { color: var(--ink); font-size: .85rem; line-height: 1.3; }
+.zw-minor { color: var(--muted); flex: 1; margin-top: 2px; }
+.zw-foot { display: flex; justify-content: space-between; color: var(--gold); border-top: 1px dashed var(--line); padding-top: 3px; margin-top: 3px; }
+.zw-dec { color: var(--muted); font-size: .65rem; }
+.zw-center { grid-column: 2 / span 2; grid-row: 2 / span 2; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--muted); text-align: center; }
+.zw-center b { color: var(--gold); font-weight: 500; font-size: 1rem; }
+.zw-blank { display: none; }
+/* tarot */
+.tarot { display: flex; gap: 8px; flex-wrap: wrap; }
+.card-t { flex: 1; min-width: 110px; background: #0f0e0c; border: 1px solid var(--line); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 4px; text-align: center; }
+.card-t small { color: var(--muted); font-size: .72rem; } .card-t b { font-weight: 500; } .card-t span { font-size: .75rem; color: var(--gold); }
+.card-t.rev span { color: var(--火); }
+.hist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.hist .ghost { margin: 0; width: 100%; text-align: left; border-style: solid; border-color: var(--line); color: var(--ink); }
+@media (max-width: 480px) { .pillars .gan td, .pillars .zhi td { font-size: 1.7rem; } .zw-cell { min-height: 80px; font-size: .62rem; } }
+
+.chip.retro { color: var(--火); border-color: var(--火); }
+.events { list-style: none; padding: 0; margin: 10px 0 0; font-size: .82rem; color: var(--ink); }
+.events li { display: flex; gap: 10px; padding: 3px 0; border-bottom: 1px dashed var(--line); }
+.events li span { color: var(--muted); min-width: 92px; }
+
+.qz { width: 100%; border-collapse: collapse; font-size: .85rem; }
+.qz th { color: var(--muted); font-weight: normal; text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--line); }
+.qz td { padding: 4px 6px; border-bottom: 1px dashed var(--line); }
+.qz tr.yu td { color: var(--muted); }
+
+.back { display:inline-block; margin-top:8px; color: var(--muted); font-size:.85rem; text-decoration:none; } .back:hover { color: var(--gold); }
