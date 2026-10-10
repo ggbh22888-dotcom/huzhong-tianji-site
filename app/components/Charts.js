@@ -18,8 +18,32 @@ export function Bazi({ c }) {
           <tr className="nayin">{cols.map((k) => <td key={k}>{c.pillars[k].naYin}</td>)}</tr>
         </tbody>
       </table>
-      <div className="wuxing">{Object.entries(c.wuxing).map(([k, v]) => <span key={k} className={`wx wx-${k}`}>{k} {v}</span>)}</div>
-      <div className="dayun">{c.daYun.map((d) => <div key={d.startYear}><b>{d.ganZhi}</b><small>{d.startAge}岁 · {d.startYear}</small></div>)}</div>
+      {c.strength && (
+        <div className="strength">
+          <div className="bar">{["木","火","土","金","水"].map((k) => <span key={k} className={`seg wx-${k}`} style={{ width: c.strength.percent[k] + "%" }} title={`${k} ${c.strength.percent[k]}%`}>{c.strength.percent[k] > 8 ? `${k}${c.strength.percent[k]}%` : ""}</span>)}</div>
+          <div className="chips">
+            <span className="chip gold">{c.strength.verdict} · 同党{c.strength.selfRatio}%{c.strength.deLing ? " · 得令" : " · 失令"}</span>
+            {c.pattern && <span className="chip gold">{c.pattern.name}{c.pattern.touChu ? "（透）" : ""}</span>}
+            {c.yongShen && <span className="chip">喜 {c.yongShen.like.join("")} · 忌 {c.yongShen.dislike.join("")}</span>}
+            {c.xunKong && <span className="chip">日空 {c.xunKong.day}</span>}
+          </div>
+        </div>
+      )}
+      {c.shenSha?.length > 0 && <div className="chips shensha">{c.shenSha.map((s, i) => <span key={i} className="chip">{s.name}<small>·{s.where}</small></span>)}</div>}
+      {c.shiShenStats && <p className="muted small">十神：{Object.entries(c.shiShenStats).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k}${v}`).join(" · ")}</p>}
+      <div className="dayun">{(c.fortuneGrid || c.daYun).map((d) => <div key={d.startYear} className={d.current ? "cur" : ""}><b>{d.ganZhi}</b><small>{d.startAge}岁 · {d.startYear}</small>{d.ganShiShen && <small>{d.ganShiShen}</small>}</div>)}</div>
+      {c.fortuneGrid && (
+        <details className="grid-wrap"><summary>大运流年表</summary>
+          <table className="ln"><tbody>
+            {c.fortuneGrid.map((d) => (
+              <tr key={d.startYear} className={d.current ? "cur" : ""}>
+                <th>{d.ganZhi}<small>{d.startAge}岁</small></th>
+                {d.liuNian.map((l) => <td key={l.year} className={l.now ? "now" : ""}><b>{l.ganZhi}</b><small>{l.year}</small><small>{l.shiShen}</small></td>)}
+              </tr>
+            ))}
+          </tbody></table>
+        </details>
+      )}
     </div>
   );
 }
