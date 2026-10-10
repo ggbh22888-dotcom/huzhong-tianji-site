@@ -133,8 +133,8 @@ button.ghost { width: auto; background: transparent; color: var(--gold); border:
 .coincast { margin: 10px 0 18px; }
 .coins { display: flex; justify-content: center; gap: 18px; margin: 12px 0 18px; perspective: 600px; }
 .coin { width: 64px; height: 64px; position: relative; transform-style: preserve-3d; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
-.coin .face { position: absolute; inset: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; backface-visibility: hidden; border: 2px solid var(--gold); background: radial-gradient(circle at 35% 35%, #e8d7a8, #9c7a3a 70%); color: #2a2110; box-shadow: 0 4px 14px rgba(0,0,0,.5); }
-.coin .face::after { content: ""; position: absolute; width: 16px; height: 16px; background: var(--card); border: 1px solid #6b5327; }
+.coin { width: 76px; height: 76px; }
+.coin .face { position: absolute; inset: 0; border-radius: 50%; backface-visibility: hidden; filter: drop-shadow(0 6px 10px rgba(0,0,0,.55)); }
 .coin .face.back { transform: rotateY(180deg); }
 .coin.spin { animation: flip .9s ease-in-out; }
 .coin.bei { transform: rotateY(180deg); } .coin.zi { transform: rotateY(0deg); }
