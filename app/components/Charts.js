@@ -198,7 +198,7 @@ export function Hexagram({ cast, date, question }) {
   );
   return (
     <div className="sys">
-      <h4>壺中一卦 <small>{date?.ganZhi} · 问：{question}</small></h4>
+      <h4>壺中問卦 <small>{date?.ganZhi} · 问：{question}</small></h4>
       <div className="hexrow">
         {draw(cast.ben)}
         {cast.zhi && <><span className="arrow">→</span>{draw(cast.zhi)}</>}

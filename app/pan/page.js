@@ -5,7 +5,7 @@ import { ChartSet, Tarot, Gua, Reading, Transits, Hexagram } from "@/app/compone
 import CoinCast from "@/app/components/CoinCast";
 
 const MODES = [
-  ["single", "壺中一命"], ["multi", "壺中合盤"], ["predict", "壺中度歲"], ["yijing", "壺中一卦"], ["tarot", "壺中一籤"],
+  ["single", "壺中一命"], ["multi", "壺中合盤"], ["predict", "壺中度歲"], ["yijing", "壺中問卦"], ["tarot", "壺中翻牌"],
   ["horoscope", "壺中觀星"], ["naming", "壺中賜名"], ["fengshui", "壺中安居"], ["pet", "壺中小伴"], ["dream", "壺中入夢"],
 ];
 const SYSTEMS = ["八字", "紫微", "七政四余", "西洋星盘", "吠陀", "玛雅", "人类图", "灵数"];
