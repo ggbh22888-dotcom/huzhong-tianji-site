@@ -5,8 +5,8 @@ import { ChartSet, Tarot, Gua, Reading, Transits, Hexagram } from "@/app/compone
 import CoinCast from "@/app/components/CoinCast";
 
 const MODES = [
-  ["single", "单排"], ["multi", "合盘"], ["predict", "预测"], ["yijing", "一卦"], ["tarot", "塔罗"],
-  ["horoscope", "星座运势"], ["naming", "起名"], ["fengshui", "风水"], ["pet", "宠物"], ["dream", "解梦"],
+  ["single", "壺中一命"], ["multi", "壺中合盤"], ["predict", "壺中度歲"], ["yijing", "壺中一卦"], ["tarot", "壺中一籤"],
+  ["horoscope", "壺中觀星"], ["naming", "壺中賜名"], ["fengshui", "壺中安居"], ["pet", "壺中小伴"], ["dream", "壺中入夢"],
 ];
 const SYSTEMS = ["八字", "紫微", "七政四余", "西洋星盘", "吠陀", "玛雅", "人类图", "灵数"];
 const LAST_KEY = "hztj.lastPerson.v1";

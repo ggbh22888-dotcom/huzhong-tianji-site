@@ -209,3 +209,4 @@ button { background: var(--seal); } button:hover:not(:disabled) { background: #9
 .events li span { color: var(--seal); }
 .chip.retro { background: rgba(180,67,43,.06); }
 header::after { height: 4px; width: 160px; }
+.modes button { letter-spacing: .05em; padding: 8px 14px; font-size: .92rem; }
