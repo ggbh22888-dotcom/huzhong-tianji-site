@@ -1,6 +1,7 @@
 "use client";
 // Charts — renders whatever chart systems came back from the API
 import ReactMarkdown from "react-markdown";
+import { useState, useEffect } from "react";
 
 export function Bazi({ c }) {
   if (!c || c.error) return null;
@@ -158,18 +159,43 @@ export function ChartSet({ charts, title }) {
 }
 
 export function Tarot({ draw }) {
+  const [zoom, setZoom] = useState(null); // index of enlarged card
+  useEffect(() => {
+    if (zoom === null) return;
+    const onKey = (e) => { if (e.key === "Escape") setZoom(null); if (e.key === "ArrowRight") setZoom((z) => (z + 1) % draw.cards.length); if (e.key === "ArrowLeft") setZoom((z) => (z - 1 + draw.cards.length) % draw.cards.length); };
+    window.addEventListener("keydown", onKey); document.body.style.overflow = "hidden";
+    return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
+  }, [zoom, draw]);
   if (!draw) return null;
+  const z = zoom === null ? null : draw.cards[zoom];
   return (
     <div className="sys">
-      <h4>牌阵</h4>
+      <h4>牌阵 <small>点牌面可放大</small></h4>
       <div className="tarot">{draw.cards.map((c, i) => (
-        <div key={i} className={`card-t ${c.reversed ? "rev" : ""}`}>
+        <div key={i} className={`card-t ${c.reversed ? "rev" : ""}`} onClick={() => setZoom(i)} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && setZoom(i)}>
           <small>{c.position}</small>
           <div className="card-img">{c.image ? <img src={c.image} alt={c.card} /> : <div className="card-ph">{c.card}</div>}</div>
-          <b>{c.card}</b><span>{c.reversed ? "逆位" : "正位"}</span>
+          <b>{c.card}</b><span>{c.reversed ? "逆位" : "正位"}{c.tag ? ` · ${c.tag}` : ""}</span>
         </div>
       ))}</div>
       <p className="muted small">牌面：東方塔羅牌 · GGHB STUDIO</p>
+      {z && (
+        <div className="lightbox" onClick={() => setZoom(null)}>
+          <button type="button" className="lb-close" aria-label="关闭" onClick={() => setZoom(null)}>×</button>
+          {draw.cards.length > 1 && <button type="button" className="lb-nav prev" aria-label="上一张" onClick={(e) => { e.stopPropagation(); setZoom((zoom - 1 + draw.cards.length) % draw.cards.length); }}>‹</button>}
+          <figure onClick={(e) => e.stopPropagation()}>
+            <div className={`lb-img ${z.reversed ? "rev" : ""}`}><img src={z.image} alt={z.card} /></div>
+            <figcaption>
+              <small>{z.position}</small>
+              <b>{z.card} <span className={z.reversed ? "seal" : "jade"}>{z.reversed ? "逆位" : "正位"}</span></b>
+              {z.tag && <em>【{z.tag}】</em>}
+              {z.gist && <p>{z.gist}</p>}
+              <p className="muted small">{z.reversed ? `逆位：${z.reversedMeaning || ""}` : `正位：${z.upright || ""}`}</p>
+            </figcaption>
+          </figure>
+          {draw.cards.length > 1 && <button type="button" className="lb-nav next" aria-label="下一张" onClick={(e) => { e.stopPropagation(); setZoom((zoom + 1) % draw.cards.length); }}>›</button>}
+        </div>
+      )}
     </div>
   );
 }
