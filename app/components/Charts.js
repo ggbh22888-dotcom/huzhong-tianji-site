@@ -165,7 +165,7 @@ export function Tarot({ draw }) {
       <div className="tarot">{draw.cards.map((c, i) => (
         <div key={i} className={`card-t ${c.reversed ? "rev" : ""}`}>
           <small>{c.position}</small>
-          <div className="card-img">{c.image ? <img src={c.image} alt={c.card} /> : <div className="card-ph">{c.card}</div>}<img className="card-seal" src="/tarot/seal.png" alt="" aria-hidden /></div>
+          <div className="card-img">{c.image ? <img src={c.image} alt={c.card} /> : <div className="card-ph">{c.card}</div>}</div>
           <b>{c.card}</b><span>{c.reversed ? "逆位" : "正位"}</span>
         </div>
       ))}</div>
