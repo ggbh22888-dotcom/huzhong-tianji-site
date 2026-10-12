@@ -1,7 +1,8 @@
 "use client";
 // JiaoBei — 擲筊：两枚月牙形筊杯，掷出一平一凸为圣杯（允），方可起卦。
 import { useState } from "react";
-import { blockLand, templeBowl, unlockAudio } from "@/lib/sfx";
+import { playSample, preload, unlockAudio } from "@/lib/sfx";
+import { useEffect } from "react";
 import { useLang } from "./Lang";
 
 const rnd = () => (typeof crypto !== "undefined" && crypto.getRandomValues ? crypto.getRandomValues(new Uint8Array(1))[0] & 1 : Math.random() < 0.5 ? 0 : 1);
@@ -27,6 +28,7 @@ function Block({ face, spinning, delay }) {
 
 export default function JiaoBei({ onGranted, disabled }) {
   const { t } = useLang();
+  useEffect(() => { preload(["jiao_toss", "temple_bowl"]); }, []);
   const [faces, setFaces] = useState([null, null]);
   const [spinning, setSpinning] = useState(false);
   const [result, setResult] = useState(null); // "sheng" | "xiao" | "yin"
@@ -39,13 +41,12 @@ export default function JiaoBei({ onGranted, disabled }) {
     setSpinning(true); setResult(null); setFaces([null, null]);
     const f = [rnd(), rnd()];
     // land sounds: left block then right block
-    blockLand({ p: -0.55, t: 0.62, pitch: 1.0 });
-    blockLand({ p: 0.55, t: 0.76, pitch: 0.93 });
+    playSample("jiao_toss", { t: 0.6, gain: 1.0 });
     setTimeout(() => {
       setFaces(f); setSpinning(false); setTries((n) => n + 1);
       const r = f[0] !== f[1] ? "sheng" : f[0] === 1 ? "xiao" : "yin";
       setResult(r);
-      if (r === "sheng") { templeBowl({ t: 0.5 }); setTimeout(() => onGranted && onGranted(), 1600); }
+      if (r === "sheng") { playSample("temple_bowl", { t: 0.5, gain: 0.8 }); setTimeout(() => onGranted && onGranted(), 1600); }
     }, 1250);
   }
 

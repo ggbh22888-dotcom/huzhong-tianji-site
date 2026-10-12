@@ -1,7 +1,8 @@
 "use client";
 // CoinCast — three coins, six throws, hexagram builds bottom→top. Calls onDone(values) when all six are cast.
 import { useState } from "react";
-import { shellShakeTraditional, coinLand, unlockAudio } from "@/lib/sfx";
+import { playSample, preload, unlockAudio } from "@/lib/sfx";
+import { useEffect } from "react";
 import { useLang } from "./Lang";
 
 const rnd = () => (typeof crypto !== "undefined" && crypto.getRandomValues ? crypto.getRandomValues(new Uint8Array(1))[0] & 1 : Math.random() < 0.5 ? 0 : 1);
@@ -58,6 +59,7 @@ function Shell({ shaking }) {
 
 export default function CoinCast({ onDone, disabled }) {
   const { t } = useLang();
+  useEffect(() => { preload(["shell_shake", "coin_drop_a", "coin_drop_b", "coin_drop_c"]); }, []);
   const YN = t("yao_names").split(",");
   const [values, setValues] = useState([]);     // 6,7,8,9 bottom→top
   const [coins, setCoins] = useState([null, null, null]); // last throw faces: 1=背(阳) 0=字(阴)
@@ -70,14 +72,14 @@ export default function CoinCast({ onDone, disabled }) {
     setSpinning(true);
     setCoins([null, null, null]); setShown(0);
     const faces = [rnd(), rnd(), rnd()];
-    const shakeSec = shellShakeTraditional({ shakes: 3 }) || 1.74;
-    const pourAt = Math.round(shakeSec * 1000) + 250;
+    playSample("shell_shake", { gain: 1.0 });
+    const pourAt = 1900 + 250;
     // coins pour out one by one: left, center, right
     const pans = [-0.7, 0, 0.7];
     faces.forEach((f, i) => {
       const at = pourAt + i * 380;
       setTimeout(() => {
-        coinLand({ p: pans[i], pitch: f ? 1 : 0.94 });
+        playSample(["coin_drop_a", "coin_drop_b", "coin_drop_c"][i], { p: pans[i], gain: 1.0, rate: f ? 1 : 0.96 });
         setCoins((c) => { const n = [...c]; n[i] = f; return n; });
         setShown(i + 1);
       }, at);
