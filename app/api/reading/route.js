@@ -88,9 +88,10 @@ function prepare(body) {
 }
 
 export async function POST(req) {
-  let payload;
+  let payload, lang;
   try {
-    payload = prepare(await req.json());
+    const body = await req.json(); lang = body.lang;
+    payload = prepare(body);
   } catch (err) {
     return Response.json({ error: err.message }, { status: 400 });
   }
@@ -110,7 +111,7 @@ export async function POST(req) {
         const s = client.messages.stream({
           model: process.env.CLAUDE_MODEL || "claude-sonnet-5-5",
           max_tokens: 4000,
-          system: buildSystemPrompt(payload.mode),
+          system: buildSystemPrompt(payload.mode, lang),
           messages: [{ role: "user", content: "请解读。\n\n```json\n" + JSON.stringify(payload, null, 1) + "\n```" }],
         });
         for await (const ev of s) {

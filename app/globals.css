@@ -317,3 +317,8 @@ main.classics { max-width: 760px; }
 .zoomctl button:disabled { opacity: .3; cursor: default; background: transparent; }
 .zoomctl b { font-size: .7rem; color: var(--muted); font-weight: 500; min-width: 34px; text-align: center; }
 @media (max-width: 480px) { .topbar { gap: 2px; } .topbar .credits { display: none; } }
+.langwrap { position: relative; display: inline-flex; }
+.langmenu { position: absolute; top: 42px; right: 0; z-index: 500; list-style: none; margin: 0; padding: 6px; min-width: 190px; max-height: 70vh; overflow: auto; background: var(--card); border: 1px solid var(--gold); border-radius: 12px; box-shadow: 0 14px 40px rgba(40,25,5,.22); }
+.langmenu li { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-size: .95rem; color: var(--ink); }
+.langmenu li:hover { background: var(--well); } .langmenu li.on { color: var(--gold); background: var(--well); } .langmenu li span { color: var(--gold); }
+.modes button small { display: block; font-size: .62rem; letter-spacing: 0; opacity: .75; line-height: 1.1; }

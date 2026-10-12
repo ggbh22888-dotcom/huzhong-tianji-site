@@ -2,6 +2,7 @@
 // CoinCast — three coins, six throws, hexagram builds bottom→top. Calls onDone(values) when all six are cast.
 import { useState } from "react";
 import { shellRattle, coinClink, unlockAudio } from "@/lib/sfx";
+import { useLang } from "./Lang";
 
 const rnd = () => (typeof crypto !== "undefined" && crypto.getRandomValues ? crypto.getRandomValues(new Uint8Array(1))[0] & 1 : Math.random() < 0.5 ? 0 : 1);
 
@@ -56,6 +57,8 @@ function Shell({ shaking }) {
 }
 
 export default function CoinCast({ onDone, disabled }) {
+  const { t } = useLang();
+  const YN = t("yao_names").split(",");
   const [values, setValues] = useState([]);     // 6,7,8,9 bottom→top
   const [coins, setCoins] = useState([null, null, null]); // last throw faces: 1=背(阳) 0=字(阴)
   const [spinning, setSpinning] = useState(false);
@@ -105,20 +108,20 @@ export default function CoinCast({ onDone, disabled }) {
           const v = values[i];
           return (
             <div key={i} className={`yao ${v === undefined ? "empty" : ""} ${v === 6 || v === 9 ? "chg" : ""}`}>
-              {v === undefined ? <span className="ph">{["初", "二", "三", "四", "五", "上"][i]}爻</span>
+              {v === undefined ? <span className="ph">{YN[i]}{t("yao")}</span>
                 : v % 2 === 1 ? <span className="yang" /> : <><span className="yin" /><span className="yin" /></>}
-              {v !== undefined && <small>{v === 6 ? "老阴 ○" : v === 9 ? "老阳 ×" : v === 7 ? "少阳" : "少阴"}</small>}
+              {v !== undefined && <small>{v === 6 ? t("old_yin") : v === 9 ? t("old_yang") : v === 7 ? t("young_yang") : t("young_yin")}</small>}
             </div>
           );
         })}
       </div>
       <div className="row" style={{ justifyContent: "center", gap: 10 }}>
         <button type="button" className="throw" onClick={throwOnce} disabled={disabled || spinning || n >= 6}>
-          {n >= 6 ? "六爻已成" : spinning ? (shown === 0 ? "龟壳摇动中……" : "铜钱落下……") : `摇第 ${n + 1} 爻`}
+          {n >= 6 ? t("cc_done") : spinning ? (shown === 0 ? t("cc_shake") : t("cc_fall")) : t("cc_throw", { n: n + 1 })}
         </button>
-        {n > 0 && n < 6 && <button type="button" className="ghost" onClick={reset} disabled={spinning}>重摇</button>}
+        {n > 0 && n < 6 && <button type="button" className="ghost" onClick={reset} disabled={spinning}>{t("cc_reset")}</button>}
       </div>
-      <p className="muted small" style={{ textAlign: "center" }}>静心，默念问题，每摇一次成一爻，自下而上，共六次。</p>
+      <p className="muted small" style={{ textAlign: "center" }}>{t("cc_hint")}</p>
     </div>
   );
 }

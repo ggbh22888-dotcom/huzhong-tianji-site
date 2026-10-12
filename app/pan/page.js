@@ -5,6 +5,7 @@ import { ChartSet, Tarot, Gua, Reading, Transits, Hexagram } from "@/app/compone
 import CoinCast from "@/app/components/CoinCast";
 import JiaoBei from "@/app/components/JiaoBei";
 import TopBar from "@/app/components/TopBar";
+import { LangProvider, useLang } from "@/app/components/Lang";
 
 const MODES = [
   ["single", "壺中一命"], ["multi", "壺中合盤"], ["predict", "壺中度歲"], ["yijing", "壺中問卦"], ["tarot", "壺中翻牌"],
@@ -14,7 +15,10 @@ const SYSTEMS = ["八字", "紫微", "七政四余", "西洋星盘", "吠陀", "
 const LAST_KEY = "hztj.lastPerson.v1";
 const HIST_KEY = "hztj.history.v1";
 
-export default function Home() {
+export default function Home() { return <LangProvider><Pan /></LangProvider>; }
+
+function Pan() {
+  const { t, lang } = useLang();
   const [mode, setMode] = useState("single");
   const [granted, setGranted] = useState(false); // 擲筊得圣杯
   useEffect(() => { try { const m = new URLSearchParams(window.location.search).get("mode"); if (m && MODES.some(([k]) => k === m)) setMode(m); } catch {} }, []);
@@ -67,7 +71,7 @@ export default function Home() {
     e.preventDefault();
     setLoading(true); setError(""); setResult(null);
     try {
-      const res = await fetch("/api/reading", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(buildBody()) });
+      const res = await fetch("/api/reading", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...buildBody(), lang }) });
       if (!res.ok) throw new Error((await res.json()).error || res.statusText);
       const reader = res.body.getReader(), dec = new TextDecoder();
       let buf = "", charts = null, reading = "";
@@ -96,93 +100,93 @@ export default function Home() {
       <TopBar onNew={() => { setResult(null); setCastValues(null); setGranted(false); setQuestion(""); window.scrollTo({ top: 0, behavior: "smooth" }); }} />
       <header>
         <h1>壺中天機</h1>
-        <p className="tagline">天機藏於壺中 · 待君來問</p>
-        <nav className="crumbs"><a href="/">首页</a> · <a href="/tools">小工具</a> · <a href="/articles">文章</a> · <a href="/classics">典籍</a></nav>
+        <p className="tagline">{t("tagline")}</p>
+        <nav className="crumbs"><a href="/">{t("nav_home")}</a> · <a href="/tools">{t("nav_tools")}</a> · <a href="/articles">{t("nav_articles")}</a> · <a href="/classics">{t("nav_classics")}</a></nav>
       </header>
 
-      <nav className="modes">{MODES.map(([k, l]) => <button key={k} type="button" className={mode === k ? "on" : ""} onClick={() => { setMode(k); setResult(null); setCastValues(null); setGranted(false); }}>{l}</button>)}</nav>
+      <nav className="modes">{MODES.map(([k, l]) => <button key={k} type="button" className={mode === k ? "on" : ""} title={t("m_" + k)} onClick={() => { setMode(k); setResult(null); setCastValues(null); setGranted(false); }}>{l}{lang !== "zh-CN" && lang !== "zh-TW" && <small>{t("m_" + k)}</small>}</button>)}</nav>
 
       <form onSubmit={submit} className="card">
         {showSystems && (
           <div className="systems">
-            <span className="muted">排盘体系</span>
+            <span className="muted">{t("systems")}</span>
             {SYSTEMS.map((s) => <label key={s} className={`sys-pick ${systems.includes(s) ? "on" : ""}`}><input type="checkbox" checked={systems.includes(s)} onChange={() => toggleSystem(s)} />{s}</label>)}
           </div>
         )}
 
-        {hasLast && mode !== "tarot" && <button type="button" className="ghost" onClick={fillLast}>↺ 历史一键填入</button>}
+        {hasLast && mode !== "tarot" && <button type="button" className="ghost" onClick={fillLast}>{t("fill_last")}</button>}
 
         {mode === "single" && <>
           <PersonForm value={p1} onChange={setP1} />
-          <label className="full">想特别问的问题（选填）<input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="例如：明年适合换工作吗？" /></label>
+          <label className="full">{t("q_opt")}<input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder={t("q_opt_ph")} /></label>
         </>}
 
         {mode === "multi" && <>
-          <label className="full">关系类型
-            <select value={relationType} onChange={(e) => setRelationType(e.target.value)}>{["伴侣", "夫妻", "合伙人", "亲子", "朋友", "上司下属"].map((r) => <option key={r}>{r}</option>)}</select>
+          <label className="full">{t("relation")}
+            <select value={relationType} onChange={(e) => setRelationType(e.target.value)}>{[["伴侣","rel_partner"], ["夫妻","rel_spouse"], ["合伙人","rel_biz"], ["亲子","rel_parent"], ["朋友","rel_friend"], ["上司下属","rel_boss"]].map(([r, k]) => <option key={r} value={r}>{t(k)}</option>)}</select>
           </label>
-          <PersonForm value={p1} onChange={setP1} label="第一位" />
-          <PersonForm value={p2} onChange={setP2} label="第二位" />
-          {p3 ? <PersonForm value={p3} onChange={setP3} label="第三位" /> : <button type="button" className="ghost" onClick={() => setP3(emptyPerson())}>+ 加第三位</button>}
+          <PersonForm value={p1} onChange={setP1} label={t("p1")} />
+          <PersonForm value={p2} onChange={setP2} label={t("p2")} />
+          {p3 ? <PersonForm value={p3} onChange={setP3} label={t("p3")} /> : <button type="button" className="ghost" onClick={() => setP3(emptyPerson())}>{t("add_third")}</button>}
         </>}
 
         {mode === "predict" && <>
           <PersonForm value={p1} onChange={setP1} />
           <div className="row">
-            <label>预测年份 <select value={targetYear} onChange={(e) => setTargetYear(+e.target.value)}>{[0, 1, 2, 3].map((d) => { const y = new Date().getFullYear() + d; return <option key={y}>{y}</option>; })}</select></label>
-            <label>关注重点 <input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="事业 / 感情 / 搬迁 / 创业…" /></label>
+            <label>{t("year")} <select value={targetYear} onChange={(e) => setTargetYear(+e.target.value)}>{[0, 1, 2, 3].map((d) => { const y = new Date().getFullYear() + d; return <option key={y}>{y}</option>; })}</select></label>
+            <label>{t("focus")} <input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder={t("focus_ph")} /></label>
           </div>
         </>}
 
         {mode === "yijing" && <>
-          <label className="full">你的问题（可留空，心中默念即可）<textarea value={question} onChange={(e) => setQuestion(e.target.value)} rows={2} placeholder="一事一问，越具体越好。例：这个月该不该接下那个项目？" /></label>
+          <label className="full">{t("yq")}<textarea value={question} onChange={(e) => setQuestion(e.target.value)} rows={2} placeholder={t("yq_ph")} /></label>
           <JiaoBei onGranted={() => setGranted(true)} disabled={loading} />
           {granted && <CoinCast onDone={setCastValues} disabled={loading} />}
         </>}
 
         {mode === "tarot" && <>
-          <label className="full">你的问题<textarea value={question} onChange={(e) => setQuestion(e.target.value)} rows={3} placeholder="尽量具体。例：我该接受这份新工作的邀约吗？" required /></label>
-          <label className="full">牌阵
-            <select value={spread} onChange={(e) => setSpread(e.target.value)}><option value="single">单牌 · 核心指引</option><option value="three">三牌 · 过去现在未来</option><option value="decision">五牌 · 两难抉择</option><option value="celtic">十牌 · 凯尔特十字</option></select>
+          <label className="full">{t("tq")}<textarea value={question} onChange={(e) => setQuestion(e.target.value)} rows={3} placeholder={t("tq_ph")} required /></label>
+          <label className="full">{t("spread")}
+            <select value={spread} onChange={(e) => setSpread(e.target.value)}><option value="single">{t("sp_single")}</option><option value="three">{t("sp_three")}</option><option value="decision">{t("sp_decision")}</option><option value="celtic">{t("sp_celtic")}</option></select>
           </label>
         </>}
 
         {mode === "naming" && <>
-          <div className="row"><label>姓氏 <input value={surname} onChange={(e) => setSurname(e.target.value)} required placeholder="例：关" /></label></div>
-          <PersonForm value={p1} onChange={setP1} label="出生资料" />
-          <label className="full">父母的期望（选填）<textarea value={text} onChange={(e) => setText(e.target.value)} rows={2} placeholder="例：希望孩子温和有主见，不要太强势的字" /></label>
+          <div className="row"><label>{t("surname")} <input value={surname} onChange={(e) => setSurname(e.target.value)} required placeholder={t("surname_ph")} /></label></div>
+          <PersonForm value={p1} onChange={setP1} label={t("birth")} />
+          <label className="full">{t("expect")}<textarea value={text} onChange={(e) => setText(e.target.value)} rows={2} placeholder={t("expect_ph")} /></label>
         </>}
 
         {mode === "fengshui" && <>
-          <PersonForm value={p1} onChange={setP1} label="居住者" compact />
-          <label className="full">居所情况<textarea value={text} onChange={(e) => setText(e.target.value)} rows={4} required placeholder="大门朝向、卧室床头方向、书桌位置、厨房灶位、最近的困扰……越具体越好" /></label>
+          <PersonForm value={p1} onChange={setP1} label={t("resident")} compact />
+          <label className="full">{t("home")}<textarea value={text} onChange={(e) => setText(e.target.value)} rows={4} required placeholder={t("home_ph")} /></label>
         </>}
 
         {mode === "pet" && <>
-          <div className="row"><label>物种 <select value={species} onChange={(e) => setSpecies(e.target.value)}>{["猫", "狗", "兔", "鸟", "仓鼠", "乌龟", "鱼", "其他"].map((s) => <option key={s}>{s}</option>)}</select></label></div>
-          <PersonForm value={p1} onChange={setP1} label="宠物出生资料（时辰不详可勾选）" compact />
-          <label className="check"><input type="checkbox" checked={withOwner} onChange={(e) => setWithOwner(e.target.checked)} /> 一并看与主人的相处</label>
-          {withOwner && <PersonForm value={p2} onChange={setP2} label="主人" compact />}
+          <div className="row"><label>{t("species")} <select value={species} onChange={(e) => setSpecies(e.target.value)}>{[["猫","sp_cat"], ["狗","sp_dog"], ["兔","sp_rabbit"], ["鸟","sp_bird"], ["仓鼠","sp_hamster"], ["乌龟","sp_turtle"], ["鱼","sp_fish"], ["其他","sp_other"]].map(([s, k]) => <option key={s} value={s}>{t(k)}</option>)}</select></label></div>
+          <PersonForm value={p1} onChange={setP1} label={t("pet_birth")} compact />
+          <label className="check"><input type="checkbox" checked={withOwner} onChange={(e) => setWithOwner(e.target.checked)} /> {t("with_owner")}</label>
+          {withOwner && <PersonForm value={p2} onChange={setP2} label={t("owner")} compact />}
         </>}
 
         {mode === "horoscope" && <>
           <div className="row">
-            <label>周期 <select value={period} onChange={(e) => setPeriod(e.target.value)}><option value="today">今日</option><option value="week">本周</option><option value="month">本月</option><option value="year">今年</option></select></label>
-            <label>关注重点 <input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="选填：工作 / 感情 / 一个决定…" /></label>
+            <label>{t("period")} <select value={period} onChange={(e) => setPeriod(e.target.value)}><option value="today">{t("pd_today")}</option><option value="week">{t("pd_week")}</option><option value="month">{t("pd_month")}</option><option value="year">{t("pd_year")}</option></select></label>
+            <label>{t("focus")} <input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder={t("focus_ph2")} /></label>
           </div>
-          <label className="check"><input type="checkbox" checked={knowBirth} onChange={(e) => setKnowBirth(e.target.checked)} /> 我知道出生日期与时间（个人化行运）</label>
+          <label className="check"><input type="checkbox" checked={knowBirth} onChange={(e) => setKnowBirth(e.target.checked)} /> {t("know_birth")}</label>
           {knowBirth ? <PersonForm value={p1} onChange={setP1} /> : (
-            <div className="row"><label>太阳星座 <select value={sunSign} onChange={(e) => setSunSign(e.target.value)}>{["白羊","金牛","双子","巨蟹","狮子","处女","天秤","天蝎","射手","摩羯","水瓶","双鱼"].map((s) => <option key={s}>{s}</option>)}</select></label></div>
+            <div className="row"><label>{t("sun_sign")} <select value={sunSign} onChange={(e) => setSunSign(e.target.value)}>{["白羊","金牛","双子","巨蟹","狮子","处女","天秤","天蝎","射手","摩羯","水瓶","双鱼"].map((s, i) => <option key={s} value={s}>{t("z" + (i + 1))}</option>)}</select></label></div>
           )}
         </>}
 
         {mode === "dream" && <>
-          <label className="full">梦境描述<textarea value={text} onChange={(e) => setText(e.target.value)} rows={5} required placeholder="尽量把场景、人物、情绪、醒来时的感觉写下来" /></label>
-          <label className="check"><input type="checkbox" checked={withOwner} onChange={(e) => setWithOwner(e.target.checked)} /> 对照我的八字与流年</label>
+          <label className="full">{t("dream")}<textarea value={text} onChange={(e) => setText(e.target.value)} rows={5} required placeholder={t("dream_ph")} /></label>
+          <label className="check"><input type="checkbox" checked={withOwner} onChange={(e) => setWithOwner(e.target.checked)} /> {t("with_bazi")}</label>
           {withOwner && <PersonForm value={p1} onChange={setP1} compact />}
         </>}
 
-        <button disabled={loading || (mode === "yijing" && !castValues)}>{loading ? "壶中正在倒出……" : mode === "yijing" ? "✦ 解卦 ✦" : "✦ 开壶 ✦"}</button>
+        <button disabled={loading || (mode === "yijing" && !castValues)}>{loading ? t("loading") : mode === "yijing" ? t("interpret") : t("open")}</button>
         {error && <p className="error">{error}</p>}
       </form>
 
@@ -190,12 +194,12 @@ export default function Home() {
 
       {history.length > 0 && !result && (
         <section className="card">
-          <h3>历史记录（仅存于本机）</h3>
+          <h3>{t("history")}</h3>
           <ul className="hist">{history.map((h) => <li key={h.at}><button type="button" className="ghost" onClick={() => setResult({ charts: h.charts, reading: h.reading })}>{new Date(h.at).toLocaleString("zh-SG")} · {MODES.find((m) => m[0] === h.mode)?.[1]}</button></li>)}</ul>
         </section>
       )}
 
-      <footer>本站测算结果仅供参考与自我认识之用。命由己造，相由心生。</footer>
+      <footer>{t("footer")}</footer>
     </main>
   );
 }

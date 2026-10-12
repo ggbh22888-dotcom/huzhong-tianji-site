@@ -2,6 +2,7 @@
 // PersonForm — reusable birth-data form (公历/农历, 时辰, 出生地, 真太阳时)
 import { PLACES } from "@/lib/places";
 import { Lunar } from "lunar-javascript";
+import { useLang } from "./Lang";
 
 const YEARS = Array.from({ length: 2030 - 1920 + 1 }, (_, i) => 2030 - i);
 const SHICHEN = ["子","丑","丑","寅","寅","卯","卯","辰","辰","巳","巳","午","午","未","未","申","申","酉","酉","戌","戌","亥","亥","子"];
@@ -27,6 +28,7 @@ export function personPayload(p) {
 }
 
 export default function PersonForm({ value, onChange, label, compact = false }) {
+  const { t } = useLang();
   const set = (k) => (e) => {
     const v = e.target.type === "checkbox" ? e.target.checked : e.target.value;
     const next = { ...value, [k]: v };
@@ -37,29 +39,29 @@ export default function PersonForm({ value, onChange, label, compact = false }) 
     <fieldset className="person">
       {label && <legend>{label}</legend>}
       <div className="row">
-        <label>姓名 <input value={value.name} onChange={set("name")} placeholder="选填" /></label>
-        <label>性别 <select value={value.gender} onChange={set("gender")}><option>女</option><option>男</option></select></label>
-        <label>历法 <select value={value.calendar} onChange={set("calendar")}><option value="solar">公历</option><option value="lunar">农历</option></select></label>
+        <label>{t("name")} <input value={value.name} onChange={set("name")} /></label>
+        <label>{t("gender")} <select value={value.gender} onChange={set("gender")}><option value="女">{t("female")}</option><option value="男">{t("male")}</option></select></label>
+        <label>{t("calendar")} <select value={value.calendar} onChange={set("calendar")}><option value="solar">{t("solar")}</option><option value="lunar">{t("lunar")}</option></select></label>
       </div>
       <div className="row">
-        <label>年 <select value={value.year} onChange={set("year")}>{YEARS.map((y) => <option key={y}>{y}</option>)}</select></label>
-        <label>月 <select value={value.month} onChange={set("month")}>{[...Array(12)].map((_, i) => <option key={i}>{i + 1}</option>)}</select></label>
-        <label>日 <select value={value.day} onChange={set("day")}>{[...Array(value.calendar === "lunar" ? 30 : 31)].map((_, i) => <option key={i}>{i + 1}</option>)}</select></label>
+        <label>{t("y")} <select value={value.year} onChange={set("year")}>{YEARS.map((y) => <option key={y}>{y}</option>)}</select></label>
+        <label>{t("mo")} <select value={value.month} onChange={set("month")}>{[...Array(12)].map((_, i) => <option key={i}>{i + 1}</option>)}</select></label>
+        <label>{t("d")} <select value={value.day} onChange={set("day")}>{[...Array(value.calendar === "lunar" ? 30 : 31)].map((_, i) => <option key={i}>{i + 1}</option>)}</select></label>
       </div>
       <div className="row">
-        <label>时辰
+        <label>{t("h")}
           <select value={value.hour} onChange={set("hour")} disabled={value.hourUnknown}>
             {SHICHEN.map((z, h) => <option key={h} value={h}>{String(h).padStart(2, "0")}:00 ({z}时)</option>)}
           </select>
         </label>
-        <label>分 <select value={value.minute} onChange={set("minute")} disabled={value.hourUnknown}>{[...Array(60)].map((_, i) => <option key={i}>{i}</option>)}</select></label>
-        <label className="check"><input type="checkbox" checked={value.hourUnknown} onChange={set("hourUnknown")} /> 时辰不详</label>
+        <label>{t("mi")} <select value={value.minute} onChange={set("minute")} disabled={value.hourUnknown}>{[...Array(60)].map((_, i) => <option key={i}>{i}</option>)}</select></label>
+        <label className="check"><input type="checkbox" checked={value.hourUnknown} onChange={set("hourUnknown")} /> {t("hour_unknown")}</label>
       </div>
       {!compact && (
         <div className="row">
-          <label>国家/地区 <select value={value.country} onChange={set("country")}>{Object.keys(PLACES).map((c) => <option key={c}>{c}</option>)}</select></label>
-          <label>城市 <select value={value.city} onChange={set("city")}>{Object.keys(PLACES[value.country] || {}).map((c) => <option key={c}>{c}</option>)}</select></label>
-          <label className="check"><input type="checkbox" checked={value.useTrueSolar} onChange={set("useTrueSolar")} disabled={value.hourUnknown} /> 真太阳时</label>
+          <label>{t("country")} <select value={value.country} onChange={set("country")}>{Object.keys(PLACES).map((c) => <option key={c}>{c}</option>)}</select></label>
+          <label>{t("city")} <select value={value.city} onChange={set("city")}>{Object.keys(PLACES[value.country] || {}).map((c) => <option key={c}>{c}</option>)}</select></label>
+          <label className="check"><input type="checkbox" checked={value.useTrueSolar} onChange={set("useTrueSolar")} disabled={value.hourUnknown} /> {t("tst")}</label>
         </div>
       )}
     </fieldset>

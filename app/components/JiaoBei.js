@@ -2,6 +2,7 @@
 // JiaoBei — 擲筊：两枚月牙形筊杯，掷出一平一凸为圣杯（允），方可起卦。
 import { useState } from "react";
 import { woodClack, chime, unlockAudio } from "@/lib/sfx";
+import { useLang } from "./Lang";
 
 const rnd = () => (typeof crypto !== "undefined" && crypto.getRandomValues ? crypto.getRandomValues(new Uint8Array(1))[0] & 1 : Math.random() < 0.5 ? 0 : 1);
 
@@ -25,6 +26,7 @@ function Block({ face, spinning, delay }) {
 }
 
 export default function JiaoBei({ onGranted, disabled }) {
+  const { t } = useLang();
   const [faces, setFaces] = useState([null, null]);
   const [spinning, setSpinning] = useState(false);
   const [result, setResult] = useState(null); // "sheng" | "xiao" | "yin"
@@ -47,7 +49,7 @@ export default function JiaoBei({ onGranted, disabled }) {
     }, 820);
   }
 
-  const msg = { sheng: "圣杯 · 一平一凸，神明允准。可以起卦。", xiao: "笑杯 · 两平，神明笑而不答。静一静，再掷。", yin: "阴杯 · 两凸，此刻不宜。调整问题，再掷。" };
+  const msg = { sheng: t("jb_sheng"), xiao: t("jb_xiao"), yin: t("jb_yin") };
   return (
     <div className={`jiaobei ${granted ? "granted" : ""}`}>
       <div className="jiao-row">
@@ -56,10 +58,10 @@ export default function JiaoBei({ onGranted, disabled }) {
       </div>
       <div className="row" style={{ justifyContent: "center" }}>
         <button type="button" className={`throw ${granted ? "ghost" : ""}`} onClick={toss} disabled={disabled || spinning || granted}>
-          {granted ? "✓ 已得圣杯" : spinning ? "筊杯在空中……" : tries ? "再掷一次" : "擲筊 · 请示"}
+          {granted ? t("jb_ok") : spinning ? t("jb_air") : tries ? t("jb_again") : t("jb_toss")}
         </button>
       </div>
-      <p className={`jiao-msg ${result || ""}`}>{result ? msg[result] : "先擲筊请示：两枚筊杯一平一凸为圣杯，得圣杯方可摇卦。"}</p>
+      <p className={`jiao-msg ${result || ""}`}>{result ? msg[result] : t("jb_intro")}</p>
     </div>
   );
 }
