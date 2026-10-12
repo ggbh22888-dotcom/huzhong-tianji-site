@@ -8,7 +8,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="zh" suppressHydrationWarning>
-      <head><script dangerouslySetInnerHTML={{ __html: `try{if(localStorage.getItem('hztj.theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}` }} /></head>
+      <head><script dangerouslySetInnerHTML={{ __html: `try{if(localStorage.getItem('hztj.theme')==='dark')document.documentElement.setAttribute('data-theme','dark');var z=localStorage.getItem('hztj.zoom');if(z)document.documentElement.style.fontSize=z+'%'}catch(e){}` }} /></head>
       <body>{children}</body>
     </html>
   );
