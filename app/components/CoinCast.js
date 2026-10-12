@@ -1,7 +1,7 @@
 "use client";
 // CoinCast — three coins, six throws, hexagram builds bottom→top. Calls onDone(values) when all six are cast.
 import { useState } from "react";
-import { shellRattle, coinClink, unlockAudio } from "@/lib/sfx";
+import { shellShakeTraditional, coinLand, unlockAudio } from "@/lib/sfx";
 import { useLang } from "./Lang";
 
 const rnd = () => (typeof crypto !== "undefined" && crypto.getRandomValues ? crypto.getRandomValues(new Uint8Array(1))[0] & 1 : Math.random() < 0.5 ? 0 : 1);
@@ -70,14 +70,14 @@ export default function CoinCast({ onDone, disabled }) {
     setSpinning(true);
     setCoins([null, null, null]); setShown(0);
     const faces = [rnd(), rnd(), rnd()];
-    shellRattle({ dur: 1.1 });
-    // coins emerge one by one: left, center, right
+    const shakeSec = shellShakeTraditional({ shakes: 3 }) || 1.74;
+    const pourAt = Math.round(shakeSec * 1000) + 250;
+    // coins pour out one by one: left, center, right
     const pans = [-0.7, 0, 0.7];
     faces.forEach((f, i) => {
-      const at = 1250 + i * 420;
+      const at = pourAt + i * 380;
       setTimeout(() => {
-        coinClink({ p: pans[i], pitch: f ? 1 : 0.93 });
-        coinClink({ p: pans[i], t: 0.11, pitch: f ? 1.04 : 0.97 });
+        coinLand({ p: pans[i], pitch: f ? 1 : 0.94 });
         setCoins((c) => { const n = [...c]; n[i] = f; return n; });
         setShown(i + 1);
       }, at);
@@ -88,7 +88,7 @@ export default function CoinCast({ onDone, disabled }) {
       setValues(next);
       setSpinning(false);
       if (next.length === 6) onDone && onDone(next);
-    }, 1250 + 3 * 420 + 350);
+    }, pourAt + 3 * 380 + 900);
   }
   function reset() { setValues([]); setCoins([null, null, null]); setShown(3); }
 

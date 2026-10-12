@@ -286,8 +286,8 @@ main.classics { max-width: 760px; }
 
 /* ---- 龟壳 ---- */
 .shell { width: 180px; margin: 4px auto -10px; filter: drop-shadow(0 8px 10px rgba(40,25,5,.4)); transform-origin: 50% 80%; }
-.shell.shake { animation: shellShake .14s ease-in-out infinite; }
-@keyframes shellShake { 0% { transform: rotate(-7deg) translateX(-5px); } 50% { transform: rotate(7deg) translateX(5px); } 100% { transform: rotate(-7deg) translateX(-5px); } }
+.shell.shake { animation: shellShake .58s ease-in-out infinite; }
+@keyframes shellShake { 0% { transform: rotate(0) translateX(0); } 12% { transform: rotate(-9deg) translateX(-7px) translateY(-3px); } 24% { transform: rotate(8deg) translateX(6px); } 36% { transform: rotate(-8deg) translateX(-6px) translateY(-2px); } 48% { transform: rotate(7deg) translateX(5px); } 60% { transform: rotate(-5deg) translateX(-3px); } 72% { transform: rotate(0) translateX(0); } 100% { transform: rotate(0) translateX(0); } }
 .coin.hidden { opacity: 0; transform: translateY(-70px) scale(.5); }
 .coin.drop { animation: coinDrop .5s cubic-bezier(.2,.9,.3,1.2); }
 .coin.drop.bei { transform: rotateY(180deg); } .coin.drop.zi { transform: rotateY(0deg); }

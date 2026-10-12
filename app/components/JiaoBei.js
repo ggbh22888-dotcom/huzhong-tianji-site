@@ -1,7 +1,7 @@
 "use client";
 // JiaoBei — 擲筊：两枚月牙形筊杯，掷出一平一凸为圣杯（允），方可起卦。
 import { useState } from "react";
-import { woodClack, chime, unlockAudio } from "@/lib/sfx";
+import { blockLand, templeBowl, unlockAudio } from "@/lib/sfx";
 import { useLang } from "./Lang";
 
 const rnd = () => (typeof crypto !== "undefined" && crypto.getRandomValues ? crypto.getRandomValues(new Uint8Array(1))[0] & 1 : Math.random() < 0.5 ? 0 : 1);
@@ -39,14 +39,14 @@ export default function JiaoBei({ onGranted, disabled }) {
     setSpinning(true); setResult(null); setFaces([null, null]);
     const f = [rnd(), rnd()];
     // land sounds: left block then right block
-    woodClack({ p: -0.6, t: 0.62, pitch: 1.0 });
-    woodClack({ p: 0.6, t: 0.74, pitch: 0.92 });
+    blockLand({ p: -0.55, t: 0.62, pitch: 1.0 });
+    blockLand({ p: 0.55, t: 0.76, pitch: 0.93 });
     setTimeout(() => {
       setFaces(f); setSpinning(false); setTries((n) => n + 1);
       const r = f[0] !== f[1] ? "sheng" : f[0] === 1 ? "xiao" : "yin";
       setResult(r);
-      if (r === "sheng") { chime({ t: 0.15 }); setTimeout(() => onGranted && onGranted(), 900); }
-    }, 820);
+      if (r === "sheng") { templeBowl({ t: 0.5 }); setTimeout(() => onGranted && onGranted(), 1600); }
+    }, 1250);
   }
 
   const msg = { sheng: t("jb_sheng"), xiao: t("jb_xiao"), yin: t("jb_yin") };
