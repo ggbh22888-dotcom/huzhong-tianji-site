@@ -12,6 +12,7 @@ const MODES = [
   ["horoscope", "壺中觀星"], ["naming", "壺中賜名"], ["fengshui", "壺中安居"], ["pet", "壺中小伴"], ["dream", "壺中入夢"],
 ];
 const SYSTEMS = ["八字", "紫微", "七政四余", "西洋星盘", "吠陀", "玛雅", "人类图", "灵数"];
+const SYS_EN = { 八字: "BaZi", 紫微: "Zi Wei", 七政四余: "Qi Zheng", 西洋星盘: "Western", 吠陀: "Vedic", 玛雅: "Maya", 人类图: "Human Design", 灵数: "Numerology" };
 const LAST_KEY = "hztj.lastPerson.v1";
 const HIST_KEY = "hztj.history.v1";
 
@@ -110,7 +111,7 @@ function Pan() {
         {showSystems && (
           <div className="systems">
             <span className="muted">{t("systems")}</span>
-            {SYSTEMS.map((s) => <label key={s} className={`sys-pick ${systems.includes(s) ? "on" : ""}`}><input type="checkbox" checked={systems.includes(s)} onChange={() => toggleSystem(s)} />{s}</label>)}
+            {SYSTEMS.map((s) => <label key={s} className={`sys-pick ${systems.includes(s) ? "on" : ""}`}><input type="checkbox" checked={systems.includes(s)} onChange={() => toggleSystem(s)} />{s}{!lang.startsWith("zh") && <span className="sys-en">{SYS_EN[s]}</span>}</label>)}
           </div>
         )}
 

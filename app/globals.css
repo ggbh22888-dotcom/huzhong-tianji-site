@@ -322,3 +322,25 @@ main.classics { max-width: 760px; }
 .langmenu li { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-size: .95rem; color: var(--ink); }
 .langmenu li:hover { background: var(--well); } .langmenu li.on { color: var(--gold); background: var(--well); } .langmenu li span { color: var(--gold); }
 .modes button small { display: block; font-size: .62rem; letter-spacing: 0; opacity: .75; line-height: 1.1; }
+
+/* ---- Latin / non-CJK typography: clearer sans, larger size, no wide tracking ---- */
+:root { --font-cjk: "Noto Serif SC", "Songti SC", "Source Han Serif SC", Georgia, serif;
+        --font-latin: "Noto Sans", "Noto Sans Thai", "Noto Sans Khmer", "Noto Sans Lao", "Noto Sans JP", "Noto Sans KR", -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+html:not([lang^="zh"]) body { font-family: var(--font-latin); font-size: 1.0625rem; line-height: 1.75; letter-spacing: 0; }
+html:not([lang^="zh"]) h1 { font-family: var(--font-cjk); }            /* 壺中天機 stays calligraphic */
+html:not([lang^="zh"]) .modes button b, html:not([lang^="zh"]) .modes button { font-family: var(--font-cjk); }
+html:not([lang^="zh"]) .modes button small { font-family: var(--font-latin); font-size: .7rem; letter-spacing: 0; opacity: .85; }
+html:not([lang^="zh"]) .tagline, html:not([lang^="zh"]) .crumbs, html:not([lang^="zh"]) label, html:not([lang^="zh"]) .muted,
+html:not([lang^="zh"]) button, html:not([lang^="zh"]) input, html:not([lang^="zh"]) select, html:not([lang^="zh"]) textarea,
+html:not([lang^="zh"]) .reading, html:not([lang^="zh"]) .chip, html:not([lang^="zh"]) .jiao-msg, html:not([lang^="zh"]) footer { font-family: var(--font-latin); letter-spacing: 0; }
+html:not([lang^="zh"]) .tagline { font-size: 1rem; }
+html:not([lang^="zh"]) label { font-size: .95rem; }
+html:not([lang^="zh"]) form > button, html:not([lang^="zh"]) button.throw { letter-spacing: .04em; font-size: 1.05rem; font-weight: 500; }
+html:not([lang^="zh"]) .reading p, html:not([lang^="zh"]) .reading li { font-size: 1.05rem; line-height: 1.8; }
+html:not([lang^="zh"]) .reading h2 { font-size: 1.15rem; letter-spacing: 0; font-weight: 600; }
+html:not([lang^="zh"]) .small { font-size: .88rem; }
+html:not([lang^="zh"]) .card-t b, html:not([lang^="zh"]) .lightbox figcaption b { font-family: var(--font-cjk); }
+/* 日韩：正文用各自 Noto Sans，字距归零 */
+html[lang="ja"] body { font-family: "Noto Sans JP", var(--font-latin); }
+html[lang="ko"] body { font-family: "Noto Sans KR", var(--font-latin); }
+.sys-en { margin-left: 6px; font-family: var(--font-latin); font-size: .8rem; opacity: .8; }
