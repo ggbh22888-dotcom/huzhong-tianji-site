@@ -21,7 +21,7 @@ export default function ToolShell({ id, children, result }) {
       <header>
         <h1>壺中天機</h1>
         <p className="tagline">壺中小工具 · {t?.[1]}</p>
-        <nav className="crumbs"><a href="/">首页</a> · <a href="/tools">全部工具</a> · <a href="/pan">AI 排盘</a></nav>
+        <nav className="crumbs"><a href="/">首页</a> · <a href="/tools">全部工具</a> · <a href="/pan">壺中排盤</a> · <a href="/articles">文章</a></nav>
       </header>
       <section className="card">
         <h2 className="tool-h">{t?.[1]}</h2>

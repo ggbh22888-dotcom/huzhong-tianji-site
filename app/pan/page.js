@@ -93,7 +93,7 @@ export default function Home() {
       <header>
         <h1>壺中天機</h1>
         <p className="tagline">天機藏於壺中 · 待君來問</p>
-        <a href="/" className="back">← 回到壺中天機首页</a>
+        <nav className="crumbs"><a href="/">首页</a> · <a href="/tools">小工具</a> · <a href="/articles">文章</a> · <a href="/classics">典籍</a></nav>
       </header>
 
       <nav className="modes">{MODES.map(([k, l]) => <button key={k} type="button" className={mode === k ? "on" : ""} onClick={() => { setMode(k); setResult(null); setCastValues(null); }}>{l}</button>)}</nav>

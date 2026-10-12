@@ -258,3 +258,16 @@ header::after { height: 4px; width: 160px; }
 .article .reading hr { border: 0; border-top: 1px dashed var(--line); margin: 28px 0 18px; }
 .tool-cta { display: block; text-align: center; margin: 22px auto 4px; padding: 13px 20px; background: var(--seal); color: var(--on-gold); text-decoration: none; border-radius: 8px; letter-spacing: .15em; max-width: 360px; }
 .tool-cta:hover { background: #9c3a25; }
+
+/* ---- classics ---- */
+main.classics { max-width: 760px; }
+.classics .intro { text-align: center; max-width: 40em; margin: 0 auto 26px; line-height: 1.8; }
+.classic-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+.classic { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.classic-head h2 { font-size: 1.3rem; margin: 0; font-weight: 500; color: var(--ink); letter-spacing: .08em; }
+.classic-head span { display: block; margin-top: 2px; }
+.classic blockquote { margin: 4px 0; padding: 8px 12px; border-left: 3px solid var(--gold); background: var(--well); border-radius: 0 6px 6px 0; }
+.classic blockquote p { margin: 0; font-size: .95rem; color: var(--gold); line-height: 1.7; font-style: normal; }
+.classic p { margin: 0; font-size: .92rem; line-height: 1.75; }
+.classic p b { color: var(--seal); font-weight: 500; margin-right: 8px; font-size: .82rem; letter-spacing: .1em; }
+.classic-link { color: var(--jade); text-decoration: none; font-size: .9rem; margin-top: 4px; } .classic-link:hover { text-decoration: underline; }
