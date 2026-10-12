@@ -271,3 +271,25 @@ main.classics { max-width: 760px; }
 .classic p { margin: 0; font-size: .92rem; line-height: 1.75; }
 .classic p b { color: var(--seal); font-weight: 500; margin-right: 8px; font-size: .82rem; letter-spacing: .1em; }
 .classic-link { color: var(--jade); text-decoration: none; font-size: .9rem; margin-top: 4px; } .classic-link:hover { text-decoration: underline; }
+
+/* ---- 擲筊 ---- */
+.jiaobei { margin: 8px 0 16px; padding: 14px 10px 6px; border: 1px dashed var(--gold-soft); border-radius: 12px; background: var(--well); transition: border-color .4s, background .4s; }
+.jiaobei.granted { border-color: var(--jade); background: #f3f8f3; }
+.jiao-row { display: flex; justify-content: center; gap: 26px; height: 80px; align-items: flex-end; margin-bottom: 10px; }
+.jiao { width: 110px; height: 64px; filter: drop-shadow(0 6px 8px rgba(60,20,10,.35)); transform-origin: center; }
+.jiao.toss { animation: jiaoToss .8s cubic-bezier(.3,.6,.3,1) forwards; }
+.jiao.flat { transform: rotate(0deg); } .jiao.round { transform: rotate(180deg); }
+@keyframes jiaoToss { 0% { transform: translateY(0) rotate(0); } 45% { transform: translateY(-90px) rotate(400deg) scale(1.08); } 80% { transform: translateY(0) rotate(700deg); } 90% { transform: translateY(-8px) rotate(720deg); } 100% { transform: translateY(0) rotate(720deg); } }
+.jiao-msg { text-align: center; font-size: .88rem; color: var(--muted); margin: 6px 0 4px; min-height: 1.4em; }
+.jiao-msg.sheng { color: var(--jade); } .jiao-msg.xiao { color: var(--gold); } .jiao-msg.yin { color: var(--seal); }
+
+/* ---- 龟壳 ---- */
+.shell { width: 180px; margin: 4px auto -10px; filter: drop-shadow(0 8px 10px rgba(40,25,5,.4)); transform-origin: 50% 80%; }
+.shell.shake { animation: shellShake .14s ease-in-out infinite; }
+@keyframes shellShake { 0% { transform: rotate(-7deg) translateX(-5px); } 50% { transform: rotate(7deg) translateX(5px); } 100% { transform: rotate(-7deg) translateX(-5px); } }
+.coin.hidden { opacity: 0; transform: translateY(-70px) scale(.5); }
+.coin.drop { animation: coinDrop .5s cubic-bezier(.2,.9,.3,1.2); }
+.coin.drop.bei { transform: rotateY(180deg); } .coin.drop.zi { transform: rotateY(0deg); }
+@keyframes coinDrop { 0% { opacity: 0; transform: translateY(-70px) rotateY(0) scale(.6); } 60% { opacity: 1; transform: translateY(6px) rotateY(540deg) scale(1.05); } 80% { transform: translateY(-4px) rotateY(620deg); } 100% { transform: translateY(0) rotateY(720deg); } }
+.coin.drop.bei { animation-name: coinDropBei; }
+@keyframes coinDropBei { 0% { opacity: 0; transform: translateY(-70px) rotateY(0) scale(.6); } 60% { opacity: 1; transform: translateY(6px) rotateY(540deg) scale(1.05); } 80% { transform: translateY(-4px) rotateY(800deg); } 100% { transform: translateY(0) rotateY(900deg); } }

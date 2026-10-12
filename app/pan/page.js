@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import PersonForm, { emptyPerson, personPayload } from "@/app/components/PersonForm";
 import { ChartSet, Tarot, Gua, Reading, Transits, Hexagram } from "@/app/components/Charts";
 import CoinCast from "@/app/components/CoinCast";
+import JiaoBei from "@/app/components/JiaoBei";
 
 const MODES = [
   ["single", "壺中一命"], ["multi", "壺中合盤"], ["predict", "壺中度歲"], ["yijing", "壺中問卦"], ["tarot", "壺中翻牌"],
@@ -14,6 +15,7 @@ const HIST_KEY = "hztj.history.v1";
 
 export default function Home() {
   const [mode, setMode] = useState("single");
+  const [granted, setGranted] = useState(false); // 擲筊得圣杯
   useEffect(() => { try { const m = new URLSearchParams(window.location.search).get("mode"); if (m && MODES.some(([k]) => k === m)) setMode(m); } catch {} }, []);
   const [systems, setSystems] = useState(["八字", "紫微"]);
   // per-mode state
@@ -96,7 +98,7 @@ export default function Home() {
         <nav className="crumbs"><a href="/">首页</a> · <a href="/tools">小工具</a> · <a href="/articles">文章</a> · <a href="/classics">典籍</a></nav>
       </header>
 
-      <nav className="modes">{MODES.map(([k, l]) => <button key={k} type="button" className={mode === k ? "on" : ""} onClick={() => { setMode(k); setResult(null); setCastValues(null); }}>{l}</button>)}</nav>
+      <nav className="modes">{MODES.map(([k, l]) => <button key={k} type="button" className={mode === k ? "on" : ""} onClick={() => { setMode(k); setResult(null); setCastValues(null); setGranted(false); }}>{l}</button>)}</nav>
 
       <form onSubmit={submit} className="card">
         {showSystems && (
@@ -132,7 +134,8 @@ export default function Home() {
 
         {mode === "yijing" && <>
           <label className="full">你的问题（可留空，心中默念即可）<textarea value={question} onChange={(e) => setQuestion(e.target.value)} rows={2} placeholder="一事一问，越具体越好。例：这个月该不该接下那个项目？" /></label>
-          <CoinCast onDone={setCastValues} disabled={loading} />
+          <JiaoBei onGranted={() => setGranted(true)} disabled={loading} />
+          {granted && <CoinCast onDone={setCastValues} disabled={loading} />}
         </>}
 
         {mode === "tarot" && <>
