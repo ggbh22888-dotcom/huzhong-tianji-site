@@ -14,6 +14,7 @@ const HIST_KEY = "hztj.history.v1";
 
 export default function Home() {
   const [mode, setMode] = useState("single");
+  useEffect(() => { try { const m = new URLSearchParams(window.location.search).get("mode"); if (m && MODES.some(([k]) => k === m)) setMode(m); } catch {} }, []);
   const [systems, setSystems] = useState(["八字", "紫微"]);
   // per-mode state
   const [p1, setP1] = useState(emptyPerson());
