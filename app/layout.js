@@ -7,7 +7,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="zh">
+    <html lang="zh" suppressHydrationWarning>
+      <head><script dangerouslySetInnerHTML={{ __html: `try{if(localStorage.getItem('hztj.theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}` }} /></head>
       <body>{children}</body>
     </html>
   );

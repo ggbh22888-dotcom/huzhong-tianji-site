@@ -293,3 +293,21 @@ main.classics { max-width: 760px; }
 @keyframes coinDrop { 0% { opacity: 0; transform: translateY(-70px) rotateY(0) scale(.6); } 60% { opacity: 1; transform: translateY(6px) rotateY(540deg) scale(1.05); } 80% { transform: translateY(-4px) rotateY(620deg); } 100% { transform: translateY(0) rotateY(720deg); } }
 .coin.drop.bei { animation-name: coinDropBei; }
 @keyframes coinDropBei { 0% { opacity: 0; transform: translateY(-70px) rotateY(0) scale(.6); } 60% { opacity: 1; transform: translateY(6px) rotateY(540deg) scale(1.05); } 80% { transform: translateY(-4px) rotateY(800deg); } 100% { transform: translateY(0) rotateY(900deg); } }
+
+/* ---- top bar ---- */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 6px; margin: -8px 0 6px; }
+.topbar button, .topbar a { width: 38px; height: 38px; margin: 0; padding: 0; display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 0; color: var(--muted); border-radius: 50%; cursor: pointer; transition: color .2s, background .2s; letter-spacing: 0; }
+.topbar button:hover, .topbar a:hover { color: var(--seal); background: var(--well); }
+.topbar .credits { font-size: .78rem; color: var(--gold); border: 1px solid var(--gold); border-radius: 999px; padding: 4px 12px; letter-spacing: .08em; white-space: nowrap; }
+
+/* ---- night mode ---- */
+:root[data-theme="dark"] {
+  --bg: #15120e; --card: #1e1a14; --well: #26211a; --ink: #ebe4d6; --muted: #9c927f;
+  --gold: #c9a24d; --gold-soft: #7d6633; --seal: #d5593f; --line: #332c22; --on-gold: #15120e;
+  --木: #6fb88a; --火: #e07a5c; --土: #c9a24d; --金: #c8c2b2; --水: #6a9fd6; --jade: #5fb08a; --gold-bright: #e0b85c;
+}
+:root[data-theme="dark"] body { background: var(--bg); }
+:root[data-theme="dark"] .card-img { box-shadow: inset 0 0 0 1px #2a2318; }
+:root[data-theme="dark"] .jiaobei.granted { background: #1a2620; }
+:root[data-theme="dark"] input, :root[data-theme="dark"] select, :root[data-theme="dark"] textarea { background: var(--well); color: var(--ink); border-color: var(--line); }
+:root[data-theme="dark"] .lightbox { background: rgba(0,0,0,.88); }

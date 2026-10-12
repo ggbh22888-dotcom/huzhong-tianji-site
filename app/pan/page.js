@@ -4,6 +4,7 @@ import PersonForm, { emptyPerson, personPayload } from "@/app/components/PersonF
 import { ChartSet, Tarot, Gua, Reading, Transits, Hexagram } from "@/app/components/Charts";
 import CoinCast from "@/app/components/CoinCast";
 import JiaoBei from "@/app/components/JiaoBei";
+import TopBar from "@/app/components/TopBar";
 
 const MODES = [
   ["single", "壺中一命"], ["multi", "壺中合盤"], ["predict", "壺中度歲"], ["yijing", "壺中問卦"], ["tarot", "壺中翻牌"],
@@ -92,6 +93,7 @@ export default function Home() {
 
   return (
     <main>
+      <TopBar onNew={() => { setResult(null); setCastValues(null); setGranted(false); setQuestion(""); window.scrollTo({ top: 0, behavior: "smooth" }); }} />
       <header>
         <h1>壺中天機</h1>
         <p className="tagline">天機藏於壺中 · 待君來問</p>
