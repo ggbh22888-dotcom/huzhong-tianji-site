@@ -18,7 +18,7 @@ header .brand img{border-radius:0;mix-blend-mode:multiply}
 header nav a{color:#46515b}
 header nav a:hover,header nav a:focus-visible{color:#806020}
 header .lang button,header .menu-btn{color:#34414c;border-color:#c9c2b4}
-header .lang button.on{background:#d8b56b;color:#12161b;border-color:#d8b56b}
+header .lang button.on{background:#b4432b;color:#fffdf8;border-color:#b4432b}
 header :focus-visible{outline-color:#806020}
 @media(max-width:900px){header nav{background:#f8f5ee;border-bottom-color:#ded8cb}}
 
@@ -281,3 +281,9 @@ font-family:"Songti SC","STSong",serif;color:var(--ink)}
 .almanac-cell:nth-child(6) span,.almanac-cell:nth-child(6) strong{color:#000}
 
 @media(min-width:1051px) and (max-width:1199px){header .brand img{width:360px;height:120px}}
+
+/* nav fits on one line beside the large brand */
+header nav{gap:16px;flex-wrap:nowrap}
+header nav a{white-space:nowrap;font-size:13.5px}
+@media(max-width:1180px){header .brand img{width:300px;height:100px}}
+@media(max-width:900px){header .brand img{width:240px;height:80px}}
