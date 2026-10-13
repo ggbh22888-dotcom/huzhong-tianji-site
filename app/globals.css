@@ -273,17 +273,6 @@ main.classics { max-width: 760px; }
 .classic p b { color: var(--seal); font-weight: 500; margin-right: 8px; font-size: .82rem; letter-spacing: .1em; }
 .classic-link { color: var(--jade); text-decoration: none; font-size: .9rem; margin-top: 4px; } .classic-link:hover { text-decoration: underline; }
 
-/* ---- 擲筊 ---- */
-.jiaobei { margin: 8px 0 16px; padding: 14px 10px 6px; border: 1px dashed var(--gold-soft); border-radius: 12px; background: var(--well); transition: border-color .4s, background .4s; }
-.jiaobei.granted { border-color: var(--jade); background: #f3f8f3; }
-.jiao-row { display: flex; justify-content: center; gap: 26px; height: 80px; align-items: flex-end; margin-bottom: 10px; }
-.jiao { width: 110px; height: 64px; filter: drop-shadow(0 6px 8px rgba(60,20,10,.35)); transform-origin: center; }
-.jiao.toss { animation: jiaoToss .8s cubic-bezier(.3,.6,.3,1) forwards; }
-.jiao.flat { transform: rotate(0deg); } .jiao.round { transform: rotate(180deg); }
-@keyframes jiaoToss { 0% { transform: translateY(0) rotate(0); } 45% { transform: translateY(-90px) rotate(400deg) scale(1.08); } 80% { transform: translateY(0) rotate(700deg); } 90% { transform: translateY(-8px) rotate(720deg); } 100% { transform: translateY(0) rotate(720deg); } }
-.jiao-msg { text-align: center; font-size: .88rem; color: var(--muted); margin: 6px 0 4px; min-height: 1.4em; }
-.jiao-msg.sheng { color: var(--jade); } .jiao-msg.xiao { color: var(--gold); } .jiao-msg.yin { color: var(--seal); }
-
 /* ---- 龟壳 ---- */
 .shell { width: 180px; margin: 4px auto -10px; filter: drop-shadow(0 8px 10px rgba(40,25,5,.4)); transform-origin: 50% 80%; }
 .shell.shake { animation: shellShake .58s ease-in-out infinite; }
@@ -309,7 +298,6 @@ main.classics { max-width: 760px; }
 }
 :root[data-theme="dark"] body { background: var(--bg); }
 :root[data-theme="dark"] .card-img { box-shadow: inset 0 0 0 1px #2a2318; }
-:root[data-theme="dark"] .jiaobei.granted { background: #1a2620; }
 :root[data-theme="dark"] input, :root[data-theme="dark"] select, :root[data-theme="dark"] textarea { background: var(--well); color: var(--ink); border-color: var(--line); }
 :root[data-theme="dark"] .lightbox { background: rgba(0,0,0,.88); }
 .zoomctl { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 999px; padding: 0 4px; height: 32px; }
@@ -344,3 +332,68 @@ html:not([lang^="zh"]) .card-t b, html:not([lang^="zh"]) .lightbox figcaption b 
 html[lang="ja"] body { font-family: "Noto Sans JP", var(--font-latin); }
 html[lang="ko"] body { font-family: "Noto Sans KR", var(--font-latin); }
 .sys-en { margin-left: 6px; font-family: var(--font-latin); font-size: .8rem; opacity: .8; }
+
+/* ======== 擲筊 · 壺中問卦 ======== */
+.jb { margin: 8px 0 18px; border-radius: 16px; overflow: hidden; border: 1px solid var(--gold-soft); background: #1b1410; }
+.jb-scene { position: relative; height: 340px; background:
+  radial-gradient(ellipse at 50% 30%, #4a2a1a 0%, #2a1812 45%, #170f0b 100%); overflow: hidden; user-select: none; -webkit-user-select: none; }
+.jb-scene::before { content: ""; position: absolute; inset: 0; background-image: repeating-linear-gradient(90deg, transparent 0 58px, rgba(255,255,255,.035) 58px 60px), repeating-linear-gradient(0deg, transparent 0 44px, rgba(255,255,255,.03) 44px 46px); }
+.jb-beam { position: absolute; top: 0; left: -4%; right: -4%; height: 26px; background: linear-gradient(#b4432b, #7d2a1c); box-shadow: 0 6px 18px rgba(0,0,0,.5); }
+.jb-beam::after { content: ""; position: absolute; left: 0; right: 0; top: 26px; height: 3px; background: linear-gradient(90deg, transparent, var(--gold-bright), transparent); opacity: .8; }
+.jb-lantern { position: absolute; top: 38px; width: 54px; height: 64px; border-radius: 50% / 46%; background: radial-gradient(circle at 40% 35%, #ff8d5a, #d4432a 55%, #8a2316); box-shadow: 0 0 34px rgba(255,120,60,.45), inset 0 -10px 14px rgba(0,0,0,.25); animation: lanternSway 5s ease-in-out infinite; }
+.jb-lantern::before { content: ""; position: absolute; top: -14px; left: 50%; width: 2px; height: 14px; background: #c9a24d; transform: translateX(-50%); }
+.jb-lantern::after { content: ""; position: absolute; bottom: -16px; left: 50%; width: 4px; height: 16px; background: #c9a24d; transform: translateX(-50%); border-radius: 2px; }
+.jb-lantern.l { left: 10%; } .jb-lantern.r { right: 10%; animation-delay: -2.5s; }
+@keyframes lanternSway { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+.jb-plaque { position: absolute; top: 58px; left: 50%; transform: translateX(-50%); padding: 8px 22px; border: 2px solid var(--gold-bright); background: linear-gradient(#2a1a12, #1a100b); color: var(--gold-bright); text-align: center; letter-spacing: .3em; font-size: 1.1rem; box-shadow: 0 0 22px rgba(201,162,77,.25), inset 0 0 12px rgba(0,0,0,.5); }
+.jb-plaque small { display: block; font-size: .62rem; letter-spacing: .25em; opacity: .75; margin-top: 2px; }
+.jb-table { position: absolute; left: 50%; top: 150px; transform: translateX(-50%); width: 220px; height: 54px; }
+.jb-table::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22px; background: linear-gradient(#6a2a1d, #3e1810); border-radius: 4px 4px 0 0; box-shadow: 0 8px 20px rgba(0,0,0,.6); }
+.jb-censer { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); width: 46px; height: 24px; background: radial-gradient(circle at 40% 30%, #d6b35a, #8a6a2a 60%, #4b3714); border-radius: 0 0 50% 50% / 0 0 70% 70%; }
+.jb-censer .stick { position: absolute; bottom: 20px; width: 2px; height: 0; background: #7a3a22; left: calc(50% - 1px); transition: height .8s ease; }
+.jb-censer .stick:nth-child(1) { transform: rotate(-8deg); left: 40%; } .jb-censer .stick:nth-child(3) { transform: rotate(8deg); left: 58%; }
+.jb-censer .stick::after { content: ""; position: absolute; top: -3px; left: -1px; width: 4px; height: 4px; border-radius: 50%; background: #ff6a2a; box-shadow: 0 0 8px #ff8a3a; opacity: 0; }
+.jb.incense .stick, .jb.ready .stick, .jb.result .stick { height: 30px; } .jb.incense .stick::after, .jb.ready .stick::after, .jb.result .stick::after { opacity: 1; animation: ember 1.2s ease-in-out infinite; }
+@keyframes ember { 50% { opacity: .5; } }
+.jb-censer .smoke { position: absolute; bottom: 52px; left: 50%; width: 6px; height: 40px; border-radius: 50%; background: radial-gradient(rgba(255,255,255,.35), transparent 70%); filter: blur(3px); opacity: 0; }
+.jb.incense .smoke, .jb.ready .smoke, .jb.result .smoke { animation: smokeUp 3.2s ease-out infinite; }
+.smoke.s2 { animation-delay: 1s !important; } .smoke.s3 { animation-delay: 2.1s !important; }
+@keyframes smokeUp { 0% { transform: translate(-50%, 0) scaleX(1); opacity: 0; } 15% { opacity: .9; } 100% { transform: translate(calc(-50% + 14px), -90px) scaleX(2.4); opacity: 0; } }
+.jb-candle { position: absolute; bottom: 22px; width: 8px; height: 30px; background: linear-gradient(#e8d6b0, #c9b28a); border-radius: 2px; }
+.jb-candle::after { content: ""; position: absolute; top: -10px; left: 1px; width: 6px; height: 10px; border-radius: 50% 50% 40% 40%; background: radial-gradient(#fff6c8, #ffb347 60%, transparent); box-shadow: 0 0 12px rgba(255,180,80,.7); animation: flicker .3s ease-in-out infinite alternate; }
+.jb-candle.l { left: 24px; } .jb-candle.r { right: 24px; }
+@keyframes flicker { from { transform: scale(1); } to { transform: scale(.9, 1.1); } }
+.jb-mat { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); width: 260px; height: 110px; border-radius: 50%; background: radial-gradient(ellipse at 50% 40%, #7a2a1e, #4a1710 70%, #2a0e09); box-shadow: inset 0 0 30px rgba(0,0,0,.6), 0 10px 30px rgba(0,0,0,.5); border: 2px solid rgba(201,162,77,.35); }
+.jb-pair { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 34px; perspective: 700px; }
+/* ---- block (3D card) ---- */
+.jb-block { position: relative; width: 78px; height: 44px; transform-style: preserve-3d; transition: transform .5s cubic-bezier(.2,.8,.3,1); }
+.jb-face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 50% 50% 50% 50% / 100% 100% 0 0; }
+.jb-flat { background: linear-gradient(#f1d2b3, #d9ad88); box-shadow: inset 0 -3px 6px rgba(0,0,0,.18), 0 6px 10px rgba(0,0,0,.45); }
+.jb-flat span { position: absolute; inset: 7px 10px 4px; border-radius: inherit; border: 1px solid rgba(150,90,60,.35); }
+.jb-round { background: radial-gradient(circle at 35% 25%, #ff7a55, #c0382a 50%, #6e1b12); transform: rotateX(180deg); box-shadow: 0 6px 10px rgba(0,0,0,.45); }
+.jb-round span { position: absolute; top: 6px; left: 22px; width: 30px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.35); filter: blur(2px); }
+.jb-block.idle { transform: rotateX(8deg); }
+.jb-block.hold { animation: blockHold .9s ease-in-out infinite; }
+@keyframes blockHold { 0%,100% { transform: translateY(-6px) rotateX(10deg) rotate(-2deg); } 50% { transform: translateY(-10px) rotateX(14deg) rotate(2deg); } }
+.jb-block.fly { animation: blockFly .95s cubic-bezier(.3,.5,.4,1) forwards; animation-delay: calc(var(--i) * 70ms); }
+@keyframes blockFly { 0% { transform: translateY(0) rotateX(0) rotateZ(0); } 40% { transform: translateY(-150px) translateX(calc((var(--i) - .5) * 30px)) rotateX(540deg) rotateZ(calc((var(--i) - .5) * 60deg)) scale(1.1); } 75% { transform: translateY(0) rotateX(1000deg) rotateZ(calc((var(--i) - .5) * 24deg)); } 85% { transform: translateY(-14px) rotateX(1040deg); } 100% { transform: translateY(0) rotateX(1080deg); } }
+.jb-block.land.f1 { transform: rotateX(8deg) rotate(calc((var(--i) - .5) * 14deg)); }
+.jb-block.land.f0 { transform: rotateX(188deg) rotate(calc((var(--i) - .5) * -12deg)); }
+/* ---- hint ring ---- */
+.jb-hint { position: absolute; left: 50%; bottom: 128px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; color: #f0e2c4; font-size: .85rem; letter-spacing: .15em; text-shadow: 0 1px 4px #000; pointer-events: none; }
+.jb-ring { width: 54px; height: 54px; border-radius: 50%; background: conic-gradient(var(--gold-bright) calc(var(--c) * 360deg), rgba(255,255,255,.12) 0); -webkit-mask: radial-gradient(circle, transparent 55%, #000 57%); mask: radial-gradient(circle, transparent 55%, #000 57%); transition: background .05s linear; }
+.jb-hint.on .jb-ring { box-shadow: 0 0 18px rgba(201,162,77,.5); }
+/* ---- result ---- */
+.jb-result { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 120px; pointer-events: none; animation: lbIn .5s ease; }
+.jb-glyph { font-family: var(--font-cjk); font-size: 4.2rem; letter-spacing: .12em; font-weight: 600; line-height: 1; color: #f6e8c6; text-shadow: 0 0 24px rgba(201,162,77,.5), 0 4px 10px rgba(0,0,0,.7); animation: glyphIn .7s cubic-bezier(.2,.9,.3,1.2); }
+.jb-result.sheng .jb-glyph { color: #ffd98a; text-shadow: 0 0 36px rgba(255,200,100,.8), 0 4px 10px rgba(0,0,0,.7); }
+.jb-result.yin .jb-glyph { color: #d9c3b8; }
+.jb-result p { margin: 10px 0 0; color: #f0e2c4; font-size: .92rem; max-width: 30em; text-align: center; padding: 0 20px; line-height: 1.6; text-shadow: 0 1px 4px #000; }
+@keyframes glyphIn { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+/* ---- controls ---- */
+.jb-ctl { padding: 14px 14px 10px; background: var(--well); text-align: center; }
+.jb-ctl .throw { width: auto; padding: 12px 30px; margin: 0; }
+.jb-ctl .throw.hold { background: var(--gold); color: var(--on-gold); letter-spacing: .25em; } .jb-ctl .throw.hold.holding { background: var(--seal); transform: scale(.97); }
+.jb-msg { font-size: .88rem; color: var(--muted); margin: 10px 0 2px; } .jb-msg.sheng { color: var(--jade); font-weight: 500; }
+.jb.granted { border-color: var(--jade); }
+@media (max-width: 480px) { .jb-scene { height: 300px; } .jb-glyph { font-size: 3.4rem; } .jb-plaque { font-size: .95rem; padding: 6px 14px; } .jb-table { top: 130px; } }
