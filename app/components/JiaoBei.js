@@ -17,7 +17,7 @@ function Block({ face, phase, idx }) {
   );
 }
 
-export default function JiaoBei({ onGranted, disabled }) {
+export default function JiaoBei({ onGranted, disabled, question = "" }) {
   const { t } = useLang();
   useEffect(() => { preload(["jiao_toss", "temple_bowl"]); }, []);
   const [step, setStep] = useState("altar");       // altar → incense → ready → result
@@ -80,6 +80,7 @@ export default function JiaoBei({ onGranted, disabled }) {
         <div className="jb-beam" />
         <div className="jb-lantern l" /><div className="jb-lantern r" />
         <div className="jb-plaque"><span>壺中天機</span><small>待君來問</small></div>
+        {question && step !== "altar" && <div className="jb-q">「 {question} 」</div>}
         <div className="jb-table">
           <div className="jb-censer">
             <i className="stick" /><i className="stick" /><i className="stick" />
@@ -119,13 +120,13 @@ export default function JiaoBei({ onGranted, disabled }) {
             {holding ? t("jb_release") : t("jb_hold_btn")}
           </button>
         )}
-        {step === "result" && !granted && (
+        {step === "result" && (
           <div className="row" style={{ justifyContent: "center", gap: 10 }}>
             <button type="button" className="throw" onClick={again} disabled={disabled}>{t("jb_again")}</button>
             <button type="button" className="ghost" onClick={restart}>{t("jb_restart")}</button>
           </div>
         )}
-        {granted && <p className="jb-msg sheng">{t("jb_ok")}</p>}
+        {step === "result" && <p className="jb-msg"><a href="/pan?mode=yijing" className="jb-link">{t("jb_go_yijing")}</a></p>}
         {step === "altar" && <p className="jb-msg">{t("jb_intro")}</p>}
         {step === "ready" && <p className="jb-msg muted">{t("jb_keys")}</p>}
       </div>

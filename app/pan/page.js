@@ -8,7 +8,7 @@ import TopBar from "@/app/components/TopBar";
 import { LangProvider, useLang } from "@/app/components/Lang";
 
 const MODES = [
-  ["single", "壺中一命"], ["multi", "壺中合盤"], ["predict", "壺中度歲"], ["yijing", "壺中問卦"], ["tarot", "壺中翻牌"],
+  ["single", "壺中一命"], ["multi", "壺中合盤"], ["predict", "壺中度歲"], ["jiaobei", "壺中擲筊"], ["yijing", "壺中問卦"], ["tarot", "壺中翻牌"],
   ["horoscope", "壺中觀星"], ["naming", "壺中賜名"], ["fengshui", "壺中安居"], ["pet", "壺中小伴"], ["dream", "壺中入夢"],
 ];
 const SYSTEMS = ["八字", "紫微", "七政四余", "西洋星盘", "吠陀", "玛雅", "人类图", "灵数"];
@@ -141,8 +141,13 @@ function Pan() {
 
         {mode === "yijing" && <>
           <label className="full">{t("yq")}<textarea value={question} onChange={(e) => setQuestion(e.target.value)} rows={2} placeholder={t("yq_ph")} /></label>
-          <JiaoBei onGranted={() => setGranted(true)} disabled={loading} />
-          {granted && <CoinCast onDone={setCastValues} disabled={loading} />}
+          <CoinCast onDone={setCastValues} disabled={loading} />
+        </>}
+
+        {mode === "jiaobei" && <>
+          <label className="full">{t("jbq")}<input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder={t("jbq_ph")} maxLength={60} /></label>
+          <div className="chips jb-chips">{["jbq1", "jbq2", "jbq3", "jbq4"].map((k) => <button key={k} type="button" className="chip" onClick={() => setQuestion(t(k))}>{t(k)}</button>)}</div>
+          <JiaoBei question={question} disabled={loading} onGranted={() => {}} />
         </>}
 
         {mode === "tarot" && <>
@@ -187,7 +192,7 @@ function Pan() {
           {withOwner && <PersonForm value={p1} onChange={setP1} compact />}
         </>}
 
-        <button disabled={loading || (mode === "yijing" && !castValues)}>{loading ? t("loading") : mode === "yijing" ? t("interpret") : t("open")}</button>
+        {mode !== "jiaobei" && <button disabled={loading || (mode === "yijing" && !castValues)}>{loading ? t("loading") : mode === "yijing" ? t("interpret") : t("open")}</button>}
         {error && <p className="error">{error}</p>}
       </form>
 

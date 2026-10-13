@@ -345,7 +345,7 @@ html[lang="ko"] body { font-family: "Noto Sans KR", var(--font-latin); }
 .jb-lantern::after { content: ""; position: absolute; bottom: -16px; left: 50%; width: 4px; height: 16px; background: #c9a24d; transform: translateX(-50%); border-radius: 2px; }
 .jb-lantern.l { left: 10%; } .jb-lantern.r { right: 10%; animation-delay: -2.5s; }
 @keyframes lanternSway { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
-.jb-plaque { position: absolute; top: 58px; left: 50%; transform: translateX(-50%); padding: 8px 22px; border: 2px solid var(--gold-bright); background: linear-gradient(#2a1a12, #1a100b); color: var(--gold-bright); text-align: center; letter-spacing: .3em; font-size: 1.1rem; box-shadow: 0 0 22px rgba(201,162,77,.25), inset 0 0 12px rgba(0,0,0,.5); }
+.jb-plaque { position: absolute; top: 62px; left: 50%; transform: translateX(-50%); padding: 8px 22px; border: 2px solid var(--gold-bright); background: linear-gradient(#2a1a12, #1a100b); color: var(--gold-bright); text-align: center; letter-spacing: .3em; font-size: 1.1rem; box-shadow: 0 0 22px rgba(201,162,77,.25), inset 0 0 12px rgba(0,0,0,.5); }
 .jb-plaque small { display: block; font-size: .62rem; letter-spacing: .25em; opacity: .75; margin-top: 2px; }
 .jb-table { position: absolute; left: 50%; top: 150px; transform: translateX(-50%); width: 220px; height: 54px; }
 .jb-table::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22px; background: linear-gradient(#6a2a1d, #3e1810); border-radius: 4px 4px 0 0; box-shadow: 0 8px 20px rgba(0,0,0,.6); }
@@ -397,3 +397,7 @@ html[lang="ko"] body { font-family: "Noto Sans KR", var(--font-latin); }
 .jb-msg { font-size: .88rem; color: var(--muted); margin: 10px 0 2px; } .jb-msg.sheng { color: var(--jade); font-weight: 500; }
 .jb.granted { border-color: var(--jade); }
 @media (max-width: 480px) { .jb-scene { height: 300px; } .jb-glyph { font-size: 3.4rem; } .jb-plaque { font-size: .95rem; padding: 6px 14px; } .jb-table { top: 130px; } }
+.jb-q { position: absolute; top: 36px; left: 50%; transform: translateX(-50%); color: #f0e2c4; font-size: .8rem; letter-spacing: .05em; white-space: nowrap; max-width: 90%; overflow: hidden; text-overflow: ellipsis; text-shadow: 0 1px 4px #000; opacity: .9; }
+.jb-chips { margin: -4px 0 12px; display: flex; flex-wrap: wrap; gap: 6px; } .jb-chips .chip { width: auto; padding: 4px 12px; font-size: .85rem; border-radius: 999px; } .jb-chips .chip { cursor: pointer; background: transparent; font-family: inherit; }
+.jb-chips .chip:hover { border-color: var(--seal); color: var(--seal); }
+.jb-link { color: var(--jade); text-decoration: none; } .jb-link:hover { text-decoration: underline; }
