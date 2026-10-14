@@ -1,0 +1,62 @@
+name: Production Website Verification
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: production-website-verification
+  cancel-in-progress: true
+jobs:
+  live-site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Wait for the expected static assets on production
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { createHash } from 'node:crypto';
+          const base = 'https://huzhongtianji.netlify.app';
+          const files = ['site-continuity.css', 'site-continuity.js'];
+          const digest = v => createHash('sha256').update(v).digest('hex');
+          const expected = Object.fromEntries(files.map(f => [f, digest(fs.readFileSync('public/' + f))]));
+          let matched = false;
+          for (let attempt = 1; attempt <= 30; attempt++) {
+            try {
+              const checks = await Promise.all(files.map(async f => {
+                const r = await fetch(base + '/' + f + '?release=' + process.env.GITHUB_SHA, {cache:'no-store', signal:AbortSignal.timeout(15000)});
+                return r.ok && digest(Buffer.from(await r.arrayBuffer())) === expected[f];
+              }));
+              if (checks.every(Boolean)) { matched = true; break; }
+            } catch (e) { console.log('Production not ready:', e.message); }
+            console.log('Waiting for Netlify deployment, attempt ' + attempt);
+            await new Promise(r => setTimeout(r, 10000));
+          }
+          if (!matched) throw new Error('The expected website assets have not reached production. Do not report this release as live.');
+          console.log('Production CSS and JS match the checked-out release.');
+          NODE
+      - name: Install isolated browser test tooling
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Verify real customer-facing flows
+        env:
+          CONTINUITY_BASE_URL: https://huzhongtianji.netlify.app
+        run: python scripts/test-site-continuity.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: production-website-verification-${{ github.run_number }}
+          path: reports/site-continuity/
+          retention-days: 14
