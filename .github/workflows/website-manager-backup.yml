@@ -20,7 +20,8 @@ jobs:
           mkdir -p backup
           git bundle create "backup/huzhong-tianji-${GITHUB_RUN_ID}.bundle" --all
           tar -czf "backup/huzhong-tianji-source-${GITHUB_RUN_ID}.tar.gz" \
-            app lib public manager scripts content package.json package-lock.json netlify.toml next.config.js README.md
+            .github app lib public manager scripts content \
+            package.json package-lock.json netlify.toml next.config.js README.md .env.example
       - uses: actions/upload-artifact@v4
         with:
           name: huzhong-tianji-backup-${{ github.run_number }}
