@@ -7,3 +7,14 @@ One Next.js project:
 - `/api/reading` → server route calling Claude. Needs `ANTHROPIC_API_KEY` in Netlify env vars.
 
 Engines live in `lib/` (see comments in each file). Voice & mode prompts: `lib/prompts.js`.
+
+## AI Website Manager
+
+The repository includes an approval-gated website operations layer:
+
+- Daily live-site health, brand, WhatsApp, link and SEO checks;
+- Pull request guardrails and production build validation;
+- Weekly source and Git-bundle backups;
+- Manual AI article proposals that open as Draft Pull Requests only.
+
+See `manager/README.md` and `manager/BRAND_GUARDRAILS.md`.
