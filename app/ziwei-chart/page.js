@@ -1,4 +1,3 @@
-import { LangProvider } from "@/app/components/Lang";
 import ZiweiChartClient from "./ZiweiChartClient";
 
 export const metadata = {
@@ -16,9 +15,5 @@ export const metadata = {
 };
 
 export default function ZiweiChartPage() {
-  return (
-    <LangProvider>
-      <ZiweiChartClient />
-    </LangProvider>
-  );
+  return <ZiweiChartClient />;
 }
