@@ -1,0 +1,58 @@
+name: Production Dependency Audit
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/dependency-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Read production dependency advisory report
+        run: |
+          mkdir -p reports/dependency-audit
+          npm audit --omit=dev --json > reports/dependency-audit/npm-audit.json || true
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const report = JSON.parse(fs.readFileSync('reports/dependency-audit/npm-audit.json', 'utf8'));
+          if (report.error || !report.metadata) throw new Error('Dependency advisory service did not return a valid report.');
+          const summary = {
+            counts: report.metadata.vulnerabilities,
+            packages: Object.entries(report.vulnerabilities || {}).map(([name, v]) => ({
+              name, severity: v.severity, isDirect: v.isDirect, range: v.range, fixAvailable: v.fixAvailable,
+              advisories: v.via.map(a => typeof a === 'string' ? a : {title:a.title, url:a.url, range:a.range, severity:a.severity})
+            }))
+          };
+          const text = JSON.stringify(summary, null, 2);
+          console.log(text);
+          fs.writeFileSync('reports/dependency-audit/summary.json', text + '\n');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## Production dependency audit\n\n```json\n' + text + '\n```\n');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: production-dependency-audit-${{ github.run_number }}
+          path: reports/dependency-audit/
+          retention-days: 14
+      - name: Stop on unresolved high or critical production advisories
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const { counts } = JSON.parse(fs.readFileSync('reports/dependency-audit/summary.json', 'utf8'));
+          if (counts.high || counts.critical) {
+            console.error('High or critical advisories require a reviewed fix or documented applicability assessment before publishing.');
+            process.exit(1);
+          }
+          NODE
