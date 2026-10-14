@@ -14,11 +14,12 @@ export default function ToolsIndex() {
         <nav className="crumbs"><a href="/">首页</a> · <a href="/ziwei-chart">紫微命盘</a> · <a href="/pan">壺中排盤</a> · <a href="/articles">文章</a> · <a href="/classics">典籍</a></nav>
       </header>
       <section className="tool-grid">
-        <a className="card tool-card" href="/ziwei-chart">
-          <b>紫微斗数命盘</b>
-          <span>输入出生日期、当地时间与地点，查看十二宫、主星、四化、大限和排盘依据。</span>
-        </a>
-        {TOOLS.map(([k, n, d]) => <a key={k} className="card tool-card" href={`/tools/${k}`}><b>{n}</b><span>{d}</span></a>)}
+        {TOOLS.map(([key, name, description, href]) => (
+          <a key={key} className="card tool-card" href={href || `/tools/${key}`}>
+            <b>{name}</b>
+            <span>{description}</span>
+          </a>
+        ))}
       </section>
       <footer>本站内容仅供传统文化参考与自我认识之用。</footer>
     </main>
