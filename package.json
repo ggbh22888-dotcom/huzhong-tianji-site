@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "manager:health": "node scripts/website-manager.mjs health",
+    "manager:repo-check": "node scripts/website-manager.mjs repo-check",
+    "manager:verify-content": "node scripts/website-manager.mjs verify-content && node manager/verify-managed-content.mjs",
+    "manager:check": "npm run manager:repo-check && npm run manager:verify-content && npm run build"
   },
   "keywords": [],
   "author": "",
