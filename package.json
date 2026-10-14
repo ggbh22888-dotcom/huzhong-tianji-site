@@ -10,7 +10,9 @@
     "manager:health": "node scripts/website-manager.mjs health",
     "manager:repo-check": "node scripts/website-manager.mjs repo-check",
     "manager:verify-content": "node scripts/website-manager.mjs verify-content && node manager/verify-managed-content.mjs",
-    "manager:check": "npm run manager:repo-check && npm run manager:verify-content && npm run build"
+    "manager:check": "npm run manager:repo-check && npm run manager:verify-content && npm run build",
+    "prebuild": "node scripts/site-continuity.mjs",
+    "predev": "node scripts/site-continuity.mjs"
   },
   "keywords": [],
   "author": "",
