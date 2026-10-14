@@ -1,0 +1,61 @@
+/* Scoped continuity polish: original artwork, features and payment flow remain. */
+:root{--hzc-ink:#102b3b;--hzc-red:#aa3929;--hzc-gold:#b28a44;--hzc-paper:#f7f2e8;--hzc-header-offset:150px}
+body>header .hd{max-width:1240px;display:grid;grid-template-columns:minmax(210px,320px) 1fr;gap:0 24px;padding:12px 28px 0}
+body>header .brand{grid-column:1;grid-row:1;min-width:0}
+body>header .brand img{display:block;width:100%;max-width:320px;height:auto;aspect-ratio:auto;object-fit:contain;mix-blend-mode:normal}
+body>header .hd-act{grid-column:2;grid-row:1;justify-self:end}
+body>header #nav{grid-column:1/-1;grid-row:2;display:flex;position:static;flex-wrap:wrap;gap:4px 23px;padding:6px 0 8px;border-top:1px solid #b28a4426;justify-content:center}
+body>header #nav a{font-size:13px;white-space:nowrap;letter-spacing:.025em;padding:6px 0}
+body>header .menu-btn{display:none}
+body>section[id],body>footer[id],#compass{scroll-margin-top:var(--hzc-header-offset)}
+body>header #hzc-ziwei-nav{color:var(--hzc-red);font-weight:600}
+.hzc-start{padding:44px 0 60px;background:var(--hzc-paper);border-top:1px solid #ded7c8}
+.hzc-intro{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:26px}
+.hzc-kicker{font:500 11px/1.6 var(--sans,system-ui);letter-spacing:.18em;color:#796340;margin:0 0 8px}
+.hzc-intro h2{font:600 clamp(26px,3vw,36px)/1.45 var(--serif,serif);color:var(--hzc-ink);margin:0}
+.hzc-intro>p{max-width:330px;margin:0;color:#5f665f;font:14px/1.85 var(--sans,system-ui)}
+.hzc-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+.hzc-card{position:relative;display:flex;flex-direction:column;min-width:0;min-height:242px;padding:24px 21px 21px;border-radius:18px;border:1px solid #d6d7cf;background:#fffdf7;color:var(--hzc-ink);overflow:hidden;transition:transform .2s,box-shadow .2s;text-decoration:none}
+.hzc-card::after{content:'';position:absolute;right:-25px;top:-30px;width:120px;height:120px;border:1px solid currentColor;border-radius:50%;opacity:.1;box-shadow:0 0 0 13px #b28a4410;pointer-events:none}
+.hzc-number{font:400 30px/1 Georgia,serif;margin-bottom:25px;color:var(--hzc-gold)}
+.hzc-card h3{font:600 21px/1.4 var(--serif,serif);margin:0 0 10px}
+.hzc-card p{font:14px/1.75 var(--sans,system-ui);margin:0 0 23px;color:inherit;opacity:.84}
+.hzc-link{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;font:500 13px/1.6 var(--sans,system-ui)}
+.hzc-daily{background:#16394b;color:#fff9ed;border-color:#16394b}.hzc-daily .hzc-number{color:#e0bb73}
+.hzc-compass{background:#ece9dc}.hzc-ziwei{background:#f2e1d8}.hzc-all{background:#e2e9e3}
+@media(hover:hover){.hzc-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px #102b3b14}}
+.hzc-card:focus-visible{outline:3px solid var(--hzc-red);outline-offset:4px}
+.hzc-footer-logo{display:block;max-width:350px;margin:0 auto 28px}.hzc-footer-logo img{display:block;width:100%;height:auto;object-fit:contain}
+/* Improve the EXISTING welcome invitation: preserve full logo and interactions. */
+#hzp-dialog{padding:16px;background:rgba(13,32,43,.58);font-family:var(--serif,'Noto Serif SC',serif);color:var(--hzc-ink)}
+#hzp-dialog .hzp-popup{width:min(620px,100%);min-height:0;max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain;padding:30px 36px 32px;background:radial-gradient(ellipse at 12% 12%,#ddb06720,transparent 48%),linear-gradient(145deg,#fffdf6,#f2eadb);border-color:#d1b27b;border-radius:25px}
+#hzp-dialog .hzp-logo{width:min(82%,390px);height:auto;max-height:none;object-fit:contain;margin:22px auto}
+#hzp-dialog .hzp-title{font-family:var(--serif,'Noto Serif SC',serif);font-size:clamp(29px,4.3vw,40px);line-height:1.5;font-weight:600;color:var(--hzc-ink);text-wrap:balance}
+#hzp-dialog .hzp-title .hzp-accent{color:var(--hzc-red)}
+#hzp-dialog .hzp-sub{color:#626359;font-size:15px;line-height:1.8}
+#hzp-dialog .hzp-btn.hzp-yes{background:#173b4c;border-color:#173b4c;box-shadow:0 8px 20px #173b4c20}
+#hzp-dialog .hzp-btn.hzp-no{color:#514c44;background:#fffaf1;border-color:#c5bba7}
+#hzp-dialog .hzp-note{color:#716c60;font-size:12px}
+#hzp-dialog .hzp-close{min-width:38px;min-height:38px}
+#hzp-dialog .hzp-lang{right:66px;top:18px}
+html[lang=en] #hzp-dialog .hzp-title{font-family:Georgia,'Times New Roman',serif;letter-spacing:-.02em;font-weight:400}
+.wa-panel .wa-head img{object-fit:contain;height:auto}.wa-panel{overscroll-behavior:contain}
+@media(max-width:1000px){.hzc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hzc-card{min-height:220px}}
+@media(max-width:900px){
+ body>header .hd{grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:10px 18px;position:relative}
+ body>header .brand img{width:100%;max-width:260px}
+ body>header .hd-act{gap:8px}
+ body>header .menu-btn{display:block;min-height:38px}
+ body>header #nav{display:none;position:absolute;left:0;right:0;top:100%;padding:14px 22px 20px;max-height:calc(100dvh - 110px);overflow:auto;background:#fcf8ef;border-bottom:1px solid #d7c6a3;box-shadow:0 12px 18px #102b3b10}
+ body>header #nav.open{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px}
+ body>header #nav a{white-space:normal;min-height:40px;display:flex;align-items:center}
+ .hzc-intro{align-items:start;flex-direction:column;gap:12px}.hzc-intro>p{max-width:100%}
+}
+@media(max-width:540px){
+ body>header .hd{padding:9px 12px;gap:8px}body>header .brand img{max-width:205px}body>header .hd-act{gap:5px}body>header .lang button{padding:7px 8px}body>header .menu-btn{padding:6px 8px}
+ .hzc-start{padding:34px 0 40px}.hzc-start .wrap{padding:0 18px}.hzc-grid{gap:10px}.hzc-card{min-height:225px;padding:18px 15px}.hzc-card h3{font-size:19px}.hzc-card p{font-size:13px}.hzc-number{margin-bottom:19px;font-size:26px}.hzc-link{font-size:12px;gap:5px}
+ #hzp-dialog .hzp-popup{padding:24px 20px 26px}#hzp-dialog .hzp-logo{width:95%;margin:34px auto 20px}#hzp-dialog .hzp-title{font-size:30px}#hzp-dialog .hzp-actions{width:100%}#hzp-dialog .hzp-btn{white-space:normal;line-height:1.5;padding:12px 16px}
+ .hzc-footer-logo{max-width:285px}
+}
+@media(max-width:350px){body>header .brand img{max-width:155px}.hzc-grid{grid-template-columns:1fr}.hzc-card{min-height:190px}}
+@media(prefers-reduced-motion:reduce){.hzc-card,#hzp-dialog,#hzp-dialog *{animation:none!important;transition:none!important}}

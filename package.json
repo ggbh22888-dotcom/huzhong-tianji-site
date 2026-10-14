@@ -10,7 +10,9 @@
     "manager:health": "node scripts/website-manager.mjs health",
     "manager:repo-check": "node scripts/website-manager.mjs repo-check",
     "manager:verify-content": "node scripts/website-manager.mjs verify-content && node manager/verify-managed-content.mjs",
-    "manager:check": "npm run manager:repo-check && npm run manager:verify-content && npm run build"
+    "manager:check": "npm run manager:repo-check && npm run manager:verify-content && npm run build",
+    "prebuild": "node scripts/site-continuity.mjs",
+    "predev": "node scripts/site-continuity.mjs"
   },
   "keywords": [],
   "author": "",
@@ -20,9 +22,12 @@
     "astronomy-engine": "^2.1.19",
     "iztro": "^2.6.1",
     "lunar-javascript": "^1.7.7",
-    "next": "^14.2.35",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "next": "15.5.24",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
     "react-markdown": "^10.1.0"
+  },
+  "overrides": {
+    "postcss": "8.5.23"
   }
 }

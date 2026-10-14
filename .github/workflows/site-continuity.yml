@@ -1,0 +1,59 @@
+name: Original Site Continuity
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'public/**'
+      - 'app/**'
+      - 'lib/**'
+      - 'scripts/site-continuity.mjs'
+      - 'scripts/test-site-continuity.py'
+      - 'package.json'
+      - '.github/workflows/site-continuity.yml'
+permissions:
+  contents: read
+concurrency:
+  group: site-continuity-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: npm run build
+      - name: Verify original sources unchanged and integration repeatable
+        run: |
+          git diff --exit-code -- lib public/contact.js public/contact.css public/brand-logo.png public/privacy.html public/terms.html app/pan
+          sha256sum public/home.html > /tmp/home-before.sha
+          node scripts/site-continuity.mjs
+          sha256sum --check /tmp/home-before.sha
+      - name: Install browser test tooling
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Start built site and test real customer flows
+        run: |
+          npm run start > /tmp/hztj-next.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 40); do
+            if curl -fsS http://127.0.0.1:3000/ > /dev/null; then break; fi
+            sleep 2
+          done
+          python scripts/test-site-continuity.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: original-site-continuity-${{ github.run_number }}
+          path: reports/site-continuity/
+          retention-days: 14
+          if-no-files-found: warn
