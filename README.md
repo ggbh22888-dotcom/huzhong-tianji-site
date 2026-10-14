@@ -2,8 +2,10 @@
 
 One Next.js project:
 - `/` → `public/home.html` — the original brand site (services, Stripe, 日签, 抽签, Calendly, WhatsApp). Edit it as plain HTML.
+- `/ziwei-chart` → a bilingual, deterministic Zi Wei Dou Shu chart experience: birth-data form, time disclosure, twelve-palace board, stars, transformations, current decade/year and method notes. Chart calculation is separate from AI interpretation.
 - `/pan` → `app/pan/page.js` — AI 排盘 engine: 8 chart systems × 9 reading modes, streaming readings.
 - `/tools/*` → five free deterministic tools (五行查询 / 农历换算 / 手机号码 / 车牌 / 姻缘何时来), `lib/tools.js`, no AI cost.
+- `/api/ziwei-chart` → deterministic Zi Wei chart JSON; no AI key required.
 - `/api/reading` → server route calling Claude. Needs `ANTHROPIC_API_KEY` in Netlify env vars.
 
 Engines live in `lib/` (see comments in each file). Voice & mode prompts: `lib/prompts.js`.
