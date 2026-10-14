@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "siteUrl": "https://huzhongtianji.netlify.app",
+  "canonicalSiteUrl": "https://huzhongtianji.com",
+  "timezone": "Asia/Singapore",
+  "approvedWhatsApp": "+65 8014 8899",
+  "approvedWhatsAppDigits": "6580148899",
+  "routes": [
+    "/",
+    "/pan",
+    "/tools",
+    "/articles",
+    "/classics",
+    "/privacy.html",
+    "/terms.html",
+    "/sitemap.xml",
+    "/robots.txt"
+  ],
+  "contentSources": [
+    "/contact.js"
+  ],
+  "requiredHomepageText": [
+    "壶中天机",
+    "壶中日签",
+    "壶中罗盘"
+  ],
+  "requiredAssets": [
+    "/brand-logo.png"
+  ],
+  "thresholds": {
+    "timeoutMs": 12000,
+    "warningLatencyMs": 5000,
+    "maxInternalLinks": 40
+  }
+}
