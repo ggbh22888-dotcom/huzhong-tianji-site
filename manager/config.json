@@ -1,12 +1,13 @@
 {
   "version": 1,
   "siteUrl": "https://huzhongtianji.netlify.app",
-  "canonicalSiteUrl": "https://huzhongtianji.com",
+  "canonicalSiteUrl": "https://huzhongtianji.netlify.app",
   "timezone": "Asia/Singapore",
   "approvedWhatsApp": "+65 8014 8899",
   "approvedWhatsAppDigits": "6580148899",
   "routes": [
     "/",
+    "/ziwei-chart",
     "/pan",
     "/tools",
     "/articles",
