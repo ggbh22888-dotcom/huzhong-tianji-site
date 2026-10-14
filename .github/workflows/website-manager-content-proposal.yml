@@ -1,0 +1,71 @@
+name: Website Manager - AI Content Proposal
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: Article topic
+        required: true
+      language:
+        description: Draft language
+        required: true
+        type: choice
+        options:
+          - bilingual
+          - zh
+          - en
+        default: bilingual
+      objective:
+        description: Content objective
+        required: false
+        default: Educate, build trust, and guide readers to a useful next step.
+      cta:
+        description: Preferred call to action
+        required: false
+        default: Invite the reader to use a relevant free tool or ask on WhatsApp.
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  proposal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Generate draft only
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          WEBSITE_MANAGER_MODEL: ${{ vars.WEBSITE_MANAGER_MODEL }}
+        run: >-
+          node scripts/website-manager.mjs content
+          --topic "${{ inputs.topic }}"
+          --language "${{ inputs.language }}"
+          --objective "${{ inputs.objective }}"
+          --cta "${{ inputs.cta }}"
+      - run: node scripts/website-manager.mjs verify-content
+      - name: Open approval-gated Draft PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TOPIC: ${{ inputs.topic }}
+        run: |
+          BRANCH="ai-content/${GITHUB_RUN_ID}"
+          git config user.name "Huzhong Tianji Website Manager"
+          git config user.email "actions@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add content/drafts
+          git commit -m "content: propose ${TOPIC}"
+          git push origin "$BRANCH"
+          gh pr create \
+            --draft \
+            --base main \
+            --head "$BRANCH" \
+            --title "AI content proposal: ${TOPIC}" \
+            --body "AI-generated draft for human review. Nothing is published until this PR is reviewed and manually merged. Please verify factual claims, tone, bilingual meaning, CTA, disclaimer, and any traditional-medicine/financial/legal wording."
