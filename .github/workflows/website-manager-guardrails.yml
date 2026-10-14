@@ -19,10 +19,12 @@ jobs:
       - run: npm ci
       - run: node scripts/website-manager.mjs repo-check
       - run: node scripts/website-manager.mjs verify-content
+      - run: node manager/verify-managed-content.mjs
       - run: npm run build
       - if: always()
         uses: actions/upload-artifact@v4
         with:
           name: website-manager-pr-report-${{ github.run_number }}
           path: reports/website-manager/
+          if-no-files-found: ignore
           retention-days: 14
