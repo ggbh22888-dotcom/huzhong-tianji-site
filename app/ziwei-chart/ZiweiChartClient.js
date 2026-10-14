@@ -2,256 +2,297 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import PersonForm, { emptyPerson, personPayload } from "@/app/components/PersonForm";
-import { useLang } from "@/app/components/Lang";
+import { LangProvider, useLang } from "@/app/components/Lang";
 import styles from "./ziwei-chart.module.css";
-
-const LAST_PERSON_KEY = "hztj.lastPerson.v1";
-const PALACE_POSITION = {
-  巳: "1 / 1", 午: "1 / 2", 未: "1 / 3", 申: "1 / 4",
-  辰: "2 / 1", 酉: "2 / 4", 卯: "3 / 1", 戌: "3 / 4",
-  寅: "4 / 1", 丑: "4 / 2", 子: "4 / 3", 亥: "4 / 4",
-};
-const MUTAGEN_CLASS = { 禄: "luck", 权: "power", 科: "honor", 忌: "challenge" };
 
 const COPY = {
   zh: {
-    home: "首页",
-    fullReading: "综合排盘",
-    articles: "壶中文章",
-    eyebrow: "HU ZHONG ZI WEI",
-    title: "壶中紫微命盘",
-    lead: "先把命盘事实、计算依据和解读分开。输入出生资料，查看命宫、身宫、十二宫、主星、四化与大限背景。",
-    feature1: "规则引擎排盘",
-    feature2: "十二宫可点击",
-    feature3: "真太阳时依据透明",
-    feature4: "AI 解读独立进行",
-    formTitle: "建立你的紫微命盘",
-    formLead: "请使用有记录的出生日期、当地时间、出生地点与性别。紫微斗数依赖时辰，不会用正午代替未知时辰。",
-    generate: "建立紫微命盘",
-    generating: "正在排盘…",
-    useLast: "使用上次资料",
-    localNote: "成功排盘后，出生资料只保存在你的浏览器本机，方便下次使用。",
-    hourRequired: "紫微斗数需要出生时辰。时辰不详时，请先确认候选时辰，不要直接填正午或午夜。",
-    resultEyebrow: "DETERMINISTIC CHART",
-    resultTitle: "命盘事实层",
-    resultLead: "以下宫位、星曜、四化和时间层由规则引擎计算；后续文字解读不应改写这些结果。",
-    lunar: "农历资料",
-    fiveElements: "五行局",
-    masters: "命主 · 身主",
-    zodiac: "生肖 · 星座",
-    lifePalace: "命宫",
+    navHome: "首页",
+    navAll: "综合排盘",
+    navArticles: "文章",
+    navContact: "WhatsApp 咨询",
+    eyebrow: "规则化排盘 · 计算与解读分开",
+    titleA: "免费紫微斗数排盘",
+    titleB: "先看清命盘，再理解人生主题",
+    intro: "输入出生日期、当地时间、出生地点与性别，建立可核对的紫微命盘。先看命宫、身宫、十二宫、主星、四化与大限，再决定是否进入 AI 深度解读。",
+    start: "开始紫微排盘",
+    viewMethod: "查看排盘方法",
+    trust1: "基础命盘无需登录",
+    trust2: "规则引擎先计算",
+    trust3: "AI 解读另一步进行",
+    trust4: "明确显示计算依据",
+    formKicker: "BIRTH DATA",
+    formTitle: "填写出生资料",
+    formIntro: "请尽量使用有记录的出生时间。紫微斗数依赖时辰；若时辰不确定，请保留不确定性，不要为了得到完整命盘而随意填正午或午夜。",
+    privacy: "本工具不要求身份证、电话或付款资料。姓名可留空；出生资料只用于本次排盘请求。",
+    generate: "生成紫微命盘",
+    generating: "正在建立命盘…",
+    beforeTitle: "排盘前先确认",
+    before1: "出生日期是公历还是农历；农历资料需确认是否闰月。",
+    before2: "时间应为出生地当时的当地钟表时间。",
+    before3: "出生地点用于经度、时区与真太阳时校正。",
+    before4: "不同流派、四化表、年界与换日规则，可能产生不同结果。",
+    previewTitle: "十二宫同盘呈现",
+    previewSub: "主星、四化、大限与依据分层阅读",
+    resultKicker: "YOUR ZI WEI CHART",
+    resultTitle: "紫微命盘",
+    resultIntro: "命盘事实来自规则引擎；下方说明只帮助你读懂字段，不把传统解释写成确定的人生结论。",
+    print: "打印／保存 PDF",
+    newChart: "重新排盘",
+    summary: "命盘总览",
+    fiveClass: "五行局",
+    soul: "命主",
+    body: "身主",
+    zodiac: "生肖",
+    decadal: "当前大限",
+    yearly: "当前流年",
+    palaceHint: "点击任何宫位，查看完整星曜与对宫资料。",
     bodyPalace: "身宫",
+    lifePalace: "命宫",
     borrowed: "借对宫主星",
     noMajor: "本宫无十四主星",
-    palaceDetail: "宫位详情",
+    minor: "辅星",
+    adjective: "杂曜",
+    ages: "对应岁数",
     opposite: "对宫",
-    decadal: "大限",
-    ages: "流年年龄",
-    majorStars: "主星",
-    minorStars: "辅星",
-    otherStars: "其他星曜",
-    none: "未显示",
-    transformations: "生年四化",
-    transformationLead: "四化显示星曜在本命盘中的结构角色，不应单独被解释为必然事件。",
-    currentTiming: "当前时间层",
-    nominalAge: "虚岁",
-    currentDecade: "当前大限",
-    currentYear: "当前流年",
-    calculation: "排盘依据",
+    decade: "大限",
+    transformations: "四化落点",
+    noTransform: "当前引擎未回传独立四化清单，请以命盘星曜旁的四化标记为准。",
+    basis: "排盘依据",
     recordedTime: "记录时间",
-    chartTime: "实际用于排盘",
+    chartTime: "实际采用时间",
     trueSolar: "真太阳时",
-    applied: "已采用",
-    notApplied: "未采用",
-    birthplace: "出生地点",
-    longitude: "经度／时区",
+    applied: "已启用",
+    notApplied: "未启用",
+    place: "出生地点",
     engine: "计算引擎",
-    rules: "规则说明",
-    crossedBoundary: "校正后跨过时辰边界，命盘可能因此改变。",
-    noBoundary: "校正未跨过时辰边界，因此时辰索引保持不变。",
-    limitationTitle: "当前版本的边界",
-    limitation: "不同流派可能采用不同四化表、年界、闰月与换日规则。当前页面会显示采用的设置，方便比较，但不会声称这是唯一正确的排法。农历闰月资料建议优先使用可靠公历记录核对。",
-    aiTitle: "下一步：解释，而不是重排",
-    aiLead: "完整解读应引用已经排出的宫位、主星、四化与时间层，并把传统命理判断、现实事实和行动建议分开。",
-    aiButton: "进入壶中综合解读",
-    whatsapp: "WhatsApp 咨询",
-    disclaimer: "紫微斗数属于传统文化解释体系，适合用于自我观察与讨论，不替代医疗、法律、投资或其他专业意见。",
-    language: "EN",
+    rule: "时辰规则",
+    warningBoundary: "真太阳时校正跨过时辰边界，命盘可能与未校正版本不同。",
+    methodTitle: "为什么不同网站可能排出不同命盘？",
+    methodText: "常见差异来自公历／农历转换、闰月、历史时区、真太阳时、23:00 或 00:00 换日、年界、流派与四化表。比较时应固定出生资料，每次只检查一项规则。",
+    separationTitle: "规则引擎与 AI 解读分开",
+    separationText: "规则引擎只负责计算宫位、星曜、四化与时间层；AI 只能整理已计算的结果，不应补造未知出生时间，也不应悄悄更换计算规则。",
+    nextTitle: "想继续看完整解读？",
+    nextText: "可把这份命盘带入壶中排盘，进一步阅读命盘主轴、天赋挑战、事业资源、关系主题、大限与流年。",
+    aiCta: "进入壶中排盘",
+    askCta: "先用 WhatsApp 咨询",
+    disclaimer: "紫微斗数属于传统文化解释体系，仅供自我观察与个人参考，不构成医疗、法律、投资或其他专业意见。",
+    errorGeneric: "无法建立命盘，请检查出生日期、时间与地点。",
+    palaceTheme: "此宫观察的主题",
+    readStars: "星曜资料",
+    shift: "校正",
+    minutes: "分钟",
   },
   en: {
-    home: "Home",
-    fullReading: "Full Reading",
-    articles: "Articles",
-    eyebrow: "HU ZHONG ZI WEI",
-    title: "Hu Zhong Zi Wei Chart",
-    lead: "Keep chart facts, calculation settings, and interpretation separate. Enter recorded birth details to view the Life Palace, Body Palace, twelve palaces, stars, transformations and decade context.",
-    feature1: "Rule-based calculation",
-    feature2: "Interactive palaces",
-    feature3: "Transparent solar-time basis",
-    feature4: "AI interpretation stays separate",
-    formTitle: "Build your Zi Wei chart",
-    formLead: "Use a recorded birth date, local time, place and gender. Zi Wei depends on birth hour, so an unknown hour will not be replaced with noon.",
-    generate: "Build Zi Wei Chart",
-    generating: "Calculating…",
-    useLast: "Use previous details",
-    localNote: "After a successful calculation, birth details are stored only in this browser for convenient reuse.",
-    hourRequired: "Zi Wei requires a birth hour. When the hour is unknown, compare plausible time ranges instead of inserting noon or midnight.",
-    resultEyebrow: "DETERMINISTIC CHART",
-    resultTitle: "Chart facts",
-    resultLead: "The palaces, stars, transformations and timing layers below are calculated by the rule engine. Later interpretation should not rewrite them.",
-    lunar: "Lunar date",
-    fiveElements: "Five-element class",
-    masters: "Life · Body masters",
-    zodiac: "Zodiac · Sign",
-    lifePalace: "Life Palace",
+    navHome: "Home",
+    navAll: "All Charts",
+    navArticles: "Articles",
+    navContact: "WhatsApp",
+    eyebrow: "RULE-BASED CHART · CALCULATION BEFORE INTERPRETATION",
+    titleA: "Free Zi Wei Dou Shu Chart",
+    titleB: "See the chart clearly before interpreting its themes",
+    intro: "Enter the recorded birth date, local time, birthplace and gender to build a transparent Zi Wei chart. Review the Life and Body Palaces, twelve palaces, stars, transformations and decade cycle before choosing an AI interpretation.",
+    start: "Create my Zi Wei chart",
+    viewMethod: "Read the method",
+    trust1: "No login for the base chart",
+    trust2: "Rule engine calculates first",
+    trust3: "AI interpretation is separate",
+    trust4: "Calculation settings are shown",
+    formKicker: "BIRTH DATA",
+    formTitle: "Enter birth details",
+    formIntro: "Use a recorded birth time whenever possible. Zi Wei depends on the time period; when the time is uncertain, keep that uncertainty instead of entering noon or midnight simply to obtain a complete-looking chart.",
+    privacy: "No identity number, phone or payment details are required. Name is optional; birth details are used for this chart request.",
+    generate: "Generate Zi Wei chart",
+    generating: "Building the chart…",
+    beforeTitle: "Confirm before calculating",
+    before1: "Whether the date is solar or lunar, and whether a lunar date is a leap month.",
+    before2: "Use the local clock time recorded at the birthplace.",
+    before3: "Birthplace provides longitude, time-zone and true-solar-time context.",
+    before4: "Different schools, transformation tables, year boundaries and day-change rules may produce different charts.",
+    previewTitle: "All twelve palaces in one view",
+    previewSub: "Read stars, transformations, decade cycles and evidence in layers",
+    resultKicker: "YOUR ZI WEI CHART",
+    resultTitle: "Zi Wei Chart",
+    resultIntro: "Chart facts come from the rule engine. The explanatory text helps identify fields without presenting traditional interpretation as scientific certainty.",
+    print: "Print / Save PDF",
+    newChart: "New chart",
+    summary: "Chart overview",
+    fiveClass: "Five-element class",
+    soul: "Life master",
+    body: "Body master",
+    zodiac: "Zodiac",
+    decadal: "Current decade",
+    yearly: "Current year",
+    palaceHint: "Select any palace to view its full star list and opposite palace.",
     bodyPalace: "Body Palace",
-    borrowed: "Borrowed opposite stars",
+    lifePalace: "Life Palace",
+    borrowed: "Borrowed from opposite",
     noMajor: "No major star in this palace",
-    palaceDetail: "Palace details",
-    opposite: "Opposite",
-    decadal: "Decade",
-    ages: "Annual ages",
-    majorStars: "Major stars",
-    minorStars: "Supporting stars",
-    otherStars: "Other stars",
-    none: "Not shown",
-    transformations: "Natal transformations",
-    transformationLead: "Transformations describe structural roles in this chart; they should not be treated as guaranteed events on their own.",
-    currentTiming: "Current timing layers",
-    nominalAge: "Nominal age",
-    currentDecade: "Current decade",
-    currentYear: "Current year",
-    calculation: "Calculation basis",
+    minor: "Supporting stars",
+    adjective: "Additional stars",
+    ages: "Ages",
+    opposite: "Opposite palace",
+    decade: "Decade cycle",
+    transformations: "Transformations",
+    noTransform: "No separate transformation list was returned; use the markers shown beside the stars.",
+    basis: "Calculation basis",
     recordedTime: "Recorded time",
     chartTime: "Time used for chart",
     trueSolar: "True solar time",
     applied: "Applied",
     notApplied: "Not applied",
-    birthplace: "Birthplace",
-    longitude: "Longitude / time zone",
-    engine: "Engine",
-    rules: "Rule note",
-    crossedBoundary: "The correction crossed a two-hour branch boundary, so the chart may change.",
-    noBoundary: "The correction did not cross a branch boundary, so the hour index stayed the same.",
-    limitationTitle: "Current scope and limits",
-    limitation: "Schools may use different transformation tables, year boundaries, leap-month rules and day-change conventions. This page exposes its current settings for comparison and does not present one convention as the only valid method. For leap-month births, verify against a reliable Gregorian record where possible.",
-    aiTitle: "Next: interpret, do not recalculate",
-    aiLead: "A complete reading should cite the calculated palaces, stars, transformations and timing layers, while separating traditional interpretation, real-world facts and practical suggestions.",
-    aiButton: "Open Hu Zhong Full Reading",
-    whatsapp: "Ask on WhatsApp",
-    disclaimer: "Zi Wei Dou Shu is a traditional interpretive system for reflection and discussion. It is not medical, legal, investment or other professional advice.",
-    language: "中文",
+    place: "Birthplace",
+    engine: "Rule engine",
+    rule: "Time-period rule",
+    warningBoundary: "True-solar-time correction crossed a time-period boundary, so this chart may differ from the uncorrected version.",
+    methodTitle: "Why can different websites produce different charts?",
+    methodText: "Differences commonly come from solar/lunar conversion, leap months, historical time zones, true solar time, 23:00 versus 00:00 day changes, year boundaries, schools and transformation tables. Hold the birth data constant and compare one rule at a time.",
+    separationTitle: "Keep calculation and AI interpretation separate",
+    separationText: "The rule engine calculates palaces, stars, transformations and time layers. AI may organize those results, but should not invent an unknown birth time or silently switch the declared rules.",
+    nextTitle: "Continue to a fuller interpretation",
+    nextText: "Take the chart into the full Huzhong reading flow for themes, strengths and challenges, work and resources, relationships, decade cycles and annual timing.",
+    aiCta: "Open full chart reading",
+    askCta: "Ask on WhatsApp first",
+    disclaimer: "Zi Wei Dou Shu is a traditional cultural interpretation system for reflection and personal reference only. It is not medical, legal, investment or other professional advice.",
+    errorGeneric: "The chart could not be created. Please check the birth date, time and place.",
+    palaceTheme: "Theme observed in this palace",
+    readStars: "Star data",
+    shift: "Correction",
+    minutes: "minutes",
   },
 };
 
-function copyFor(lang) {
-  return lang?.startsWith("zh") ? COPY.zh : COPY.en;
+const PALACE_THEME = {
+  命宫: ["自我定位、做事方式与人生主轴", "identity, operating style and life direction"],
+  兄弟: ["同辈、手足与协作方式", "peers, siblings and collaboration"],
+  夫妻: ["亲密关系、承诺与伴侣互动", "intimacy, commitment and partnership"],
+  子女: ["子女缘、创造力与作品延伸", "children, creativity and what you create"],
+  财帛: ["资源观、收入方式与价值交换", "resources, earning style and value exchange"],
+  疾厄: ["身心负荷、压力模式与日常照顾", "stress patterns, capacity and everyday care"],
+  迁移: ["外部环境、移动与离开熟悉圈后的表现", "outside environments, movement and life beyond familiar settings"],
+  仆役: ["朋友、团队、部属与社会网络", "friends, teams, colleagues and networks"],
+  官禄: ["事业角色、责任、成就与社会位置", "career roles, responsibility and public contribution"],
+  田宅: ["家宅、资产、空间与安全感", "home, property, space and security"],
+  福德: ["内在满足、精神节奏与休息方式", "inner fulfilment, mental rhythm and rest"],
+  父母: ["长辈、支持系统、制度与传承", "elders, support systems, institutions and inheritance"],
+};
+
+const GRID_POSITIONS = {
+  巳: [1, 1], 午: [1, 2], 未: [1, 3], 申: [1, 4],
+  辰: [2, 1], 酉: [2, 4], 卯: [3, 1], 戌: [3, 4],
+  寅: [4, 1], 丑: [4, 2], 子: [4, 3], 亥: [4, 4],
+};
+
+const MUTAGEN_CLASS = { 禄: styles.lu, 权: styles.quan, 科: styles.ke, 忌: styles.ji };
+
+function textValue(value, fallback = "—") {
+  if (value === undefined || value === null || value === "") return fallback;
+  return String(value);
 }
 
-function StarChip({ star, compact = false }) {
+function normalisePalaceName(name = "") {
+  return name.endsWith("宫") ? name : `${name}宫`;
+}
+
+function Star({ star, major = false, borrowed = false }) {
   if (!star?.name) return null;
-  const tone = MUTAGEN_CLASS[star.mutagen];
   return (
-    <span className={`${styles.starChip} ${compact ? styles.starCompact : ""} ${tone ? styles[tone] : ""}`}>
+    <span className={`${styles.star} ${major ? styles.majorStar : styles.minorStar} ${borrowed ? styles.borrowedStar : ""}`}>
       <b>{star.name}</b>
+      {star.mutagen && <em className={MUTAGEN_CLASS[star.mutagen] || styles.mutagen}>{star.mutagen}</em>}
       {star.brightness && <small>{star.brightness}</small>}
-      {star.mutagen && <em>化{star.mutagen}</em>}
     </span>
   );
 }
 
-function PalaceCell({ palace, selected, onSelect, t }) {
+function PalaceCell({ palace, active, onSelect, c }) {
+  if (!palace) return null;
+  const position = GRID_POSITIONS[palace.earthlyBranch] || [1, 1];
   const major = palace.majorStarDetails || [];
   const borrowed = palace.borrowedMajorStarDetails || [];
+  const minor = (palace.minorStarDetails || []).slice(0, 5);
   return (
     <button
       type="button"
-      className={`${styles.palaceCell} ${selected ? styles.selectedPalace : ""} ${palace.isLifePalace ? styles.lifePalace : ""}`}
-      style={{ gridArea: PALACE_POSITION[palace.earthlyBranch] }}
-      onClick={() => onSelect(palace.name)}
-      aria-pressed={selected}
+      className={`${styles.palaceCell} ${active ? styles.activePalace : ""} ${palace.isLifePalace ? styles.lifeCell : ""}`}
+      style={{ gridRow: position[0], gridColumn: position[1] }}
+      onClick={() => onSelect(palace)}
+      aria-pressed={active}
     >
       <span className={styles.palaceHead}>
-        <b>{palace.name}</b>
-        <span>{palace.ganZhi}</span>
+        <strong>{palace.name}</strong>
+        <small>{palace.ganZhi}</small>
       </span>
-      <span className={styles.palaceStars}>
-        {major.length > 0
-          ? major.slice(0, 4).map((star, index) => <StarChip key={`${star.name}-${index}`} star={star} compact />)
-          : borrowed.slice(0, 3).map((star, index) => <StarChip key={`${star.name}-${index}`} star={star} compact />)}
-        {major.length === 0 && borrowed.length === 0 && <span className={styles.emptyStar}>{t.noMajor}</span>}
+      <span className={styles.palaceTags}>
+        {palace.isLifePalace && <i>{c.lifePalace}</i>}
+        {palace.isBodyPalace && <i>{c.bodyPalace}</i>}
       </span>
+      <span className={styles.cellStars}>
+        {major.map((star) => <Star key={`${palace.name}-${star.name}-${star.mutagen}`} star={star} major />)}
+        {!major.length && borrowed.map((star) => <Star key={`${palace.name}-borrow-${star.name}`} star={star} major borrowed />)}
+        {!major.length && !borrowed.length && <span className={styles.emptyMajor}>{c.noMajor}</span>}
+      </span>
+      {minor.length > 0 && <span className={styles.cellMinor}>{minor.map((star) => star.name).join(" · ")}</span>}
       <span className={styles.palaceFoot}>
-        <span>{palace.isBodyPalace ? `身宫 · ${palace.decadal || ""}` : palace.decadal || ""}</span>
-        {major.length === 0 && borrowed.length > 0 && <i>{t.borrowed}</i>}
+        <small>{palace.decadal || ""}</small>
+        {borrowed.length > 0 && <small>{c.borrowed}</small>}
       </span>
     </button>
   );
 }
 
-function StarGroup({ title, stars, emptyText }) {
+function PreviewChart({ c }) {
+  const names = ["命", "兄", "夫", "子", "财", "疾", "迁", "友", "官", "田", "福", "父"];
   return (
-    <div className={styles.starGroup}>
-      <h4>{title}</h4>
-      <div className={styles.starList}>
-        {stars?.length ? stars.map((star, index) => <StarChip key={`${star.name}-${index}`} star={star} />) : <span className={styles.muted}>{emptyText}</span>}
+    <div className={styles.previewShell} aria-hidden="true">
+      <div className={styles.previewGrid}>
+        {names.map((name, index) => <span key={name} className={index === 0 ? styles.previewActive : ""}>{name}</span>)}
+        <div className={styles.previewCenter}>
+          <img src="/brand-logo.png" alt="" />
+          <b>{c.previewTitle}</b>
+          <small>{c.previewSub}</small>
+        </div>
       </div>
     </div>
   );
 }
 
-function ValueCard({ label, children }) {
-  return (
-    <div className={styles.valueCard}>
-      <small>{label}</small>
-      <b>{children || "—"}</b>
-    </div>
-  );
-}
-
-export default function ZiweiChartClient() {
+function ChartExperience() {
   const { lang, setLang } = useLang();
-  const t = copyFor(lang);
-  const [person, setPerson] = useState(() => emptyPerson({ year: 1990, month: 1, day: 1, hour: 12, minute: 0, gender: "女" }));
+  const isZh = lang.startsWith("zh");
+  const c = isZh ? COPY.zh : COPY.en;
+  const [person, setPerson] = useState(() => emptyPerson());
   const [chart, setChart] = useState(null);
-  const [selectedName, setSelectedName] = useState("");
+  const [selected, setSelected] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [hasLast, setHasLast] = useState(false);
   const resultRef = useRef(null);
+  const formRef = useRef(null);
 
   useEffect(() => {
-    try { setHasLast(Boolean(localStorage.getItem(LAST_PERSON_KEY))); } catch {}
-  }, []);
+    if (!chart?.palaces?.length) return;
+    const life = chart.palaces.find((palace) => palace.isLifePalace) || chart.palaces[0];
+    setSelected(life);
+  }, [chart]);
 
-  const selectedPalace = useMemo(() => {
-    if (!chart?.palaces?.length) return null;
-    return chart.palaces.find((palace) => palace.name === selectedName)
-      || chart.palaces.find((palace) => palace.isLifePalace)
-      || chart.palaces[0];
-  }, [chart, selectedName]);
-
-  const lifePalace = chart?.palaces?.find((palace) => palace.isLifePalace);
-  const bodyPalace = chart?.palaces?.find((palace) => palace.isBodyPalace);
-
-  function loadLast() {
-    try {
-      const saved = JSON.parse(localStorage.getItem(LAST_PERSON_KEY));
-      if (saved) setPerson({ ...emptyPerson(), ...saved });
-    } catch {}
-  }
+  const summaryItems = useMemo(() => {
+    if (!chart) return [];
+    return [
+      [c.fiveClass, chart.fiveElementsClass],
+      [c.soul, chart.soul],
+      [c.body, chart.body],
+      [c.zodiac, chart.zodiac || chart.sign],
+      [c.decadal, chart.current?.decadal ? `${chart.current.decadal.name || ""} ${chart.current.decadal.ganZhi || ""}`.trim() : "—"],
+      [c.yearly, chart.current?.yearly ? `${chart.current.yearly.name || ""} ${chart.current.yearly.ganZhi || ""}`.trim() : "—"],
+    ];
+  }, [chart, c]);
 
   async function submit(event) {
     event.preventDefault();
     setError("");
-    setChart(null);
-    if (person.hourUnknown) {
-      setError(t.hourRequired);
-      return;
-    }
-
     setLoading(true);
     try {
+      if (person.hourUnknown) throw new Error(isZh ? "紫微斗数需要出生时辰。请先确认时辰，或比较可能的候选时辰。" : "Zi Wei requires a birth time. Confirm it first, or compare plausible time periods.");
       const payload = personPayload(person);
       const response = await fetch("/api/ziwei-chart", {
         method: "POST",
@@ -259,210 +300,220 @@ export default function ZiweiChartClient() {
         body: JSON.stringify(payload),
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Unable to calculate chart.");
+      if (!response.ok) throw new Error(data.error || c.errorGeneric);
       setChart(data.chart);
-      const life = data.chart?.palaces?.find((palace) => palace.isLifePalace);
-      setSelectedName(life?.name || data.chart?.palaces?.[0]?.name || "");
-      try {
-        localStorage.setItem(LAST_PERSON_KEY, JSON.stringify(person));
-        setHasLast(true);
-      } catch {}
-      requestAnimationFrame(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
-    } catch (caught) {
-      setError(caught?.message || "Unable to calculate chart.");
+      try { localStorage.setItem("hztj.lastPerson.v1", JSON.stringify(person)); } catch {}
+      setTimeout(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+    } catch (err) {
+      setError(err?.message || c.errorGeneric);
     } finally {
       setLoading(false);
     }
   }
 
-  const whatsappText = encodeURIComponent(lang?.startsWith("zh")
-    ? "你好，我想了解壶中紫微命盘与完整解读。"
-    : "Hello, I would like to learn more about the Hu Zhong Zi Wei chart and full reading.");
+  function resetChart() {
+    setChart(null);
+    setSelected(null);
+    setError("");
+    setTimeout(() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 30);
+  }
+
+  const themeKey = normalisePalaceName(selected?.name || "");
+  const theme = PALACE_THEME[themeKey] || ["此宫位对应的人生主题", "the life theme represented by this palace"];
+  const waMessage = encodeURIComponent(isZh ? "你好，我想咨询壶中天机的紫微斗数命盘解读。" : "Hello, I would like to ask about a Zi Wei Dou Shu chart reading.");
 
   return (
-    <main className={styles.page}>
-      <header className={styles.header}>
-        <a className={styles.brand} href="/" aria-label="壶中天机">
+    <div className={styles.page}>
+      <header className={styles.siteHeader}>
+        <a href="/" className={styles.logoLink} aria-label="壶中天机">
           <img src="/brand-logo.png" alt="壶中天机 HUZHONG TIANJI" />
         </a>
         <nav className={styles.nav}>
-          <a href="/">{t.home}</a>
-          <a href="/pan?mode=single">{t.fullReading}</a>
-          <a href="/articles">{t.articles}</a>
-          <button type="button" onClick={() => setLang(lang?.startsWith("zh") ? "en" : "zh-CN")}>{t.language}</button>
+          <a href="/">{c.navHome}</a>
+          <a href="/pan?mode=single">{c.navAll}</a>
+          <a href="/articles">{c.navArticles}</a>
+          <a href={`https://wa.me/6580148899?text=${waMessage}`} target="_blank" rel="noreferrer">{c.navContact}</a>
         </nav>
+        <div className={styles.langSwitch} aria-label="Language">
+          <button type="button" className={isZh ? styles.langOn : ""} onClick={() => setLang("zh-CN")}>中文</button>
+          <button type="button" className={!isZh ? styles.langOn : ""} onClick={() => setLang("en")}>EN</button>
+        </div>
       </header>
 
-      <section className={styles.hero}>
-        <div className={styles.heroCopy}>
-          <p className={styles.eyebrow}>{t.eyebrow}</p>
-          <h1>{t.title}</h1>
-          <p className={styles.lead}>{t.lead}</p>
-          <div className={styles.featureRow}>
-            {[t.feature1, t.feature2, t.feature3, t.feature4].map((item) => <span key={item}>{item}</span>)}
-          </div>
-        </div>
-        <div className={styles.heroDiagram} aria-hidden="true">
-          <div className={styles.orbitOne} />
-          <div className={styles.orbitTwo} />
-          <div className={styles.heroSeal}>紫<br />微</div>
-          <span className={styles.starA}>✦</span>
-          <span className={styles.starB}>✧</span>
-          <span className={styles.starC}>✦</span>
-        </div>
-      </section>
-
-      <section className={styles.formSection}>
-        <div className={styles.formIntro}>
-          <p className={styles.sectionNumber}>01</p>
-          <h2>{t.formTitle}</h2>
-          <p>{t.formLead}</p>
-        </div>
-        <form className={styles.formCard} onSubmit={submit}>
-          <PersonForm value={person} onChange={setPerson} />
-          {hasLast && <button className={styles.secondaryButton} type="button" onClick={loadLast}>{t.useLast}</button>}
-          {error && <div className={styles.error} role="alert">{error}</div>}
-          <button className={styles.primaryButton} type="submit" disabled={loading}>
-            {loading ? t.generating : t.generate}
-          </button>
-          <p className={styles.localNote}>{t.localNote}</p>
-        </form>
-      </section>
-
-      {chart && (
-        <section className={styles.resultSection} ref={resultRef}>
-          <div className={styles.resultHeading}>
-            <div>
-              <p className={styles.eyebrow}>{t.resultEyebrow}</p>
-              <h2>{t.resultTitle}</h2>
-              <p>{t.resultLead}</p>
+      <main>
+        <section className={styles.hero}>
+          <div className={styles.heroCopy}>
+            <p className={styles.eyebrow}>{c.eyebrow}</p>
+            <h1><span>{c.titleA}</span>{c.titleB}</h1>
+            <p className={styles.lead}>{c.intro}</p>
+            <div className={styles.heroActions}>
+              <button type="button" className={styles.primaryButton} onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })}>{c.start}</button>
+              <a className={styles.secondaryButton} href="#method">{c.viewMethod}</a>
             </div>
-            <span className={styles.engineBadge}>{chart.engine?.name || "iztro"} · {chart.engine?.ruleVersion || "v1"}</span>
-          </div>
-
-          <div className={styles.valueGrid}>
-            <ValueCard label={t.lunar}>{chart.lunarDate}</ValueCard>
-            <ValueCard label={t.fiveElements}>{chart.fiveElementsClass}</ValueCard>
-            <ValueCard label={t.masters}>{chart.soul} · {chart.body}</ValueCard>
-            <ValueCard label={t.zodiac}>{chart.zodiac} · {chart.sign}</ValueCard>
-          </div>
-
-          <div className={styles.chartLayout}>
-            <div className={styles.chartScroll}>
-              <div className={styles.chartGrid}>
-                {chart.palaces.map((palace) => (
-                  <PalaceCell
-                    key={palace.ganZhi}
-                    palace={palace}
-                    selected={selectedPalace?.name === palace.name}
-                    onSelect={setSelectedName}
-                    t={t}
-                  />
-                ))}
-                <div className={styles.chartCenter}>
-                  <img src="/brand-logo.png" alt="" />
-                  <b>{chart.chineseDate}</b>
-                  <span>{chart.lunarDate}</span>
-                  <div>
-                    <small>{t.lifePalace}</small><strong>{lifePalace?.ganZhi || "—"}</strong>
-                    <small>{t.bodyPalace}</small><strong>{bodyPalace?.name || "—"}</strong>
-                  </div>
-                </div>
-              </div>
+            <div className={styles.trustStrip}>
+              {[c.trust1, c.trust2, c.trust3, c.trust4].map((item) => <span key={item}>✓ {item}</span>)}
             </div>
-
-            {selectedPalace && (
-              <aside className={styles.palaceDetail}>
-                <div className={styles.detailHead}>
-                  <div>
-                    <small>{t.palaceDetail}</small>
-                    <h3>{selectedPalace.name}</h3>
-                  </div>
-                  <span>{selectedPalace.ganZhi}{selectedPalace.isBodyPalace ? " · 身宫" : ""}</span>
-                </div>
-                <div className={styles.detailFacts}>
-                  <span><small>{t.opposite}</small><b>{selectedPalace.oppositePalace?.name || "—"}</b></span>
-                  <span><small>{t.decadal}</small><b>{selectedPalace.decadal || "—"}</b></span>
-                  <span><small>{t.ages}</small><b>{selectedPalace.ages?.slice(0, 6).join("、") || "—"}</b></span>
-                </div>
-                <StarGroup title={t.majorStars} stars={selectedPalace.majorStarDetails} emptyText={t.noMajor} />
-                {!selectedPalace.majorStarDetails?.length && selectedPalace.borrowedMajorStarDetails?.length > 0 && (
-                  <StarGroup title={t.borrowed} stars={selectedPalace.borrowedMajorStarDetails} emptyText={t.none} />
-                )}
-                <StarGroup title={t.minorStars} stars={selectedPalace.minorStarDetails} emptyText={t.none} />
-                <StarGroup title={t.otherStars} stars={selectedPalace.adjectiveStarDetails} emptyText={t.none} />
-              </aside>
-            )}
           </div>
-
-          <div className={styles.lowerGrid}>
-            <article className={styles.panel}>
-              <p className={styles.sectionNumber}>02</p>
-              <h3>{t.transformations}</h3>
-              <p>{t.transformationLead}</p>
-              <div className={styles.mutagenGrid}>
-                {chart.mutagens?.length ? chart.mutagens.map((item, index) => (
-                  <div className={`${styles.mutagenCard} ${styles[MUTAGEN_CLASS[item.mutagen]] || ""}`} key={`${item.star}-${item.mutagen}-${index}`}>
-                    <small>化{item.mutagen}</small>
-                    <b>{item.star}{item.brightness || ""}</b>
-                    <span>{item.palace} · {item.ganZhi}</span>
-                  </div>
-                )) : <span className={styles.muted}>{t.none}</span>}
-              </div>
-            </article>
-
-            <article className={styles.panel}>
-              <p className={styles.sectionNumber}>03</p>
-              <h3>{t.currentTiming}</h3>
-              <div className={styles.timingList}>
-                <span><small>{t.nominalAge}</small><b>{chart.current?.nominalAge || "—"}</b></span>
-                <span><small>{t.currentDecade}</small><b>{chart.current?.decadal ? `${chart.current.decadal.name} ${chart.current.decadal.ganZhi}` : "—"}</b><em>{chart.current?.decadal?.palace || ""}</em></span>
-                <span><small>{t.currentYear}</small><b>{chart.current?.yearly ? `${chart.current.yearly.name} ${chart.current.yearly.ganZhi}` : "—"}</b><em>{chart.current?.yearly?.palace || ""}</em></span>
-              </div>
-            </article>
-          </div>
-
-          <article className={styles.methodPanel}>
-            <p className={styles.sectionNumber}>04</p>
-            <h3>{t.calculation}</h3>
-            <div className={styles.methodGrid}>
-              <span><small>{t.recordedTime}</small><b>{chart.calculation?.recordedLocalTime}</b></span>
-              <span><small>{t.chartTime}</small><b>{chart.calculation?.chartTime}</b></span>
-              <span><small>{t.trueSolar}</small><b>{chart.calculation?.trueSolarTimeApplied ? t.applied : t.notApplied}</b></span>
-              <span><small>{t.birthplace}</small><b>{chart.calculation?.birthplace || "—"}</b></span>
-              <span><small>{t.longitude}</small><b>{chart.calculation?.longitude}° · UTC{chart.calculation?.timezoneHours >= 0 ? "+" : ""}{chart.calculation?.timezoneHours}</b></span>
-              <span><small>{t.engine}</small><b>{chart.engine?.name} {chart.engine?.version}</b></span>
-            </div>
-            {chart.calculation?.solarCorrection && (
-              <div className={styles.boundaryNote}>
-                {chart.calculation.solarCorrection.crossedHourBranch ? t.crossedBoundary : t.noBoundary}
-                <b>{chart.calculation.solarCorrection.shiftMinutes > 0 ? "+" : ""}{chart.calculation.solarCorrection.shiftMinutes} min</b>
-              </div>
-            )}
-            <details className={styles.rules}>
-              <summary>{t.rules}</summary>
-              <p>{chart.calculation?.hourBranchRule}</p>
-              <p>{chart.calculation?.note}</p>
-              <h4>{t.limitationTitle}</h4>
-              <p>{t.limitation}</p>
-            </details>
-          </article>
-
-          <article className={styles.aiPanel}>
-            <div>
-              <p className={styles.sectionNumber}>05</p>
-              <h3>{t.aiTitle}</h3>
-              <p>{t.aiLead}</p>
-            </div>
-            <div className={styles.ctaRow}>
-              <a className={styles.primaryButton} href="/pan?mode=single">{t.aiButton}</a>
-              <a className={styles.secondaryButton} href={`https://wa.me/6580148899?text=${whatsappText}`} target="_blank" rel="noreferrer">{t.whatsapp}</a>
-            </div>
-          </article>
-
-          <p className={styles.disclaimer}>{t.disclaimer}</p>
+          <PreviewChart c={c} />
         </section>
-      )}
-    </main>
+
+        <section className={styles.formSection} ref={formRef}>
+          <div className={styles.formCard}>
+            <p className={styles.eyebrow}>{c.formKicker}</p>
+            <h2>{c.formTitle}</h2>
+            <p className={styles.formIntro}>{c.formIntro}</p>
+            <form onSubmit={submit}>
+              <div className={styles.personWrap}><PersonForm value={person} onChange={setPerson} /></div>
+              <p className={styles.privacyNote}>🔒 {c.privacy}</p>
+              {error && <div className={styles.error} role="alert">{error}</div>}
+              <button className={styles.generateButton} type="submit" disabled={loading}>{loading ? c.generating : c.generate}</button>
+            </form>
+          </div>
+          <aside className={styles.beforeCard}>
+            <div className={styles.beforeSeal}>天机</div>
+            <h3>{c.beforeTitle}</h3>
+            <ol>
+              <li>{c.before1}</li>
+              <li>{c.before2}</li>
+              <li>{c.before3}</li>
+              <li>{c.before4}</li>
+            </ol>
+          </aside>
+        </section>
+
+        {chart && (
+          <section className={styles.resultSection} ref={resultRef}>
+            <div className={styles.resultHead}>
+              <div>
+                <p className={styles.eyebrow}>{c.resultKicker}</p>
+                <h2>{c.resultTitle}</h2>
+                <p>{c.resultIntro}</p>
+              </div>
+              <div className={styles.resultActions}>
+                <button type="button" onClick={() => window.print()}>{c.print}</button>
+                <button type="button" onClick={resetChart}>{c.newChart}</button>
+              </div>
+            </div>
+
+            <div className={styles.summaryBlock}>
+              <h3>{c.summary}</h3>
+              <div className={styles.summaryGrid}>
+                {summaryItems.map(([label, value]) => (
+                  <div key={label}><small>{label}</small><b>{textValue(value)}</b></div>
+                ))}
+              </div>
+            </div>
+
+            {chart.calculation?.solarCorrection?.crossedHourBranch && <div className={styles.boundaryWarning}>⚠ {c.warningBoundary}</div>}
+
+            <div className={styles.chartLayout}>
+              <div>
+                <p className={styles.chartHint}>{c.palaceHint}</p>
+                <div className={styles.chartGrid}>
+                  {(chart.palaces || []).map((palace) => (
+                    <PalaceCell key={`${palace.name}-${palace.ganZhi}`} palace={palace} active={selected?.ganZhi === palace.ganZhi} onSelect={setSelected} c={c} />
+                  ))}
+                  <div className={styles.chartCenter}>
+                    <img src="/brand-logo.png" alt="壶中天机" />
+                    <strong>{chart.chineseDate}</strong>
+                    <span>{chart.lunarDate}</span>
+                    <div>
+                      <small>{chart.fiveElementsClass}</small>
+                      <small>{c.soul} {chart.soul}</small>
+                      <small>{c.body} {chart.body}</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {selected && (
+                <aside className={styles.palaceDetail}>
+                  <div className={styles.detailTitle}>
+                    <div><small>{selected.ganZhi}</small><h3>{selected.name}</h3></div>
+                    <div className={styles.detailBadges}>
+                      {selected.isLifePalace && <span>{c.lifePalace}</span>}
+                      {selected.isBodyPalace && <span>{c.bodyPalace}</span>}
+                    </div>
+                  </div>
+                  <div className={styles.themeBox}><small>{c.palaceTheme}</small><p>{isZh ? theme[0] : theme[1]}</p></div>
+                  <section className={styles.starSection}>
+                    <h4>{c.readStars}</h4>
+                    <div className={styles.starGroup}>
+                      {(selected.majorStarDetails || []).map((star) => <Star key={`detail-major-${star.name}-${star.mutagen}`} star={star} major />)}
+                      {!(selected.majorStarDetails || []).length && (selected.borrowedMajorStarDetails || []).map((star) => <Star key={`detail-borrow-${star.name}`} star={star} major borrowed />)}
+                      {!(selected.majorStarDetails || []).length && !(selected.borrowedMajorStarDetails || []).length && <span className={styles.emptyMajor}>{c.noMajor}</span>}
+                    </div>
+                  </section>
+                  {(selected.minorStarDetails || []).length > 0 && <section className={styles.starSection}><h4>{c.minor}</h4><div className={styles.starGroup}>{selected.minorStarDetails.map((star) => <Star key={`detail-minor-${star.name}-${star.mutagen}`} star={star} />)}</div></section>}
+                  {(selected.adjectiveStarDetails || []).length > 0 && <section className={styles.starSection}><h4>{c.adjective}</h4><p className={styles.starText}>{selected.adjectiveStarDetails.map((star) => star.name).join(" · ")}</p></section>}
+                  <dl className={styles.detailList}>
+                    <div><dt>{c.decade}</dt><dd>{selected.decadal || "—"}</dd></div>
+                    <div><dt>{c.opposite}</dt><dd>{selected.oppositePalace ? `${selected.oppositePalace.name} · ${selected.oppositePalace.ganZhi}` : "—"}</dd></div>
+                    <div><dt>{c.ages}</dt><dd>{selected.ages?.length ? selected.ages.join("、") : "—"}</dd></div>
+                  </dl>
+                </aside>
+              )}
+            </div>
+
+            <div className={styles.mutagenBlock}>
+              <h3>{c.transformations}</h3>
+              {chart.mutagens?.length ? (
+                <div className={styles.mutagenGrid}>{chart.mutagens.map((item, index) => (
+                  <div key={`${item.star}-${item.mutagen}-${index}`}>
+                    <span className={MUTAGEN_CLASS[item.mutagen] || styles.mutagen}>{item.mutagen}</span>
+                    <b>{item.star}</b>
+                    <small>{item.palace} · {item.ganZhi}</small>
+                  </div>
+                ))}</div>
+              ) : <p className={styles.muted}>{c.noTransform}</p>}
+            </div>
+
+            <div className={styles.basisBlock}>
+              <h3>{c.basis}</h3>
+              <div className={styles.basisGrid}>
+                <div><small>{c.recordedTime}</small><b>{chart.calculation?.recordedLocalTime}</b></div>
+                <div><small>{c.chartTime}</small><b>{chart.calculation?.chartTime}</b></div>
+                <div><small>{c.trueSolar}</small><b>{chart.calculation?.trueSolarTimeApplied ? c.applied : c.notApplied}</b>{chart.calculation?.solarCorrection && <span>{c.shift} {chart.calculation.solarCorrection.shiftMinutes > 0 ? "+" : ""}{chart.calculation.solarCorrection.shiftMinutes} {c.minutes}</span>}</div>
+                <div><small>{c.place}</small><b>{chart.calculation?.birthplace || "—"}</b><span>{chart.calculation?.longitude}° · UTC{chart.calculation?.timezoneHours >= 0 ? "+" : ""}{chart.calculation?.timezoneHours}</span></div>
+                <div><small>{c.engine}</small><b>{chart.engine?.name} {chart.engine?.version}</b><span>{chart.engine?.ruleVersion}</span></div>
+                <div><small>{c.rule}</small><b>{chart.calculation?.hourBranchRule}</b></div>
+              </div>
+              <p className={styles.methodNote}>{chart.calculation?.note}</p>
+            </div>
+          </section>
+        )}
+
+        <section className={styles.methodSection} id="method">
+          <div>
+            <p className={styles.eyebrow}>METHOD & EVIDENCE</p>
+            <h2>{c.methodTitle}</h2>
+            <p>{c.methodText}</p>
+          </div>
+          <div>
+            <p className={styles.eyebrow}>RULE ENGINE ≠ AI</p>
+            <h2>{c.separationTitle}</h2>
+            <p>{c.separationText}</p>
+          </div>
+        </section>
+
+        <section className={styles.nextSection}>
+          <div><p className={styles.eyebrow}>NEXT STEP</p><h2>{c.nextTitle}</h2><p>{c.nextText}</p></div>
+          <div className={styles.nextActions}>
+            <a href="/pan?mode=single" className={styles.primaryButton}>{c.aiCta}</a>
+            <a href={`https://wa.me/6580148899?text=${waMessage}`} target="_blank" rel="noreferrer" className={styles.secondaryButton}>{c.askCta}</a>
+          </div>
+        </section>
+      </main>
+
+      <footer className={styles.footer}>
+        <img src="/brand-logo.png" alt="壶中天机 HUZHONG TIANJI" />
+        <p>{c.disclaimer}</p>
+        <div><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="https://wa.me/6580148899" target="_blank" rel="noreferrer">+65 8014 8899</a></div>
+      </footer>
+    </div>
   );
+}
+
+export default function ZiweiChartClient() {
+  return <LangProvider><ChartExperience /></LangProvider>;
 }
