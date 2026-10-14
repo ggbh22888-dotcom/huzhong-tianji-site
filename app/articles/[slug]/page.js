@@ -5,13 +5,13 @@ export function generateStaticParams() {
   return ARTICLES.map((a) => ({ slug: a.slug }));
 }
 
-export function generateMetadata({ params }) {
-  const article = getArticle(params.slug);
+export async function generateMetadata({ params }) {
+  const article = getArticle((await params).slug);
   return article ? { title: `${article.title} · 壺中天機`, description: article.summary } : {};
 }
 
-export default function ArticlePage({ params }) {
-  const article = getArticle(params.slug);
+export default async function ArticlePage({ params }) {
+  const article = getArticle((await params).slug);
   if (!article) return <main><header><h1>壺中天機</h1></header><p className="muted">没有这篇文章。<a href="/articles">回文章列表</a></p></main>;
   const others = ARTICLES.filter((item) => item.slug !== article.slug).slice(0, 3);
   return (
