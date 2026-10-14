@@ -24,19 +24,23 @@ GitHub Actions 每天检查：
 
 - Repo 品牌与联系方式检查；
 - API key／Secret 误提交扫描；
-- AI 内容草稿状态与免责声明检查；
+- AI 管理文章的必要字段、免责声明、危险链接与绝对化表述检查；
 - Next.js production build。
 
 ### 3. AI 内容提案
 
-从 GitHub Actions 手动输入题目后，AI 只会：
+从 GitHub Actions 手动输入文章标题、重点、语言、来源备注和 CTA 后，系统会：
 
-1. 生成文章草稿；
-2. 放进 `content/drafts/`；
-3. 建立 Draft Pull Request；
-4. 等待人工审阅。
+1. 生成一份待审核文章；
+2. 写入 `content/managed-articles.json`；
+3. 验证免责声明、内容结构、链接协议与禁用表述；
+4. 执行 production build；
+5. 建立 Draft Pull Request；
+6. 等待人工审阅。
 
-它不会自动上线，也不会改价格、付款链接或法律内容。
+文章只有在 Draft Pull Request 被人工确认并合并后，才会进入 `/articles` 页面并由 Netlify 部署。系统不会自行合并，也不会自动修改价格、付款链接或法律内容。
+
+没有设置 AI Secret 时，系统会产生一份清楚标注的审核模板，而不是凭空编写内容。
 
 ### 4. 每周备份
 
@@ -65,7 +69,7 @@ GitHub 本身仍是主要版本历史与回滚来源。
 加入：
 
 - `ANTHROPIC_API_KEY`
-- 可选：`WEBSITE_MANAGER_MODEL`
+- 可选 Repository Variable：`WEBSITE_MANAGER_MODEL`
 
 不要把 API key 写进任何文件。
 
@@ -94,9 +98,19 @@ GitHub 本身仍是主要版本历史与回滚来源。
 node scripts/website-manager.mjs health
 node scripts/website-manager.mjs repo-check
 node scripts/website-manager.mjs verify-content
-node scripts/website-manager.mjs content --topic "为什么出生时辰会影响命盘" --language bilingual
+node manager/verify-managed-content.mjs
+```
+
+本地建立管理文章提案：
+
+```bash
+CONTENT_TITLE="为什么出生时辰会影响命盘" \
+CONTENT_FOCUS="说明时柱在传统八字中的作用，不作决定论" \
+CONTENT_LANG="bilingual" \
+CONTENT_SOURCE_NOTES="只使用已经审核的课程资料" \
+node manager/content-proposal.mjs
 ```
 
 ## 安全边界
 
-健康检查只读取公开网页，不采集客户出生资料、表单内容或 WhatsApp 对话。
+健康检查只读取公开网页，不采集客户出生资料、表单内容、付款资料或 WhatsApp 对话。
