@@ -3,8 +3,11 @@ name: Website Manager - AI Content Proposal
 on:
   workflow_dispatch:
     inputs:
-      topic:
-        description: Article topic
+      title:
+        description: Article title
+        required: true
+      focus:
+        description: Main angle, facts, and reader takeaway
         required: true
       language:
         description: Draft language
@@ -15,14 +18,19 @@ on:
           - zh
           - en
         default: bilingual
-      objective:
-        description: Content objective
+      tag:
+        description: Article category
         required: false
-        default: Educate, build trust, and guide readers to a useful next step.
-      cta:
-        description: Preferred call to action
+        default: 壶中随笔
+      source_notes:
+        description: Source notes or facts the draft must stay within
         required: false
-        default: Invite the reader to use a relevant free tool or ask on WhatsApp.
+      tool_href:
+        description: Optional internal CTA path, for example /tools/wuxing
+        required: false
+      tool_label:
+        description: Optional CTA label
+        required: false
 
 permissions:
   contents: write
@@ -40,32 +48,35 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Generate draft only
+      - name: Generate approval-gated article proposal
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           WEBSITE_MANAGER_MODEL: ${{ vars.WEBSITE_MANAGER_MODEL }}
-        run: >-
-          node scripts/website-manager.mjs content
-          --topic "${{ inputs.topic }}"
-          --language "${{ inputs.language }}"
-          --objective "${{ inputs.objective }}"
-          --cta "${{ inputs.cta }}"
-      - run: node scripts/website-manager.mjs verify-content
+          CONTENT_TITLE: ${{ inputs.title }}
+          CONTENT_FOCUS: ${{ inputs.focus }}
+          CONTENT_LANG: ${{ inputs.language }}
+          CONTENT_TAG: ${{ inputs.tag }}
+          CONTENT_SOURCE_NOTES: ${{ inputs.source_notes }}
+          CONTENT_TOOL_HREF: ${{ inputs.tool_href }}
+          CONTENT_TOOL_LABEL: ${{ inputs.tool_label }}
+        run: node manager/content-proposal.mjs
+      - run: node manager/verify-managed-content.mjs
+      - run: npm run build
       - name: Open approval-gated Draft PR
         env:
           GH_TOKEN: ${{ github.token }}
-          TOPIC: ${{ inputs.topic }}
+          ARTICLE_TITLE: ${{ inputs.title }}
         run: |
           BRANCH="ai-content/${GITHUB_RUN_ID}"
           git config user.name "Huzhong Tianji Website Manager"
           git config user.email "actions@users.noreply.github.com"
           git checkout -b "$BRANCH"
-          git add content/drafts
-          git commit -m "content: propose ${TOPIC}"
+          git add content/managed-articles.json
+          git commit -m "content: propose managed article"
           git push origin "$BRANCH"
           gh pr create \
             --draft \
             --base main \
             --head "$BRANCH" \
-            --title "AI content proposal: ${TOPIC}" \
-            --body "AI-generated draft for human review. Nothing is published until this PR is reviewed and manually merged. Please verify factual claims, tone, bilingual meaning, CTA, disclaimer, and any traditional-medicine/financial/legal wording."
+            --title "AI article proposal: ${ARTICLE_TITLE}" \
+            --body "AI-generated article proposal for human review. It is not published until this Draft Pull Request is reviewed and manually merged. Please verify source support, tone, bilingual meaning, CTA, disclaimer, and any health, legal, financial, or traditional-culture wording."
