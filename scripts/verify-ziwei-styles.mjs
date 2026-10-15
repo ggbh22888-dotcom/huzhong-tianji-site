@@ -1,0 +1,14 @@
+import { readFile, mkdir, writeFile } from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const component = await readFile('app/ziwei-chart/ZiweiChartClient.js', 'utf8');
+const css = (await readFile('app/ziwei-chart/ziwei-chart.module.css', 'utf8')).replace(/\/\*[\s\S]*?\*\//g, '');
+const used = new Set([...component.matchAll(/styles\.([A-Za-z_][A-Za-z0-9_]*)/g)].map(x => x[1]));
+const defined = new Set([...css.matchAll(/\.([A-Za-z_][A-Za-z0-9_-]*)/g)].map(x => x[1]));
+const missing = [...used].filter(name => !defined.has(name)).sort();
+const report = { classesUsed: used.size, missing, passed: missing.length === 0 };
+await mkdir('reports/layout', { recursive: true });
+await writeFile('reports/layout/style-contract.json', JSON.stringify(report, null, 2));
+console.log(JSON.stringify(report, null, 2));
+assert.ok(used.size > 50, 'Component structure changed: review the style-contract test.');
+assert.deepEqual(missing, [], 'Undefined CSS-module classes would silently remove layout rules.');
+assert.match(css, /\.page\s*>\s*main\s*\{[^}]*max-width:\s*none/, 'Zi Wei main must not inherit the legacy narrow container.');

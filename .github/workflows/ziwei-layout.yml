@@ -1,0 +1,77 @@
+name: Zi Wei Layout Acceptance
+on:
+  pull_request:
+    branches: [main]
+    paths: ['app/**', 'public/**', 'lib/**', 'scripts/**', 'package.json', 'package-lock.json', '.github/workflows/ziwei-layout.yml']
+  push:
+    branches: [main]
+    paths: ['app/**', 'public/**', 'lib/**', 'scripts/**', 'package.json', 'package-lock.json', '.github/workflows/ziwei-layout.yml']
+permissions:
+  contents: read
+concurrency:
+  group: ziwei-layout-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: node scripts/verify-ziwei-styles.mjs
+      - run: npm run build
+      - name: Install Chromium and WebKit
+        run: |
+          pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium webkit
+      - name: Check actual layout and synthetic chart results
+        run: |
+          npm start > /tmp/hztj-layout.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 40); do
+            if curl -fsS http://127.0.0.1:3000/ziwei-chart > /dev/null; then break; fi
+            sleep 2
+          done
+          python scripts/test-ziwei-layout.py
+      - name: Wait for the new Zi Wei styles on production
+        if: github.event_name == 'push'
+        run: |
+          python - <<'PY'
+          import re,time,urllib.request
+          from urllib.parse import urljoin
+          base='https://huzhongtianji.netlify.app'
+          for attempt in range(36):
+            try:
+              html=urllib.request.urlopen(base+'/ziwei-chart',timeout=20).read().decode()
+              urls=set(re.findall(r'href="([^"]+\.css(?:\?[^"]*)?)"',html))
+              found=any('ziwei-layout-20261015' in urllib.request.urlopen(urljoin(base,u),timeout=20).read().decode() for u in urls)
+              if found:
+                print('Production serves the corrected Zi Wei stylesheet.');break
+            except Exception as e: print(type(e).__name__)
+            time.sleep(10)
+          else: raise SystemExit('Expected stylesheet was not observed on production.')
+          PY
+      - name: Repeat visual and workflow checks on the public website
+        if: github.event_name == 'push'
+        env:
+          LAYOUT_BASE_URL: https://huzhongtianji.netlify.app
+          LAYOUT_REPORT_DIR: reports/layout/production
+        run: python scripts/test-ziwei-layout.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ziwei-layout-${{ github.run_number }}-${{ github.event_name }}
+          path: reports/layout/
+          retention-days: 14
