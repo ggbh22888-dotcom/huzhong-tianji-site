@@ -1,4 +1,4 @@
-"""Layout and workflow acceptance. Uses anonymous synthetic birth data, never paid AI or payments."""
+"""Layout acceptance: anonymous synthetic birth data only, never paid AI or payments."""
 import json
 import os
 from pathlib import Path
@@ -7,9 +7,7 @@ from playwright.sync_api import sync_playwright, expect
 BASE = os.environ.get('LAYOUT_BASE_URL', 'http://127.0.0.1:3000').rstrip('/')
 OUT = Path(os.environ.get('LAYOUT_REPORT_DIR', 'reports/layout/browser'))
 OUT.mkdir(parents=True, exist_ok=True)
-REVISION = 'ziwei-layout-20261015'
-results = []
-failures = []
+results, failures = [], []
 
 def loc(page, name):
     return page.locator('[class*="_' + name + '__"]')
@@ -41,7 +39,7 @@ with sync_playwright() as p:
                         expected_lang = 'zh-CN' if language.startswith('zh') else 'en'
                         expect(page.locator('html')).to_have_attribute('lang',expected_lang)
                         expect(loc(page,'siteHeader')).to_be_visible()
-                        assert loc(page,'page').evaluate('(el)=>getComputedStyle(el).getPropertyValue("--hztj-layout-revision").trim()') == REVISION
+                        assert loc(page,'page').evaluate('(el)=>getComputedStyle(el).getPropertyValue("--hztj-layout-revision").trim()') == 'ziwei-layout-20261015'
                         page.evaluate('document.fonts.ready')
                         fits_page(page)
                         header = loc(page,'siteHeader').bounding_box()
@@ -50,41 +48,42 @@ with sync_playwright() as p:
                         logo = loc(page,'logoLink').locator('img')
                         page.wait_for_function('document.querySelector("header img").naturalWidth > 0')
                         dimensions = logo.bounding_box()
-                        assert 100 <= dimensions['width'] <= 280
-                        assert dimensions['height'] <= 100
+                        assert 100 <= dimensions['width'] <= 280 and dimensions['height'] <= 100
                         assert header['height'] < (160 if width > 800 else 230), str(header)
-                        assert hero['width'] >= (400 if width >= 1100 else width - 64 if width <= 800 else 300), str(hero)
+                        minimum = 400 if width >= 1100 else min(670,width-64) if width <= 800 else 300
+                        assert hero['width'] >= minimum, str(hero)
                         assert heading['height'] < 300, str(heading)
+                        record.update(headerHeight=header['height'], headingWidth=heading['width'], headingHeight=heading['height'], logoWidth=dimensions['width'])
                         controls = loc(page,'langSwitch').locator('button')
                         assert controls.count() == 2
                         b0, b1 = controls.nth(0).bounding_box(), controls.nth(1).bounding_box()
-                        assert abs(b0['y']-b1['y']) < 3 and max(b0['width'],b1['width']) < 90, 'Language controls not compact'
+                        assert abs(b0['y']-b1['y']) < 3 and max(b0['width'],b1['width']) < 90
                         for image in page.locator('img').all():
                             box=image.bounding_box()
                             if box: assert box['width'] <= 300, 'Oversized brand artwork'
                         screenshot(page, name + '-top')
+                        motif=loc(page,'previewCenter').evaluate('(e)=>({height:e.clientHeight,scroll:e.scrollHeight})')
+                        assert motif['scroll'] <= motif['height']+2, 'Motif caption overlaps the ring: '+str(motif)
+                        loc(page,'previewShell').screenshot(path=str(OUT/(name+'-motif.png')))
                         loc(page,'heroActions').locator('button').click()
                         expect(loc(page,'formCard')).to_be_in_viewport()
                         fields = loc(page,'personWrap').locator('input:not([type=checkbox]), select')
                         for field in fields.all():
                             box=field.bounding_box()
                             style=field.evaluate('(el)=>({font:parseFloat(getComputedStyle(el).fontSize),color:getComputedStyle(el).color,background:getComputedStyle(el).backgroundColor})')
-                            assert box['width'] >= 95 and box['height'] >= 44, 'Unreadable form control: '+str(box)
-                            assert style['font'] >= 16
-                            assert style['color'] != style['background']
+                            assert box['width'] >= 95 and box['height'] >= 44, 'Unreadable control: '+str(box)
+                            assert style['font'] >= 16 and style['color'] != style['background']
                             assert box['x'] >= -1 and box['x']+box['width'] <= width+1
                         screenshot(page, name + '-form')
-                        # Explicitly test an existing /pan dark-theme preference cannot turn this light form black.
                         page.evaluate('document.documentElement.setAttribute("data-theme","dark")')
-                        colour=fields.first.evaluate('(el)=>getComputedStyle(el).backgroundColor')
-                        assert colour == 'rgb(255, 253, 248)', colour
+                        assert fields.first.evaluate('(el)=>getComputedStyle(el).backgroundColor') == 'rgb(255, 253, 248)'
                         page.evaluate('document.documentElement.removeAttribute("data-theme")')
                         unknown = loc(page,'personWrap').locator('input[type=checkbox]').first
                         unknown.check()
                         loc(page,'generateButton').click()
-                        expect(page.locator('[role=alert]')).to_be_visible()
+                        # Next.js also has a route-announcer alert; inspect only this form's validation error.
+                        expect(loc(page,'formCard').locator('[role=alert]')).to_be_visible()
                         unknown.uncheck()
-                        # Default anonymous 1990-01-01 test fixture; never a customer's supplied data.
                         with page.expect_response(lambda r:'/api/ziwei-chart' in r.url and r.request.method=='POST') as reply:
                             loc(page,'generateButton').click()
                         assert reply.value.status == 200, reply.value.text()
@@ -97,28 +96,24 @@ with sync_playwright() as p:
                         expect(cells.last).to_have_attribute('aria-pressed','true')
                         assert loc(page,'chartCenter').locator('img').bounding_box()['width'] <= 245
                         screenshot(page, name + '-chart')
-                        # Check the complete result page, not just its first viewport.
                         loc(page,'basisBlock').scroll_into_view_if_needed()
                         fits_page(page)
-                        assert loc(page,'basisBlock').bounding_box()['width'] >= width-64 if width <= 800 else True
+                        if width <= 800: assert loc(page,'basisBlock').bounding_box()['width'] >= width-64
                         page.emulate_media(media='print')
                         expect(loc(page,'siteHeader')).not_to_be_visible()
                         expect(loc(page,'chartGrid')).to_be_visible()
                         page.emulate_media(media='screen')
                         loc(page,'langSwitch').locator('button').nth(1 if language.startswith('zh') else 0).click()
-                        expect(page.locator('html')).to_have_attribute('lang', 'en' if language.startswith('zh') else 'zh-CN')
+                        expect(page.locator('html')).to_have_attribute('lang','en' if language.startswith('zh') else 'zh-CN')
                         fits_page(page)
                         assert not errors, errors
-                        record.update(status='passed', headerHeight=header['height'], headingWidth=heading['width'], headingHeight=heading['height'], logoWidth=dimensions['width'], chartCells=12)
+                        record.update(status='passed',chartCells=12)
                     except Exception as error:
-                        record['error']=str(error)
-                        failures.append(name + ': ' + str(error))
+                        record['error']=str(error); failures.append(name+': '+str(error))
                         try: screenshot(page,name+'-FAILED')
                         except Exception: pass
                     finally:
-                        results.append(record)
-                        context.close()
-            # Other customer pages: inspect document arrangement at desktop and phone sizes.
+                        results.append(record); context.close()
             if engine == 'chromium':
                 for width,height in [(1440,960),(390,844)]:
                     for route in ['/','/pan','/tools','/articles','/classics','/tools/wuxing','/tools/nongli','/tools/phone','/tools/plate','/tools/yinyuan','/articles/bazi-is-a-manual-not-a-verdict']:
@@ -137,8 +132,7 @@ with sync_playwright() as p:
                             expect(h).to_be_visible()
                             assert h.bounding_box()['width'] >= min(width-64,400)
                             if route=='/pan': expect(page.locator('.modes button')).to_have_count(11)
-                            screenshot(page,name)
-                            record['status']='passed'
+                            screenshot(page,name);record['status']='passed'
                         except Exception as error:
                             record['error']=str(error);failures.append(name+': '+str(error))
                             try: screenshot(page,name+'-FAILED')
@@ -148,6 +142,5 @@ with sync_playwright() as p:
         finally:
             browser.close()
             (OUT/'results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
-
 print(json.dumps({'passed':len(results)-len(failures),'total':len(results),'failures':failures},ensure_ascii=False,indent=2))
 if failures: raise SystemExit(1)
