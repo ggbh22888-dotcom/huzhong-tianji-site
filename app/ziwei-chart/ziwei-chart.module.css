@@ -213,7 +213,7 @@
   .page .hero h1 { font-size: 32px; line-height: 1.4; }.hero h1 > span { font-size: 14px; }
   .lead { font-size: 15px; line-height: 1.85; margin-top: 18px; }.heroActions { gap: 9px; margin: 22px 0 18px; }
   .page .primaryButton, .page .secondaryButton { padding: 11px 17px; font-size: 14px; }
-  .previewShell { max-width: 280px; padding: 10px; border-radius: 20px; }.previewGrid { gap: 4px; }.previewGrid > span { border-radius: 7px; font-size: 18px; }.previewCenter { padding: 5px; gap: 6px; }.previewCenter b { font-size: 12px; }.previewCenter small { font-size: 10px; }
+  .previewShell { max-width: 280px; padding: 10px; border-radius: 20px; }.previewGrid { gap: 4px; }.previewGrid > span { border-radius: 7px; font-size: 18px; }.previewCenter { padding: 5px; gap: 6px; }.previewCenter b { font-size: 12px; }.previewCenter small { display: none; }
   .formCard { padding: 22px 18px; border-radius: 18px; }.formIntro { font-size: 14px; }
   .personWrap :global(.row) { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px 12px; margin-bottom: 16px; }
   .personWrap :global(.row) > label:last-child:nth-child(3) { grid-column: 1/-1; }
