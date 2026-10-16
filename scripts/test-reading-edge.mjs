@@ -33,6 +33,8 @@ test('edge returns charts immediately while provider is still waiting', async()=
     const input=JSON.parse(options.body);
     assert.equal(input.model,'claude-sonnet-5-5');
     assert.equal(input.max_tokens,4000);
+    assert.equal(input.thinking.type,'between_tools');
+    assert.equal(input.output_config.effort,'medium');
     assert.equal(options.headers['x-api-key'],'test-only-key');
     assert.equal(options.headers.cookie,undefined);
     await waiting;
