@@ -6,6 +6,7 @@ import CoinCast from "@/app/components/CoinCast";
 import JiaoBei from "@/app/components/JiaoBei";
 import TopBar from "@/app/components/TopBar";
 import { LangProvider, useLang } from "@/app/components/Lang";
+import { readReadingStream } from "@/lib/reading-stream.mjs";
 
 const MODES = [
   ["single", "壺中一命"], ["multi", "壺中合盤"], ["predict", "壺中度歲"], ["jiaobei", "壺中擲筊"], ["yijing", "壺中問卦"], ["tarot", "壺中翻牌"],
@@ -71,27 +72,18 @@ function Pan() {
   async function submit(e) {
     e.preventDefault();
     setLoading(true); setError(""); setResult(null);
+    const abort = new AbortController();
+    const timeout = setTimeout(() => abort.abort(), 120000);
     try {
-      const res = await fetch("/api/reading", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...buildBody(), lang }) });
+      const res = await fetch("/api/reading", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...buildBody(), lang }), signal: abort.signal });
       if (!res.ok) throw new Error((await res.json()).error || res.statusText);
-      const reader = res.body.getReader(), dec = new TextDecoder();
-      let buf = "", charts = null, reading = "";
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-        buf += dec.decode(value, { stream: true });
-        if (!charts) {
-          const i = buf.indexOf("\n\n");
-          if (i === -1) continue;
-          charts = JSON.parse(buf.slice(0, i)).charts; buf = buf.slice(i + 2);
-        }
-        reading += buf; buf = "";
-        setResult({ charts, reading });
-      }
+      const { charts, reading } = await readReadingStream(res.body, setResult);
       saveHistory({ at: Date.now(), mode, charts, reading });
       try { localStorage.setItem(LAST_KEY, JSON.stringify(p1)); } catch {}
-    } catch (err) { setError(err.message); }
-    finally { setLoading(false); }
+    } catch (err) {
+      setError(err.name === "AbortError" ? "解读等待时间较长，本次未能完成，请稍后重新开启。" : /[\u4e00-\u9fff]/.test(err.message) ? err.message : "解读连接中断，请检查网络后重新开启。");
+    }
+    finally { clearTimeout(timeout); setLoading(false); }
   }
 
   const showSystems = ["single", "multi", "predict"].includes(mode);
@@ -196,7 +188,7 @@ function Pan() {
         {error && <p className="error">{error}</p>}
       </form>
 
-      {result && <Result mode={mode} data={result} loading={loading} />}
+      {result && <Result mode={mode} data={result} loading={loading} error={error} />}
 
       {history.length > 0 && !result && (
         <section className="card">
@@ -210,7 +202,7 @@ function Pan() {
   );
 }
 
-function Result({ data, loading }) {
+function Result({ data, loading, error }) {
   const c = data.charts;
   return (
     <section className="card">
@@ -224,8 +216,9 @@ function Result({ data, loading }) {
       {c.transitsNow && <Transits t={c.transitsNow} events={c.events} sunSign={c.sunSign} />}
       {c.liuNian && <p className="muted">流年 {c.liuNian.year} {c.liuNian.ganZhi}（{c.liuNian.shengXiao}）</p>}
       <h3>半壶解读{loading && <span className="cursor">▍</span>}</h3>
-      <Reading text={data.reading} />
-      <details><summary>查看原始 JSON（学习用）</summary><pre>{JSON.stringify(c, null, 2)}</pre></details>
+      {data.reading?.trim() && <Reading text={data.reading} />}
+      {loading && <p role="status" className="muted">{data.reading?.trim() ? "解读仍在生成，请稍候…" : "排盘已完成，正在生成解读，请稍候…"}</p>}
+      {!loading && (error || !data.reading?.trim()) && <p role="alert" className="error">{error || "这份记录没有保存解读文字，请重新开启。"}</p>}
     </section>
   );
 }

@@ -100,13 +100,14 @@ export async function POST(req) {
   const enc = new TextEncoder();
 
   if (!process.env.ANTHROPIC_API_KEY) {
-    return new Response(header + "⚠️ 未设置 ANTHROPIC_API_KEY，仅显示排盘结果。", { headers: { "Content-Type": "text/plain; charset=utf-8" } });
+    return new Response(header + "解读服务暂未就绪。目前可以查看排盘结果，请稍后再试。", { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" } });
   }
 
-  const client = new Anthropic();
+  const client = new Anthropic({ timeout: 90000, maxRetries: 0 });
   const stream = new ReadableStream({
     async start(controller) {
       controller.enqueue(enc.encode(header));
+      let hasText = false;
       try {
         const s = client.messages.stream({
           model: process.env.CLAUDE_MODEL || "claude-sonnet-5-5",
@@ -115,10 +116,15 @@ export async function POST(req) {
           messages: [{ role: "user", content: "请解读。\n\n```json\n" + JSON.stringify(payload, null, 1) + "\n```" }],
         });
         for await (const ev of s) {
-          if (ev.type === "content_block_delta" && ev.delta?.type === "text_delta") controller.enqueue(enc.encode(ev.delta.text));
+          if (ev.type === "content_block_delta" && ev.delta?.type === "text_delta") {
+            if (ev.delta.text.trim()) hasText = true;
+            controller.enqueue(enc.encode(ev.delta.text));
+          }
         }
+        if (!hasText) controller.enqueue(enc.encode("排盘已完成，但本次未收到解读文字，请稍后重新开启。"));
       } catch (e) {
-        controller.enqueue(enc.encode("\n\n[解读中断：" + e.message + "]"));
+        console.error("Reading generation failed", { status: e.status, name: e.name });
+        controller.enqueue(enc.encode("\n\n本次解读未能完成。排盘结果仍可查看，请稍后重新开启。"));
       }
       controller.close();
     },
