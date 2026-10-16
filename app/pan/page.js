@@ -81,7 +81,7 @@ function Pan() {
       saveHistory({ at: Date.now(), mode, charts, reading });
       try { localStorage.setItem(LAST_KEY, JSON.stringify(p1)); } catch {}
     } catch (err) {
-      setError(err.name === "AbortError" ? "解读等待时间较长，本次未能完成，请稍后重新开启。" : /[\u4e00-\u9fff]/.test(err.message) ? err.message : "解读连接中断，请检查网络后重新开启。");
+      setError(err.name === "AbortError" ? "解读等待时间较长，本次未能完成，请稍后重新开启。" : /[\u4e00-\u9fff]/.test(err.message) ? err.message : "解读服务连接中断，本次未能完成。排盘结果仍可查看，请稍后重试。");
     }
     finally { clearTimeout(timeout); setLoading(false); }
   }
