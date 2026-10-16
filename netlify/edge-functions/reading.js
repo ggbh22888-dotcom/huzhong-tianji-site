@@ -1,5 +1,6 @@
 import { buildSystemPrompt } from "../../lib/prompts.js";
 import { forwardText } from "../../lib/anthropic-text-stream.mjs";
+import { readingOptions } from "../../lib/reading-options.mjs";
 
 export default async function reading(request) {
   if (request.method !== "POST") return new Response("Method not allowed", { status: 405 });
@@ -39,7 +40,7 @@ export default async function reading(request) {
           method: "POST",
           headers: { "Content-Type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01" },
           signal: abort.signal,
-          body: JSON.stringify({ model, max_tokens: 4000, stream: true,
+          body: JSON.stringify({ ...readingOptions(model), stream: true,
             system: buildSystemPrompt(charts.mode, lang),
             messages: [{ role: "user", content: "请解读。\n\n```json\n" + JSON.stringify(charts, null, 1) + "\n```" }],
           }),
