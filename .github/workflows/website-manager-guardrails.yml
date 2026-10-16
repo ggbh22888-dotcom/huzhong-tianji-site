@@ -20,7 +20,7 @@ jobs:
       - run: node scripts/website-manager.mjs repo-check
       - run: node scripts/website-manager.mjs verify-content
       - run: node manager/verify-managed-content.mjs
-      - run: node --test scripts/test-reading-stream.mjs
+      - run: node --test scripts/test-reading-stream.mjs scripts/test-reading-edge.mjs
       - run: npm run build
       - if: always()
         uses: actions/upload-artifact@v4
