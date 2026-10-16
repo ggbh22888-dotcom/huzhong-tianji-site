@@ -3,6 +3,10 @@ import "./globals.css";
 export const metadata = {
   title: "壶中天机 · 八字排盘",
   description: "八字排盘 + AI 解读 — 学习版",
+  icons: {
+    icon: [{ url: "/huzhong-icon-20261016.png", type: "image/png", sizes: "1024x1024" }],
+    apple: "/huzhong-icon-20261016.png",
+  },
 };
 
 export default function RootLayout({ children }) {
