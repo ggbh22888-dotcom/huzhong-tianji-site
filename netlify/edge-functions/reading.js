@@ -6,8 +6,15 @@ export default async function reading(request) {
   const raw = await request.text();
   if (raw.length > 200000) return new Response("Request too large", { status: 413 });
   // Keep birth calculations in Node; do not store the request or interpretation.
+  const chartHeaders = new Headers({ "Content-Type": "application/json" });
+  // Preserve preview access on this same-site subrequest only. These headers
+  // must never be forwarded to the AI provider.
+  for (const name of ["cookie", "authorization"]) {
+    const value = request.headers.get(name);
+    if (value) chartHeaders.set(name, value);
+  }
   const chartResponse = await fetch(new URL("/api/chart-data", request.url), {
-    method: "POST", headers: { "Content-Type": "application/json" }, body: raw,
+    method: "POST", headers: chartHeaders, body: raw,
   });
   if (!chartResponse.ok) return chartResponse;
   const { charts, lang } = await chartResponse.json();
