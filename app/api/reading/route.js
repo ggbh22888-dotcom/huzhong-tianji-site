@@ -3,6 +3,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { prepare } from "@/lib/reading-charts";
 import { buildSystemPrompt } from "@/lib/prompts";
+import { readingOptions } from "@/lib/reading-options.mjs";
 
 export const runtime = "nodejs";
 export const maxDuration = 120;
@@ -30,8 +31,7 @@ export async function POST(req) {
       let hasText = false;
       try {
         const s = client.messages.stream({
-          model: process.env.CLAUDE_MODEL || "claude-sonnet-5-5",
-          max_tokens: 4000,
+          ...readingOptions(process.env.CLAUDE_MODEL || "claude-sonnet-5-5"),
           system: buildSystemPrompt(payload.mode, lang),
           messages: [{ role: "user", content: "请解读。\n\n```json\n" + JSON.stringify(payload, null, 1) + "\n```" }],
         });
