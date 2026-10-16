@@ -26,16 +26,20 @@ test('edge returns charts immediately while provider is still waiting', async()=
   let release;
   const waiting=new Promise(resolve=>{release=resolve;});
   globalThis.fetch=async(url,options)=>{
-    if(String(url).includes('/api/chart-data')) return Response.json({charts:{mode:'single'},lang:'zh-CN'});
+    if(String(url).includes('/api/chart-data')) {
+      assert.equal(options.headers.get('cookie'),'preview=test-only');
+      return Response.json({charts:{mode:'single'},lang:'zh-CN'});
+    }
     const input=JSON.parse(options.body);
     assert.equal(input.model,'claude-sonnet-5-5');
     assert.equal(input.max_tokens,4000);
     assert.equal(options.headers['x-api-key'],'test-only-key');
+    assert.equal(options.headers.cookie,undefined);
     await waiting;
     return new Response(sse('完整解读正文'));
   };
   try {
-    const result=await reading(new Request('https://example.test/api/reading',{method:'POST',body:'{}'}));
+    const result=await reading(new Request('https://example.test/api/reading',{method:'POST',headers:{cookie:'preview=test-only'},body:'{}'}));
     assert.equal(result.headers.get('x-reading-runtime'),'edge-v1');
     const reader=result.body.getReader();
     const first=await reader.read();
