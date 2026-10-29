@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import PersonForm, { emptyPerson, personPayload } from "@/app/components/PersonForm";
-import { ChartSet, Tarot, Gua, Reading, Transits, Hexagram } from "@/app/components/Charts";
+import { ChartSet, Tarot, Gua, Reading, Transits, Hexagram, Duisui } from "@/app/components/Charts";
 import CoinCast from "@/app/components/CoinCast";
 import JiaoBei from "@/app/components/JiaoBei";
 import TopBar from "@/app/components/TopBar";
@@ -214,7 +214,8 @@ function Result({ data, loading, error }) {
       {c.cast && <Hexagram cast={c.cast} date={c.castDate} question={c.question} />}
       {c.gua && <Gua gua={c.gua} />}
       {c.transitsNow && <Transits t={c.transitsNow} events={c.events} sunSign={c.sunSign} />}
-      {c.liuNian && <p className="muted">流年 {c.liuNian.year} {c.liuNian.ganZhi}（{c.liuNian.shengXiao}）</p>}
+      {c.duisui && <Duisui d={c.duisui} />}
+      {c.liuNian && !c.duisui && <p className="muted">流年 {c.liuNian.year} {c.liuNian.ganZhi}（{c.liuNian.shengXiao}）</p>}
       <h3>半壶解读{loading && <span className="cursor">▍</span>}</h3>
       {data.reading?.trim() && <Reading text={data.reading} />}
       {loading && <p role="status" className="muted">{data.reading?.trim() ? "解读仍在生成，请稍候…" : "排盘已完成，正在生成解读，请稍候…"}</p>}

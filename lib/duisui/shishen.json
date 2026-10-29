@@ -1,0 +1,13 @@
+{
+  "_说明": "十神对九维的加减分。self 自身 / career 事业 / zhengcai 正财 / piancai 偏财 / health 健康 / guiren 贵人 / xiaoren 小人（分数越高=小人越少越安全）/ love 感情 / travel 出行。theme 为该十神司令时的主题词，供文案层引用。",
+  "比肩": { "theme": "同侪并立，宜合作不宜独揽", "self": 0.5, "career": 0, "zhengcai": -0.5, "piancai": -0.5, "health": 0.5, "guiren": 0, "xiaoren": -0.5, "love": 0, "travel": 0 },
+  "劫财": { "theme": "财易散、人易争，守成为上", "self": 0, "career": 0, "zhengcai": -1, "piancai": -1, "health": 0, "guiren": -0.5, "xiaoren": -1, "love": -0.5, "travel": 0 },
+  "食神": { "theme": "口福才华并至，宜创作宜享受", "self": 0.5, "career": 0.5, "zhengcai": 0.5, "piancai": 0.5, "health": 0.5, "guiren": 0.5, "xiaoren": 0.5, "love": 0.5, "travel": 0.5 },
+  "伤官": { "theme": "锋芒外露，言多必失", "self": 0, "career": 0.5, "zhengcai": -0.5, "piancai": 0.5, "health": -0.5, "guiren": -0.5, "xiaoren": -1, "love": -0.5, "travel": 0 },
+  "偏财": { "theme": "横财机遇，宜投资宜交际", "self": 0, "career": 0, "zhengcai": 0, "piancai": 1, "health": 0, "guiren": 0.5, "xiaoren": 0, "love": 0.5, "travel": 0.5 },
+  "正财": { "theme": "正财稳进，宜积累不宜冒进", "self": 0.5, "career": 0.5, "zhengcai": 1, "piancai": 0, "health": 0, "guiren": 0, "xiaoren": 0, "love": 0.5, "travel": 0 },
+  "七杀": { "theme": "压力与权力同来，宜攻不宜守", "self": -0.5, "career": 0.5, "zhengcai": 0, "piancai": 0, "health": -1, "guiren": 0, "xiaoren": -1, "love": -0.5, "travel": -0.5 },
+  "正官": { "theme": "名位有望，宜守规矩谋晋升", "self": 0.5, "career": 1, "zhengcai": 0, "piancai": 0, "health": 0, "guiren": 0.5, "xiaoren": 0.5, "love": 0.5, "travel": 0 },
+  "偏印": { "theme": "思虑偏多，宜学习忌空想", "self": -0.5, "career": 0, "zhengcai": -0.5, "piancai": -0.5, "health": -0.5, "guiren": 0, "xiaoren": -0.5, "love": -0.5, "travel": 0 },
+  "正印": { "theme": "贵人护持，宜进修宜静养", "self": 1, "career": 0.5, "zhengcai": 0, "piancai": -0.5, "health": 1, "guiren": 1, "xiaoren": 0.5, "love": 0, "travel": -0.5 }
+}

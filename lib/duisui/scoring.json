@@ -1,0 +1,19 @@
+{
+  "_说明": "权重与合成。每段每维从 base 起算 → 十神加减 → 总分 ± 用神/忌神/地支关系(封顶) → 神煞 → 九维各加总分偏移的一半 → 夹到 [1,5]，步长 0.5。",
+  "base": 3,
+  "yongshen": {
+    "monthElementIsYong": 1.0, "monthElementIsJi": -1.0,
+    "liuNianGanIsYong": 0.5, "liuNianGanIsJi": -0.5,
+    "renYuanIsYong": 0.5, "renYuanIsJi": -0.5
+  },
+  "liuNianGanWeight": 0.5,
+  "liuYueGanWeight": 1.0,
+  "renYuanWeight": 0.6,
+  "relationCap": { "min": -2.0, "max": 2.0 },
+  "jiaoJieWindowDays": 3,
+  "dims": ["self","career","zhengcai","piancai","health","guiren","xiaoren","love","travel"],
+  "dimensionLabels": { "self": "自身", "career": "事业", "zhengcai": "正财", "piancai": "偏财", "health": "健康", "guiren": "贵人", "xiaoren": "小人", "love": "感情", "travel": "出行" },
+  "liteDims": ["career", "wealth", "love", "health", "people"],
+  "liteMap": { "career": ["career"], "wealth": ["zhengcai","piancai"], "love": ["love"], "health": ["health"], "people": ["guiren","xiaoren"] },
+  "liteLabels": { "career": "事业", "wealth": "财运", "love": "感情", "health": "健康", "people": "人际" }
+}

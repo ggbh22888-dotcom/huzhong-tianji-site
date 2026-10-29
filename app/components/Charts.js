@@ -251,3 +251,40 @@ export function Hexagram({ cast, date, question }) {
 export function Reading({ text }) {
   return <div className="reading"><ReactMarkdown>{text}</ReactMarkdown></div>;
 }
+
+
+// ---------- 壺中度歲 · 廿四节气流年表 ----------
+const star = (v) => "★".repeat(Math.floor(v)) + (v % 1 ? "☆" : "");
+const fmtSG = (iso) => new Date(iso).toLocaleString("zh-SG", { timeZone: "Asia/Singapore", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false });
+export function Duisui({ d }) {
+  const [full, setFull] = useState(false);
+  if (!d || d.error) return null;
+  const dims = full ? d.dims : Object.keys(d.liteLabels);
+  const labels = full ? d.dimensionLabels : d.liteLabels;
+  const top = new Set(d.top3), low = new Set(d.bottom3);
+  return (
+    <div className="sys duisui">
+      <h4>壺中度歲 · {d.targetYear} {d.liuNian.ganZhi}年 <small>流年{d.liuNian.shishen}{d.daYun ? ` · 大运 ${d.daYun.ganZhi}` : ""} · 喜{d.yongshen.join("")} 忌{d.jishen.join("")} · 按廿四节气分廿四段</small></h4>
+      <p className="muted" style={{ fontSize: ".85rem" }}>
+        有利颜色：{d.extras.luckyColors.join("、")}　方位：{d.extras.luckyDirections.join("、")}　贵人姓氏：{d.extras.guirenSurnames.slice(0, 8).join("、")}
+        <button type="button" className="ghost" style={{ marginLeft: 12 }} onClick={() => setFull(!full)}>{full ? "五维简表" : "九维全表"}</button>
+      </p>
+      <div style={{ overflowX: "auto" }}>
+        <table className="pillars duisui-t">
+          <thead><tr><th>节气</th><th>起</th><th>流月</th><th>司令</th><th>总评</th>{dims.map((k) => <th key={k}>{labels[k]}</th>)}<th>关系 · 神煞</th></tr></thead>
+          <tbody>
+            {d.segments.map((s) => (
+              <tr key={s.index} className={top.has(s.index) ? "hi" : low.has(s.index) ? "lo" : ""}>
+                <td>{s.jieqi}</td><td className="muted">{fmtSG(s.start)}</td><td>{s.liuYue}</td><td className="muted">{s.renYuan}{s.shishenRenYuan}</td>
+                <td><b>{s.overall}</b></td>
+                {dims.map((k) => <td key={k} className="stars">{star(full ? s.scores[k] : s.lite[k])}</td>)}
+                <td className="muted rel">{[...s.relations, ...s.shensha].join("、")}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="muted" style={{ fontSize: ".8rem" }}>上半月以中气前人元司令、下半月以本气司令；交节前后三天为气场切换期，宜静不宜动。</p>
+    </div>
+  );
+}

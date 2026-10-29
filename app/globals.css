@@ -401,3 +401,11 @@ html[lang="ko"] body { font-family: "Noto Sans KR", var(--font-latin); }
 .jb-chips { margin: -4px 0 12px; display: flex; flex-wrap: wrap; gap: 6px; } .jb-chips .chip { width: auto; padding: 4px 12px; font-size: .85rem; border-radius: 999px; } .jb-chips .chip { cursor: pointer; background: transparent; font-family: inherit; }
 .jb-chips .chip:hover { border-color: var(--seal); color: var(--seal); }
 .jb-link { color: var(--jade); text-decoration: none; } .jb-link:hover { text-decoration: underline; }
+
+/* 壺中度歲 廿四节气表 */
+.duisui-t { font-size: .82rem; text-align: left; }
+.duisui-t th, .duisui-t td { padding: 4px 6px; white-space: nowrap; border-bottom: 1px solid var(--line); }
+.duisui-t td.stars { color: var(--gold); letter-spacing: 1px; font-size: .75rem; }
+.duisui-t td.rel { white-space: normal; min-width: 180px; font-size: .75rem; }
+.duisui-t tr.hi td:first-child { color: var(--jade); font-weight: 600; }
+.duisui-t tr.lo td:first-child { color: var(--seal); font-weight: 600; }
