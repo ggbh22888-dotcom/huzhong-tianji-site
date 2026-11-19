@@ -18,6 +18,9 @@ jobs:
       image: mcr.microsoft.com/playwright/python:v1.57.0-noble
       options: --shm-size=1g
     timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
     env:
       NEXT_TELEMETRY_DISABLED: '1'
     steps:
@@ -34,9 +37,9 @@ jobs:
       - run: npm ci
       - run: node scripts/verify-ziwei-styles.mjs
       - run: npm run build
-      - name: Install Chromium and WebKit
+      - name: Install browser test tooling
         run: |
-          pip install playwright==1.57.0
+          python -m pip install playwright==1.57.0
           python -m playwright --version
       - name: Check actual layout and synthetic chart results
         run: |

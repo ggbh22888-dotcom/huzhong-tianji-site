@@ -22,6 +22,9 @@ jobs:
       image: mcr.microsoft.com/playwright/python:v1.57.0-noble
       options: --shm-size=1g
     timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -35,7 +38,7 @@ jobs:
       - run: npm run build
       - name: Verify original sources unchanged and integration repeatable
         run: |
-          git diff --exit-code -- lib public/contact.js public/contact.css public/brand-logo.png public/privacy.html public/terms.html app/pan
+          git -C "$GITHUB_WORKSPACE" -c safe.directory="$GITHUB_WORKSPACE" diff --exit-code -- lib public/contact.js public/contact.css public/brand-logo.png public/privacy.html public/terms.html app/pan
           sha256sum public/home.html > /tmp/home-before.sha
           node scripts/site-continuity.mjs
           sha256sum --check /tmp/home-before.sha
