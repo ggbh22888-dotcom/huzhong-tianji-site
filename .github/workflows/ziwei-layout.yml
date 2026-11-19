@@ -14,6 +14,9 @@ concurrency:
 jobs:
   layout:
     runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright/python:v1.57.0-noble
+      options: --shm-size=1g
     timeout-minutes: 20
     env:
       NEXT_TELEMETRY_DISABLED: '1'
@@ -34,7 +37,7 @@ jobs:
       - name: Install Chromium and WebKit
         run: |
           pip install playwright==1.57.0
-          python -m playwright install --with-deps chromium webkit
+          python -m playwright --version
       - name: Check actual layout and synthetic chart results
         run: |
           npm start > /tmp/hztj-layout.log 2>&1 &

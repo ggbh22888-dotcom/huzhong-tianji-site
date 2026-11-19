@@ -18,6 +18,9 @@ concurrency:
 jobs:
   acceptance:
     runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright/python:v1.57.0-noble
+      options: --shm-size=1g
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -39,7 +42,7 @@ jobs:
       - name: Install browser test tooling
         run: |
           python -m pip install playwright==1.57.0
-          python -m playwright install --with-deps chromium
+          python -m playwright --version
       - name: Start built site and test real customer flows
         run: |
           npm run start > /tmp/hztj-next.log 2>&1 &
