@@ -53,6 +53,15 @@ with sync_playwright() as p:
                 expect(menu).to_have_attribute('aria-expanded','false')
             page.locator('#btn-en').click()
             expect(page.locator('#hzc-heading')).to_have_text('Where would you like to begin?')
+            # The new report preview follows language changes and keyboard selection.
+            tabs = page.get_by_role('tablist', name='Life Book chapters')
+            expect(tabs).to_be_visible()
+            tabs.get_by_role('tab', name='02 Work & direction').click()
+            expect(page.locator('#sheet-title')).to_have_text('Find a way of working that fits.')
+            tabs.get_by_role('tab', name='02 Work & direction').press('End')
+            expect(page.locator('#sheet-page')).to_have_text('05 / 05')
+            expect(page.locator('#report-panel')).to_contain_text('Not a personal chart or prediction.')
+            assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 2'), f'Report overflows at {width}'
             page.locator('.wa-launch').click()
             expect(page.locator('#wa-panel')).to_be_visible()
             href = page.locator('#wa-send').get_attribute('href') or ''

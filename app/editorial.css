@@ -1,0 +1,19 @@
+/* Shared reading surfaces carry the same paper, ink and vermilion identity. */
+:root{--bg:#f6f1e7;--card:#fffcf5;--well:#eee8da;--ink:#203c36;--muted:#646b60;--gold:#8b6b31;--gold-soft:#d6c49b;--seal:#a23f30;--line:#d9d2c1;--jade:#315e50}
+:root[data-theme="dark"]{--bg:#101c18;--card:#192a23;--well:#20372e;--ink:#eee7d6;--muted:#b8c2b6;--gold:#c8ad73;--gold-soft:#6e6445;--seal:#e5947e;--line:#3e5143;--jade:#9bbca4;--on-gold:#17241e}
+body{background-image:none;font-family:"Noto Sans SC","Noto Sans",system-ui,sans-serif}
+main{max-width:1000px;padding:36px 28px 70px}
+h1,h2,h3,h4,.tagline{font-family:"Noto Serif SC","Songti SC",Georgia,serif}
+header{padding-bottom:24px}header::after{height:1px;background:var(--line);width:100%;margin-top:24px}
+.card{border-radius:5px;border:1px solid var(--line);box-shadow:none;padding:30px}
+input,select,textarea{border-radius:3px;min-height:44px}
+button,.btn-gold,.btn-line{border-radius:3px}
+.modes{gap:8px}.modes button{border-radius:3px;min-height:44px;padding:9px 15px}
+.sys-pick{border-radius:3px;min-height:40px;position:relative}.sys-pick input{display:block;position:absolute;width:1px;height:1px;min-height:0;margin:0;opacity:0;overflow:hidden}.sys-pick:focus-within{outline:2px solid var(--seal);outline-offset:3px}
+.reading{max-width:70ch;margin:24px auto 8px;line-height:2.1;font-size:16px}.reading h2{font-family:"Noto Serif SC",serif;font-size:1.25rem;color:var(--ink);border-top:1px solid var(--line);padding-top:22px;margin-top:32px}.reading p{margin-bottom:18px}
+:where(a,button,summary,[tabindex]):focus-visible{outline:2px solid var(--seal);outline-offset:4px}
+@media(max-width:600px){main{padding:24px 16px 55px}.card{padding:22px 17px}.modes{gap:6px}.modes button{font-size:.85rem;padding:8px 10px}.reading{font-size:15px;line-height:2}.reading h2{font-size:1.13rem}h1{font-size:1.7rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+:root[data-theme="dark"] .modes button.on,:root[data-theme="dark"] .btn-gold{color:var(--on-gold)}
+:root[data-theme="dark"] .modes button.on:hover,:root[data-theme="dark"] form>button:hover:not(:disabled){background:#efaa96;color:#17241e}
+:root[data-theme="dark"] .cta{background:var(--card)}
