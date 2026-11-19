@@ -14,3 +14,6 @@ button,.btn-gold,.btn-line{border-radius:3px}
 :where(a,button,summary,[tabindex]):focus-visible{outline:2px solid var(--seal);outline-offset:4px}
 @media(max-width:600px){main{padding:24px 16px 55px}.card{padding:22px 17px}.modes{gap:6px}.modes button{font-size:.85rem;padding:8px 10px}.reading{font-size:15px;line-height:2}.reading h2{font-size:1.13rem}h1{font-size:1.7rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+:root[data-theme="dark"] .modes button.on,:root[data-theme="dark"] .btn-gold{color:var(--on-gold)}
+:root[data-theme="dark"] .modes button.on:hover,:root[data-theme="dark"] form>button:hover:not(:disabled){background:#efaa96;color:#17241e}
+:root[data-theme="dark"] .cta{background:var(--card)}
