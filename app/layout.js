@@ -1,4 +1,5 @@
 import "./globals.css";
+import "./editorial.css";
 
 export const metadata = {
   title: "壶中天机 · 八字排盘",

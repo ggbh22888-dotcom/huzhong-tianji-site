@@ -159,8 +159,11 @@ footer .fine{font-size:12px;color:var(--muted);max-width:560px;margin:26px auto 
 footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
 </style>
 <link rel="stylesheet" href="contact.css">
+<link rel="stylesheet" href="/site-continuity.css">
+<link rel="stylesheet" href="/home-design.css">
 </head>
 <body>
+<a class="skip-link" href="#top" data-design="skip">跳至主要内容</a>
 
 <header>
   <div class="hd">
@@ -170,6 +173,7 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
     </a>
     <nav id="nav">
       <a href="/pan" data-i18n="nav_pan" style="color:var(--seal)">壺中排盤</a>
+      <a id="hzc-ziwei-nav" href="/ziwei-chart" data-hzcopy="ziweiNav">紫微命盘</a>
       <a href="/tools" data-i18n="nav_tools">小工具</a>
       <a href="/articles" data-i18n="nav_articles">文章</a>
       <a href="/classics" data-i18n="nav_classics">典籍</a>
@@ -192,41 +196,29 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
 <!-- ================= 主视觉 ================= -->
 <section class="hero" id="top">
   <div class="wrap hero-grid">
-    <div>
+    <div class="hero-copy">
+      <div class="edition"><span data-design="edition">壶中天机 · 人生参考手册</span><span>SINGAPORE · 中 / EN</span></div>
       <p class="kicker" data-i18n="hero_kicker">八字 · 紫微 · 数字 · 风水方位</p>
       <h1><span data-i18n="h1a">玄夜观星，</span><br><em data-i18n="h1b">指一方吉凶。</em></h1>
       <p data-i18n="hero_desc">把脚步放慢一点。从传统智慧出发，读懂性情、际遇与身边的方位，找到属于自己的方向。</p>
       <div class="cta">
-        <a class="btn btn-gold" href="#services" data-i18n="hero_c1">探索我的命书</a>
+        <a class="btn btn-gold" href="#report" data-design="heroReport">翻开我的命书 <span aria-hidden="true">↗</span></a>
         <a class="btn btn-line" href="/pan" data-i18n="hero_c2">免费开壺排盤 →</a>
       </div>
+      <p class="hero-footnote" data-design="heroNote">观天时 · 知自性 · 择时而行</p>
     </div>
-    <div class="compass-box" aria-hidden="true">
-      <svg viewBox="0 0 400 400" fill="none">
-        <circle cx="200" cy="200" r="190" stroke="#2b2521" stroke-opacity=".12"/>
-        <circle cx="200" cy="200" r="150" stroke="#2b2521" stroke-opacity=".15"/>
-        <circle cx="200" cy="200" r="110" stroke="#a8873f" stroke-opacity=".5"/>
-        <g class="spin-slow">
-          <g stroke="#a8873f" stroke-opacity=".7">
-            <path d="M200 30 L208 90 L200 82 L192 90 Z" fill="#b4432b" fill-opacity=".9"/>
-            <path d="M200 370 L208 310 L200 318 L192 310 Z" fill="#a8873f" fill-opacity=".45"/>
-            <path d="M30 200 L90 208 L82 200 L90 192 Z" fill="#a8873f" fill-opacity=".45"/>
-            <path d="M370 200 L310 208 L318 200 L310 192 Z" fill="#a8873f" fill-opacity=".45"/>
-            <path d="M80 80 L120 120" /><path d="M320 80 L280 120"/><path d="M80 320 L120 280"/><path d="M320 320 L280 280"/>
-          </g>
-          <g fill="#2b2521" fill-opacity=".55" font-size="17" font-family="Noto Serif SC" text-anchor="middle">
-            <text x="200" y="16">北</text><text x="200" y="396">南</text><text x="14" y="206">西</text><text x="386" y="206">东</text>
-          </g>
-        </g>
-        <text x="200" y="192" text-anchor="middle" fill="#a8873f" font-size="34" font-family="Noto Serif SC" font-weight="600">壶中</text>
-        <text x="200" y="232" text-anchor="middle" fill="#a8873f" font-size="34" font-family="Noto Serif SC" font-weight="600">天机</text>
-        <text x="200" y="262" text-anchor="middle" fill="#9AA3AD" font-size="10" letter-spacing="4" font-family="Noto Sans SC">SECRETS OF THE VESSEL</text>
-      </svg>
-    </div>
+    <figure class="vessel-art">
+      <img src="/vessel-stars.webp" width="1344" height="1792" fetchpriority="high" alt="陶壶中升起金色星盘，星图与水墨云纹在墨青色夜空交织">
+      <figcaption><span data-design="artCaption">壶中有天地 · 盘里见人生</span><span>01 / HUZHONG</span></figcaption>
+    </figure>
   </div>
 </section>
 
 <!-- ================= 理念 ================= -->
+<section id="hzc-start" class="hzc-start" data-lang-key="hztj.lang" aria-labelledby="hzc-heading"><div class="wrap"><div class="hzc-intro"><div><p class="hzc-kicker">HUZHONG TIANJI · EXPLORE</p><h2 id="hzc-heading" data-hzcopy="heading">此刻，想从哪里开始？</h2></div><p data-hzcopy="intro">一签、一个方向，或一张命盘。按自己的步调，走进壶中。</p></div><div class="hzc-grid"><a class="hzc-card hzc-daily" href="#daily"><span class="hzc-number" aria-hidden="true">01</span><h3 data-hzcopy="dailyTitle">今日天机</h3><p data-hzcopy="dailyDesc">一页日签，给今天一个安静的开始。</p><span class="hzc-link"><span data-hzcopy="dailyAction">查看今日天机</span><span aria-hidden="true">↗</span></span></a>
+<a class="hzc-card hzc-compass" href="#compass"><span class="hzc-number" aria-hidden="true">02</span><h3 data-hzcopy="compassTitle">壶中罗盘</h3><p data-hzcopy="compassDesc">了解原有个人方位服务与咨询方式。</p><span class="hzc-link"><span data-hzcopy="compassAction">探索壶中罗盘</span><span aria-hidden="true">↗</span></span></a>
+<a class="hzc-card hzc-ziwei" href="/ziwei-chart"><span class="hzc-number" aria-hidden="true">03</span><h3 data-hzcopy="ziweiTitle">紫微命盘</h3><p data-hzcopy="ziweiDesc">从出生资料出发，逐宫查看命盘结构。</p><span class="hzc-link"><span data-hzcopy="ziweiAction">进入紫微命盘</span><span aria-hidden="true">↗</span></span></a>
+<a class="hzc-card hzc-all" href="/pan"><span class="hzc-number" aria-hidden="true">04</span><h3 data-hzcopy="allTitle">综合排盘</h3><p data-hzcopy="allDesc">八字、合盘、问卦、翻牌与其他原有工具。</p><span class="hzc-link"><span data-hzcopy="allAction">查看完整工具</span><span aria-hidden="true">↗</span></span></a></div></div></section>
 <section id="approach">
   <div class="wrap">
     <p class="kicker" data-i18n="ap_k">壶中之道 · OUR APPROACH</p>
@@ -237,6 +229,37 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
       <div class="pillar"><span class="num">02</span><h3 data-i18n="p2t">紫微 · 观人生</h3><p data-i18n="p2d">从十二宫与四化，观察事业、关系及生活面向之间的联系。</p></div>
       <div class="pillar"><span class="num">03</span><h3 data-i18n="p3t">壶中数 · 看日常</h3><p data-i18n="p3d">从生日与身边的数字、方位，寻找日常生活中的另一种解读。</p></div>
     </div>
+  </div>
+</section>
+
+<section id="report" class="report-section" aria-labelledby="report-heading">
+  <div class="wrap">
+    <div class="report-intro">
+      <div><p class="kicker" data-design="reportKicker">一册命书 · THE LIFE BOOK</p><h2 class="title" id="report-heading" data-design="reportTitle">把命盘，读成生活。</h2></div>
+      <p class="sub" data-design="reportDesc">从天性到际遇，从一张盘到下一步。翻开几个篇章，看看一份解读如何与你的生活相连。</p>
+    </div>
+    <div class="report-workspace">
+      <div class="report-index"><p class="index-label" data-design="indexLabel">书中有你关心的事</p>
+        <div class="report-tabs" role="tablist" aria-label="命书篇章" aria-orientation="vertical">
+          <button role="tab" id="report-tab-0" aria-controls="report-panel" aria-selected="true" tabindex="0" data-chapter="0"><span>01</span><b data-design="chapter0">认识自己</b><span aria-hidden="true">↗</span></button>
+          <button role="tab" id="report-tab-1" aria-controls="report-panel" aria-selected="false" tabindex="-1" data-chapter="1"><span>02</span><b data-design="chapter1">事业与方向</b><span aria-hidden="true">↗</span></button>
+          <button role="tab" id="report-tab-2" aria-controls="report-panel" aria-selected="false" tabindex="-1" data-chapter="2"><span>03</span><b data-design="chapter2">关系与相处</b><span aria-hidden="true">↗</span></button>
+          <button role="tab" id="report-tab-3" aria-controls="report-panel" aria-selected="false" tabindex="-1" data-chapter="3"><span>04</span><b data-design="chapter3">人生的时序</b><span aria-hidden="true">↗</span></button>
+          <button role="tab" id="report-tab-4" aria-controls="report-panel" aria-selected="false" tabindex="-1" data-chapter="4"><span>05</span><b data-design="chapter4">日常的行动</b><span aria-hidden="true">↗</span></button>
+        </div>
+        <p class="index-note" data-design="indexNote">八字与紫微合参<br>用生活语言，读懂传统智慧。</p>
+      </div>
+      <article class="report-sheet" id="report-panel" role="tabpanel" aria-labelledby="report-tab-0" tabindex="0">
+        <div class="sheet-top"><span>HUZHONG TIANJI</span><span class="sample-stamp" data-design="sample">阅读示意</span></div>
+        <p class="sheet-chapter" id="sheet-chapter">第一章 · 认识自己</p>
+        <h3 id="sheet-title">读懂天性，也看见可能。</h3>
+        <p class="sheet-lede" id="sheet-lede">从八字与紫微的不同视角，梳理你习惯的思考、表达与行动方式。</p>
+        <div class="sheet-topics" id="sheet-topics"><div><small>天赋</small><p>什么让你做起来更自然？</p></div><div><small>模式</small><p>什么情境容易让你反复消耗？</p></div><div><small>选择</small><p>如何为自己创造合适的环境？</p></div></div>
+        <div class="sheet-reflection"><span data-design="reflection">留一个问题给自己</span><p id="sheet-question">最近一次感到自在而投入，是在做什么？</p></div>
+        <div class="sheet-bottom"><span data-design="sampleNote">内容结构示意，非个人命盘或预测。</span><span id="sheet-page">01 / 05</span></div>
+      </article>
+    </div>
+    <div class="report-bottom"><p data-design="reportFoot">一份可以留存、重读的人生参考。具体内容依所选服务而定。</p><a href="#services" class="text-link" data-design="reportAction">查看命书与咨询 <span aria-hidden="true">↗</span></a></div>
   </div>
 </section>
 
@@ -259,8 +282,8 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
     <p class="sub" style="margin-left:auto;margin-right:auto" data-i18n="dr_d">输入出生日期，开启一支日主人格签。用片刻清静，看看传统命理如何描述您的性情。</p>
     <div class="tool-card" style="text-align:left">
       <div class="f-row">
-        <div><label data-i18n="dr_birth">出生日期（阳历）</label><input type="date" id="drawDate"></div>
-        <div><label data-i18n="dr_time">出生时辰（可选，不确定可留空）</label>
+        <div><label for="drawDate" data-i18n="dr_birth">出生日期（阳历）</label><input type="date" id="drawDate"></div>
+        <div><label for="drawTime" data-i18n="dr_time">出生时辰（可选，不确定可留空）</label>
           <select id="drawTime">
             <option value="" data-i18n="dr_unsure">不确定</option>
             <option>子时 23:00–01:00</option><option>丑时 01:00–03:00</option><option>寅时 03:00–05:00</option>
@@ -272,7 +295,7 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
       </div>
       <button class="btn btn-gold" style="width:100%;justify-content:center" onclick="draw()" data-i18n="dr_go">开启我的一签</button>
       <p class="note" data-i18n="dr_note">生辰仅在您的装置上运算，不会上传或储存。</p>
-      <div class="result" id="drawResult"></div>
+      <div class="result" id="drawResult" role="status" aria-live="polite"></div>
     </div>
   </div>
 </section>
@@ -346,6 +369,7 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
 
 <footer>
   <div class="wrap">
+<a class="hzc-footer-logo" href="#top"><img src="/brand-logo.png" alt="壶中天机 HUZHONG TIANJI" loading="lazy"></a>
     <p class="kicker" data-i18n="ft_k">待君来问 · AN OPEN INVITATION</p>
     <h2 class="title" data-i18n="ft_t">心里有问，不妨坐下聊聊。</h2>
     <a class="mail" href="mailto:dfe22888@gmail.com">dfe22888@gmail.com</a>
@@ -623,5 +647,7 @@ setLang(LANG);
 document.getElementById('drawDate').valueAsDate=new Date(1990,0,1);
 </script>
 <script src="contact.js"></script>
+<script src="/site-continuity.js" defer></script>
+<script src="/report-explorer.js" defer></script>
 </body>
 </html>

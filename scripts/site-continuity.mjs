@@ -19,8 +19,14 @@ assert.ok(langKey && /^[\w.-]+$/.test(langKey), 'Cannot safely find the existing
 if (!html.includes('href="/site-continuity.css"')) {
   insertBefore('</head>', '<link rel="stylesheet" href="/site-continuity.css">');
 }
+if (!html.includes('href="/home-design.css"')) {
+  insertBefore('</head>', '<link rel="stylesheet" href="/home-design.css">');
+}
 if (!html.includes('src="/site-continuity.js"')) {
   insertBefore('</body>', '<script src="/site-continuity.js" defer></script>');
+}
+if (!html.includes('src="/report-explorer.js"')) {
+  insertBefore('</body>', '<script src="/report-explorer.js" defer></script>');
 }
 if (!html.includes('id="hzc-ziwei-nav"')) {
   insertBefore('      <a href="/tools"', '      <a id="hzc-ziwei-nav" href="/ziwei-chart" data-hzcopy="ziweiNav">紫微命盘</a>');
