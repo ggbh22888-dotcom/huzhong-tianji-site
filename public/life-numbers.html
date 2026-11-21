@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f2ea">
+<title>生命的底色 · 壶中数图报告 | 壶中天机 Huzhong Tianji</title>
+<meta name="description" content="《生命的底色》：一份白话写成的个人数字报告。看懂自己的底色、适合的事业方向、未来十年的节奏，以及接下来五年的路线图。A plain-language personal life-numbers report with a five-year roadmap.">
+<link rel="icon" type="image/png" sizes="1024x1024" href="/huzhong-icon-20261016.png">
+<link rel="apple-touch-icon" href="/huzhong-icon-20261016.png">
+<meta property="og:title" content="生命的底色 · 壶中数图报告">
+<meta property="og:description" content="不谈术语，只谈你这个人。白话个人数字报告，附五年路线图。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://huzhongtianji.netlify.app/life-numbers">
+<meta property="og:image" content="https://huzhongtianji.netlify.app/brand-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f2ea; --bg2:#f1ece1; --card:#fffdf8; --text:#2b2521; --muted:#8b8070;
+  --accent:#a8873f; --accent-dim:rgba(168,135,63,.12); --line:#e6dfd0;
+  --seal:#b4432b; --jade:#2f7d5a; --gold-bright:#c9a24d;
+  --serif:"Noto Serif SC",serif; --sans:"Noto Sans SC",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.kicker{font-size:13px;letter-spacing:.22em;color:var(--accent);margin-bottom:12px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.35}
+h2.title{font-size:clamp(26px,4vw,34px)}
+.sub{color:var(--muted);margin-top:10px;max-width:620px}
+section{padding:76px 0;border-top:1px solid var(--line)}
+header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header::after{content:"";display:block;height:3px;background:linear-gradient(90deg,var(--seal) 0 33.3%,var(--gold-bright) 33.3% 66.6%,var(--jade) 66.6%)}
+.hd{max-width:1080px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.hd img{height:44px;width:auto;display:block}
+.hd nav{display:flex;gap:22px;font-size:14px;align-items:center}
+.hd nav a:hover{color:var(--accent)}
+.lang button{border:1px solid var(--line);background:var(--card);padding:4px 10px;font-size:13px;cursor:pointer;color:var(--muted)}
+.lang button.on{background:var(--text);color:#fff;border-color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:2px;font-size:15px;cursor:pointer;border:1px solid transparent;font-family:var(--sans)}
+.btn-gold{background:var(--accent);color:#fff}
+.btn-gold:hover{background:#96772f}
+.btn-line{border-color:var(--text);color:var(--text);background:transparent}
+.btn-line:hover{background:var(--text);color:#fff}
+/* hero */
+.hero{border-top:none;padding:72px 0 64px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(34px,5.4vw,54px);letter-spacing:.04em}
+.hero h1 em{font-style:normal;color:var(--seal)}
+.hero p.lead{margin:18px 0 26px;font-size:17px;max-width:520px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero .fine{margin-top:18px;font-size:13px;color:var(--muted)}
+.chart{background:var(--card);border:1px solid var(--line);padding:18px;box-shadow:0 18px 40px -28px rgba(43,37,33,.35)}
+.chart svg{width:100%;height:auto;display:block}
+.chart figcaption{font-size:12px;color:var(--muted);text-align:center;margin-top:8px;letter-spacing:.1em}
+/* grids */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:34px}
+.card{background:var(--card);border:1px solid var(--line);padding:24px}
+.card .n{font-family:var(--serif);color:var(--accent);font-size:13px;letter-spacing:.2em}
+.card h3{font-size:19px;margin:8px 0 8px}
+.card p{color:#5a5148;font-size:15px}
+.ask{background:var(--bg2)}
+.ask ul{list-style:none;margin-top:26px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px 28px}
+.ask li{padding-left:22px;position:relative;font-family:var(--serif);font-size:17px}
+.ask li::before{content:"";position:absolute;left:0;top:.7em;width:10px;height:1px;background:var(--seal)}
+/* sample */
+.sample{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.page{background:#fff;border:1px solid var(--line);padding:22px 20px;min-height:250px;box-shadow:0 14px 30px -24px rgba(43,37,33,.4)}
+.page .ph{font-family:var(--serif);color:var(--jade);font-size:16px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:12px}
+.page .ph span{color:var(--accent);font-size:12px;margin-right:8px}
+.page p{font-size:13.5px;color:#4d463e;margin-bottom:8px;line-height:1.75}
+.page .tag{display:inline-block;background:var(--jade);color:#fff;border-radius:12px;font-size:11.5px;padding:1px 10px;margin:0 4px 6px 0}
+.page table{width:100%;border-collapse:collapse;font-size:12.5px}
+.page td{border-bottom:1px solid var(--line);padding:6px 4px;vertical-align:top}
+.page td:first-child{color:var(--accent);white-space:nowrap;font-weight:500}
+.samplenote{font-size:13px;color:var(--muted);margin-top:14px}
+/* pricing */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;align-items:stretch}
+.tier{background:var(--card);border:1px solid var(--line);padding:28px 24px;display:flex;flex-direction:column}
+.tier.main{border:1.5px solid var(--accent);position:relative}
+.tier.main::before{content:attr(data-flag);position:absolute;top:-12px;left:24px;background:var(--accent);color:#fff;font-size:12px;padding:2px 12px;letter-spacing:.1em}
+.tier h3{font-size:20px}
+.tier .price{font-family:var(--serif);font-size:34px;margin:10px 0 2px}
+.tier .price small{font-size:14px;color:var(--muted);margin-right:6px}
+.tier .for{color:var(--muted);font-size:14px;margin-bottom:14px}
+.tier ul{list-style:none;margin-bottom:22px;flex:1}
+.tier li{padding-left:20px;position:relative;font-size:14.5px;margin:7px 0}
+.tier li::before{content:"✓";position:absolute;left:0;color:var(--jade);font-weight:700}
+.tier .btn{justify-content:center}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:34px}
+.step .n{font-family:var(--serif);font-size:28px;color:var(--accent)}
+.step h3{font-size:17px;margin:4px 0 6px}
+.step p{font-size:14.5px;color:#5a5148}
+/* form */
+.form{background:var(--card);border:1px solid var(--line);padding:30px;margin-top:34px;max-width:760px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.f-one{margin-bottom:16px}
+label{display:block;font-size:13.5px;color:#5a5148;margin-bottom:6px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--line);background:#fff;font-family:var(--sans);font-size:15px;color:var(--text);border-radius:2px}
+textarea{min-height:76px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent-dim);border-color:var(--accent)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:#5a5148;margin:6px 0 18px}
+.consent input{width:auto;margin-top:5px}
+.err{color:var(--seal);font-size:14px;margin-top:10px;min-height:1.4em}
+.note{font-size:13px;color:var(--muted);margin-top:12px}
+/* faq */
+details{border-bottom:1px solid var(--line);padding:16px 0;max-width:760px}
+summary{cursor:pointer;font-family:var(--serif);font-size:17px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--accent)}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:#5a5148;font-size:15px}
+footer{padding:44px 0 60px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+footer a{border-bottom:1px dashed var(--muted)}
+@media(max-width:860px){
+  .hero-grid,.grid3,.grid2,.sample,.tiers,.steps,.f-row,.ask ul{grid-template-columns:1fr}
+  .hd nav a.hide-m{display:none}
+  section{padding:56px 0}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="hd">
+    <a href="/"><img src="/brand-logo.png" alt="壶中天机 HUZHONG TIANJI"></a>
+    <nav>
+      <a class="hide-m" href="#inside" data-i18n="nav1">报告内容</a>
+      <a class="hide-m" href="#pricing" data-i18n="nav2">价格</a>
+      <a class="hide-m" href="#order" data-i18n="nav3">订购</a>
+      <a class="hide-m" href="/" data-i18n="nav4">回首页</a>
+      <span class="lang"><button id="btn-zh" class="on" onclick="setLang('zh')">中</button><button id="btn-en" onclick="setLang('en')">EN</button></span>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker" data-i18n="h_k">壶中数图 · 个人报告</p>
+      <h1><span data-i18n="h_1">生命的</span><em data-i18n="h_2">底色</em></h1>
+      <p class="lead" data-i18n="h_lead">不谈术语，只谈你这个人。一份用白话写成的个人报告：你是什么样的人，适合往哪里走，接下来五年先做什么、再做什么。</p>
+      <div class="cta">
+        <a class="btn btn-gold" href="#order" data-i18n="h_c1">订购我的报告</a>
+        <a class="btn btn-line" href="#inside" data-i18n="h_c2">先看报告里有什么</a>
+      </div>
+      <p class="fine" data-i18n="h_fine">中文或英文 · A4 PDF · 只需要公历出生日期，不需要出生时间</p>
+    </div>
+    <figure class="chart">
+      <svg viewBox="0 0 600 560" xmlns="http://www.w3.org/2000/svg" font-family="Noto Sans SC, sans-serif" role="img" aria-label="壶中数图示例">
+        <circle cx="300" cy="290" r="258" fill="none" stroke="#c9cf9c" stroke-width="2"/>
+        <circle cx="300" cy="290" r="240" fill="none" stroke="#d9ddb6" stroke-width="1.2"/>
+        <g fill="#5b2d8e" font-weight="700" text-anchor="middle">
+          <text x="300" y="60" font-size="17" data-i18n="c_top">事业 · 发展</text>
+          <text x="300" y="84" font-size="13">41–60</text>
+          <text x="84" y="282" font-size="15" data-i18n="c_left">工作 · 人际</text>
+          <text x="84" y="302" font-size="12">21–40</text>
+          <text x="516" y="282" font-size="15" data-i18n="c_right">家庭 · 财富</text>
+          <text x="516" y="302" font-size="12">61+</text>
+        </g>
+        <polyline points="160,330 300,178 440,330" fill="none" stroke="#5b2d8e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="185" y1="345" x2="415" y2="345" stroke="#5b2d8e" stroke-width="3"/>
+        <line x1="300" y1="345" x2="300" y2="455" stroke="#5b2d8e" stroke-width="3"/>
+        <line x1="190" y1="398" x2="410" y2="398" stroke="#5b2d8e" stroke-width="3"/>
+        <line x1="180" y1="455" x2="420" y2="455" stroke="#5b2d8e" stroke-width="3"/>
+        <g fill="#b9a9cf" font-weight="700" text-anchor="middle" font-size="24">
+          <text x="300" y="150" font-size="32">?</text>
+          <text x="255" y="385">?</text><text x="345" y="385">?</text>
+          <text x="215" y="442">?</text><text x="268" y="442">?</text><text x="332" y="442">?</text><text x="385" y="442">?</text>
+        </g>
+        <circle cx="300" cy="275" r="29" fill="#8dc04f"/>
+        <text x="300" y="285" fill="#fff" font-size="26" font-weight="700" text-anchor="middle">?</text>
+        <g fill="#d23b2c" font-size="16" text-anchor="middle"><text x="300" y="228">★</text><text x="176" y="452">★</text><text x="424" y="452">★</text></g>
+        <g font-weight="700" text-anchor="middle" font-size="14">
+          <text x="300" y="498" fill="#6aa23a" data-i18n="c_core">本我 · 天赋与性格</text>
+          <text x="300" y="520" fill="#d24a3c" data-i18n="c_inner">自我 · 期望与感受</text>
+          <text x="300" y="542" fill="#1f3a68" data-i18n="c_social">社会我 · 行为与模式</text>
+        </g>
+      </svg>
+      <figcaption data-i18n="c_cap">你的壶中数图 · 正中间是你的主性格</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="ask">
+  <div class="wrap">
+    <p class="kicker" data-i18n="a_k">这份报告回答的问题</p>
+    <h2 class="title" data-i18n="a_t">读完，你会更清楚这几件事。</h2>
+    <ul>
+      <li data-i18n="a_1">我为什么总是这样做决定？</li>
+      <li data-i18n="a_2">我适合做什么，怎么判断一个机会？</li>
+      <li data-i18n="a_3">我的钱从哪里来，哪几年要谨慎？</li>
+      <li data-i18n="a_4">我在关系里需要什么，容易卡在哪里？</li>
+      <li data-i18n="a_5">未来一年和十年，各是什么节奏？</li>
+      <li data-i18n="a_6">我现在最想解决的事，下一步怎么走？</li>
+    </ul>
+  </div>
+</section>
+
+<section id="inside">
+  <div class="wrap">
+    <p class="kicker" data-i18n="i_k">报告内容 · INSIDE THE REPORT</p>
+    <h2 class="title" data-i18n="i_t">九个章节，一张速记卡。</h2>
+    <p class="sub" data-i18n="i_d">完整报告约十二页。每一节都用日常的话写，读得懂，也用得上。</p>
+    <div class="grid3">
+      <div class="card"><span class="n">01</span><h3 data-i18n="i1t">你的壶中数图</h3><p data-i18n="i1d">一张属于你的图。主性格、打动你的入口、心里真正在意的事，一眼看到。</p></div>
+      <div class="card"><span class="n">02</span><h3 data-i18n="i2t">你的底色</h3><p data-i18n="i2d">天赋是什么，心里期待什么，状态好和不好时各是什么样子，掉进低状态时怎么出来。</p></div>
+      <div class="card"><span class="n">03</span><h3 data-i18n="i3t">天赋与盲点</h3><p data-i18n="i3d">你天生有的、天生没有的。没有的那几样，可以向自己的哪个长处去借。</p></div>
+      <div class="card"><span class="n">04</span><h3 data-i18n="i4t">事业与财富</h3><p data-i18n="i4d">适合的方向排出先后。判断一个机会的三个问题。钱的来路，和最容易漏掉的地方。</p></div>
+      <div class="card"><span class="n">05</span><h3 data-i18n="i5t">感情与关系</h3><p data-i18n="i5d">你需要什么、带来什么、容易卡在哪里，以及一段可以直接给身边人看的相处说明。</p></div>
+      <div class="card"><span class="n">06</span><h3 data-i18n="i6t">人生三季</h3><p data-i18n="i6d">21 岁以后分三段，每段二十年。每一段的生活重心，和要练的本事。</p></div>
+      <div class="card"><span class="n">07</span><h3 data-i18n="i7t">未来一年</h3><p data-i18n="i7d">这一年的主题、适合做的事和要留意的事。</p></div>
+      <div class="card"><span class="n">08</span><h3 data-i18n="i8t">未来十年</h3><p data-i18n="i8d">一张表看完十年：哪一年播种，哪一年收成，哪几年做大决定要谨慎。</p></div>
+      <div class="card"><span class="n">09</span><h3 data-i18n="i9t">你的路线图</h3><p data-i18n="i9d">从你填写的「现在最想解决的事」写起，分五个阶段：先做什么、再做什么、什么时候看结果。</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker" data-i18n="s_k">报告示例 · SAMPLE</p>
+    <h2 class="title" data-i18n="s_t">它读起来是这样的。</h2>
+    <div class="sample">
+      <div class="page">
+        <div class="ph"><span>02</span><b data-i18n="s1h">你的底色</b></div>
+        <p data-i18n="s1a">你做事凭感觉，旁人看来像跳来跳去。但只要目标是自己定的，你一定做到。</p>
+        <p data-i18n="s1b">你真正的坑不是能力不够，而是没有方向的时候会停住。先找到方向，再谈努力。</p>
+        <span class="tag" data-i18n="s1t1">#做自己</span><span class="tag" data-i18n="s1t2">#使命必达</span>
+      </div>
+      <div class="page">
+        <div class="ph"><span>04</span><b data-i18n="s2h">判断一个机会，问三件事</b></div>
+        <table>
+          <tr><td data-i18n="s2a">想不想</td><td data-i18n="s2ad">这是不是你自己想要的方向。</td></tr>
+          <tr><td data-i18n="s2b">适不适合</td><td data-i18n="s2bd">有没有自主空间，对方尊不尊重你。</td></tr>
+          <tr><td data-i18n="s2c">会不会</td><td data-i18n="s2cd">能力最后才看，缺的可以学、可以找搭档。</td></tr>
+        </table>
+      </div>
+      <div class="page">
+        <div class="ph"><span>09</span><b data-i18n="s3h">路线图</b></div>
+        <table>
+          <tr><td data-i18n="s3a">第一年</td><td data-i18n="s3ad">选定一条主线，写成三步计划。</td></tr>
+          <tr><td data-i18n="s3b">第二年</td><td data-i18n="s3bd">找一位能补你短处的伙伴。</td></tr>
+          <tr><td data-i18n="s3c">第三年</td><td data-i18n="s3cd">推出来，拿到第一批结果。</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="samplenote" data-i18n="s_note">以上是示例文字，用来说明写法。你的报告会按你的出生日期和你填写的问题来写。</p>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <p class="kicker" data-i18n="p_k">价格 · PRICING</p>
+    <h2 class="title" data-i18n="p_t">三种深度，按需要选。</h2>
+    <div class="tiers">
+      <div class="tier">
+        <h3 data-i18n="p1h">壶中数图 · 入门</h3>
+        <div class="price"><small>SGD</small>19</div>
+        <p class="for" data-i18n="p1f">想先认识自己</p>
+        <ul>
+          <li data-i18n="p1a">你的壶中数图</li>
+          <li data-i18n="p1b">「你是几号人」一页卡片</li>
+          <li data-i18n="p1c">未来一年的主题</li>
+        </ul>
+        <a class="btn btn-line" href="#order" onclick="pick('starter')" data-i18n="p_btn">选这一档</a>
+      </div>
+      <div class="tier main" data-flag="推荐" id="tierMain">
+        <h3 data-i18n="p2h">生命的底色 · 完整报告</h3>
+        <div class="price"><small>SGD</small>68</div>
+        <p class="for" data-i18n="p2f">想知道接下来怎么走</p>
+        <ul>
+          <li data-i18n="p2a">全部九个章节和速记卡，约十二页 A4 PDF</li>
+          <li data-i18n="p2b">事业、财富、感情与关系</li>
+          <li data-i18n="p2c">未来一年和十年的节奏</li>
+          <li data-i18n="p2d">按你的问题写的五年路线图</li>
+        </ul>
+        <a class="btn btn-gold" href="#order" onclick="pick('full')" data-i18n="p_btn">选这一档</a>
+      </div>
+      <div class="tier">
+        <h3 data-i18n="p3h">完整报告 + 一对一解读</h3>
+        <div class="price"><small>SGD</small>188</div>
+        <p class="for" data-i18n="p3f">想当面问清楚</p>
+        <ul>
+          <li data-i18n="p3a">完整报告的全部内容</li>
+          <li data-i18n="p3b">30 分钟线上一对一解读</li>
+          <li data-i18n="p3c">可以就报告内容提问</li>
+        </ul>
+        <a class="btn btn-line" href="#order" onclick="pick('session')" data-i18n="p_btn">选这一档</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker" data-i18n="st_k">怎么开始 · HOW IT WORKS</p>
+    <h2 class="title" data-i18n="st_t">四步，拿到你的报告。</h2>
+    <div class="steps">
+      <div class="step"><span class="n">01</span><h3 data-i18n="st1t">填写资料</h3><p data-i18n="st1d">出生日期，加上几个简单的问题。</p></div>
+      <div class="step"><span class="n">02</span><h3 data-i18n="st2t">WhatsApp 确认</h3><p data-i18n="st2d">资料会带到 WhatsApp，由你自己按发送。</p></div>
+      <div class="step"><span class="n">03</span><h3 data-i18n="st3t">付款</h3><p data-i18n="st3d">我们回复付款链接和预计交付时间。</p></div>
+      <div class="step"><span class="n">04</span><h3 data-i18n="st4t">收到报告</h3><p data-i18n="st4d">PDF 报告通过 WhatsApp 或电邮发给你。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="order">
+  <div class="wrap">
+    <p class="kicker" data-i18n="o_k">订购 · ORDER</p>
+    <h2 class="title" data-i18n="o_t">告诉我们一点关于你的事。</h2>
+    <p class="sub" data-i18n="o_d">问题答得越具体，路线图写得越准。带 * 的是必填。</p>
+    <form class="form" id="orderForm" onsubmit="return sendOrder(event)">
+      <div class="f-row">
+        <div><label for="fTier" data-i18n="f_tier">选择档次 *</label>
+          <select id="fTier" required>
+            <option value="full" data-i18n="f_tier2">完整报告 · SGD 68</option>
+            <option value="starter" data-i18n="f_tier1">入门 · SGD 19</option>
+            <option value="session" data-i18n="f_tier3">完整报告 + 一对一解读 · SGD 188</option>
+          </select></div>
+        <div><label for="fLang" data-i18n="f_lang">报告语言 *</label>
+          <select id="fLang" required><option value="中文" data-i18n="f_lang1">中文</option><option value="English">English</option></select></div>
+      </div>
+      <div class="f-row">
+        <div><label for="fName" data-i18n="f_name">称呼（会印在封面）*</label><input id="fName" required maxlength="60" autocomplete="name"></div>
+        <div><label for="fDob" data-i18n="f_dob">公历出生日期 *</label><input id="fDob" type="date" required></div>
+      </div>
+      <div class="f-row">
+        <div><label for="fSex" data-i18n="f_sex">性别 *</label>
+          <select id="fSex" required><option value="女" data-i18n="f_sex1">女</option><option value="男" data-i18n="f_sex2">男</option></select></div>
+        <div><label for="fTopic" data-i18n="f_topic">现在最想解决的是什么？*</label>
+          <select id="fTopic" required>
+            <option data-i18n="f_t1">事业方向</option><option data-i18n="f_t2">收入与财富</option>
+            <option data-i18n="f_t3">感情与关系</option><option data-i18n="f_t4">家人相处</option><option data-i18n="f_t5">其他</option>
+          </select></div>
+      </div>
+      <div class="f-one"><label for="fWork" data-i18n="f_work">现在在做什么工作？（受雇、自己做，还是待业）</label><input id="fWork" maxlength="160"></div>
+      <div class="f-one"><label for="fOpt" data-i18n="f_opt">手上有哪些选项，或正在考虑的决定？</label><textarea id="fOpt" maxlength="400"></textarea></div>
+      <div class="f-row">
+        <div><label for="fRel" data-i18n="f_rel">感情状况</label>
+          <select id="fRel"><option value="" data-i18n="f_r0">不填</option><option data-i18n="f_r1">单身</option><option data-i18n="f_r2">交往中</option><option data-i18n="f_r3">已婚</option><option data-i18n="f_r4">分开</option></select></div>
+        <div><label for="fFor" data-i18n="f_for">这份报告给谁读？</label>
+          <select id="fFor"><option data-i18n="f_for1">我自己</option><option data-i18n="f_for2">我替家人或朋友订</option></select></div>
+      </div>
+      <label class="consent"><input type="checkbox" id="fOk" required><span data-i18n="f_ok">我同意壶中天机使用以上资料来撰写这份报告。资料不会提供给第三方。</span></label>
+      <button class="btn btn-gold" type="submit" data-i18n="f_go">带着资料到 WhatsApp 下单</button>
+      <p class="err" id="fErr" role="alert"></p>
+      <p class="note" data-i18n="f_note">这个表单不会把资料存到网站上。按下按钮后，资料会整理成一段文字带到 WhatsApp，由你自己发送。详见 <a href="/privacy.html" style="border-bottom:1px dashed var(--muted)">隐私说明</a> 与 <a href="/terms.html" style="border-bottom:1px dashed var(--muted)">服务条款</a>。</p>
+    </form>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker" data-i18n="q_k">常见问题 · FAQ</p>
+    <h2 class="title" data-i18n="q_t">下单前，你可能想知道。</h2>
+    <div style="margin-top:22px">
+      <details><summary data-i18n="q1">这是算命吗？</summary><p data-i18n="q1a">不是。这份报告用你的出生日期来看性格倾向和人生节奏，帮你认识自己、找到着力点。它不预言结果，也不替你做决定。</p></details>
+      <details><summary data-i18n="q2">需要出生时间吗？</summary><p data-i18n="q2a">不需要。只要公历的出生年、月、日。</p></details>
+      <details><summary data-i18n="q3">报告是自动生成的吗？</summary><p data-i18n="q3a">数图和年份由系统计算。路线图会按你填写的问题来写，所以表单里的问题请尽量具体。</p></details>
+      <details><summary data-i18n="q4">可以替家人或朋友订吗？</summary><p data-i18n="q4a">可以。请先得到对方同意，再提供对方的出生日期。</p></details>
+      <details><summary data-i18n="q5">多久可以收到？</summary><p data-i18n="q5a">确认订单时，我们会在 WhatsApp 告诉你预计的交付时间。</p></details>
+      <details><summary data-i18n="q6">报告会谈健康、投资吗？</summary><p data-i18n="q6a">不会给医疗或投资结论。报告里关于年份的提醒只是参考，不能代替医生、律师或财务顾问的专业意见。</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p data-i18n="ft">传统文化与个人参考。生命数字是一套观察人的工具，用来理解倾向、找着力点，不是判决书，也不替代医疗、法律、投资或其他专业意见。</p>
+    <p style="margin-top:10px">壶中天机 HUZHONG TIANJI · WhatsApp +65 8014 8899 · <a href="mailto:dfe22888@gmail.com">dfe22888@gmail.com</a> · <a href="/privacy.html" data-i18n="ft_p">隐私</a> · <a href="/terms.html" data-i18n="ft_t">条款</a></p>
+  </div>
+</footer>
+
+<script>
+var WHATSAPP_NUMBER='6580148899';
+var LANG=(function(){try{return localStorage.getItem('hz-lang')||'zh'}catch(e){return 'zh'}})();
+var EN={
+ nav1:"What's inside",nav2:"Pricing",nav3:"Order",nav4:"Home",
+ h_k:"HUZHONG LIFE NUMBERS · PERSONAL REPORT",h_1:"The Colour of ",h_2:"Your Life",
+ h_lead:"No jargon. Just you, as a person. A personal report in plain language: what kind of person you are, which direction suits you, and what to do first and next over the coming five years.",
+ h_c1:"Order my report",h_c2:"See what's inside",
+ h_fine:"Chinese or English · A4 PDF · Date of birth only, no birth time needed",
+ c_top:"Career · Growth",c_left:"Work · People",c_right:"Family · Wealth",
+ c_core:"Core self · talent and personality",c_inner:"Inner self · hopes and feelings",c_social:"Social self · behaviour and patterns",
+ c_cap:"Your chart · your main number sits in the centre",
+ a_k:"WHAT THIS REPORT ANSWERS",a_t:"After reading, these get clearer.",
+ a_1:"Why do I keep deciding things this way?",a_2:"What work suits me, and how do I judge an opportunity?",
+ a_3:"Where does my money come from, and which years call for care?",a_4:"What do I need in relationships, and where do I get stuck?",
+ a_5:"What is the rhythm of my next year and next ten years?",a_6:"For the thing I most want to solve now, what is the next step?",
+ i_k:"INSIDE THE REPORT",i_t:"Nine sections and a summary card.",i_d:"The full report runs about twelve pages. Every section is written in everyday language you can read and use.",
+ i1t:"Your chart",i1d:"A chart of your own. Your main number, what first moves you, and what you really care about, at a glance.",
+ i2t:"Your base colour",i2d:"Your talent, what you hope for, how you are at your best and worst, and how to get out of a low state.",
+ i3t:"Gifts and blind spots",i3d:"What you were born with and without, and which of your strengths can stand in for what is missing.",
+ i4t:"Work and money",i4d:"Suitable directions, ranked. Three questions for judging an opportunity. Where your money comes from and where it leaks.",
+ i5t:"Love and relationships",i5d:"What you need, what you bring, where you get stuck, and a short guide you can show the people around you.",
+ i6t:"Three seasons of life",i6d:"Adult life in three stages of twenty years. What each stage centres on and the skill it asks you to practise.",
+ i7t:"The year ahead",i7d:"The theme of the year, what suits it and what to watch.",
+ i8t:"The next ten years",i8d:"Ten years in one table: which year to plant, which to harvest, and which years call for care with big decisions.",
+ i9t:"Your roadmap",i9d:"Starts from the thing you told us you most want to solve, in five stages: what first, what next, and when to expect results.",
+ s_k:"SAMPLE",s_t:"This is how it reads.",
+ s1h:"Your base colour",s1a:"You act on feeling, and to others it can look like jumping around. But once the goal is your own, you get there.",
+ s1b:"Your real trap is not a lack of ability. It is stalling when you have no direction. Find the direction first, then talk about effort.",
+ s1t1:"#be yourself",s1t2:"#gets it done",
+ s2h:"Three questions for any opportunity",s2a:"Do I want it",s2ad:"Is this a direction you chose yourself?",
+ s2b:"Does it suit me",s2bd:"Is there room to decide, and are you respected?",s2c:"Can I do it",s2cd:"Skill comes last. Gaps can be learned or covered by a partner.",
+ s3h:"Roadmap",s3a:"Year one",s3ad:"Pick one main line and write it as a three-step plan.",s3b:"Year two",s3bd:"Find a partner who covers your gaps.",s3c:"Year three",s3cd:"Launch and get the first visible results.",
+ s_note:"The text above is a sample to show the style. Your report is written from your date of birth and the questions you answer.",
+ p_k:"PRICING",p_t:"Three depths. Choose what you need.",p_btn:"Choose this",
+ p1h:"Life Numbers · Starter",p1f:"To get to know yourself first",p1a:"Your chart",p1b:"A one-page \"which number are you\" card",p1c:"The theme of your year ahead",
+ p2h:"The Colour of Your Life · Full report",p2f:"To know what to do next",p2a:"All nine sections and the summary card, about twelve A4 pages",p2b:"Work, money, love and relationships",p2c:"The rhythm of your next year and ten years",p2d:"A five-year roadmap written around your question",
+ p3h:"Full report + one-to-one session",p3f:"To ask in person",p3a:"Everything in the full report",p3b:"A 30-minute online one-to-one session",p3c:"Ask questions about your report",
+ st_k:"HOW IT WORKS",st_t:"Four steps to your report.",
+ st1t:"Fill in your details",st1d:"Your date of birth and a few simple questions.",st2t:"Confirm on WhatsApp",st2d:"Your details are carried into WhatsApp. You press send yourself.",
+ st3t:"Pay",st3d:"We reply with a payment link and the expected delivery time.",st4t:"Receive your report",st4d:"The PDF is sent to you by WhatsApp or email.",
+ o_k:"ORDER",o_t:"Tell us a little about you.",o_d:"The more specific your answers, the more precise your roadmap. Fields marked * are required.",
+ f_tier:"Choose a tier *",f_tier1:"Starter · SGD 19",f_tier2:"Full report · SGD 68",f_tier3:"Full report + one-to-one session · SGD 188",
+ f_lang:"Report language *",f_lang1:"Chinese",f_name:"Name (printed on the cover) *",f_dob:"Date of birth *",f_sex:"Sex *",f_sex1:"Female",f_sex2:"Male",
+ f_topic:"What do you most want to solve now? *",f_t1:"Career direction",f_t2:"Income and wealth",f_t3:"Love and relationships",f_t4:"Family",f_t5:"Other",
+ f_work:"What work do you do now? (employed, self-employed, or between jobs)",f_opt:"What options or decisions are you considering?",
+ f_rel:"Relationship status",f_r0:"Prefer not to say",f_r1:"Single",f_r2:"In a relationship",f_r3:"Married",f_r4:"Separated",
+ f_for:"Who will read this report?",f_for1:"Myself",f_for2:"I am ordering for family or a friend",
+ f_ok:"I agree that Huzhong Tianji may use these details to write this report. They will not be shared with third parties.",
+ f_go:"Take my details to WhatsApp and order",
+ f_note:"This form does not store your details on the website. When you press the button, they are put into a WhatsApp message for you to send yourself. See the <a href=\"/privacy.html\" style=\"border-bottom:1px dashed var(--muted)\">privacy notice</a> and <a href=\"/terms.html\" style=\"border-bottom:1px dashed var(--muted)\">terms</a>.",
+ q_k:"FAQ",q_t:"Before you order.",
+ q1:"Is this fortune-telling?",q1a:"No. The report uses your date of birth to describe tendencies and the rhythm of your years, to help you understand yourself and see where to put effort. It does not predict outcomes or decide for you.",
+ q2:"Do you need my time of birth?",q2a:"No. Only the year, month and day.",
+ q3:"Is the report auto-generated?",q3a:"The chart and the years are calculated by our system. The roadmap is written around the questions you answer, so please be as specific as you can.",
+ q4:"Can I order for family or a friend?",q4a:"Yes. Please get their consent before giving us their date of birth.",
+ q5:"How long does it take?",q5a:"When we confirm your order on WhatsApp, we will tell you the expected delivery time.",
+ q6:"Does the report cover health or investments?",q6a:"It gives no medical or investment conclusions. Notes about particular years are for reference only and do not replace advice from a doctor, lawyer or financial adviser.",
+ ft:"For cultural and personal reference. Life numbers are a tool for understanding tendencies and seeing where to put effort. They are not a verdict and do not replace medical, legal, investment or other professional advice.",
+ ft_p:"Privacy",ft_t:"Terms"
+};
+var ZH={};
+document.querySelectorAll('[data-i18n]').forEach(function(el){ZH[el.getAttribute('data-i18n')]=el.innerHTML;});
+function setLang(l){
+  LANG=l; try{localStorage.setItem('hz-lang',l)}catch(e){}
+  document.getElementById('btn-zh').classList.toggle('on',l==='zh');
+  document.getElementById('btn-en').classList.toggle('on',l==='en');
+  document.documentElement.lang=l==='zh'?'zh-Hans':'en';
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k=el.getAttribute('data-i18n'); var v=(l==='en'?EN[k]:ZH[k]); if(v!==undefined) el.innerHTML=v;
+  });
+  document.getElementById('tierMain').setAttribute('data-flag',l==='en'?'Recommended':'推荐');
+}
+function pick(v){document.getElementById('fTier').value=v;}
+function val(id){return document.getElementById(id).value.trim();}
+function sel(id){var s=document.getElementById(id);return s.options[s.selectedIndex].text;}
+function sendOrder(e){
+  e.preventDefault();
+  var err=document.getElementById('fErr'); err.textContent='';
+  var dob=val('fDob');
+  if(!dob||new Date(dob)>new Date()){err.textContent=LANG==='en'?'Please enter a valid date of birth.':'请填写正确的出生日期。';return false;}
+  var lines=[
+    '【生命的底色 · 订购 / Order】',
+    '档次 Tier: '+sel('fTier'),
+    '报告语言 Language: '+val('fLang'),
+    '称呼 Name: '+val('fName'),
+    '出生日期 DOB: '+dob,
+    '性别 Sex: '+sel('fSex'),
+    '最想解决 Focus: '+sel('fTopic')
+  ];
+  if(val('fWork')) lines.push('现在的工作 Work: '+val('fWork'));
+  if(val('fOpt')) lines.push('选项 Options: '+val('fOpt'));
+  if(val('fRel')) lines.push('感情状况 Status: '+sel('fRel'));
+  lines.push('给谁读 For: '+sel('fFor'));
+  window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(lines.join('\n')),'_blank','noopener');
+  return false;
+}
+if(LANG==='en') setLang('en');
+</script>
+</body>
+</html>
