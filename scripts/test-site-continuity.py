@@ -62,6 +62,30 @@ with sync_playwright() as p:
             expect(page.locator('#sheet-page')).to_have_text('05 / 05')
             expect(page.locator('#report-panel')).to_contain_text('Not a personal chart or prediction.')
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 2'), f'Report overflows at {width}'
+            # Layout adapters must preserve all purchase routes after language re-rendering.
+            services = page.locator('#svcGrid .svc')
+            expect(services).to_have_count(8)
+            expect(page.locator('#svcGrid a[href^="https://buy.stripe.com/"]')).to_have_count(8)
+            assert page.locator('#svcGrid .svc-price').all_text_contents() == ['SGD 38', 'SGD 68', 'SGD 38', 'SGD 108', 'SGD 68', 'SGD 68', 'SGD 168', 'SGD 38']
+            if width <= 620:
+                # Keyboard users can reach the final card in the horizontal mobile rail.
+                services.last.locator('a.btn').focus()
+                assert page.locator('#svcGrid').evaluate('(el) => el.scrollLeft > 0')
+                assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 2')
+            # The moved result area must replace the empty slip and show a real local draw.
+            page.locator('#drawDate').fill('1990-01-01')
+            page.get_by_role('button', name='Reveal my draw', exact=True).click()
+            expect(page.locator('#drawResult')).to_be_visible()
+            expect(page.locator('#drawResult .gz')).to_have_text('戊辰')
+            expect(page.locator('.draw-empty')).not_to_be_visible()
+            # Reparenting the daily almanac must not break the existing date controls.
+            before = page.locator('#dailyDate').inner_text()
+            page.get_by_role('button', name='Next →', exact=True).click()
+            expect(page.locator('#dailyDate')).not_to_have_text(before)
+            expect(page.locator('.daily-layout > .almanac')).to_have_count(1)
+            page.get_by_role('button', name='← Prev', exact=True).click()
+            expect(page.locator('#dailyDate')).to_have_text(before)
+            expect(page.locator('#fService option')).to_have_count(8)
             page.locator('.wa-launch').click()
             expect(page.locator('#wa-panel')).to_be_visible()
             href = page.locator('#wa-send').get_attribute('href') or ''

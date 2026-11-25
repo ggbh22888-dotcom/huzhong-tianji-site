@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"壶中天机 Huzhong Tianji","url":"https://huzhongtianji.netlify.app/","description":"八字、紫微、数字解读与个人风水方位建议 / Four Pillars, Zi Wei Dou Shu, numerology and personal feng shui direction readings.","areaServed":"SG","priceRange":"SGD 38 - 168","email":"dfe22888@gmail.com"}
 </script>
@@ -195,9 +195,10 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
 
 <!-- ================= 主视觉 ================= -->
 <section class="hero" id="top">
+  <div class="sky-orbit" aria-hidden="true"><span>乾</span><span>坤</span><span>离</span><span>坎</span></div>
   <div class="wrap hero-grid">
+    <div class="edition"><span data-design="edition">壶中天机 · 人生参考手册</span><span>SINGAPORE · 中 / EN</span></div>
     <div class="hero-copy">
-      <div class="edition"><span data-design="edition">壶中天机 · 人生参考手册</span><span>SINGAPORE · 中 / EN</span></div>
       <p class="kicker" data-i18n="hero_kicker">八字 · 紫微 · 数字 · 风水方位</p>
       <h1><span data-i18n="h1a">玄夜观星，</span><br><em data-i18n="h1b">指一方吉凶。</em></h1>
       <p data-i18n="hero_desc">把脚步放慢一点。从传统智慧出发，读懂性情、际遇与身边的方位，找到属于自己的方向。</p>
@@ -205,29 +206,31 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
         <a class="btn btn-gold" href="#report" data-design="heroReport">翻开我的命书 <span aria-hidden="true">↗</span></a>
         <a class="btn btn-line" href="/pan" data-i18n="hero_c2">免费开壺排盤 →</a>
       </div>
-      <p class="hero-footnote" data-design="heroNote">观天时 · 知自性 · 择时而行</p>
+      <div class="hero-footnote"><span class="ink-seal" aria-hidden="true">观天<br>知命</span><p data-design="heroNote">观天时 · 知自性 · 择时而行</p></div>
     </div>
     <figure class="vessel-art">
-      <img src="/vessel-stars.webp" width="1344" height="1792" fetchpriority="high" alt="陶壶中升起金色星盘，星图与水墨云纹在墨青色夜空交织">
+      <div class="art-frame framed"><img src="/vessel-ink.webp" width="1440" height="1920" fetchpriority="high" alt="米白宣纸上的水墨茶壶与金色星图"><span class="art-ribbon" data-design="artRibbon">一壶一世界</span></div>
       <figcaption><span data-design="artCaption">壶中有天地 · 盘里见人生</span><span>01 / HUZHONG</span></figcaption>
     </figure>
   </div>
+  <a class="scroll-cue" href="#hzc-start" aria-label="探索网站">SCROLL<span aria-hidden="true"></span></a>
 </section>
 
 <!-- ================= 理念 ================= -->
-<section id="hzc-start" class="hzc-start" data-lang-key="hztj.lang" aria-labelledby="hzc-heading"><div class="wrap"><div class="hzc-intro"><div><p class="hzc-kicker">HUZHONG TIANJI · EXPLORE</p><h2 id="hzc-heading" data-hzcopy="heading">此刻，想从哪里开始？</h2></div><p data-hzcopy="intro">一签、一个方向，或一张命盘。按自己的步调，走进壶中。</p></div><div class="hzc-grid"><a class="hzc-card hzc-daily" href="#daily"><span class="hzc-number" aria-hidden="true">01</span><h3 data-hzcopy="dailyTitle">今日天机</h3><p data-hzcopy="dailyDesc">一页日签，给今天一个安静的开始。</p><span class="hzc-link"><span data-hzcopy="dailyAction">查看今日天机</span><span aria-hidden="true">↗</span></span></a>
-<a class="hzc-card hzc-compass" href="#compass"><span class="hzc-number" aria-hidden="true">02</span><h3 data-hzcopy="compassTitle">壶中罗盘</h3><p data-hzcopy="compassDesc">了解原有个人方位服务与咨询方式。</p><span class="hzc-link"><span data-hzcopy="compassAction">探索壶中罗盘</span><span aria-hidden="true">↗</span></span></a>
-<a class="hzc-card hzc-ziwei" href="/ziwei-chart"><span class="hzc-number" aria-hidden="true">03</span><h3 data-hzcopy="ziweiTitle">紫微命盘</h3><p data-hzcopy="ziweiDesc">从出生资料出发，逐宫查看命盘结构。</p><span class="hzc-link"><span data-hzcopy="ziweiAction">进入紫微命盘</span><span aria-hidden="true">↗</span></span></a>
-<a class="hzc-card hzc-all" href="/pan"><span class="hzc-number" aria-hidden="true">04</span><h3 data-hzcopy="allTitle">综合排盘</h3><p data-hzcopy="allDesc">八字、合盘、问卦、翻牌与其他原有工具。</p><span class="hzc-link"><span data-hzcopy="allAction">查看完整工具</span><span aria-hidden="true">↗</span></span></a></div></div></section>
+<section id="hzc-start" class="hzc-start" data-lang-key="hztj.lang" aria-labelledby="hzc-heading"><div class="wrap"><div class="hzc-intro"><div><p class="hzc-kicker">HUZHONG TIANJI · EXPLORE</p><h2 id="hzc-heading" data-hzcopy="heading">此刻，想从哪里开始？</h2></div><p data-hzcopy="intro">一签、一个方向，或一张命盘。按自己的步调，走进壶中。</p></div><div class="hzc-grid"><a class="hzc-card hzc-daily" data-ink="日" href="#daily"><span class="hzc-number" aria-hidden="true">01</span><h3 data-hzcopy="dailyTitle">今日天机</h3><p data-hzcopy="dailyDesc">一页日签，给今天一个安静的开始。</p><span class="hzc-link"><span data-hzcopy="dailyAction">查看今日天机</span><span aria-hidden="true">↗</span></span></a>
+<a class="hzc-card hzc-compass" data-ink="罗" href="#compass"><span class="hzc-number" aria-hidden="true">02</span><h3 data-hzcopy="compassTitle">壶中罗盘</h3><p data-hzcopy="compassDesc">了解原有个人方位服务与咨询方式。</p><span class="hzc-link"><span data-hzcopy="compassAction">探索壶中罗盘</span><span aria-hidden="true">↗</span></span></a>
+<a class="hzc-card hzc-ziwei" data-ink="紫" href="/ziwei-chart"><span class="hzc-number" aria-hidden="true">03</span><h3 data-hzcopy="ziweiTitle">紫微命盘</h3><p data-hzcopy="ziweiDesc">从出生资料出发，逐宫查看命盘结构。</p><span class="hzc-link"><span data-hzcopy="ziweiAction">进入紫微命盘</span><span aria-hidden="true">↗</span></span></a>
+<a class="hzc-card hzc-all" data-ink="盘" href="/pan"><span class="hzc-number" aria-hidden="true">04</span><h3 data-hzcopy="allTitle">综合排盘</h3><p data-hzcopy="allDesc">八字、合盘、问卦、翻牌与其他原有工具。</p><span class="hzc-link"><span data-hzcopy="allAction">查看完整工具</span><span aria-hidden="true">↗</span></span></a></div></div></section>
 <section id="approach">
   <div class="wrap">
-    <p class="kicker" data-i18n="ap_k">壶中之道 · OUR APPROACH</p>
+    <div class="approach-copy"><p class="kicker" data-i18n="ap_k">壶中之道 · OUR APPROACH</p>
     <h2 class="title" data-i18n="ap_t">不只问未来，也问问自己。</h2>
     <p class="sub" data-i18n="ap_d">有些答案，来自更深地认识自己。壶中天机将八字、紫微、数字与风水方位放在一起，结合您的生活情境，梳理天性、关系、选择与空间。我们提供一份参考，也为您的自主选择留白。</p>
+    </div>
     <div class="pillars">
-      <div class="pillar"><span class="num">01</span><h3 data-i18n="p1t">八字 · 读天性</h3><p data-i18n="p1d">从出生四柱出发，认识性情、格局与不同人生阶段的主题。</p></div>
-      <div class="pillar"><span class="num">02</span><h3 data-i18n="p2t">紫微 · 观人生</h3><p data-i18n="p2d">从十二宫与四化，观察事业、关系及生活面向之间的联系。</p></div>
-      <div class="pillar"><span class="num">03</span><h3 data-i18n="p3t">壶中数 · 看日常</h3><p data-i18n="p3d">从生日与身边的数字、方位，寻找日常生活中的另一种解读。</p></div>
+      <div class="pillar"><span class="num"><b aria-hidden="true">壹</b><small>01</small></span><h3 data-i18n="p1t">八字 · 读天性</h3><p data-i18n="p1d">从出生四柱出发，认识性情、格局与不同人生阶段的主题。</p></div>
+      <div class="pillar"><span class="num"><b aria-hidden="true">贰</b><small>02</small></span><h3 data-i18n="p2t">紫微 · 观人生</h3><p data-i18n="p2d">从十二宫与四化，观察事业、关系及生活面向之间的联系。</p></div>
+      <div class="pillar"><span class="num"><b aria-hidden="true">叁</b><small>03</small></span><h3 data-i18n="p3t">壶中数 · 看日常</h3><p data-i18n="p3d">从生日与身边的数字、方位，寻找日常生活中的另一种解读。</p></div>
     </div>
   </div>
 </section>
@@ -250,7 +253,7 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
         <p class="index-note" data-design="indexNote">八字与紫微合参<br>用生活语言，读懂传统智慧。</p>
       </div>
       <article class="report-sheet" id="report-panel" role="tabpanel" aria-labelledby="report-tab-0" tabindex="0">
-        <div class="sheet-top"><span>HUZHONG TIANJI</span><span class="sample-stamp" data-design="sample">阅读示意</span></div>
+        <span class="sheet-watermark" aria-hidden="true">壹</span><div class="sheet-top"><span>HUZHONG TIANJI</span><span class="sample-stamp" data-design="sample">阅读示意</span></div>
         <p class="sheet-chapter" id="sheet-chapter">第一章 · 认识自己</p>
         <h3 id="sheet-title">读懂天性，也看见可能。</h3>
         <p class="sheet-lede" id="sheet-lede">从八字与紫微的不同视角，梳理你习惯的思考、表达与行动方式。</p>
@@ -266,9 +269,11 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
 <!-- ================= 服务 ================= -->
 <section id="services">
   <div class="wrap">
-    <p class="kicker" data-i18n="sv_k">命书与咨询 · READINGS &amp; CONSULTATIONS</p>
+    <div class="section-intro"><div><p class="kicker" data-i18n="sv_k">命书与咨询 · READINGS &amp; CONSULTATIONS</p>
     <h2 class="title" data-i18n="sv_t">属于你的，一份解读。</h2>
-    <p class="sub" data-i18n="sv_d">从一份随身参考，到一场深入对话。按自己的需要，选择适合的开始。</p>
+    </div><p class="sub" data-i18n="sv_d">从一份随身参考，到一场深入对话。按自己的需要，选择适合的开始。</p>
+    </div>
+    <p class="service-swipe" data-design="swipe">← 左右滑动查看八项服务 →</p>
     <div class="svc-grid" id="svcGrid"></div>
     <p style="margin-top:28px;font-size:14px;color:var(--muted)"><span data-i18n="sv_q">还不确定从哪里开始？</span> <a href="mailto:dfe22888@gmail.com" style="color:var(--accent);border-bottom:1px dashed var(--accent)" data-i18n="sv_ql">先聊一聊 →</a></p>
   </div>
@@ -277,7 +282,7 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
 <!-- ================= 一签 ================= -->
 <section id="draw">
   <div class="wrap" style="text-align:center">
-    <p class="kicker" data-i18n="dr_k">壶中一签 · A MOMENT FOR YOU</p>
+    <div class="draw-copy"><p class="kicker" data-i18n="dr_k">壶中一签 · A MOMENT FOR YOU</p>
     <h2 class="title" data-i18n="dr_t">先从一签，认识自己的天性。</h2>
     <p class="sub" style="margin-left:auto;margin-right:auto" data-i18n="dr_d">输入出生日期，开启一支日主人格签。用片刻清静，看看传统命理如何描述您的性情。</p>
     <div class="tool-card" style="text-align:left">
@@ -295,6 +300,9 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
       </div>
       <button class="btn btn-gold" style="width:100%;justify-content:center" onclick="draw()" data-i18n="dr_go">开启我的一签</button>
       <p class="note" data-i18n="dr_note">生辰仅在您的装置上运算，不会上传或储存。</p>
+    </div></div>
+    <div class="draw-output">
+      <div class="draw-empty" aria-hidden="true"><span class="fortune-slip" data-design="drawSlip">壶中一签</span><p data-design="drawWait">静心片刻 · 签在壶中</p></div>
       <div class="result" id="drawResult" role="status" aria-live="polite"></div>
     </div>
   </div>
@@ -305,16 +313,16 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
   <div class="wrap" style="text-align:center">
     <p class="kicker" data-i18n="da_k">壶中日签 · THE DAILY PAGE</p>
     <h2 class="title" data-i18n="da_t">翻一页历法，留一点从容。</h2>
-    <div class="tool-card" style="text-align:center">
+    <div class="tool-card daily-layout" style="text-align:center"><div class="daily-calendar">
       <div style="font-size:13px;color:var(--muted);letter-spacing:.15em" id="dailyDate"></div>
       <div class="gz serif" style="font-size:46px;font-weight:700;margin:10px 0 4px" id="dailyGz">—</div>
       <div style="font-family:var(--serif);color:var(--accent);font-size:17px" id="dailyNick"></div>
       <div class="chips" id="dailyChips"></div>
-      <div class="daily-nav">
+      </div><div class="daily-message"><div class="daily-nav">
         <button onclick="shiftDay(-1)" data-i18n="da_prev">← 前一日</button>
         <button onclick="shiftDay(0)" data-i18n="da_today">回到今日</button>
         <button onclick="shiftDay(1)" data-i18n="da_next">后一日 →</button>
-      </div>
+      </div></div>
     </div>
     <p class="note" style="text-align:center" data-i18n="da_note">依您装置的当地日期计算。传统历法参考，不替您决定每一步。</p>
   </div>
@@ -326,35 +334,36 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
     <p class="kicker" data-i18n="bk_k">如何开始 · YOUR NEXT STEPS</p>
     <h2 class="title" data-i18n="bk_t">从相识，到读懂。</h2>
     <div class="steps">
-      <div class="step"><span class="n">01</span><h3 data-i18n="s1t">选择服务</h3><p data-i18n="s1d">先选适合的命书或咨询，通过付款页面订购。</p></div>
-      <div class="step"><span class="n">02</span><h3 data-i18n="s2t">提交资料</h3><p data-i18n="s2d">付款后填写生辰、出生地与收据单号，注明中文或英文版。</p></div>
-      <div class="step"><span class="n">03</span><h3 data-i18n="s3t">交付与对话</h3><p data-i18n="s3d">报告以 PDF 电邮交付；选择真人咨询的客户，可预约解读时间。</p></div>
+      <div class="step"><span class="n" aria-label="01">壹</span><h3 data-i18n="s1t">选择服务</h3><p data-i18n="s1d">先选适合的命书或咨询，通过付款页面订购。</p></div>
+      <div class="step"><span class="n" aria-label="02">贰</span><h3 data-i18n="s2t">提交资料</h3><p data-i18n="s2d">付款后填写生辰、出生地与收据单号，注明中文或英文版。</p></div>
+      <div class="step"><span class="n" aria-label="03">叁</span><h3 data-i18n="s3t">交付与对话</h3><p data-i18n="s3d">报告以 PDF 电邮交付；选择真人咨询的客户，可预约解读时间。</p></div>
     </div>
 
-    <div style="max-width:720px;margin:72px auto 0">
+    <div class="booking-layout"><div class="booking-intro">
       <p class="kicker" data-i18n="fm_k">已经选好服务 · FOR OUR CLIENTS</p>
       <h2 class="title" style="font-size:26px" data-i18n="fm_t">接下来，让我们认真读你。</h2>
-      <form id="intakeForm" class="form-grid">
+      <p class="note" data-i18n="f_priv">资料只在此页面整理，点击后由您在 WhatsApp 确认发送。网站不储存表单资料。</p>
+      </div><div class="booking-form framed"><form id="intakeForm" class="form-grid">
         <input type="hidden" name="subject" value="壶中天机 · 新订单资料">
         <input type="checkbox" name="botcheck" style="display:none">
-        <div><label data-i18n="f_name">姓名</label><input name="name" required></div>
-        <div><label data-i18n="f_email">电邮</label><input type="email" name="email" required></div>
-        <div><label data-i18n="f_gender">性别</label><select name="gender"><option data-i18n="g_f">女</option><option data-i18n="g_m">男</option></select></div>
-        <div><label data-i18n="f_item">订购项目</label>
+        <div><label for="intake-name" data-i18n="f_name">姓名</label><input id="intake-name" name="name" required></div>
+        <div><label for="intake-email" data-i18n="f_email">电邮</label><input type="email" id="intake-email" name="email" required></div>
+        <div><label for="intake-gender" data-i18n="f_gender">性别</label><select id="intake-gender" name="gender"><option data-i18n="g_f">女</option><option data-i18n="g_m">男</option></select></div>
+        <div><label for="fService" data-i18n="f_item">订购项目</label>
           <select name="service" id="fService"></select>
         </div>
-        <div><label data-i18n="f_lang">版本</label><select name="lang"><option data-i18n="v_zh">中文</option><option>English</option></select></div>
-        <div><label data-i18n="f_date">出生日期</label><input type="date" name="birthdate"></div>
-        <div><label data-i18n="f_time">出生时间</label><input name="birthtime" placeholder="如 14:30 / 不确定"></div>
-        <div><label data-i18n="f_place">出生地</label><input name="birthplace"></div>
-        <div><label data-i18n="f_receipt">付款单号（选填）</label><input name="receipt"></div>
-        <div class="full"><label data-i18n="f_home">现居环境简述（指南针客户填写）</label><textarea name="home" rows="2" placeholder="如：自宅三房式，主卧在西北；或租屋单间，床头朝东"></textarea></div>
-        <div class="full"><label data-i18n="f_note">备注（选填）</label><textarea name="note" rows="2"></textarea></div>
+        <div><label for="intake-lang" data-i18n="f_lang">版本</label><select id="intake-lang" name="lang"><option data-i18n="v_zh">中文</option><option>English</option></select></div>
+        <div><label for="intake-birthdate" data-i18n="f_date">出生日期</label><input type="date" id="intake-birthdate" name="birthdate"></div>
+        <div><label for="intake-birthtime" data-i18n="f_time">出生时间</label><input id="intake-birthtime" name="birthtime" placeholder="如 14:30 / 不确定"></div>
+        <div><label for="intake-birthplace" data-i18n="f_place">出生地</label><input id="intake-birthplace" name="birthplace"></div>
+        <div><label for="intake-receipt" data-i18n="f_receipt">付款单号（选填）</label><input id="intake-receipt" name="receipt"></div>
+        <div class="full"><label for="intake-home" data-i18n="f_home">现居环境简述（指南针客户填写）</label><textarea id="intake-home" name="home" rows="2" placeholder="如：自宅三房式，主卧在西北；或租屋单间，床头朝东"></textarea></div>
+        <div class="full"><label for="intake-note" data-i18n="f_note">备注（选填）</label><textarea id="intake-note" name="note" rows="2"></textarea></div>
         <div class="full"><button type="submit" class="btn btn-gold" style="width:100%;justify-content:center" data-i18n="f_submit">通过 WhatsApp 发送资料</button></div>
       </form>
       <div class="form-ok" id="formOk" data-i18n="f_ok">已收到您的资料，我们会尽快以电邮回复。付款证明请另行电邮补交。</div>
-      <p class="note" data-i18n="f_priv">资料只在此页面整理，点击后由您在 WhatsApp 确认发送。网站不储存表单资料。</p>
-    </div>
+
+    </div></div>
   </div>
 </section>
 
@@ -649,5 +658,6 @@ document.getElementById('drawDate').valueAsDate=new Date(1990,0,1);
 <script src="contact.js"></script>
 <script src="/site-continuity.js" defer></script>
 <script src="/report-explorer.js" defer></script>
+<script src="/ink-layout.js" defer></script>
 </body>
 </html>

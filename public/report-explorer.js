@@ -10,7 +10,7 @@
       skip:'跳至主要内容', edition:'壶中天机 · 人生参考手册', heroReport:'翻开我的命书 ↗', heroNote:'观天时 · 知自性 · 择时而行', artCaption:'壶中有天地 · 盘里见人生',
       reportKicker:'一册命书 · THE LIFE BOOK', reportTitle:'把命盘，读成生活。', reportDesc:'从天性到际遇，从一张盘到下一步。翻开几个篇章，看看一份解读如何与你的生活相连。', indexLabel:'书中有你关心的事',
       chapter0:'认识自己', chapter1:'事业与方向', chapter2:'关系与相处', chapter3:'人生的时序', chapter4:'日常的行动', indexNote:'八字与紫微合参。用生活语言，读懂传统智慧。', sample:'阅读示意', reflection:'留一个问题给自己', sampleNote:'内容结构示意，非个人命盘或预测。', reportFoot:'一份可以留存、重读的人生参考。具体内容依所选服务而定。', reportAction:'查看命书与咨询 ↗',
-      artAlt:'陶壶中升起金色星盘，星图与水墨云纹在墨青色夜空交织', tabLabel:'命书篇章',
+      artRibbon:'一壶一世界', swipe:'← 左右滑动查看八项服务 →', drawSlip:'壶中一签', drawWait:'静心片刻 · 签在壶中', artAlt:'米白宣纸上的水墨茶壶与金色星图', tabLabel:'命书篇章',
       chapters:[
         ['第一章 · 认识自己','读懂天性，也看见可能。','从八字与紫微的不同视角，梳理你习惯的思考、表达与行动方式。',[['天赋','什么让你做起来更自然？'],['模式','什么情境容易让你反复消耗？'],['选择','如何为自己创造合适的环境？']],'最近一次感到自在而投入，是在做什么？'],
         ['第二章 · 事业与方向','找到适合自己的发力方式。','把命盘中的性情线索放进真实的工作情境，思考角色、协作与成长方向。',[['角色','独立深耕，还是与团队协作？'],['环境','你在哪种节奏里更能发挥？'],['合作','哪些沟通习惯值得调整？']],'现在的工作，最让你有成就感的是哪一部分？'],
@@ -23,7 +23,7 @@
       skip:'Skip to content', edition:'HUZHONG · A GUIDE TO YOUR NATURE', heroReport:'Open the Life Book ↗', heroNote:'Know your nature. Move at your own pace.', artCaption:'A universe within the vessel',
       reportKicker:'THE LIFE BOOK', reportTitle:'A chart, translated into life.', reportDesc:'From your nature to your next step. Explore a few chapters to see how a reading connects with everyday life.', indexLabel:'A few things you may be wondering',
       chapter0:'Your nature', chapter1:'Work & direction', chapter2:'Relationships', chapter3:'Life’s seasons', chapter4:'Everyday actions', indexNote:'Four Pillars and Zi Wei, read together. Classical wisdom in everyday language.', sample:'ILLUSTRATIVE', reflection:'A question to take with you', sampleNote:'Illustrative structure. Not a personal chart or prediction.', reportFoot:'A personal reference to keep and revisit. Contents vary by service.', reportAction:'Explore readings & consultations ↗',
-      artAlt:'Golden star charts rise from a clay teapot into an ink-blue sky with painted clouds', tabLabel:'Life Book chapters',
+      artRibbon:'A world in a vessel', swipe:'← Swipe to explore all eight services →', drawSlip:'A moment for you', drawWait:'Take a breath. Your reading awaits.', artAlt:'An ink-wash teapot and golden star charts on cream paper', tabLabel:'Life Book chapters',
       chapters:[
         ['CHAPTER ONE · YOUR NATURE','Understand your nature. See your possibilities.','Look at familiar ways of thinking, expressing yourself and taking action through Four Pillars and Zi Wei.',[['Strengths','What comes more naturally to you?'],['Patterns','Which situations leave you drained?'],['Choices','What environment helps you thrive?']],'The last time you felt fully absorbed and at ease, what were you doing?'],
         ['CHAPTER TWO · WORK & DIRECTION','Find a way of working that fits.','Connect the temperament themes in a chart with real working situations, roles and opportunities to grow.',[['Role','Independent work or collaboration?'],['Environment','What pace brings out your strengths?'],['Collaboration','What could you communicate differently?']],'Which part of your work gives you the most satisfaction?'],
@@ -38,8 +38,11 @@
     const c = copy[language()], chapter = c.chapters[current];
     document.querySelectorAll('[data-design]').forEach(el => { if(c[el.dataset.design]) el.textContent = c[el.dataset.design]; });
     document.querySelector('.vessel-art img').alt = c.artAlt;
+    document.querySelector('.scroll-cue').setAttribute('aria-label', language() === 'zh' ? '探索网站' : 'Explore the website');
     document.querySelector('.report-tabs').setAttribute('aria-label', c.tabLabel);
     tabs.forEach((tab, i) => {tab.setAttribute('aria-selected', String(i === current));tab.tabIndex = i === current ? 0 : -1;});
+    document.querySelector('.sheet-watermark').textContent = '壹贰叁肆伍'[current];
+    tabs.forEach((tab, i) => tab.firstElementChild.textContent = language() === 'zh' ? '壹贰叁肆伍'[i] : String(i+1).padStart(2,'0'));
     panel.setAttribute('aria-labelledby',tabs[current].id);
     ['sheet-chapter','sheet-title','sheet-lede'].forEach((id,i) => document.getElementById(id).textContent=chapter[i]);
     const topics = document.getElementById('sheet-topics');topics.replaceChildren();
