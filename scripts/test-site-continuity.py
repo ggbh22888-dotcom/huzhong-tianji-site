@@ -125,7 +125,8 @@ with sync_playwright() as p:
         dialog.locator('.hzp-no').click()
         expect(dialog).not_to_be_visible()
         hero, motion, art = page.locator('#top'), page.locator('#hero-motion-toggle'), page.locator('.art-image')
-        art.scroll_into_view_if_needed()
+        # Scroll the stationary canvas; the picture intentionally never becomes stable.
+        page.locator('#hero-art-scene').scroll_into_view_if_needed()
 
         def expect_motion_advancing():
             expect(hero).to_have_attribute('data-motion', 'playing')
@@ -159,7 +160,7 @@ with sync_playwright() as p:
         page.locator('#services').scroll_into_view_if_needed()
         expect(hero).to_have_attribute('data-motion-active', 'false')
         expect(hero).to_have_attribute('data-motion', 'playing')
-        art.scroll_into_view_if_needed()
+        page.locator('#hero-art-scene').scroll_into_view_if_needed()
         expect_motion_advancing()
         # A changed system preference pauses immediately; a deliberate Play remains available.
         page.emulate_media(reduced_motion='reduce')
