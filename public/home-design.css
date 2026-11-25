@@ -69,7 +69,7 @@ h2.title,.hzc-intro h2{font-size:32px;line-height:1.4}.kicker,.hzc-kicker{font-s
 .art-canvas .art-image{display:block;width:100%;height:100%;object-fit:cover;transform-origin:50% 65%}
 .vessel-atmosphere{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:hidden;color:#94703d}
 .vessel-constellation{transform-origin:56.25% 27.083333%;transform-box:view-box}.orbit-track{fill:none;stroke:currentColor;stroke-width:.8;opacity:.22}.orbit-track-inner{stroke-dasharray:1 12;opacity:.35}.orbit-stars{fill:#b98a3a;opacity:.8}.orbit-trace{fill:none;stroke:#b58b45;stroke-width:1.8;stroke-linecap:round;opacity:.55}.vessel-glints{fill:#b58b45;stroke:#b58b45;stroke-width:1.2;stroke-linecap:round;opacity:.25}.vessel-steam-lines{fill:none;stroke:#9c896c;stroke-width:2;stroke-linecap:round;opacity:.25}
-.motion-toggle{position:absolute;right:28px;bottom:28px;z-index:2;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:9px 13px;border:1px solid #1f1c1938;background:#f8f4eceb;color:var(--text);font:11px/1.5 var(--sans);letter-spacing:.05em;cursor:pointer;transition:background .2s,border-color .2s}
+.motion-toggle{position:absolute;left:28px;bottom:28px;z-index:2;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:9px 13px;border:1px solid #1f1c1938;background:#f8f4eceb;color:var(--text);font:11px/1.5 var(--sans);letter-spacing:.05em;cursor:pointer;transition:background .2s,border-color .2s}
 .motion-toggle[hidden]{display:none}.motion-toggle:hover{background:var(--card);border-color:var(--seal)}.motion-toggle svg{flex:none;stroke:currentColor;stroke-width:1.5;fill:none}.hero[data-motion=playing] .motion-icon-play,.hero[data-motion=paused] .motion-icon-pause{display:none}
 /* All hero animation is paused until initialized, including the original background orbit. */
 .hero .sky-orbit{animation-play-state:paused}
@@ -85,4 +85,4 @@ h2.title,.hzc-intro h2{font-size:32px;line-height:1.4}.kicker,.hzc-kicker{font-s
 @keyframes vessel-orbit{to{transform:rotate(360deg)}}
 @keyframes vessel-shimmer{0%,100%{opacity:.18}50%{opacity:.75}}
 @keyframes vessel-drift{0%{opacity:0;transform:translate3d(0,14px,0)}25%{opacity:.7}70%{opacity:.4}100%{opacity:0;transform:translate3d(-10px,-34px,0)}}
-@media(max-width:620px){.motion-toggle{right:22px;bottom:22px;font-size:10px;padding-inline:11px}.vessel-steam-lines{stroke-width:2.4}}
+@media(max-width:620px){.motion-toggle{left:22px;bottom:22px;font-size:10px;padding-inline:11px}.vessel-steam-lines{stroke-width:2.4}}

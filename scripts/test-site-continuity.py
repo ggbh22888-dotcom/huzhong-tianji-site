@@ -114,7 +114,7 @@ with sync_playwright() as p:
             context.close()
 
         # Exercise real motion separately; all responsive flow cases above respect Reduce Motion.
-        context = browser.new_context(viewport={'width':1280, 'height':900}, locale='en-GB', reduced_motion='no-preference')
+        context = browser.new_context(viewport={'width':1280, 'height':720}, locale='en-GB', reduced_motion='no-preference')
         page = context.new_page()
         errors = []
         page.on('pageerror', lambda error: errors.append(str(error)))
@@ -151,6 +151,10 @@ with sync_playwright() as p:
 
         expect_motion_advancing()
         expect(motion).to_have_text('Pause animation')
+        control, contact = motion.bounding_box(), page.locator('.wa-launch').bounding_box()
+        assert control and contact
+        assert (control['x'] + control['width'] <= contact['x'] or contact['x'] + contact['width'] <= control['x']
+                or control['y'] + control['height'] <= contact['y'] or contact['y'] + contact['height'] <= control['y']), 'Contact widget obscures motion control'
         motion.press('Space')
         expect_motion_frozen()
         page.locator('#btn-zh').click()
@@ -176,7 +180,7 @@ with sync_playwright() as p:
         motion.click()
         expect_motion_frozen()
         assert not errors, f'Motion browser errors: {errors}'
-        results.append({'viewport':'1280x900', 'locale':'en-GB', 'case':'artwork-motion', 'status':'passed'})
+        results.append({'viewport':'1280x720', 'locale':'en-GB', 'case':'artwork-motion', 'status':'passed'})
         context.close()
     finally:
         browser.close()
