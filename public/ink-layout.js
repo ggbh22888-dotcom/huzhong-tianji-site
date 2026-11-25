@@ -31,4 +31,37 @@
   if (message) new MutationObserver(arrangeDaily).observe(message, {childList:true});
   new MutationObserver(decorateServices).observe(document.documentElement, {attributes:true, attributeFilter:['lang']});
   decorateServices(); arrangeDaily();
+  // Motion is decorative and starts only after a working pause control is ready.
+  const hero = document.getElementById('top');
+  const motionButton = document.getElementById('hero-motion-toggle');
+  if (hero && motionButton) {
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let wantsMotion = !preference.matches;
+    let inView = true;
+    function renderMotion() {
+      hero.dataset.motion = wantsMotion ? 'playing' : 'paused';
+      hero.dataset.motionActive = String(wantsMotion && inView && !document.hidden);
+      const zh = language() === 'zh';
+      motionButton.querySelector('[data-motion-label]').textContent = wantsMotion
+        ? (zh ? '暂停动画' : 'Pause animation')
+        : (zh ? '播放动画' : 'Play animation');
+    }
+    motionButton.addEventListener('click', () => { wantsMotion = !wantsMotion; renderMotion(); });
+    preference.addEventListener('change', e => {
+      // A new request to reduce motion takes precedence; relaxing it never auto-restarts.
+      if (e.matches) wantsMotion = false;
+      renderMotion();
+    });
+    document.addEventListener('visibilitychange', renderMotion);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting;
+        renderMotion();
+      }, {threshold:0}).observe(hero);
+    }
+    new MutationObserver(renderMotion).observe(document.documentElement, {attributes:true, attributeFilter:['lang']});
+    renderMotion();
+    hero.setAttribute('data-motion-ready', '');
+    motionButton.hidden = false;
+  }
 })();

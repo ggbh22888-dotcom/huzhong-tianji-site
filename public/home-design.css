@@ -63,3 +63,26 @@ h2.title,.hzc-intro h2{font-size:32px;line-height:1.4}.kicker,.hzc-kicker{font-s
 .steps{grid-template-columns:1fr;gap:36px;margin-top:48px}.step{display:grid;grid-template-columns:50px 1fr;gap:4px 20px;padding-top:24px}.step .n{grid-row:1/3;font-size:36px}.step h3{margin:0 0 10px;font-size:22px}.step p{font-size:13px;grid-column:2}.booking-layout{margin-top:64px}.booking-intro .title{font-size:30px!important}.booking-form{padding:28px 22px}.booking-form .form-grid{grid-template-columns:1fr;gap:24px}.booking-form .btn{font-size:13px}.f-row input,.f-row select,.form-grid input,.form-grid select,.form-grid textarea{font-size:16px;min-width:0}.form-grid>div{min-width:0}#faq{padding-top:72px}#faq summary{font-size:16px;gap:16px;padding:24px 0}#faq details p{padding:0 0 24px;font-size:13px}.hzc-footer-logo{max-width:200px}footer{padding-top:64px}footer .title{font-size:32px}footer .mail{font-size:21px}footer .btn{font-size:12px;padding:12px 16px;margin-bottom:10px}footer .fine{font-size:11px}.wa-launch{left:auto!important;right:16px!important;width:auto!important;bottom:16px!important;font-size:11px!important;padding:12px 16px!important}html[lang=en] .hero h1{font-size:54px;line-height:1.05}html[lang=en] .hero .kicker{letter-spacing:.1em}html[lang=en] .hero .btn{font-size:12px;padding:14px 17px}html[lang=en] .sheet-topics>div{grid-template-columns:76px 1fr}}
 @media(max-width:360px){body>header .hd{padding-inline:14px;gap:8px}body>header .hd-act{gap:5px}body>header .brand img{width:118px}.wrap,.hzc-start .wrap{padding-inline:18px}.hero .btn{padding:14px 15px;font-size:12px}.hzc-card{padding:24px 14px}.hzc-card h3{font-size:19px}.hzc-link{font-size:10px}.svc-grid{margin-right:-18px}.svc{padding:28px}html[lang=en] .hero h1{font-size:48px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Living ink: stationary frame and copy, lightweight motion inside the artwork. */
+.art-canvas{position:relative;aspect-ratio:3/4;overflow:hidden;isolation:isolate}
+.art-canvas .art-image{display:block;width:100%;height:100%;object-fit:cover;transform-origin:50% 65%}
+.vessel-atmosphere{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:hidden;color:#94703d}
+.vessel-constellation{transform-origin:56.25% 27.083333%;transform-box:view-box}.orbit-track{fill:none;stroke:currentColor;stroke-width:.8;opacity:.22}.orbit-track-inner{stroke-dasharray:1 12;opacity:.35}.orbit-stars{fill:#b98a3a;opacity:.8}.orbit-trace{fill:none;stroke:#b58b45;stroke-width:1.8;stroke-linecap:round;opacity:.55}.vessel-glints{fill:#b58b45;stroke:#b58b45;stroke-width:1.2;stroke-linecap:round;opacity:.25}.vessel-steam-lines{fill:none;stroke:#9c896c;stroke-width:2;stroke-linecap:round;opacity:.25}
+.motion-toggle{position:absolute;right:28px;bottom:28px;z-index:2;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:9px 13px;border:1px solid #1f1c1938;background:#f8f4eceb;color:var(--text);font:11px/1.5 var(--sans);letter-spacing:.05em;cursor:pointer;transition:background .2s,border-color .2s}
+.motion-toggle[hidden]{display:none}.motion-toggle:hover{background:var(--card);border-color:var(--seal)}.motion-toggle svg{flex:none;stroke:currentColor;stroke-width:1.5;fill:none}.hero[data-motion=playing] .motion-icon-play,.hero[data-motion=paused] .motion-icon-pause{display:none}
+/* All hero animation is paused until initialized, including the original background orbit. */
+.hero .sky-orbit{animation-play-state:paused}
+.hero[data-motion-ready] .art-image{animation:vessel-breathe 16s ease-in-out infinite!important}
+.hero[data-motion-ready] .vessel-constellation{animation:vessel-orbit 48s linear infinite!important}
+.hero[data-motion-ready] .vessel-glints{animation:vessel-shimmer 6s ease-in-out infinite!important}
+.hero[data-motion-ready] .vessel-steam{animation:vessel-drift 9s ease-in-out infinite!important}
+.hero[data-motion-ready] .vessel-steam-second{animation-delay:-4.5s!important}
+.hero[data-motion-ready] .sky-orbit{animation:sky-turn 240s linear infinite!important}
+.hero[data-motion-ready] :is(.art-image,.motion-layer,.sky-orbit){animation-play-state:paused!important}
+.hero[data-motion-active=true] :is(.art-image,.motion-layer,.sky-orbit){animation-play-state:running!important}
+@keyframes vessel-breathe{0%,100%{transform:scale(1.018) translate3d(0,2px,0)}50%{transform:scale(1.045) translate3d(-2px,-4px,0)}}
+@keyframes vessel-orbit{to{transform:rotate(360deg)}}
+@keyframes vessel-shimmer{0%,100%{opacity:.18}50%{opacity:.75}}
+@keyframes vessel-drift{0%{opacity:0;transform:translate3d(0,14px,0)}25%{opacity:.7}70%{opacity:.4}100%{opacity:0;transform:translate3d(-10px,-34px,0)}}
+@media(max-width:620px){.motion-toggle{right:22px;bottom:22px;font-size:10px;padding-inline:11px}.vessel-steam-lines{stroke-width:2.4}}
