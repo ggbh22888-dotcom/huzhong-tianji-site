@@ -1,6 +1,6 @@
 /* Shared reading surfaces carry the same paper, ink and vermilion identity. */
-:root{--bg:#f6f1e7;--card:#fffcf5;--well:#eee8da;--ink:#203c36;--muted:#646b60;--gold:#8b6b31;--gold-soft:#d6c49b;--seal:#a23f30;--line:#d9d2c1;--jade:#315e50}
-:root[data-theme="dark"]{--bg:#101c18;--card:#192a23;--well:#20372e;--ink:#eee7d6;--muted:#b8c2b6;--gold:#c8ad73;--gold-soft:#6e6445;--seal:#e5947e;--line:#3e5143;--jade:#9bbca4;--on-gold:#17241e}
+:root{--bg:#f4eee3;--card:#f8f4ec;--well:#ebe3d3;--ink:#1f1c19;--muted:#5b544b;--gold:#8b6b31;--gold-soft:#d6c49b;--seal:#a8322a;--line:#d4ccbf;--jade:#315e50}
+:root[data-theme="dark"]{--bg:#171511;--card:#211e19;--well:#2b2721;--ink:#eee7d6;--muted:#c3b9aa;--gold:#c8ad73;--gold-soft:#6e6445;--seal:#e5947e;--line:#4c4438;--jade:#9bbca4;--on-gold:#211e19}
 body{background-image:none;font-family:"Noto Sans SC","Noto Sans",system-ui,sans-serif}
 main{max-width:1000px;padding:36px 28px 70px}
 h1,h2,h3,h4,.tagline{font-family:"Noto Serif SC","Songti SC",Georgia,serif}
@@ -15,5 +15,5 @@ button,.btn-gold,.btn-line{border-radius:3px}
 @media(max-width:600px){main{padding:24px 16px 55px}.card{padding:22px 17px}.modes{gap:6px}.modes button{font-size:.85rem;padding:8px 10px}.reading{font-size:15px;line-height:2}.reading h2{font-size:1.13rem}h1{font-size:1.7rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 :root[data-theme="dark"] .modes button.on,:root[data-theme="dark"] .btn-gold{color:var(--on-gold)}
-:root[data-theme="dark"] .modes button.on:hover,:root[data-theme="dark"] form>button:hover:not(:disabled){background:#efaa96;color:#17241e}
+:root[data-theme="dark"] .modes button.on:hover,:root[data-theme="dark"] form>button:hover:not(:disabled){background:#efaa96;color:#211e19}
 :root[data-theme="dark"] .cta{background:var(--card)}
