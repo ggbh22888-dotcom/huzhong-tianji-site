@@ -124,30 +124,76 @@ with sync_playwright() as p:
         expect(dialog).to_be_visible(timeout=15000)
         dialog.locator('.hzp-no').click()
         expect(dialog).not_to_be_visible()
-        hero, motion, art = page.locator('#top'), page.locator('#hero-motion-toggle'), page.locator('.art-image')
-        # Scroll the stationary canvas; the picture intentionally never becomes stable.
+        hero, motion = page.locator('#top'), page.locator('#hero-motion-toggle')
+        # Scroll the stationary canvas, never an animated celestial or smoke layer.
         page.locator('#hero-art-scene').scroll_into_view_if_needed()
+        expect(page.locator('.celestial-spin')).to_have_count(1)
+        expect(page.locator('.vessel-smoke')).to_have_count(3)
+        page.locator('#hero-art-scene img').evaluate_all('(images) => Promise.all(images.map(img => img.decode()))')
+        for layer in page.locator('#hero-art-scene img').all():
+            expect(layer).to_be_visible()
+            assert layer.evaluate('(img) => img.complete && img.naturalWidth > 0 && img.naturalHeight > 0')
+
+        # Sample rendered output, not animation names: a spinning wrapper must not move the teapot.
+        motion_sample = """() => {
+            const sample = el => {
+                const style = getComputedStyle(el), m = new DOMMatrix(style.transform);
+                return {transform: style.transform, opacity: Number(style.opacity),
+                    matrix: [m.a, m.b, m.c, m.d, m.e, m.f],
+                    times: el.getAnimations().map(a => a.currentTime)};
+            };
+            const base = document.querySelector('.art-image').getBoundingClientRect();
+            const canvas = document.querySelector('#hero-art-scene').getBoundingClientRect();
+            return {
+                base: sample(document.querySelector('.art-image')),
+                baseBox: [base.x - canvas.x, base.y - canvas.y, base.width, base.height],
+                spin: sample(document.querySelector('.celestial-spin')),
+                float: sample(document.querySelector('.celestial-float')),
+                smoke: [...document.querySelectorAll('.vessel-smoke')].map(sample),
+                all: [...document.querySelectorAll('#hero-art-scene .motion-layer, #top .sky-orbit')].map(sample)
+            };
+        }"""
+
+        def expect_static_base(before, after):
+            assert before['base']['times'] == after['base']['times'] == [], 'Teapot base must not animate'
+            assert before['base']['transform'] == after['base']['transform'], 'Teapot transform changed'
+            assert all(abs(a - b) < 0.01 for a, b in zip(before['baseBox'], after['baseBox'])), 'Teapot moved inside its frame'
 
         def expect_motion_advancing():
             expect(hero).to_have_attribute('data-motion', 'playing')
             expect(hero).to_have_attribute('data-motion-active', 'true')
-            page.wait_for_function("document.querySelector('.art-image').getAnimations().some(a => a.playState === 'running')")
-            transform = art.evaluate('(el) => getComputedStyle(el).transform')
-            page.wait_for_function("before => getComputedStyle(document.querySelector('.art-image')).transform !== before", arg=transform, timeout=5000)
+            page.wait_for_function("""() => [...document.querySelectorAll('#hero-art-scene .motion-layer, #top .sky-orbit')]
+                .every(el => el.getAnimations().length > 0 && el.getAnimations().every(a => a.playState === 'running' && !a.pending))""")
+            before = page.evaluate(motion_sample)
+            page.wait_for_function("before => { const now = (" + motion_sample + """)();
+                const angle = state => Math.atan2(state.matrix[1], state.matrix[0]) * 180 / Math.PI;
+                const clockwise = (angle(now.spin) - angle(before.spin) + 540) % 360 - 180;
+                return clockwise > 0.01 && clockwise < 45
+                    && now.spin.opacity > 0.01 && now.float.opacity > 0.01
+                    && now.float.matrix.slice(4).some((value, i) => Math.abs(value - before.float.matrix[i + 4]) > 0.005)
+                    && now.smoke.some((state, i) => state.opacity > 0.01
+                        && (state.transform !== before.smoke[i].transform
+                            || Math.abs(state.opacity - before.smoke[i].opacity) > 0.001));
+            }""", arg=before, timeout=5000)
+            after = page.evaluate(motion_sample)
+            expect_static_base(before, after)
+            assert all(abs(a - b) < 0.0001 for a, b in zip(after['float']['matrix'][:4], [1, 0, 0, 1])), 'Celestial float must translate without rotating or scaling'
 
         def expect_motion_frozen():
             expect(hero).to_have_attribute('data-motion', 'paused')
             expect(hero).to_have_attribute('data-motion-active', 'false')
             # CSS pause is applied on the next rendering tick, after the label updates.
             page.wait_for_function("""() => {
-                const animations = document.querySelector('.art-image').getAnimations();
-                return animations.length > 0 && animations.every(a => a.playState === 'paused' && !a.pending);
+                const layers = [...document.querySelectorAll('#hero-art-scene .motion-layer, #top .sky-orbit')];
+                return layers.length > 0 && layers.every(el => el.getAnimations().length > 0
+                    && el.getAnimations().every(a => a.playState === 'paused' && !a.pending));
             }""")
-            transform = art.evaluate('(el) => getComputedStyle(el).transform')
-            # A timed sample proves Pause freezes the picture instead of only changing its label.
+            before = page.evaluate(motion_sample)
+            # Every plume, the floating circle, its clockwise spin, and the background must freeze.
             page.wait_for_timeout(250)
-            assert art.evaluate('(el) => getComputedStyle(el).transform') == transform
-            assert page.locator('.sky-orbit').evaluate("el => el.getAnimations().every(a => a.playState !== 'running')")
+            after = page.evaluate(motion_sample)
+            expect_static_base(before, after)
+            assert after['all'] == before['all'], 'An artwork layer continues moving while paused'
 
         expect_motion_advancing()
         expect(motion).to_have_text('Pause animation')
