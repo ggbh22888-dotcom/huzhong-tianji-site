@@ -138,6 +138,11 @@ with sync_playwright() as p:
         def expect_motion_frozen():
             expect(hero).to_have_attribute('data-motion', 'paused')
             expect(hero).to_have_attribute('data-motion-active', 'false')
+            # CSS pause is applied on the next rendering tick, after the label updates.
+            page.wait_for_function("""() => {
+                const animations = document.querySelector('.art-image').getAnimations();
+                return animations.length > 0 && animations.every(a => a.playState === 'paused' && !a.pending);
+            }""")
             transform = art.evaluate('(el) => getComputedStyle(el).transform')
             # A timed sample proves Pause freezes the picture instead of only changing its label.
             page.wait_for_timeout(250)
