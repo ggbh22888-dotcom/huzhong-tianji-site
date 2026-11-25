@@ -2,7 +2,7 @@
 
 Requested reference: https://huzhong-hafpr72h.manus.space
 
-Updates the existing Netlify homepage with the reference's ink, cream and vermilion palette, single-row header, watercolor vessel artwork, editorial section layout, chapter preview, dark service grid and mobile service carousel. The artwork is copied from the supplied reference's observed image URL; no external Manus runtime or analytics are embedded.
+Updates the existing Netlify homepage with the reference's ink, cream and vermilion palette, single-row header, watercolor vessel artwork, editorial section layout, chapter preview, dark service grid and mobile service carousel. The full-resolution artwork matches the later supplied `huzhong-site.zip` byte-for-byte. Its 480px and 800px variants are taken directly from that archive and selected responsively; the responsive footer landscape is also copied from that archive. No external Manus runtime or analytics are embedded.
 
 Original inline scripts remain byte-identical to the main-branch baseline. Existing prices, Stripe destinations, contact details, legal text, chart engines and reading endpoints are unchanged. Presentation adapters only decorate service cards and reposition the daily almanac. Full daily almanac content remains available.
 
