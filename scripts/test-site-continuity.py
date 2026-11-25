@@ -44,6 +44,12 @@ with sync_playwright() as p:
             assert page.locator('.wa-launch').count() == 1, 'Duplicate contact widget'
             page.evaluate('window.scrollTo(0,0)')
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 2'), f'Horizontal overflow at {width}'
+            hero = page.locator('#top')
+            motion = page.locator('#hero-motion-toggle')
+            expect(page.locator('#top[data-motion-ready]')).to_have_count(1)
+            expect(hero).to_have_attribute('data-motion', 'paused')
+            expect(hero).to_have_attribute('data-motion-active', 'false')
+            expect(motion).to_have_text('播放动画' if language.startswith('zh') else 'Play animation')
             if width <= 900:
                 menu = page.locator('.menu-btn')
                 menu.click()
@@ -53,6 +59,8 @@ with sync_playwright() as p:
                 expect(menu).to_have_attribute('aria-expanded','false')
             page.locator('#btn-en').click()
             expect(page.locator('#hzc-heading')).to_have_text('Where would you like to begin?')
+            expect(motion).to_have_text('Play animation')
+            expect(hero).to_have_attribute('data-motion', 'paused')
             # The new report preview follows language changes and keyboard selection.
             tabs = page.get_by_role('tablist', name='Life Book chapters')
             expect(tabs).to_be_visible()
@@ -60,6 +68,7 @@ with sync_playwright() as p:
             expect(page.locator('#sheet-title')).to_have_text('Find a way of working that fits.')
             tabs.get_by_role('tab', name='02 Work & direction').press('End')
             expect(page.locator('#sheet-page')).to_have_text('05 / 05')
+            expect(hero).to_have_attribute('data-motion', 'paused')
             expect(page.locator('#report-panel')).to_contain_text('Not a personal chart or prediction.')
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 2'), f'Report overflows at {width}'
             # Layout adapters must preserve all purchase routes after language re-rendering.
@@ -103,6 +112,66 @@ with sync_playwright() as p:
             assert not errors, f'Browser errors: {errors}'
             results.append({'viewport':f'{width}x{height}', 'locale':language, 'status':'passed', 'logoAspectRatio':ratio})
             context.close()
+
+        # Exercise real motion separately; all responsive flow cases above respect Reduce Motion.
+        context = browser.new_context(viewport={'width':1280, 'height':900}, locale='en-GB', reduced_motion='no-preference')
+        page = context.new_page()
+        errors = []
+        page.on('pageerror', lambda error: errors.append(str(error)))
+        page.route('**/api/reading', lambda route: route.abort())
+        page.goto(BASE + '/', wait_until='domcontentloaded')
+        dialog = page.locator('#hzp-dialog')
+        expect(dialog).to_be_visible(timeout=15000)
+        dialog.locator('.hzp-no').click()
+        expect(dialog).not_to_be_visible()
+        hero, motion, art = page.locator('#top'), page.locator('#hero-motion-toggle'), page.locator('.art-image')
+        art.scroll_into_view_if_needed()
+
+        def expect_motion_advancing():
+            expect(hero).to_have_attribute('data-motion', 'playing')
+            expect(hero).to_have_attribute('data-motion-active', 'true')
+            page.wait_for_function("document.querySelector('.art-image').getAnimations().some(a => a.playState === 'running')")
+            transform = art.evaluate('(el) => getComputedStyle(el).transform')
+            page.wait_for_function("before => getComputedStyle(document.querySelector('.art-image')).transform !== before", arg=transform, timeout=5000)
+
+        def expect_motion_frozen():
+            expect(hero).to_have_attribute('data-motion', 'paused')
+            expect(hero).to_have_attribute('data-motion-active', 'false')
+            transform = art.evaluate('(el) => getComputedStyle(el).transform')
+            # A timed sample proves Pause freezes the picture instead of only changing its label.
+            page.wait_for_timeout(250)
+            assert art.evaluate('(el) => getComputedStyle(el).transform') == transform
+            assert page.locator('.sky-orbit').evaluate("el => el.getAnimations().every(a => a.playState !== 'running')")
+
+        expect_motion_advancing()
+        expect(motion).to_have_text('Pause animation')
+        motion.press('Space')
+        expect_motion_frozen()
+        page.locator('#btn-zh').click()
+        expect(motion).to_have_text('播放动画')
+        expect(hero).to_have_attribute('data-motion', 'paused')
+        page.locator('#btn-en').click()
+        expect(motion).to_have_text('Play animation')
+        expect_motion_frozen()
+        motion.press('Enter')
+        expect_motion_advancing()
+        # Going offscreen suspends work without cancelling the visitor's Play choice.
+        page.locator('#services').scroll_into_view_if_needed()
+        expect(hero).to_have_attribute('data-motion-active', 'false')
+        expect(hero).to_have_attribute('data-motion', 'playing')
+        art.scroll_into_view_if_needed()
+        expect_motion_advancing()
+        # A changed system preference pauses immediately; a deliberate Play remains available.
+        page.emulate_media(reduced_motion='reduce')
+        expect_motion_frozen()
+        expect(motion).to_have_text('Play animation')
+        motion.click()
+        expect_motion_advancing()
+        motion.click()
+        expect_motion_frozen()
+        assert not errors, f'Motion browser errors: {errors}'
+        results.append({'viewport':'1280x900', 'locale':'en-GB', 'case':'artwork-motion', 'status':'passed'})
+        context.close()
     finally:
         browser.close()
         (OUT / 'results.json').write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding='utf-8')

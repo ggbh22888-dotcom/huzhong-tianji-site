@@ -209,7 +209,20 @@ footer .c{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.1em}
       <div class="hero-footnote"><span class="ink-seal" aria-hidden="true">观天<br>知命</span><p data-design="heroNote">观天时 · 知自性 · 择时而行</p></div>
     </div>
     <figure class="vessel-art">
-      <div class="art-frame framed"><img src="/vessel-ink-800.webp" srcset="/vessel-ink-480.webp 480w, /vessel-ink-800.webp 800w, /vessel-ink.webp 1440w" sizes="(max-width: 620px) 82vw, (max-width: 1150px) 43vw, 450px" width="1440" height="1920" fetchpriority="high" alt="米白宣纸上的水墨茶壶与金色星图"><span class="art-ribbon" data-design="artRibbon">一壶一世界</span></div>
+      <div class="art-frame framed"><div class="art-canvas" id="hero-art-scene"><img class="art-image" src="/vessel-ink-800.webp" srcset="/vessel-ink-480.webp 480w, /vessel-ink-800.webp 800w, /vessel-ink.webp 1440w" sizes="(max-width: 620px) 82vw, (max-width: 1150px) 43vw, 450px" width="1440" height="1920" fetchpriority="high" alt="米白宣纸上的水墨茶壶与金色星图"><svg class="vessel-atmosphere" viewBox="0 0 720 960" aria-hidden="true" focusable="false">
+          <g class="motion-layer vessel-constellation">
+            <circle class="orbit-track" cx="405" cy="260" r="170"/>
+            <circle class="orbit-track orbit-track-inner" cx="405" cy="260" r="132"/>
+            <g class="orbit-stars"><circle cx="405" cy="90" r="3"/><circle cx="551" cy="347" r="2.3"/><circle cx="280" cy="374" r="2"/><circle cx="319" cy="160" r="2.5"/></g>
+            <path class="orbit-trace" d="M405 90 A170 170 0 0 1 552 175 M280 374 A170 170 0 0 1 240 219"/>
+          </g>
+          <g class="motion-layer vessel-glints"><path d="M438 153v12m-6-6h12 M524 284v10m-5-5h10 M335 320v8m-4-4h8"/><circle cx="460" cy="373" r="2.5"/><circle cx="351" cy="210" r="2"/></g>
+          <g class="vessel-steam-lines"><path class="motion-layer vessel-steam" d="M354 783 C417 731 323 698 389 641 S469 567 420 514"/><path class="motion-layer vessel-steam vessel-steam-second" d="M369 779 C430 725 356 700 413 640 S476 564 442 518"/></g>
+        </svg></div>
+        <button class="motion-toggle" id="hero-motion-toggle" type="button" aria-controls="hero-art-scene" hidden>
+          <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path class="motion-icon-pause" d="M5 3v10M11 3v10"/><path class="motion-icon-play" d="m5 3 8 5-8 5Z"/></svg><span data-motion-label>暂停动画</span>
+        </button>
+        <span class="art-ribbon" data-design="artRibbon">一壶一世界</span></div>
       <figcaption><span data-design="artCaption">壶中有天地 · 盘里见人生</span><span>01 / HUZHONG</span></figcaption>
     </figure>
   </div>
