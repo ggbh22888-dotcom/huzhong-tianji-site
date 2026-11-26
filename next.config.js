@@ -2,6 +2,11 @@
 module.exports = {
   reactStrictMode: true,
   async rewrites() {
-    return { beforeFiles: [{ source: "/", destination: "/home.html" }] };
+    return {
+      beforeFiles: [
+        { source: "/", destination: "/home.html" },
+        { source: "/life-numbers", destination: "/life-numbers.html" },
+      ],
+    };
   },
 };
